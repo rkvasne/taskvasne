@@ -25,20 +25,15 @@ if (!gotTheLock) {
     const icon = nativeImage.createFromPath(iconPath);
     tray = new Tray(icon);
 
-    const contextMenu = Menu.buildFromTemplate([
-      { label: 'Abrir', click: () => showWindow() },
-      { type: 'separator' },
-      { label: 'Sobre', click: () => showAbout() },
-      { type: 'separator' },
-      { label: 'Sair', click: () => app.quit() }
-    ]);
+    // Remove native context menu to use the custom window as the menu
+    // const contextMenu = Menu.buildFromTemplate([...]);
+    // tray.setContextMenu(contextMenu);
 
     tray.setToolTip('Taskvasne');
-    tray.setContextMenu(contextMenu);
 
-    tray.on('click', () => {
-      showWindow();
-    });
+    // Toggle window on click (left or right)
+    tray.on('click', () => toggleWindow());
+    tray.on('right-click', () => toggleWindow());
 
     createWindow();
 
@@ -48,20 +43,60 @@ if (!gotTheLock) {
   });
 }
 
+function toggleWindow() {
+  if (mainWindow.isVisible()) {
+    mainWindow.hide();
+  } else {
+    showWindow();
+  }
+}
+
+let aboutWindow = null;
+
 function showAbout() {
-  dialog.showMessageBox(mainWindow, {
-    type: 'info',
+  if (aboutWindow) {
+    aboutWindow.focus();
+    return;
+  }
+
+  aboutWindow = new BrowserWindow({
+    width: 320,
+    height: 340,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    fullscreenable: false,
     title: 'Sobre',
-    message: 'Taskvasne v0.0.1',
-    detail: 'Desenvolvido por Raphael Kvasne\n\nEmail: raphael@kvasne.com\nSite: kvasne.com',
-    buttons: ['OK', 'Visitar Site'],
-    icon: path.join(__dirname, 'icon.png')
-  }).then(result => {
-    if (result.response === 1) {
-      shell.openExternal('https://kvasne.com');
+    frame: false, // Frameless for custom style
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    icon: path.join(__dirname, 'icon.png'),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false // For simple internal page
     }
   });
+
+  aboutWindow.loadFile('about.html');
+
+  aboutWindow.once('ready-to-show', () => {
+    aboutWindow.show();
+  });
+
+  aboutWindow.on('closed', () => {
+    aboutWindow = null;
+  });
 }
+
+// IPC Handlers for UI buttons
+ipcMain.on('app-quit', () => {
+  app.quit();
+});
+
+ipcMain.on('app-about', () => {
+  showAbout();
+});
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -129,8 +164,6 @@ ipcMain.handle('get-ports', async () => {
       const processMap = new Map();
       if (!err && stdout) {
         stdout.split('\n').forEach(line => {
-          // CSV format: "Image Name","PID","Session Name","Session#","Mem Usage"
-          // Example: "chrome.exe","1234","Console","1","10,000 K"
           const parts = line.trim().split(',');
           if (parts.length >= 2) {
             const name = parts[0].replace(/"/g, '');
@@ -141,7 +174,7 @@ ipcMain.handle('get-ports', async () => {
       }
 
       // 2. Get ports using netstat
-      exec('netstat -ano', (error, stdout, stderr) => {
+      exec('netstat -ano', async (error, stdout, stderr) => {
         if (error) {
           console.error(`netstat error: ${error}`);
           resolve([]);
@@ -153,27 +186,22 @@ ipcMain.handle('get-ports', async () => {
         const seenPorts = new Set();
 
         lines.forEach(line => {
-          // Line format: TCP    0.0.0.0:3000           0.0.0.0:0              LISTENING       1234
           const parts = line.trim().split(/\s+/);
           if (parts.length < 5) return;
 
-          const protocol = parts[0]; // TCP or UDP
+          const protocol = parts[0];
           const localAddr = parts[1];
-          const state = parts[3]; // LISTENING
+          const state = parts[3];
           const pid = parts[4];
 
-          // We only care about LISTENING TCP ports usually for dev servers
           if (state === 'LISTENING' && protocol === 'TCP') {
             const portMatch = localAddr.match(/:(\d+)$/);
             if (portMatch) {
               const port = parseInt(portMatch[1], 10);
 
-              // Filter: User interested in dev ports (usually > 1000)
               if (port > 1000 && !seenPorts.has(port)) {
                 seenPorts.add(port);
-
                 const processName = processMap.get(pid) || 'Desconhecido';
-
                 results.push({
                   LocalPort: port,
                   PID: pid,
@@ -184,8 +212,57 @@ ipcMain.handle('get-ports', async () => {
           }
         });
 
-        results.sort((a, b) => a.LocalPort - b.LocalPort);
-        resolve(results);
+        // 3. Enrichment: Try to get project name for generic processes
+        const enrichedResults = await Promise.all(results.map(async (item) => {
+          if (['node.exe', 'java.exe', 'python.exe'].includes(item.ProcessName.toLowerCase())) {
+            try {
+              const cmd = await new Promise(res => {
+                // Use PowerShell for reliable command line retrieval
+                const psCommand = `powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'ProcessId = ${item.PID}' | Select-Object -ExpandProperty CommandLine"`;
+                exec(psCommand, (e, out) => {
+                  if (e || !out) res('');
+                  else res(out.trim());
+                });
+              });
+
+              // Look for file paths. Match absolute paths.
+              // We split by arguments to handle quotes better.
+              const parts = cmd.split(/\s+/);
+
+              for (let part of parts) {
+                // Remove quotes
+                let cleanPart = part.replace(/^"|"$/g, '');
+
+                // Check if it looks like a path and contains the process name (to skip the executable itself)
+                if (cleanPart.includes(':\\') && !cleanPart.toLowerCase().endsWith(item.ProcessName.toLowerCase())) {
+                  const pathParts = cleanPart.split('\\');
+                  if (pathParts.length > 1) {
+                    let folderName = pathParts[pathParts.length - 2];
+
+                    if (!pathParts[pathParts.length - 1].includes('.')) {
+                      folderName = pathParts[pathParts.length - 1];
+                    }
+
+                    if (['bin', 'dist', 'build', 'src', 'lib'].includes(folderName.toLowerCase()) && pathParts.length > 2) {
+                      folderName = pathParts[pathParts.length - 3];
+                    }
+
+                    if (folderName) {
+                      item.ProcessName += ` (${folderName})`;
+                      break;
+                    }
+                  }
+                }
+              }
+            } catch (e) {
+              // Ignore errors
+            }
+          }
+          return item;
+        }));
+
+        enrichedResults.sort((a, b) => a.LocalPort - b.LocalPort);
+        resolve(enrichedResults);
       });
     });
   });

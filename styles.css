@@ -43,24 +43,35 @@ body {
   font-weight: 600;
 }
 
-.refresh-btn {
+.header-actions {
+  display: flex;
+  gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.icon-btn {
   background: transparent;
   border: none;
   color: var(--text-color);
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
   border-radius: 4px;
-  -webkit-app-region: no-drag;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.2s;
 }
 
-.refresh-btn:hover {
+.icon-btn:hover {
   background: var(--card-hover);
 }
 
-.refresh-btn svg.spinning {
+.icon-btn.danger:hover {
+  background: rgba(255, 77, 79, 0.2);
+  color: var(--danger-color);
+}
+
+.icon-btn svg.spinning {
   animation: spin 1s linear infinite;
 }
 

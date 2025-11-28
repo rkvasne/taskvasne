@@ -1,6 +1,6 @@
 {
     "name": "taskvasne",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "description": "A Windows 11 styled port manager for developers",
     "repository": {
         "type": "git",
@@ -13,14 +13,20 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=icon.ico"
+        "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist-portable --overwrite --icon=icon.ico --ignore=\"^/dist\" --ignore=\"^/docs\" --ignore=\"^/.git\" --ignore=\"^/.vscode\"",
+        "build:portable": "electron-builder --win portable",
+        "build:win": "electron-builder",
+        "build": "echo 'Vercel build skipped'"
     },
     "build": {
         "appId": "com.kvasne.taskvasne",
         "productName": "Taskvasne",
         "win": {
             "target": "nsis",
-            "icon": "icon.png"
+            "icon": "icon.ico"
+        },
+        "portable": {
+            "artifactName": "Taskvasne.exe"
         },
         "nsis": {
             "oneClick": false,

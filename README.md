@@ -1,10 +1,13 @@
 # Taskvasne
 
 ![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)
-![Version](https://img.shields.io/badge/version-0.0.1-blue?style=for-the-badge)
-![Platform](https://img.shields.io/badge/platform-windows-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-0.0.3-purple?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)
+![Vercel](https://img.shields.io/badge/vercel-deployed-black?style=for-the-badge&logo=vercel)
 
 > **Taskvasne** é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.).
+>
+> 🌐 **Acesse o site oficial:** [taskvasne.vercel.app](https://taskvasne.vercel.app)
 
 <p align="center">
   <img src="icon.png" width="128" alt="Taskvasne Icon">
@@ -51,6 +54,10 @@ npm run dist
 ```
 O executável será criado na pasta `dist/`.
 
+**⚠️ Importante**: O arquivo `Taskvasne.exe` **não pode ser movido sozinho**. Ele depende dos outros arquivos na pasta para funcionar.
+*   Para "instalar", mova a **pasta inteira** para um local seguro (ex: `Meus Documentos`).
+*   Crie um **atalho** do `Taskvasne.exe` na sua Área de Trabalho.
+
 ## 🛠️ Tecnologias
 
 *   **Electron**: Core do aplicativo.
@@ -61,9 +68,10 @@ O executável será criado na pasta `dist/`.
 
 Desenvolvido com ❤️ por **Raphael Kvasne**.
 
-*   🌐 **Website**: [kvasne.com](https://kvasne.com)
+*   🌐 **Projeto**: [taskvasne.vercel.app](https://taskvasne.vercel.app)
+*   👨‍💻 **Portfolio**: [kvasne.com](https://kvasne.com)
 *   📧 **Email**: [raphael@kvasne.com](mailto:raphael@kvasne.com)
-*   💼 **LinkedIn**: [Raphael Kvasne](https://linkedin.com/in/raphaelkvasne)
+*   💼 **LinkedIn**: [Raphael Kvasne](https://www.linkedin.com/in/rkvasne/)
 
 ## 📄 Licença
 
