@@ -39,23 +39,39 @@ function renderPorts(ports) {
         <div class="pid">PID: ${port.PID}</div>
       </div>
       <div class="actions">
-        <button class="kill-btn" onclick="killProcess(${port.PID})" title="Matar Processo">X</button>
+        <button class="kill-btn" onclick="killProcess(${port.PID}, this)" title="Matar Processo">X</button>
       </div>
     `;
         listElement.appendChild(item);
     });
 }
 
-async function killProcess(pid) {
-    // In a real app, maybe a custom modal. Native confirm is fine for MVP.
-    // Since we are "Windows 11 style", native confirm is a bit jarring, but acceptable.
-    // We could implement a custom modal in HTML if requested.
+async function killProcess(pid, btnElement) {
+    // 1. Confirmation
+    if (!confirm(`Tem certeza que deseja encerrar o processo com PID ${pid}?`)) {
+        return;
+    }
 
+    // 2. Visual Feedback (Optimistic UI)
+    let row = null;
+    if (btnElement) {
+        row = btnElement.closest('.port-item');
+        if (row) {
+            row.classList.add('removing');
+        }
+    }
+
+    // 3. Perform Action
     const result = await window.electronAPI.killProcess(pid);
+
     if (result.success) {
-        // Optimistic update or refresh
-        loadPorts();
+        // Wait for animation to finish before reloading
+        setTimeout(() => {
+            loadPorts();
+        }, 300);
     } else {
+        // Revert visual change if failed
+        if (row) row.classList.remove('removing');
         alert('Erro ao parar processo: ' + result.error);
     }
 }
