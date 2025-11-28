@@ -121,6 +121,11 @@ body {
   align-items: center;
   gap: 12px;
   overflow: hidden;
+  transition: opacity 0.2s;
+}
+
+.port-info:hover {
+  opacity: 0.8;
 }
 
 .port-badge {
