@@ -46,6 +46,7 @@ nav {
     font-size: 24px;
     background: linear-gradient(90deg, #fff, var(--primary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -71,6 +72,14 @@ nav {
 
 .hero-content {
     max-width: 600px;
+}
+
+.hero-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
 }
 
 .badge {
@@ -204,13 +213,26 @@ p {
 }
 
 .port {
-    color: var(--primary);
+    color: #00d9ff;
     font-weight: bold;
     font-family: monospace;
+    font-size: 14px;
 }
 
-.kill {
-    color: #ff4d4f;
+.proc {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    flex: 1;
+    margin: 0 12px;
+}
+
+.kill-btn {
+    background: #ff4d4f;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -225,8 +247,8 @@ p {
     margin-bottom: 60px;
     background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .features-grid {
