@@ -1,6 +1,6 @@
 # Taskvasne
 
-![License](https://img.shields.io/github/license/raphaelkvasne/taskvasne?style=for-the-badge&color=blue)
+![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)
 ![Version](https://img.shields.io/badge/version-0.0.1-blue?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platform-windows-blue?style=for-the-badge)
 
@@ -16,6 +16,9 @@
 *   **🎨 Design Windows 11**: Interface moderna, compacta e com modo escuro nativo.
 *   **🛡️ System Tray**: Vive silenciosamente na sua bandeja do sistema. Um clique para abrir, um clique para fechar.
 *   **🛑 Kill Process**: Encerre processos travados ou indesejados com um único clique.
+    *   *Feedback Visual*: O item desliza e desaparece suavemente ao ser encerrado.
+    *   *Sem Interrupções*: Ação imediata para manter seu fluxo de trabalho rápido.
+*   **🔄 Atualização Inteligente**: Botão de refresh com animação e feedback visual.
 *   **🔒 Instância Única**: Previne múltiplas janelas, mantendo seu workspace limpo.
 
 ## 🚀 Instalação
@@ -28,7 +31,7 @@
 
 1.  Clone o repositório:
     ```bash
-    git clone https://github.com/raphaelkvasne/taskvasne.git
+    git clone https://github.com/rkvasne/taskvasne.git
     ```
 2.  Instale as dependências:
     ```bash
@@ -41,7 +44,7 @@
 
 ### 📦 Criando Executável
 
-Para gerar um arquivo `.exe` portátil e otimizado:
+Para gerar um arquivo `.exe` portátil e otimizado com o ícone correto:
 
 ```bash
 npm run dist
