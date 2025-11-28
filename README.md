@@ -21,6 +21,7 @@
 *   **🛑 Kill Process**: Encerre processos travados ou indesejados com um único clique.
     *   *Feedback Visual*: O item desliza e desaparece suavemente ao ser encerrado.
     *   *Sem Interrupções*: Ação imediata para manter seu fluxo de trabalho rápido.
+*   **🌐 Acesso Rápido**: Clique em qualquer porta da lista para abrir `localhost:porta` instantaneamente no seu navegador padrão.
 *   **🔄 Atualização Inteligente**: Botão de refresh com animação e feedback visual.
 *   **🔒 Instância Única**: Previne múltiplas janelas, mantendo seu workspace limpo.
 
