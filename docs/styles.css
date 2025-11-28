@@ -258,6 +258,14 @@ p {
     border-radius: 12px;
     background: rgba(138, 43, 226, 0.1);
     color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .icon {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
 }
 
 .security-section {
@@ -285,11 +293,12 @@ p {
     padding: 24px;
     border-radius: 12px;
     border: 1px solid var(--border);
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .sec-item:hover {
     border-color: var(--primary);
+    transform: translateY(-5px);
 }
 
 .check {
@@ -303,6 +312,14 @@ p {
     justify-content: center;
     font-weight: bold;
     flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.sec-item:hover .check {
+    background: var(--primary);
+    color: #fff;
+    transform: scale(1.15);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
 }
 
 .sec-item h4 {
