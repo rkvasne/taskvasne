@@ -2,6 +2,14 @@
     "name": "taskvasne",
     "version": "0.0.1",
     "description": "A Windows 11 styled port manager for developers",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rkvasne/taskvasne.git"
+    },
+    "bugs": {
+        "url": "https://github.com/rkvasne/taskvasne/issues"
+    },
+    "homepage": "https://github.com/rkvasne/taskvasne#readme",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
