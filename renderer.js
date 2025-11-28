@@ -47,10 +47,10 @@ function renderPorts(ports) {
 }
 
 async function killProcess(pid, btnElement) {
-    // 1. Confirmation
-    if (!confirm(`Tem certeza que deseja encerrar o processo com PID ${pid}?`)) {
-        return;
-    }
+    // 1. Confirmation (Removed by request)
+    // if (!confirm(`Tem certeza que deseja encerrar o processo com PID ${pid}?`)) {
+    //   return;
+    // }
 
     // 2. Visual Feedback (Optimistic UI)
     let row = null;
