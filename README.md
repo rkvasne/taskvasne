@@ -1,7 +1,7 @@
 # Taskvasne
 
 ![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)
-![Version](https://img.shields.io/badge/version-0.0.3-purple?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-0.0.5-purple?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)
 ![Vercel](https://img.shields.io/badge/vercel-deployed-black?style=for-the-badge&logo=vercel)
 
