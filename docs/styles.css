@@ -1,11 +1,13 @@
 :root {
     --bg: #0a0a0a;
-    --text: #ffffff;
+    --text: #fff;
     --primary: #8a2be2;
-    /* Blue Violet / Purple */
-    --secondary: #7000ff;
     --glass: rgba(255, 255, 255, 0.05);
     --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -213,11 +215,24 @@ p {
 }
 
 .features {
+    padding: 100px 10%;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
-    padding: 100px 10%;
-    background: rgba(255, 255, 255, 0.02);
 }
 
 .feature-card {
@@ -234,8 +249,15 @@ p {
 }
 
 .feature-card .icon {
-    font-size: 40px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(138, 43, 226, 0.1);
+    color: var(--primary);
 }
 
 .security-section {
@@ -273,8 +295,8 @@ p {
 .check {
     background: rgba(138, 43, 226, 0.1);
     color: var(--primary);
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
