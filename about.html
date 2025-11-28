@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre o Taskvasne</title>
+    <style>
+        body {
+            background-color: #202020;
+            color: #ffffff;
+            font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            user-select: none;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+
+        .version {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 24px;
+        }
+
+        .description {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            color: #ddd;
+        }
+
+        .links {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        a {
+            color: #8a2be2;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            background: #333;
+            color: white;
+            border: 1px solid #444;
+            padding: 6px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #444;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Title bar drag region */
+        .drag-region {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            -webkit-app-region: drag;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="drag-region"></div>
+    <img src="icon.png" class="logo" alt="Logo">
+    <h1>Taskvasne</h1>
+    <div class="version">Versão 0.0.4</div>
+
+    <div class="description">
+        Gerenciador de portas minimalista para Windows.<br>
+        Desenvolvido com ❤️ por Raphael Kvasne.
+    </div>
+
+    <div class="links">
+        <a id="link-site">Website</a>
+        <a id="link-github">GitHub</a>
+        <a id="link-linkedin">LinkedIn</a>
+    </div>
+
+    <button class="close-btn" id="close-btn">Fechar</button>
+
+    <script>
+        const { ipcRenderer, shell } = require('electron');
+
+        document.getElementById('close-btn').addEventListener('click', () => {
+            window.close();
+        });
+
+        document.getElementById('link-site').addEventListener('click', (e) => {
+            e.preventDefault();
+            require('electron').shell.openExternal('https://taskvasne.vercel.app');
+        });
+
+        document.getElementById('link-github').addEventListener('click', (e) => {
+            e.preventDefault();
+            require('electron').shell.openExternal('https://github.com/rkvasne/taskvasne');
+        });
+
+        document.getElementById('link-linkedin').addEventListener('click', (e) => {
+            e.preventDefault();
+            require('electron').shell.openExternal('https://www.linkedin.com/in/rkvasne/');
+        });
+    </script>
+</body>
+
+</html>

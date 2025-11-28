@@ -29,9 +29,6 @@ function renderPorts(ports) {
         const item = document.createElement('div');
         item.className = 'port-item';
 
-        // Determine badge color based on port range or process name?
-        // For now, keep it simple.
-
         item.innerHTML = `
       <div class="port-info">
         <div class="port-badge">:${port.LocalPort}</div>
@@ -39,19 +36,26 @@ function renderPorts(ports) {
         <div class="pid">PID: ${port.PID}</div>
       </div>
       <div class="actions">
-        <button class="kill-btn" onclick="killProcess(${port.PID}, this)" title="Matar Processo">X</button>
       </div>
     `;
+
+        // Create button manually to attach event listener properly
+        const killBtn = document.createElement('button');
+        killBtn.className = 'kill-btn';
+        killBtn.title = 'Parar Processo';
+        // Stop icon (filled square)
+        killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> Parar`;
+        killBtn.onclick = (e) => {
+            e.stopPropagation(); // Prevent row click
+            killProcess(port.PID, item);
+        };
+
+        item.querySelector('.actions').appendChild(killBtn);
         listElement.appendChild(item);
     });
 }
 
 async function killProcess(pid, btnElement) {
-    // 1. Confirmation (Removed by request)
-    // if (!confirm(`Tem certeza que deseja encerrar o processo com PID ${pid}?`)) {
-    //   return;
-    // }
-
     // 2. Visual Feedback (Optimistic UI)
     let row = null;
     if (btnElement) {
@@ -82,12 +86,17 @@ refreshBtn.addEventListener('click', () => {
     const icon = refreshBtn.querySelector('svg');
     if (icon) icon.classList.add('spinning');
 
-    // Don't wipe list immediately to avoid flicker if fast
-    // listElement.innerHTML = '<div class="empty-state">Atualizando...</div>';
-
     loadPorts().finally(() => {
         if (icon) icon.classList.remove('spinning');
     });
+});
+
+document.getElementById('about').addEventListener('click', () => {
+    window.electronAPI.showAbout();
+});
+
+document.getElementById('quit').addEventListener('click', () => {
+    window.electronAPI.quitApp();
 });
 
 // Initial load
