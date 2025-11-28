@@ -30,7 +30,7 @@ function renderPorts(ports) {
         item.className = 'port-item';
 
         item.innerHTML = `
-      <div class="port-info">
+      <div class="port-info" title="Abrir http://localhost:${port.LocalPort}">
         <div class="port-badge">:${port.LocalPort}</div>
         <div class="process-name" title="${port.ProcessName}">${port.ProcessName || 'Desconhecido'}</div>
         <div class="pid">PID: ${port.PID}</div>
@@ -38,6 +38,13 @@ function renderPorts(ports) {
       <div class="actions">
       </div>
     `;
+
+        // Add click listener to open localhost
+        const portInfo = item.querySelector('.port-info');
+        portInfo.style.cursor = 'pointer';
+        portInfo.onclick = () => {
+            window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
+        };
 
         // Create button manually to attach event listener properly
         const killBtn = document.createElement('button');
