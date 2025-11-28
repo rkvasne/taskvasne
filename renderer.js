@@ -79,8 +79,15 @@ async function killProcess(pid, btnElement) {
 window.killProcess = killProcess;
 
 refreshBtn.addEventListener('click', () => {
-    listElement.innerHTML = '<div class="empty-state">Atualizando...</div>';
-    loadPorts();
+    const icon = refreshBtn.querySelector('svg');
+    if (icon) icon.classList.add('spinning');
+
+    // Don't wipe list immediately to avoid flicker if fast
+    // listElement.innerHTML = '<div class="empty-state">Atualizando...</div>';
+
+    loadPorts().finally(() => {
+        if (icon) icon.classList.remove('spinning');
+    });
 });
 
 // Initial load

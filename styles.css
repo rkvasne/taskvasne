@@ -60,6 +60,20 @@ body {
   background: var(--card-hover);
 }
 
+.refresh-btn svg.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .port-list {
   flex: 1;
   overflow-y: auto;
@@ -77,6 +91,12 @@ body {
   transition: all 0.2s;
   height: 32px;
   /* Fixed height for compactness */
+}
+
+.port-item.removing {
+  opacity: 0;
+  transform: translateX(20px);
+  pointer-events: none;
 }
 
 .port-item:hover {
@@ -140,6 +160,21 @@ body {
   height: 24px;
   display: flex;
   align-items: center;
+}
+
+.kill-btn:hover {
+  background: var(--danger-color);
+  color: white;
+  border-color: var(--danger-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
