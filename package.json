@@ -13,7 +13,7 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=icon.png"
+        "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist --overwrite --icon=icon.ico"
     },
     "build": {
         "appId": "com.kvasne.taskvasne",
@@ -41,6 +41,7 @@
     "devDependencies": {
         "electron": "^39.2.4",
         "electron-builder": "^26.0.12",
-        "electron-packager": "^17.1.2"
+        "electron-packager": "^17.1.2",
+        "png-to-ico": "^3.0.1"
     }
 }
