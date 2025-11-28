@@ -6,7 +6,9 @@
 
 > **Taskvasne** é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.).
 
-![Preview](icon.png)
+<p align="center">
+  <img src="icon.png" width="128" alt="Taskvasne Icon">
+</p>
 
 ## ✨ Funcionalidades
 
