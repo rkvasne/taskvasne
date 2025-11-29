@@ -144,13 +144,8 @@ function showWindow() {
   // If taskbar is top/left/right, this logic is simplistic, but sufficient for MVP
 
   mainWindow.setPosition(x, y, false);
-
-  if (mainWindow.isVisible()) {
-    mainWindow.hide();
-  } else {
-    mainWindow.show();
-    mainWindow.focus();
-  }
+  mainWindow.show();
+  mainWindow.focus();
 }
 
 app.on('window-all-closed', () => {
