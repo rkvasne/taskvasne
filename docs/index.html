@@ -25,8 +25,10 @@
 
     <header class="hero">
         <div class="hero-content">
-            <img src="logo.png" alt="Taskvasne Logo" class="hero-logo">
-            <div class="badge">v0.0.5 ALPHA</div>
+            <div class="hero-header">
+                <img src="logo.png" alt="Taskvasne Logo" class="hero-logo">
+                <div class="badge">v0.0.6 ALPHA</div>
+            </div>
             <h1>Controle suas portas.<br><span>Com Estilo.</span></h1>
             <p>O gerenciador de processos mais rápido, bonito e minimalista para desenvolvedores Windows.</p>
             <div class="cta-group">
@@ -35,37 +37,54 @@
             </div>
         </div>
         <div class="hero-image">
-            <div class="app-mockup">
-                <div class="mockup-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+            <div class="interactive-demo">
+                <div class="app-popup" id="demo-popup">
+                    <div class="mockup-header">
+                        <span class="title">Taskvasne</span>
+                        <div class="win-controls">
+                            <span>&#8722;</span>
+                            <span>&#10005;</span>
+                        </div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mockup-row">
+                            <div class="row-info">
+                                <span class="port">:5040</span>
+                                <span class="proc">svchost.exe</span>
+                            </div>
+                            <span class="kill-btn">Parar</span>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="row-info">
+                                <span class="port">:3000</span>
+                                <span class="proc">node.exe (api)</span>
+                            </div>
+                            <span class="kill-btn">Parar</span>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="row-info">
+                                <span class="port">:5173</span>
+                                <span class="proc">vite.exe</span>
+                            </div>
+                            <span class="kill-btn">Parar</span>
+                        </div>
+                        <div class="mockup-row">
+                            <div class="row-info">
+                                <span class="port">:8080</span>
+                                <span class="proc">java.exe</span>
+                            </div>
+                            <span class="kill-btn">Parar</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="mockup-body">
-                    <div class="mockup-row">
-                        <span class="port">:5040</span>
-                        <span class="proc">svchost.exe (tasks-app)</span>
-                        <span class="kill-btn">Parar</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="port">:5357</span>
-                        <span class="proc">System</span>
-                        <span class="kill-btn">Parar</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="port">:9101</span>
-                        <span class="proc">Antigravity.exe</span>
-                        <span class="kill-btn">Parar</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="port">:24416</span>
-                        <span class="proc">Kiro.exe</span>
-                        <span class="kill-btn">Parar</span>
-                    </div>
-                    <div class="mockup-row">
-                        <span class="port">:49409</span>
-                        <span class="proc">Cursor.exe</span>
-                        <span class="kill-btn">Parar</span>
+
+                <div class="tray-area">
+                    <div class="tray-icon-wrapper" id="demo-trigger">
+                        <img src="logo.png" alt="Tray Icon" class="tray-icon">
+                        <div class="click-hint">
+                            <span>Clique para testar</span>
+                            <div class="arrow-down"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,6 +196,33 @@
     <footer>
         <p>&copy; 2025 Taskvasne. Open Source sob licença MIT.</p>
     </footer>
+
+    <script>
+        // Interactive Demo Script
+        const trigger = document.getElementById('demo-trigger');
+        const popup = document.getElementById('demo-popup');
+        const hint = document.querySelector('.click-hint');
+        let isOpen = false;
+
+        trigger.addEventListener('click', () => {
+            isOpen = !isOpen;
+            if (isOpen) {
+                popup.classList.add('visible');
+                hint.style.opacity = '0';
+            } else {
+                popup.classList.remove('visible');
+                // Don't show hint again immediately to keep it clean
+            }
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isOpen && !trigger.contains(e.target) && !popup.contains(e.target)) {
+                isOpen = false;
+                popup.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 
 </html>
