@@ -17,146 +17,166 @@
     <nav>
         <div class="logo">Taskvasne</div>
         <div class="links">
-            <div class="icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                </svg>
-            </div>
-            <h3>Ultra Rápido</h3>
-            <p>Construído com Vanilla JS para performance máxima. Sem frameworks pesados, apenas velocidade.</p>
+            <a href="#features">Funcionalidades</a>
+            <a href="#download">Download</a>
+            <a href="#author">Autor</a>
         </div>
-        <div class="feature-card">
-            <div class="icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path
-                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-            </div>
-            <h3>Design Moderno</h3>
-            <p>Estética inspirada no Windows 11 com vidro fosco, bordas arredondadas e modo escuro nativo.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-            </div>
-            <h3>System Tray</h3>
-            <p>Vive silenciosamente na sua bandeja. Um clique para abrir, matar o processo e voltar ao código.</p>
-        </div>
-        </div>
-        </section>
+    </nav>
 
-        <section id="security" class="security-section">
-            <div class="security-content">
-                <h2>Segurança e Transparência</h2>
-                <p>Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
-
-                <div class="security-grid">
-                    <div class="sec-item">
-                        <div class="check">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <polyline points="16 18 22 12 16 6"></polyline>
-                                <polyline points="8 6 2 12 8 18"></polyline>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4>Código Aberto</h4>
-                            <p>Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.</p>
-                        </div>
+    <header class="hero">
+        <div class="hero-content">
+            <img src="logo.png" alt="Taskvasne Logo" class="hero-logo">
+            <div class="badge">v0.0.5 ALPHA</div>
+            <h1>Controle suas portas.<br><span>Com Estilo.</span></h1>
+            <p>O gerenciador de processos mais rápido, bonito e minimalista para desenvolvedores Windows.</p>
+            <div class="cta-group">
+                <a href="Taskvasne.zip" class="btn primary" download>Baixar para Windows (ZIP)</a>
+                <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank">Ver no GitHub</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="app-mockup">
+                <div class="mockup-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mockup-body">
+                    <div class="mockup-row">
+                        <span class="port">:5040</span>
+                        <span class="proc">svchost.exe (tasks-app)</span>
+                        <span class="kill-btn">Parar</span>
                     </div>
-                    <div class="sec-item">
-                        <div class="check">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
-                                </path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                            </svg>
-                        </div>
-                        <div>
-                            <h4>Zero Telemetria</h4>
-                            <p>Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.</p>
-                        </div>
+                    <div class="mockup-row">
+                        <span class="port">:5357</span>
+                        <span class="proc">System</span>
+                        <span class="kill-btn">Parar</span>
                     </div>
-                    <div class="sec-item">
-                        <div class="check">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                <path d="M9 12l2 2 4-4" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h4>Sem Malware</h4>
-                            <p>Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.</p>
-                        </div>
+                    <div class="mockup-row">
+                        <span class="port">:9101</span>
+                        <span class="proc">Antigravity.exe</span>
+                        <span class="kill-btn">Parar</span>
+                    </div>
+                    <div class="mockup-row">
+                        <span class="port">:24416</span>
+                        <span class="proc">Kiro.exe</span>
+                        <span class="kill-btn">Parar</span>
+                    </div>
+                    <div class="mockup-row">
+                        <span class="port">:49409</span>
+                        <span class="proc">Cursor.exe</span>
+                        <span class="kill-btn">Parar</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </header>
 
-        <section id="author" class="author-section">
-            <div class="author-content">
-                <h2>Conheça o Criador</h2>
-                <p>Desenvolvido com paixão por design e código.</p>
+    <section id="features" class="features">
+        <h2 class="section-title">Por que escolher o Taskvasne?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                    </svg>
+                </div>
+                <h3>Ultra Rápido</h3>
+                <p>Construído com Vanilla JS para performance máxima. Sem frameworks pesados, apenas velocidade.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <h3>Design Moderno</h3>
+                <p>Estética inspirada no Windows 11 com vidro fosco, bordas arredondadas e modo escuro nativo.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                </div>
+                <h3>System Tray</h3>
+                <p>Vive silenciosamente na sua bandeja. Um clique para abrir, matar o processo e voltar ao código.</p>
+            </div>
+        </div>
+    </section>
 
-                <div class="profile-card">
-                    <div class="profile-info">
-                        <h3>Raphael Kvasne</h3>
-                        <span class="role">Full Stack Developer</span>
-                        <p>Criando experiências digitais que unem funcionalidade e estética futurista.</p>
-                        <a href="https://kvasne.com" target="_blank" class="btn-glow">Visitar kvasne.com</a>
+    <section id="security" class="security-section">
+        <div class="security-content">
+            <h2>Segurança e Transparência</h2>
+            <p>Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
+
+            <div class="security-grid">
+                <div class="sec-item">
+                    <div class="check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Código Aberto</h4>
+                        <p>Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.</p>
+                    </div>
+                </div>
+                <div class="sec-item">
+                    <div class="check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                            </path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Zero Telemetria</h4>
+                        <p>Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.</p>
+                    </div>
+                </div>
+                <div class="sec-item">
+                    <div class="check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Sem Malware</h4>
+                        <p>Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            <p>&copy; 2025 Taskvasne. Open Source sob licença MIT.</p>
-        </footer>
+    <section id="author" class="author-section">
+        <div class="author-content">
+            <h2>Conheça o Criador</h2>
+            <p>Desenvolvido com paixão por design e código.</p>
 
-        <script>
-            // Interactive Demo Script
-            const trigger = document.getElementById('demo-trigger');
-            const popup = document.getElementById('demo-popup');
-            const hint = document.querySelector('.click-hint');
-            let isOpen = false;
+            <div class="profile-card">
+                <div class="profile-info">
+                    <h3>Raphael Kvasne</h3>
+                    <span class="role">Full Stack Developer</span>
+                    <p>Criando experiências digitais que unem funcionalidade e estética futurista.</p>
+                    <a href="https://kvasne.com" target="_blank" class="btn-glow">Visitar kvasne.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            trigger.addEventListener('click', () => {
-                isOpen = !isOpen;
-                if (isOpen) {
-                    popup.classList.add('visible');
-                    hint.style.opacity = '0';
-                } else {
-                    popup.classList.remove('visible');
-                }
-            });
-
-            // Close when clicking outside
-            document.addEventListener('click', (e) => {
-                if (isOpen && !trigger.contains(e.target) && !popup.contains(e.target)) {
-                    isOpen = false;
-                    popup.classList.remove('visible');
-                }
-            });
-
-            // Clock Script
-            function updateClock() {
-                const now = new Date();
-                const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-                const date = now.toLocaleDateString('pt-BR');
-
-                document.getElementById('clock-time').textContent = time;
-                document.getElementById('clock-date').textContent = date;
-            }
-
-            setInterval(updateClock, 1000);
-            updateClock();
-        </script>
+    <footer>
+        <p>&copy; 2025 Taskvasne. Open Source sob licença MIT.</p>
+    </footer>
 </body>
 
 </html>
