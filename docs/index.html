@@ -32,7 +32,9 @@
             <h1>Controle suas portas.<br><span>Com Estilo.</span></h1>
             <p>O gerenciador de processos mais rápido, bonito e minimalista para desenvolvedores Windows.</p>
             <div class="cta-group">
-                <a href="Taskvasne.zip" class="btn primary" download>Baixar para Windows (ZIP)</a>
+                <a href="https://github.com/rkvasne/taskvasne/blob/main/docs/Taskvasne.zip?raw=true"
+                    class="btn primary">Baixar
+                    para Windows (ZIP)</a>
                 <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank">Ver no GitHub</a>
             </div>
         </div>
@@ -82,9 +84,27 @@
                     <div class="tray-icon-wrapper" id="demo-trigger">
                         <img src="logo.png" alt="Tray Icon" class="tray-icon">
                         <div class="click-hint">
-                            <span>Clique para testar</span>
+                            <span>Teste aqui</span>
                             <div class="arrow-down"></div>
                         </div>
+                    </div>
+                    <div class="system-icons">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                        </svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                    </div>
+                    <div class="clock">
+                        <span id="clock-time">12:45</span>
+                        <span id="clock-date">29/11/2025</span>
                     </div>
                 </div>
             </div>
@@ -211,7 +231,6 @@
                 hint.style.opacity = '0';
             } else {
                 popup.classList.remove('visible');
-                // Don't show hint again immediately to keep it clean
             }
         });
 
@@ -222,6 +241,19 @@
                 popup.classList.remove('visible');
             }
         });
+
+        // Clock Script
+        function updateClock() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            const date = now.toLocaleDateString('pt-BR');
+
+            document.getElementById('clock-time').textContent = time;
+            document.getElementById('clock-date').textContent = date;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 

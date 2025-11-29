@@ -24,7 +24,8 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at center, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at center, rgba(138, 43, 226, 0.08) 0%, transparent 60%);
+    filter: blur(80px);
     z-index: -1;
     pointer-events: none;
 }
@@ -64,10 +65,10 @@ nav {
 
 .hero {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
-    padding: 80px 10%;
-    min-height: 80vh;
+    padding: 0 10% 40px 10%;
+    min-height: 40vh;
 }
 
 .hero-content {
@@ -85,7 +86,11 @@ nav {
     width: 64px;
     height: 64px;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    filter: drop-shadow(0 10px 20px rgba(138, 43, 226, 0.3));
 }
 
 .badge {
@@ -161,16 +166,17 @@ p {
 .interactive-demo {
     position: relative;
     width: 400px;
-    height: 600px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    margin-top: 20px;
 }
 
 .app-popup {
     width: 360px;
-    height: 500px;
+    height: 400px;
     background: rgba(32, 32, 32, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
@@ -178,13 +184,15 @@ p {
     backdrop-filter: blur(20px);
     overflow: hidden;
     position: absolute;
-    bottom: 80px;
+    bottom: 70px;
+    right: 20px;
     opacity: 0;
     transform: translateY(40px) scale(0.95);
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
     pointer-events: none;
     display: flex;
     flex-direction: column;
+    z-index: 10;
 }
 
 .app-popup.visible {
@@ -216,25 +224,43 @@ p {
 }
 
 .tray-area {
-    width: 100%;
-    height: 60px;
-    background: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(20px);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 250px;
+    height: 48px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: relative;
+    padding: 0 12px;
+    gap: 12px;
+    align-self: flex-end;
+    margin-right: 20px;
+    /* Visuals moved to ::before to prevent tooltip clipping */
+}
+
+.tray-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(32, 32, 32, 0.6);
+    backdrop-filter: blur(20px);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: none;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    mask-image: linear-gradient(to right, transparent, black 100px);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 100px);
+    z-index: -1;
 }
 
 .tray-icon-wrapper {
     position: relative;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 6px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tray-icon-wrapper:hover {
@@ -242,9 +268,32 @@ p {
 }
 
 .tray-icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     display: block;
+}
+
+.system-icons {
+    display: flex;
+    gap: 12px;
+    color: #fff;
+    opacity: 0.8;
+    align-items: center;
+}
+
+.clock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    cursor: default;
+}
+
+#clock-date {
+    font-size: 11px;
 }
 
 .click-hint {
@@ -263,6 +312,7 @@ p {
     animation: bounce 2s infinite;
     pointer-events: none;
     transition: opacity 0.3s;
+    z-index: 100;
 }
 
 .arrow-down {
