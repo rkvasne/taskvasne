@@ -64,14 +64,19 @@ nav {
 
 .hero {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    /* Alinha a barra com os botões */
     justify-content: space-between;
-    padding: 80px 10%;
-    min-height: 80vh;
+    padding: 40px 10% 80px 10%;
+    /* Reduzido padding superior */
+    min-height: 60vh;
+    /* Reduzida altura mínima */
 }
 
 .hero-content {
     max-width: 600px;
+    padding-bottom: 10px;
+    /* Ajuste fino para alinhamento */
 }
 
 .hero-header {
@@ -154,18 +159,17 @@ p {
 
 .hero-image {
     position: relative;
+    z-index: 10;
 }
 
 /* Interactive Demo Styles */
 .interactive-demo {
     position: relative;
-    width: 400px;
-    height: 500px;
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
-    margin-top: 20px;
+    align-items: flex-end;
 }
 
 .app-popup {
@@ -179,7 +183,7 @@ p {
     overflow: hidden;
     position: absolute;
     bottom: 70px;
-    right: 20px;
+    right: 0;
     opacity: 0;
     transform: translateY(40px) scale(0.95);
     transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
