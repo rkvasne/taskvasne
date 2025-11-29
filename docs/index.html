@@ -17,9 +17,10 @@
     <nav>
         <div class="logo">Taskvasne</div>
         <div class="links">
-            <a href="#features">Funcionalidades</a>
-            <a href="#download">Download</a>
-            <a href="#author">Autor</a>
+            <a href="#download" data-i18n="nav.download">Download</a>
+            <a href="#features" data-i18n="nav.features">Funcionalidades</a>
+            <a href="#author" data-i18n="nav.author">Autor</a>
+            <button id="lang-toggle" class="lang-btn">EN</button>
         </div>
     </nav>
 
@@ -29,13 +30,14 @@
                 <img src="logo.png" alt="Taskvasne Logo" class="hero-logo">
                 <div class="badge">v0.0.6 ALPHA</div>
             </div>
-            <h1>Controle suas portas.<br><span>Com Estilo.</span></h1>
-            <p>O gerenciador de processos mais rápido, bonito e minimalista para desenvolvedores Windows.</p>
+            <h1 data-i18n="hero.title">Controle suas portas.<br><span>Com Estilo.</span></h1>
+            <p data-i18n="hero.subtitle">O gerenciador de processos mais rápido, bonito e minimalista para
+                desenvolvedores Windows.</p>
             <div class="cta-group">
-                <a href="https://github.com/rkvasne/taskvasne/blob/main/docs/Taskvasne.zip?raw=true"
-                    class="btn primary">Baixar
-                    para Windows (ZIP)</a>
-                <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank">Ver no GitHub</a>
+                <a href="https://github.com/rkvasne/taskvasne/blob/main/docs/Taskvasne.zip?raw=true" class="btn primary"
+                    data-i18n="hero.download">Baixar para Windows (ZIP)</a>
+                <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank"
+                    data-i18n="hero.github">Ver no GitHub</a>
             </div>
         </div>
         <div class="hero-image">
@@ -54,28 +56,28 @@
                                 <span class="port">:5040</span>
                                 <span class="proc">svchost.exe</span>
                             </div>
-                            <span class="kill-btn">Parar</span>
+                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
                         </div>
                         <div class="mockup-row">
                             <div class="row-info">
                                 <span class="port">:3000</span>
                                 <span class="proc">node.exe (api)</span>
                             </div>
-                            <span class="kill-btn">Parar</span>
+                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
                         </div>
                         <div class="mockup-row">
                             <div class="row-info">
                                 <span class="port">:5173</span>
                                 <span class="proc">vite.exe</span>
                             </div>
-                            <span class="kill-btn">Parar</span>
+                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
                         </div>
                         <div class="mockup-row">
                             <div class="row-info">
                                 <span class="port">:8080</span>
                                 <span class="proc">java.exe</span>
                             </div>
-                            <span class="kill-btn">Parar</span>
+                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
                     <div class="tray-icon-wrapper" id="demo-trigger">
                         <img src="logo.png" alt="Tray Icon" class="tray-icon">
                         <div class="click-hint">
-                            <span>Teste aqui</span>
+                            <span data-i18n="demo.hint">Teste aqui</span>
                             <div class="arrow-down"></div>
                         </div>
                     </div>
@@ -112,7 +114,7 @@
     </header>
 
     <section id="features" class="features">
-        <h2 class="section-title">Por que escolher o Taskvasne?</h2>
+        <h2 class="section-title" data-i18n="features.title">Por que escolher o Taskvasne?</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="icon">
@@ -120,8 +122,9 @@
                         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
                     </svg>
                 </div>
-                <h3>Ultra Rápido</h3>
-                <p>Construído com Vanilla JS para performance máxima. Sem frameworks pesados, apenas velocidade.</p>
+                <h3 data-i18n="features.fast.title">Ultra Rápido</h3>
+                <p data-i18n="features.fast.desc">Construído com Vanilla JS para performance máxima. Sem frameworks
+                    pesados, apenas velocidade.</p>
             </div>
             <div class="feature-card">
                 <div class="icon">
@@ -130,8 +133,9 @@
                             d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                     </svg>
                 </div>
-                <h3>Design Moderno</h3>
-                <p>Estética inspirada no Windows 11 com vidro fosco, bordas arredondadas e modo escuro nativo.</p>
+                <h3 data-i18n="features.modern.title">Design Moderno</h3>
+                <p data-i18n="features.modern.desc">Estética inspirada no Windows 11 com vidro fosco, bordas
+                    arredondadas e modo escuro nativo.</p>
             </div>
             <div class="feature-card">
                 <div class="icon">
@@ -140,16 +144,17 @@
                         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                     </svg>
                 </div>
-                <h3>System Tray</h3>
-                <p>Vive silenciosamente na sua bandeja. Um clique para abrir, matar o processo e voltar ao código.</p>
+                <h3 data-i18n="features.tray.title">System Tray</h3>
+                <p data-i18n="features.tray.desc">Vive silenciosamente na sua bandeja. Um clique para abrir, matar o
+                    processo e voltar ao código.</p>
             </div>
         </div>
     </section>
 
     <section id="security" class="security-section">
         <div class="security-content">
-            <h2>Segurança e Transparência</h2>
-            <p>Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
+            <h2 data-i18n="security.title">Segurança e Transparência</h2>
+            <p data-i18n="security.subtitle">Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -160,8 +165,9 @@
                             <polyline points="8 6 2 12 8 18"></polyline>
                         </svg>
                     </div>
-                    <h3>Código Aberto</h3>
-                    <p>Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.</p>
+                    <h3 data-i18n="security.opensource.title">Código Aberto</h3>
+                    <p data-i18n="security.opensource.desc">Todo o código fonte está disponível no GitHub. Você pode
+                        auditar cada linha.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">
@@ -173,8 +179,9 @@
                             <line x1="1" y1="1" x2="23" y2="23"></line>
                         </svg>
                     </div>
-                    <h3>Zero Telemetria</h3>
-                    <p>Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.</p>
+                    <h3 data-i18n="security.telemetry.title">Zero Telemetria</h3>
+                    <p data-i18n="security.telemetry.desc">Não coletamos dados, não rastreamos seu uso e não enviamos
+                        nada para a nuvem.</p>
                 </div>
                 <div class="feature-card">
                     <div class="icon">
@@ -184,8 +191,9 @@
                             <path d="M9 12l2 2 4-4" />
                         </svg>
                     </div>
-                    <h3>Sem Malware</h3>
-                    <p>Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.</p>
+                    <h3 data-i18n="security.malware.title">Sem Malware</h3>
+                    <p data-i18n="security.malware.desc">Livre de vírus, keyloggers ou qualquer software malicioso.
+                        Garantia de código limpo.</p>
                 </div>
             </div>
         </div>
@@ -193,25 +201,114 @@
 
     <section id="author" class="author-section">
         <div class="author-content">
-            <h2>Conheça o Criador</h2>
-            <p>Desenvolvido com paixão por design e código.</p>
+            <h2 data-i18n="author.title">Conheça o Criador</h2>
+            <p data-i18n="author.subtitle">Desenvolvido com paixão por design e código.</p>
 
             <div class="profile-card">
                 <div class="profile-info">
                     <h3>Raphael Kvasne</h3>
                     <span class="role">Full Stack Developer</span>
-                    <p>Criando experiências digitais que unem funcionalidade e estética futurista.</p>
-                    <a href="https://kvasne.com" target="_blank" class="btn-glow">Visitar kvasne.com</a>
+                    <p data-i18n="author.bio">Criando experiências digitais que unem funcionalidade e estética
+                        futurista.</p>
+                    <a href="https://kvasne.com" target="_blank" class="btn-glow" data-i18n="author.visit">Visitar
+                        kvasne.com</a>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Taskvasne. Open Source sob licença MIT.</p>
+        <p data-i18n="footer.text">&copy; 2025 Taskvasne. Open Source sob licença MIT.</p>
     </footer>
 
     <script>
+        // Translations
+        const translations = {
+            'pt-BR': {
+                'nav.download': 'Download',
+                'nav.features': 'Funcionalidades',
+                'nav.author': 'Autor',
+                'hero.title': 'Controle suas portas.<br><span>Com Estilo.</span>',
+                'hero.subtitle': 'O gerenciador de processos mais rápido, bonito e minimalista para desenvolvedores Windows.',
+                'hero.download': 'Baixar para Windows (ZIP)',
+                'hero.github': 'Ver no GitHub',
+                'demo.kill': 'Parar',
+                'demo.hint': 'Teste aqui',
+                'features.title': 'Por que escolher o Taskvasne?',
+                'features.fast.title': 'Ultra Rápido',
+                'features.fast.desc': 'Construído com Vanilla JS para performance máxima. Sem frameworks pesados, apenas velocidade.',
+                'features.modern.title': 'Design Moderno',
+                'features.modern.desc': 'Estética inspirada no Windows 11 com vidro fosco, bordas arredondadas e modo escuro nativo.',
+                'features.tray.title': 'System Tray',
+                'features.tray.desc': 'Vive silenciosamente na sua bandeja. Um clique para abrir, matar o processo e voltar ao código.',
+                'security.title': 'Segurança e Transparência',
+                'security.subtitle': 'Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.',
+                'security.opensource.title': 'Código Aberto',
+                'security.opensource.desc': 'Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.',
+                'security.telemetry.title': 'Zero Telemetria',
+                'security.telemetry.desc': 'Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.',
+                'security.malware.title': 'Sem Malware',
+                'security.malware.desc': 'Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.',
+                'author.title': 'Conheça o Criador',
+                'author.subtitle': 'Desenvolvido com paixão por design e código.',
+                'author.bio': 'Criando experiências digitais que unem funcionalidade e estética futurista.',
+                'author.visit': 'Visitar kvasne.com',
+                'footer.text': '&copy; 2025 Taskvasne. Open Source sob licença MIT.'
+            },
+            'en': {
+                'nav.download': 'Download',
+                'nav.features': 'Features',
+                'nav.author': 'Author',
+                'hero.title': 'Control your ports.<br><span>With Style.</span>',
+                'hero.subtitle': 'The fastest, most beautiful, and minimalist process manager for Windows developers.',
+                'hero.download': 'Download for Windows (ZIP)',
+                'hero.github': 'View on GitHub',
+                'demo.kill': 'Kill',
+                'demo.hint': 'Try here',
+                'features.title': 'Why choose Taskvasne?',
+                'features.fast.title': 'Blazing Fast',
+                'features.fast.desc': 'Built with Vanilla JS for maximum performance. No heavy frameworks, just speed.',
+                'features.modern.title': 'Modern Design',
+                'features.modern.desc': 'Windows 11 inspired aesthetic with frosted glass, rounded corners, and native dark mode.',
+                'features.tray.title': 'System Tray',
+                'features.tray.desc': 'Lives quietly in your tray. One click to open, kill the process, and get back to code.',
+                'security.title': 'Security and Transparency',
+                'security.subtitle': 'Your security is our priority. Taskvasne is 100% transparent.',
+                'security.opensource.title': 'Open Source',
+                'security.opensource.desc': 'All source code is available on GitHub. You can audit every line.',
+                'security.telemetry.title': 'Zero Telemetry',
+                'security.telemetry.desc': 'We collect no data, track no usage, and send nothing to the cloud.',
+                'security.malware.title': 'Malware Free',
+                'security.malware.desc': 'Free from viruses, keyloggers, or any malicious software. Clean code guarantee.',
+                'author.title': 'Meet the Creator',
+                'author.subtitle': 'Developed with passion for design and code.',
+                'author.bio': 'Creating digital experiences that unite functionality and futuristic aesthetics.',
+                'author.visit': 'Visit kvasne.com',
+                'footer.text': '&copy; 2025 Taskvasne. Open Source under MIT license.'
+            }
+        };
+
+        let currentLang = 'pt-BR';
+        const langToggle = document.getElementById('lang-toggle');
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            langToggle.textContent = lang === 'pt-BR' ? 'EN' : 'PT';
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            const newLang = currentLang === 'pt-BR' ? 'en' : 'pt-BR';
+            updateLanguage(newLang);
+        });
+
         // Interactive Demo Script
         const trigger = document.getElementById('demo-trigger');
         const popup = document.getElementById('demo-popup');
@@ -239,8 +336,8 @@
         // Clock Script
         function updateClock() {
             const now = new Date();
-            const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-            const date = now.toLocaleDateString('pt-BR');
+            const time = now.toLocaleTimeString(currentLang, { hour: '2-digit', minute: '2-digit' });
+            const date = now.toLocaleDateString(currentLang);
 
             document.getElementById('clock-time').textContent = time;
             document.getElementById('clock-date').textContent = date;
