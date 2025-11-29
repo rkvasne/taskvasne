@@ -164,7 +164,7 @@ app.on('window-all-closed', () => {
 ipcMain.handle('get-ports', async () => {
   return new Promise((resolve, reject) => {
     // 1. Get all processes first using tasklist (faster than querying per PID)
-    exec('tasklist /FO CSV /NH', (err, stdout, stderr) => {
+    exec('tasklist /FO CSV /NH', { maxBuffer: 5 * 1024 * 1024 }, (err, stdout, stderr) => {
       const processMap = new Map();
       if (!err && stdout) {
         stdout.split('\n').forEach(line => {
@@ -178,9 +178,11 @@ ipcMain.handle('get-ports', async () => {
       }
 
       // 2. Get ports using netstat
-      exec('netstat -ano', async (error, stdout, stderr) => {
+      // Increase maxBuffer to 5MB to prevent crash on systems with many connections
+      exec('netstat -ano', { maxBuffer: 5 * 1024 * 1024 }, async (error, stdout, stderr) => {
         if (error) {
           console.error(`netstat error: ${error}`);
+          // Show error in dev, but in prod maybe just return empty
           resolve([]);
           return;
         }
@@ -198,7 +200,9 @@ ipcMain.handle('get-ports', async () => {
           const state = parts[3];
           const pid = parts[4];
 
-          if (state === 'LISTENING' && protocol === 'TCP') {
+          // Check for LISTENING (standard) or OUVINDO (pt-br legacy) just in case
+          // Also ensure protocol is TCP
+          if ((state === 'LISTENING' || state === 'OUVINDO') && protocol === 'TCP') {
             const portMatch = localAddr.match(/:(\d+)$/);
             if (portMatch) {
               const port = parseInt(portMatch[1], 10);
