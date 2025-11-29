@@ -100,9 +100,9 @@ nav {
 
 .hero {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    padding: 0 10% 40px 10%;
+    padding: 60px 10% 40px 10%;
     min-height: 40vh;
 }
 
