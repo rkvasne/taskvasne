@@ -16,13 +16,21 @@
 ## ✨ Funcionalidades
 
 *   **⚡ Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
-*   **🎨 Design Windows 11**: Interface moderna, compacta e com modo escuro nativo.
+*   **🧠 Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java, facilitando a identificação de qual projeto está rodando em qual porta.
+*   **🎨 Design Windows 11**: Interface moderna, compacta, frameless e com modo escuro nativo.
 *   **🛡️ System Tray**: Vive silenciosamente na sua bandeja do sistema. Um clique para abrir, um clique para fechar.
 *   **🛑 Kill Process**: Encerre processos travados ou indesejados com um único clique.
     *   *Feedback Visual*: O item desliza e desaparece suavemente ao ser encerrado.
     *   *Sem Interrupções*: Ação imediata para manter seu fluxo de trabalho rápido.
-*   **🔄 Atualização Inteligente**: Botão de refresh com animação e feedback visual.
-*   **🔒 Instância Única**: Previne múltiplas janelas, mantendo seu workspace limpo.
+*   **🔄 Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos. Também possui botão de refresh manual.
+*   **🔗 Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` instantaneamente no seu navegador padrão.
+*   **🔒 Instância Única**: Previne múltiplas janelas, mantendo seu fluxo de trabalho limpo.
+
+## 🛡️ Segurança e Privacidade
+
+*   **Código Aberto**: Todo o código é auditável e disponível no GitHub.
+*   **Zero Telemetria**: Nenhum dado é coletado, rastreado ou enviado para a nuvem.
+*   **Transparência Total**: Foco absoluto em segurança e privacidade do desenvolvedor.
 
 ## 🚀 Instalação
 
@@ -105,7 +113,7 @@ Devido ao tamanho do binário (`Taskvasne.zip` ~140MB), utilizamos o **Git LFS (
 
 ## 👤 Autor
 
-Desenvolvido com ❤️ por **Raphael Kvasne**.
+Desenvolvido com ☕ por **Raphael Kvasne**.
 
 *   🌐 **Projeto**: [taskvasne.vercel.app](https://taskvasne.vercel.app)
 *   👨‍💻 **Portfolio**: [kvasne.com](https://kvasne.com)
