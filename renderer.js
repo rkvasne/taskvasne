@@ -30,8 +30,8 @@ function renderPorts(ports) {
         item.className = 'port-item';
 
         item.innerHTML = `
-      <div class="port-info" title="Abrir http://localhost:${port.LocalPort}">
-        <div class="port-badge">:${port.LocalPort}</div>
+      <div class="port-info">
+        <div class="port-badge" title="Abrir http://localhost:${port.LocalPort}">:${port.LocalPort}</div>
         <div class="process-name" title="${port.ProcessName}">${port.ProcessName || 'Desconhecido'}</div>
         <div class="pid">PID: ${port.PID}</div>
       </div>
@@ -39,10 +39,10 @@ function renderPorts(ports) {
       </div>
     `;
 
-        // Add click listener to open localhost
-        const portInfo = item.querySelector('.port-info');
-        portInfo.style.cursor = 'pointer';
-        portInfo.onclick = () => {
+        // Add click listener to badge
+        const badge = item.querySelector('.port-badge');
+        badge.onclick = (e) => {
+            e.stopPropagation();
             window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
         };
 
