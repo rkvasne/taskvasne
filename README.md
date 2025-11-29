@@ -28,9 +28,9 @@
 
 ## 🛡️ Segurança e Privacidade
 
-*   **Código Aberto**: Todo o código é auditável e disponível no GitHub.
-*   **Zero Telemetria**: Nenhum dado é coletado, rastreado ou enviado para a nuvem.
-*   **Transparência Total**: Foco absoluto em segurança e privacidade do desenvolvedor.
+*   **Código Aberto**: Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.
+*   **Zero Telemetria**: Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.
+*   **Sem Malware**: Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.
 
 ## 🚀 Instalação
 
