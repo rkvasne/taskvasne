@@ -2,18 +2,6 @@ const { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage, screen, dialog, sh
 const path = require('path');
 const { exec } = require('child_process');
 
-const fs = require('fs');
-
-// Setup logging
-const logPath = path.join(app.getPath('userData'), 'debug.log');
-function log(message) {
-  try {
-    fs.appendFileSync(logPath, `${new Date().toISOString()} - ${message}\n`);
-  } catch (e) {
-    // Ignore logging errors
-  }
-}
-
 let mainWindow;
 let tray;
 
@@ -24,7 +12,6 @@ if (!gotTheLock) {
   app.quit();
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
-    log('Second instance detected');
     // Someone tried to run a second instance, we should focus our window.
     if (mainWindow) {
       if (mainWindow.isMinimized()) mainWindow.restore();
@@ -34,9 +21,7 @@ if (!gotTheLock) {
   });
 
   app.whenReady().then(() => {
-    log('App ready');
     const iconPath = path.join(__dirname, 'icon.png');
-    log(`Icon path: ${iconPath}`);
     const icon = nativeImage.createFromPath(iconPath);
     tray = new Tray(icon);
 
@@ -47,14 +32,8 @@ if (!gotTheLock) {
     tray.setToolTip('Taskvasne');
 
     // Toggle window on click (left or right)
-    tray.on('click', () => {
-      log('Tray clicked');
-      toggleWindow();
-    });
-    tray.on('right-click', () => {
-      log('Tray right-clicked');
-      toggleWindow();
-    });
+    tray.on('click', () => toggleWindow());
+    tray.on('right-click', () => toggleWindow());
 
     createWindow();
 
@@ -64,12 +43,7 @@ if (!gotTheLock) {
   });
 }
 
-process.on('uncaughtException', (error) => {
-  log(`Uncaught Exception: ${error.stack}`);
-});
-
 function toggleWindow() {
-  log('Toggling window');
   if (mainWindow.isVisible()) {
     mainWindow.hide();
   } else {
@@ -80,13 +54,51 @@ function toggleWindow() {
 let aboutWindow = null;
 
 function showAbout() {
-  // ... (unchanged)
+  if (aboutWindow) {
+    aboutWindow.focus();
+    return;
+  }
+
+  aboutWindow = new BrowserWindow({
+    width: 320,
+    height: 340,
+    resizable: false,
+    minimizable: false,
+    maximizable: false,
+    fullscreenable: false,
+    title: 'Sobre',
+    frame: false, // Frameless for custom style
+    parent: mainWindow,
+    modal: true,
+    show: false,
+    icon: path.join(__dirname, 'icon.png'),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false // For simple internal page
+    }
+  });
+
+  aboutWindow.loadFile('about.html');
+
+  aboutWindow.once('ready-to-show', () => {
+    aboutWindow.show();
+  });
+
+  aboutWindow.on('closed', () => {
+    aboutWindow = null;
+  });
 }
 
-// ... (IPC handlers unchanged)
+// IPC Handlers for UI buttons
+ipcMain.on('app-quit', () => {
+  app.quit();
+});
+
+ipcMain.on('app-about', () => {
+  showAbout();
+});
 
 function createWindow() {
-  log('Creating window...');
   mainWindow = new BrowserWindow({
     width: 360,
     height: 500,
@@ -94,8 +106,7 @@ function createWindow() {
     frame: false,
     resizable: false,
     skipTaskbar: true,
-    transparent: false,
-    backgroundColor: '#202020',
+    transparent: true, // Try for rounded corners effect
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -106,14 +117,6 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 
-  mainWindow.webContents.on('did-finish-load', () => {
-    log('Window loaded index.html');
-  });
-
-  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
-    log(`Failed to load window: ${errorCode} - ${errorDescription}`);
-  });
-
   mainWindow.on('blur', () => {
     if (!mainWindow.webContents.isDevToolsOpened()) {
       mainWindow.hide();
@@ -122,35 +125,31 @@ function createWindow() {
 }
 
 function showWindow() {
-  log('Showing window...');
-  try {
-    const trayBounds = tray.getBounds();
-    const windowBounds = mainWindow.getBounds();
-    log(`Tray bounds: ${JSON.stringify(trayBounds)}`);
-    log(`Window bounds: ${JSON.stringify(windowBounds)}`);
+  const trayBounds = tray.getBounds();
+  const windowBounds = mainWindow.getBounds();
 
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  // Basic positioning logic for Windows (bottom-right usually)
+  // We'll center it horizontally over the tray icon if possible, or snap to corner
 
-    let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
-    let y = Math.round(trayBounds.y - windowBounds.height);
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
-    // Adjust if off screen
-    if (x < 0) x = 0;
-    if (x + windowBounds.width > width) x = width - windowBounds.width;
-    if (y < 0) y = 0;
+  let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
+  let y = Math.round(trayBounds.y - windowBounds.height);
 
-    log(`Calculated position: ${x}, ${y}`);
-    mainWindow.setPosition(x, y, false);
+  // Adjust if off screen
+  if (x < 0) x = 0;
+  if (x + windowBounds.width > width) x = width - windowBounds.width;
+  if (y < 0) y = 0; // Should not happen if taskbar is bottom
 
-    if (mainWindow.isVisible()) {
-      mainWindow.hide();
-    } else {
-      mainWindow.show();
-      mainWindow.focus();
-      log('Window shown and focused');
-    }
-  } catch (e) {
-    log(`Error in showWindow: ${e.stack}`);
+  // If taskbar is top/left/right, this logic is simplistic, but sufficient for MVP
+
+  mainWindow.setPosition(x, y, false);
+
+  if (mainWindow.isVisible()) {
+    mainWindow.hide();
+  } else {
+    mainWindow.show();
+    mainWindow.focus();
   }
 }
 
@@ -161,7 +160,7 @@ app.on('window-all-closed', () => {
 ipcMain.handle('get-ports', async () => {
   return new Promise((resolve, reject) => {
     // 1. Get all processes first using tasklist (faster than querying per PID)
-    exec('tasklist /FO CSV /NH', { maxBuffer: 5 * 1024 * 1024 }, (err, stdout, stderr) => {
+    exec('tasklist /FO CSV /NH', (err, stdout, stderr) => {
       const processMap = new Map();
       if (!err && stdout) {
         stdout.split('\n').forEach(line => {
@@ -175,11 +174,9 @@ ipcMain.handle('get-ports', async () => {
       }
 
       // 2. Get ports using netstat
-      // Increase maxBuffer to 5MB to prevent crash on systems with many connections
-      exec('netstat -ano', { maxBuffer: 5 * 1024 * 1024 }, async (error, stdout, stderr) => {
+      exec('netstat -ano', async (error, stdout, stderr) => {
         if (error) {
           console.error(`netstat error: ${error}`);
-          // Show error in dev, but in prod maybe just return empty
           resolve([]);
           return;
         }
@@ -197,9 +194,7 @@ ipcMain.handle('get-ports', async () => {
           const state = parts[3];
           const pid = parts[4];
 
-          // Check for LISTENING (standard) or OUVINDO (pt-br legacy) just in case
-          // Also ensure protocol is TCP
-          if ((state === 'LISTENING' || state === 'OUVINDO') && protocol === 'TCP') {
+          if (state === 'LISTENING' && protocol === 'TCP') {
             const portMatch = localAddr.match(/:(\d+)$/);
             if (portMatch) {
               const port = parseInt(portMatch[1], 10);
