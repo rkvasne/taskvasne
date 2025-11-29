@@ -274,3 +274,12 @@ ipcMain.handle('kill-process', async (event, pid) => {
     });
   });
 });
+
+ipcMain.handle('open-external', async (event, url) => {
+  try {
+    await shell.openExternal(url);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
