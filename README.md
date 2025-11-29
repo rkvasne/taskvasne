@@ -45,18 +45,57 @@
     npm start
     ```
 
-### 📦 Criando Executável
+### 📦 Distribuição e Arquitetura
 
-Para gerar um arquivo `.exe` portátil e otimizado com o ícone correto:
+#### Geração do Executável
+O projeto utiliza o `electron-packager` para criar uma versão portátil e otimizada para Windows x64.
 
-```bash
-npm run dist
-```
-O executável será criado na pasta `dist/`.
+1.  **Comando de Build**:
+    ```bash
+    npm run dist
+    ```
+    Este comando executa o script configurado no `package.json`:
+    ```json
+    "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist-portable --overwrite --icon=icon.ico ..."
+    ```
 
-**⚠️ Importante**: O arquivo `Taskvasne.exe` **não pode ser movido sozinho**. Ele depende dos outros arquivos na pasta para funcionar.
-*   Para "instalar", mova a **pasta inteira** para um local seguro (ex: `Meus Documentos`).
-*   Crie um **atalho** do `Taskvasne.exe` na sua Área de Trabalho.
+2.  **Resultado**:
+    O processo gera a pasta `dist-portable/Taskvasne-win32-x64`, contendo o executável e todas as dependências necessárias.
+
+#### Conteúdo do Pacote (Zip)
+O arquivo `Taskvasne.zip` é uma compressão da pasta gerada acima. Ele contém tudo o que o aplicativo precisa para rodar isoladamente (Standalone):
+
+*   **Taskvasne.exe**: O ponto de entrada do aplicativo.
+*   **Bibliotecas Gráficas e Multimídia (DLLs)**:
+    *   `ffmpeg.dll`: Suporte a áudio e vídeo.
+    *   `libGLESv2.dll`, `libEGL.dll`: Renderização gráfica (OpenGL/WebGL).
+    *   `vulkan-1.dll`, `vk_swiftshader.dll`: Suporte a Vulkan.
+    *   `d3dcompiler_47.dll`, `dxcompiler.dll`: Compiladores DirectX.
+*   **Core do Electron**:
+    *   `resources.pak`, `chrome_*.pak`: Recursos visuais do Chromium.
+    *   `icudtl.dat`: Suporte a internacionalização (i18n).
+*   **Código Fonte**:
+    *   `resources/`: Pasta contendo o código da aplicação (`main.js`, `renderer.js`, `index.html`, etc.), geralmente empacotado.
+
+#### Versionamento no Git (Git LFS)
+Devido ao tamanho do binário (`Taskvasne.zip` ~140MB), utilizamos o **Git LFS (Large File Storage)** para versionamento.
+
+1.  **Configuração (.gitattributes)**:
+    O arquivo foi configurado para ser rastreado pelo LFS:
+    ```ini
+    docs/Taskvasne.zip filter=lfs diff=lfs merge=lfs -text
+    ```
+
+2.  **Como o arquivo foi aceito**:
+    Como arquivos `.zip` estão listados no `.gitignore` para evitar commits acidentais de builds locais, foi necessário forçar a adição do arquivo de distribuição oficial:
+    ```bash
+    git add -f docs/Taskvasne.zip
+    ```
+    Isso garante que apenas este zip específico (hospedado na pasta `docs/` para download via GitHub Pages/Raw) seja versionado, enquanto outros zips temporários continuam ignorados.
+
+3.  **Download via Raw URL**:
+    Para garantir o download direto do binário (e não do ponteiro LFS), o link no site utiliza o parâmetro `?raw=true`:
+    `https://github.com/rkvasne/taskvasne/blob/main/docs/Taskvasne.zip?raw=true`
 
 ## 🛠️ Tecnologias
 
