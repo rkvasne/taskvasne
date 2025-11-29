@@ -74,24 +74,30 @@ nav {
     max-width: 600px;
 }
 
+.hero-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
 .hero-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
+    width: 64px;
+    height: 64px;
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .badge {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 6px 16px;
     background: rgba(138, 43, 226, 0.1);
     color: var(--primary);
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    margin-bottom: 20px;
     border: 1px solid rgba(138, 43, 226, 0.2);
+    margin-bottom: 0;
 }
 
 h1 {
