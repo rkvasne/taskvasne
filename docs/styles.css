@@ -502,6 +502,10 @@ p {
     border-color: var(--primary);
 }
 
+.profile-info h3 {
+    text-transform: uppercase;
+}
+
 .profile-card::before {
     content: '';
     position: absolute;
