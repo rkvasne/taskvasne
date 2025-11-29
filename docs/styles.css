@@ -65,18 +65,14 @@ nav {
 .hero {
     display: flex;
     align-items: flex-end;
-    /* Alinha a barra com os botões */
     justify-content: space-between;
     padding: 40px 10% 80px 10%;
-    /* Reduzido padding superior */
     min-height: 60vh;
-    /* Reduzida altura mínima */
 }
 
 .hero-content {
     max-width: 600px;
     padding-bottom: 10px;
-    /* Ajuste fino para alinhamento */
 }
 
 .hero-header {
