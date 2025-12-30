@@ -68,7 +68,7 @@ nav {
     -webkit-text-fill-color: transparent;
 }
 
-.links {
+.nav-menu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -76,9 +76,12 @@ nav {
     flex: 1;
     min-width: 0;
     flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.links a {
+.nav-link {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: color 0.3s;
@@ -86,7 +89,7 @@ nav {
     white-space: nowrap;
 }
 
-.links a:hover {
+.nav-link:hover {
     color: var(--primary);
 }
 
@@ -103,7 +106,7 @@ nav {
     transition: all 0.3s;
 }
 
-.nav-toggle {
+.mobile-menu-btn {
     display: none;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -117,7 +120,7 @@ nav {
     gap: 4px;
 }
 
-.nav-toggle-bar {
+.mobile-menu-bar {
     display: block;
     width: 18px;
     height: 2px;
@@ -125,12 +128,27 @@ nav {
     border-radius: 2px;
 }
 
-.nav-toggle:hover {
+.mobile-menu-btn:hover {
     border-color: var(--primary);
 }
 
-.nav-menu {
+.menu-overlay {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+    display: block;
+    opacity: 1;
 }
 
 .lang-btn:hover {
@@ -165,7 +183,7 @@ nav {
 .hero-logo {
     width: 64px;
     height: 64px;
-    border-radius: 16px;
+    border-radius: 50%;
     box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
 }
 
@@ -239,19 +257,19 @@ p {
 /* Interactive Demo Mockup */
 .interactive-demo {
     position: relative;
-    width: 400px;
-    height: 350px;
+    width: 420px;
+    height: 420px;
 }
 
 .app-popup {
-    width: 320px;
+    width: 380px;
     background: #1a1a1a;
     border: 1px solid var(--border);
     border-radius: 12px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     position: absolute;
-    top: 0;
-    left: 40px;
+    bottom: 80px;
+    right: 0;
     overflow: hidden;
     z-index: 10;
     animation: float 6s ease-in-out infinite;
@@ -345,8 +363,8 @@ p {
 /* Tray Area */
 .tray-area {
     position: absolute;
-    bottom: -40px;
-    right: -40px;
+    bottom: 0;
+    right: 0;
     background: rgba(30, 30, 30, 0.9);
     backdrop-filter: blur(10px);
     border-radius: 8px;
@@ -386,6 +404,12 @@ p {
     opacity: 0;
     transition: opacity 0.3s;
     pointer-events: none;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
 }
 
 .tray-icon-wrapper:hover .click-hint {
@@ -750,49 +774,36 @@ p {
         padding: 16px 20px;
     }
 
-    .links {
-        flex-wrap: nowrap;
-        gap: 10px;
-    }
-
-    .links .nav-link {
-        display: none;
-    }
-
-    .nav-toggle {
+    .mobile-menu-btn {
         display: inline-flex;
     }
 
     .nav-menu {
-        display: block;
-        position: absolute;
-        top: calc(100% + 10px);
-        right: 20px;
-        min-width: 220px;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
         background: rgba(20, 20, 20, 0.92);
         backdrop-filter: blur(14px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 14px;
-        padding: 10px;
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        transition: right 0.3s ease-in-out;
+        z-index: 1000;
+        padding: 24px;
+        flex-wrap: nowrap;
     }
 
-    .nav-menu[hidden] {
-        display: none;
+    .nav-menu.active {
+        right: 0;
     }
 
-    .nav-menu-link {
-        display: block;
-        padding: 10px 12px;
-        border-radius: 10px;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 14px;
-    }
-
-    .nav-menu-link:hover {
-        background: rgba(255, 255, 255, 0.06);
-        color: #fff;
+    .nav-link {
+        font-size: 16px;
     }
 
     .footer-content {
