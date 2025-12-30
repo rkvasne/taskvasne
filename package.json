@@ -16,7 +16,13 @@
         "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist-portable --overwrite --icon=icon.ico --ignore=\"^/dist\" --ignore=\"^/docs\" --ignore=\"^/.git\" --ignore=\"^/.vscode\"",
         "build:portable": "electron-builder --win portable",
         "build:win": "electron-builder",
-        "build": "echo 'Vercel build skipped'"
+        "build": "echo 'Vercel build skipped'",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "lint": "eslint *.js",
+        "lint:fix": "eslint *.js --fix",
+        "format": "prettier --write \"*.{js,json,md}\""
     },
     "build": {
         "appId": "com.kvasne.taskvasne",
@@ -45,9 +51,18 @@
     "author": "Raphael Kvasne <raphael@kvasne.com> (https://kvasne.com)",
     "license": "MIT",
     "devDependencies": {
+        "@types/jest": "^30.0.0",
         "electron": "^39.2.4",
         "electron-builder": "^26.0.12",
         "electron-packager": "^17.1.2",
-        "png-to-ico": "^3.0.1"
+        "eslint": "^9.39.2",
+        "eslint-config-prettier": "^10.1.8",
+        "jest": "^30.2.0",
+        "jest-environment-jsdom": "^30.2.0",
+        "png-to-ico": "^3.0.1",
+        "prettier": "^3.7.4"
+    },
+    "dependencies": {
+        "electron-log": "^5.4.3"
     }
 }

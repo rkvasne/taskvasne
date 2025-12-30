@@ -1,7 +1,13 @@
-const { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage, screen, dialog, shell } = require('electron');
+const { app, BrowserWindow, Tray, ipcMain, nativeImage, screen, shell } = require('electron');
 const path = require('path');
 const { exec } = require('child_process');
 const { getPorts } = require('./port-manager');
+const log = require('electron-log');
+
+// Configure logging
+log.transports.file.level = 'info';
+log.transports.console.level = 'debug';
+log.info('Application starting...');
 
 let mainWindow;
 let tray;
@@ -10,10 +16,12 @@ let tray;
 const gotTheLock = app.requestSingleInstanceLock();
 
 if (!gotTheLock) {
+  log.info('Second instance detected, quitting...');
   app.quit();
 } else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
+  app.on('second-instance', (_event, _commandLine, _workingDirectory) => {
     // Someone tried to run a second instance, we should focus our window.
+    log.info('Second instance attempted, focusing main window');
     if (mainWindow) {
       if (mainWindow.isMinimized()) mainWindow.restore();
       if (!mainWindow.isVisible()) showWindow();
@@ -44,6 +52,10 @@ if (!gotTheLock) {
   });
 }
 
+/**
+ * Toggles window visibility (show/hide)
+ * @returns {void}
+ */
 function toggleWindow() {
   if (mainWindow.isVisible()) {
     mainWindow.hide();
@@ -54,6 +66,11 @@ function toggleWindow() {
 
 let aboutWindow = null;
 
+/**
+ * Shows the About modal window
+ * Creates a new modal if it doesn't exist, otherwise focuses existing one
+ * @returns {void}
+ */
 function showAbout() {
   if (aboutWindow) {
     aboutWindow.focus();
@@ -74,8 +91,9 @@ function showAbout() {
     show: false,
     icon: path.join(__dirname, 'icon.png'),
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false // For simple internal page
+      preload: path.join(__dirname, 'preload-about.js'),
+      nodeIntegration: false,
+      contextIsolation: true
     }
   });
 
@@ -92,6 +110,7 @@ function showAbout() {
 
 // IPC Handlers for UI buttons
 ipcMain.on('app-quit', () => {
+  log.info('Quit requested by user');
   app.quit();
 });
 
@@ -99,6 +118,16 @@ ipcMain.on('app-about', () => {
   showAbout();
 });
 
+ipcMain.on('about-close', () => {
+  if (aboutWindow) {
+    aboutWindow.close();
+  }
+});
+
+/**
+ * Creates the main application window
+ * @returns {void}
+ */
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 360,
@@ -125,6 +154,11 @@ function createWindow() {
   });
 }
 
+/**
+ * Shows the window near the system tray icon
+ * Positions the window above the tray icon with proper bounds checking
+ * @returns {void}
+ */
 function showWindow() {
   const trayBounds = tray.getBounds();
   const windowBounds = mainWindow.getBounds();
@@ -132,7 +166,7 @@ function showWindow() {
   // Basic positioning logic for Windows (bottom-right usually)
   // We'll center it horizontally over the tray icon if possible, or snap to corner
 
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const { width } = screen.getPrimaryDisplay().workAreaSize;
 
   let x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2));
   let y = Math.round(trayBounds.y - windowBounds.height);
@@ -160,11 +194,20 @@ ipcMain.handle('get-ports', async () => {
 });
 
 ipcMain.handle('kill-process', async (event, pid) => {
-  return new Promise((resolve, reject) => {
-    exec(`taskkill /F /PID ${pid}`, (error, stdout, stderr) => {
+  return new Promise((resolve, _reject) => {
+    // Security: Sanitize PID to prevent command injection
+    const safePid = parseInt(pid, 10);
+    if (isNaN(safePid) || safePid <= 0) {
+      resolve({ success: false, error: 'Invalid PID' });
+      return;
+    }
+    
+    exec(`taskkill /F /PID ${safePid}`, (error, stdout, stderr) => {
       if (error) {
+        log.error(`Failed to kill process ${safePid}: ${stderr}`);
         resolve({ success: false, error: stderr });
       } else {
+        log.info(`Successfully killed process ${safePid}`);
         resolve({ success: true });
       }
     });
@@ -173,9 +216,11 @@ ipcMain.handle('kill-process', async (event, pid) => {
 
 ipcMain.handle('open-external', async (event, url) => {
   try {
+    log.info(`Opening external URL: ${url}`);
     await shell.openExternal(url);
     return { success: true };
   } catch (error) {
+    log.error(`Failed to open external URL: ${error.message}`);
     return { success: false, error: error.message };
   }
 });
