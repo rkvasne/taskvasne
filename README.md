@@ -7,6 +7,8 @@
 
 > **Taskvasne** é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.).
 >
+> **Status:** v0.0.6 (ALPHA)
+>
 > 🌐 **Acesse o site oficial:** [taskvasne.vercel.app](https://taskvasne.vercel.app) (Disponível em PT-BR e EN)
 
 <p align="center">
@@ -52,6 +54,14 @@
     ```bash
     npm start
     ```
+
+## 🌐 Site (Documentação Web)
+
+O site publicado em [taskvasne.vercel.app](https://taskvasne.vercel.app) é servido a partir da pasta `docs/`.
+
+- A configuração de deploy/rotas está em `vercel.json`.
+- Para pré-visualizar localmente, basta servir a pasta `docs/` via qualquer servidor estático.
+    - Exemplo: `npx serve docs`
 
 ### 📦 Distribuição e Arquitetura
 
