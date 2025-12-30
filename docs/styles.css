@@ -42,12 +42,14 @@ nav {
     position: sticky;
     top: 0;
     z-index: 100;
+    gap: 16px;
 }
 
 .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
 }
 
 .brand-icon {
@@ -66,12 +68,22 @@ nav {
     -webkit-text-fill-color: transparent;
 }
 
+.links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    flex: 1;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
 .links a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    margin-left: 24px;
     transition: color 0.3s;
     font-size: 14px;
+    white-space: nowrap;
 }
 
 .links a:hover {
@@ -88,8 +100,37 @@ nav {
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
-    margin-left: 24px;
     transition: all 0.3s;
+}
+
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 40px;
+    height: 34px;
+    padding: 6px 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+}
+
+.nav-toggle:hover {
+    border-color: var(--primary);
+}
+
+.nav-menu {
+    display: none;
 }
 
 .lang-btn:hover {
@@ -703,6 +744,55 @@ p {
 
     .cta-group {
         justify-content: center;
+    }
+
+    nav {
+        padding: 16px 20px;
+    }
+
+    .links {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .links .nav-link {
+        display: none;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .nav-menu {
+        display: block;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 20px;
+        min-width: 220px;
+        background: rgba(20, 20, 20, 0.92);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 10px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .nav-menu[hidden] {
+        display: none;
+    }
+
+    .nav-menu-link {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 14px;
+    }
+
+    .nav-menu-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
     }
 
     .footer-content {
