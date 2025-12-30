@@ -488,7 +488,7 @@ Veja o [CHANGELOG.md](CHANGELOG.md) para histórico completo de mudanças.
 
 ## 👨‍💻 Autor
 
-Desenvolvido com ☕ por **Raphael Kvasne**.
+Desenvolvido por **Raphael Kvasne**.
 
 *   🌐 **Projeto**: [taskvasne.vercel.app](https://taskvasne.vercel.app)
 *   👨‍💻 **Portfolio**: [kvasne.com](https://kvasne.com)
