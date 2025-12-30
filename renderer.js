@@ -1,24 +1,39 @@
+// Configuration Constants
+const AUTO_REFRESH_INTERVAL = 5000; // 5 seconds - sync with README documentation
+const ANIMATION_DURATION = 300; // 300ms - sync with CSS transition duration
+
 const listElement = document.getElementById('port-list');
 const refreshBtn = document.getElementById('refresh');
 
+/**
+ * Loads and displays the list of active ports
+ * Shows loading state only if list is empty to avoid flicker
+ * @async
+ * @returns {Promise<void>}
+ */
 async function loadPorts() {
     // Only show loading if empty to avoid flicker
     if (listElement.children.length === 0) {
-        listElement.innerHTML = '<div class="empty-state">Carregando...</div>';
+        listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loading')}</div>`;
     }
 
     try {
         const ports = await window.electronAPI.getPorts();
         renderPorts(ports);
     } catch (error) {
-        listElement.innerHTML = `<div class="empty-state">Erro ao carregar: ${error}</div>`;
+        listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loadingError')}: ${error}</div>`;
     }
 }
 
+/**
+ * Renders the ports list in the UI
+ * @param {Array<{LocalPort: number, PID: string, ProcessName: string}>} ports - Array of port objects
+ * @returns {void}
+ */
 function renderPorts(ports) {
     // If we have ports, clear list. If not, show empty state.
     if (!ports || ports.length === 0) {
-        listElement.innerHTML = '<div class="empty-state">Nenhuma porta ativa encontrada (acima de 1000)</div>';
+        listElement.innerHTML = `<div class="empty-state">${window.i18n.t('noPortsFound')}</div>`;
         return;
     }
 
@@ -31,9 +46,9 @@ function renderPorts(ports) {
 
         item.innerHTML = `
       <div class="port-info">
-        <div class="port-badge" title="Abrir http://localhost:${port.LocalPort}">:${port.LocalPort}</div>
-        <div class="process-name" title="${port.ProcessName}">${port.ProcessName || 'Desconhecido'}</div>
-        <div class="pid">PID: ${port.PID}</div>
+        <div class="port-badge" title="${window.i18n.t('openPort', { port: port.LocalPort })}">:${port.LocalPort}</div>
+        <div class="process-name" title="${port.ProcessName}">${port.ProcessName || window.i18n.t('unknown')}</div>
+        <div class="pid">${window.i18n.t('pid', { pid: port.PID })}</div>
       </div>
       <div class="actions">
       </div>
@@ -57,9 +72,9 @@ function renderPorts(ports) {
         // Create button manually to attach event listener properly
         const killBtn = document.createElement('button');
         killBtn.className = 'kill-btn';
-        killBtn.title = 'Parar Processo';
+        killBtn.title = window.i18n.t('stopProcess');
         // Stop icon (filled square)
-        killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> Parar`;
+        killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> ${window.i18n.t('stop')}`;
         killBtn.onclick = (e) => {
             e.stopPropagation(); // Prevent row click
             killProcess(port.PID, item);
@@ -70,6 +85,13 @@ function renderPorts(ports) {
     });
 }
 
+/**
+ * Kills a process by PID with visual feedback
+ * @async
+ * @param {string} pid - Process ID to kill
+ * @param {HTMLElement} btnElement - Button element that triggered the action
+ * @returns {Promise<void>}
+ */
 async function killProcess(pid, btnElement) {
     // 2. Visual Feedback (Optimistic UI)
     let row = null;
@@ -87,11 +109,11 @@ async function killProcess(pid, btnElement) {
         // Wait for animation to finish before reloading
         setTimeout(() => {
             loadPorts();
-        }, 300);
+        }, ANIMATION_DURATION);
     } else {
         // Revert visual change if failed
         if (row) row.classList.remove('removing');
-        alert('Erro ao parar processo: ' + result.error);
+        alert(`${window.i18n.t('errorKillingProcess')}: ${result.error}`);
     }
 }
 
@@ -118,4 +140,4 @@ document.getElementById('quit').addEventListener('click', () => {
 loadPorts();
 
 // Auto refresh every 5s
-setInterval(loadPorts, 5000);
+setInterval(loadPorts, AUTO_REFRESH_INTERVAL);
