@@ -130,41 +130,56 @@
 
     <script src="i18n.js"></script>
     <script>
-        // Internationalization setup
-        function updateAboutTranslations() {
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (key === 'version') {
-                    element.textContent = `${window.i18n.t('version')} 0.0.6`;
-                } else {
-                    element.textContent = window.i18n.t(key);
-                }
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', () => {
+            // Internationalization setup
+            function updateAboutTranslations() {
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (key === 'version') {
+                        element.textContent = `${window.i18n.t('version')} 0.0.6`;
+                    } else {
+                        element.textContent = window.i18n.t(key);
+                    }
+                });
+            }
+
+            // Listen for language changes
+            window.addEventListener('languageChanged', updateAboutTranslations);
+            
+            // Initial translation
+            updateAboutTranslations();
+
+            // Close button
+            const closeBtn = document.getElementById('close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    console.log('Close button clicked');
+                    if (window.aboutAPI && window.aboutAPI.closeWindow) {
+                        window.aboutAPI.closeWindow();
+                    } else {
+                        console.error('aboutAPI not available');
+                    }
+                });
+            } else {
+                console.error('close-btn not found');
+            }
+
+            // External links
+            document.getElementById('link-site').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.aboutAPI.openExternal('https://taskvasne.vercel.app');
             });
-        }
 
-        // Listen for language changes
-        window.addEventListener('languageChanged', updateAboutTranslations);
-        
-        // Initial translation
-        updateAboutTranslations();
+            document.getElementById('link-github').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.aboutAPI.openExternal('https://github.com/rkvasne/taskvasne');
+            });
 
-        document.getElementById('close-btn').addEventListener('click', () => {
-            window.aboutAPI.closeWindow();
-        });
-
-        document.getElementById('link-site').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.aboutAPI.openExternal('https://taskvasne.vercel.app');
-        });
-
-        document.getElementById('link-github').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.aboutAPI.openExternal('https://github.com/rkvasne/taskvasne');
-        });
-
-        document.getElementById('link-linkedin').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.aboutAPI.openExternal('https://www.linkedin.com/in/rkvasne/');
+            document.getElementById('link-linkedin').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.aboutAPI.openExternal('https://www.linkedin.com/in/rkvasne/');
+            });
         });
     </script>
 </body>
