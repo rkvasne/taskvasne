@@ -71,13 +71,16 @@ Commit: `7f06443`
 
 ## 📦 Arquivos Criados/Modificados
 
-### Novos Arquivos (15)
+### Novos Arquivos (18)
 ```
 ✨ i18n.js                           # Sistema de internacionalização
 ✨ __tests__/i18n.test.js            # Testes do i18n (14 testes)
 ✨ __tests__/port-manager.test.js    # Testes do port-manager (17 testes)
 ✨ CHANGELOG.md                      # Histórico de mudanças
 ✨ CONTRIBUTING.md                   # Guia de contribuição
+✨ SPRINT1_REPORT.md                 # Relatório Sprint 1 (Segurança)
+✨ SPRINT2_REPORT.md                 # Relatório Sprint 2 (Testes)
+✨ GIT_LFS_SETUP.md                  # Guia completo Git LFS
 ✨ SPRINT3_REPORT.md                 # Relatório Sprint 3
 ✨ ANALISE_TECNICA.md                # Análise técnica completa
 ✨ eslint.config.js                  # Configuração ESLint 9.x
@@ -107,10 +110,16 @@ Commit: `7f06443`
 
 ## 🚀 Próximos Passos
 
-### 1. Push para GitHub ⏳
+### 1. ✅ Push para GitHub (COMPLETO)
 ```bash
-git push origin main
+git push origin main  # ✅ Concluído
 ```
+
+**Histórico de Uploads LFS:**
+- ✅ dist-portable/Taskvasne.zip (114 MB) - Upload 100% concluído
+- ✅ Commit cd1ec52: "release: v0.0.6 - Add Taskvasne portable executable to LFS"
+- ✅ Commit 4035c17: "docs: add Git LFS setup documentation"
+- ✅ Commit e98647f: "docs: add Sprint 1 and Sprint 2 detailed reports"
 
 ### 2. Criar Release Tag
 ```bash
@@ -127,15 +136,31 @@ git push origin v0.0.6
 ```
 
 ### 3. Publicar Release no GitHub
-- Ir para https://github.com/rkvasne/taskvasne/releases
+- Ir para https://github.com/rkvasne/taskvasne/releases/new
 - Criar nova release com tag `v0.0.6`
-- Anexar executável do `dist-portable/`
+- **NÃO PRECISA ANEXAR EXECUTÁVEL** (já está no Git LFS)
 - Copiar conteúdo do CHANGELOG.md
+- Adicionar link de download:
+  ```markdown
+  📦 **Download:** [Taskvasne.zip](https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip) (114 MB)
+  ```
 
 ### 4. Deploy da Landing Page ✅
 - Vercel já está configurado
 - Push automático irá deployar
 - Verificar em https://taskvasne.vercel.app
+
+### 5. Git LFS - Configuração Completa ✅
+- ✅ Git LFS instalado e configurado
+- ✅ `.gitattributes` configurado para `*.exe` e `*.zip`
+- ✅ Binário enviado via LFS (114 MB @ 9.2 MB/s)
+- ✅ Documentação completa em [GIT_LFS_SETUP.md](GIT_LFS_SETUP.md)
+- ✅ Verificação: `git lfs ls-files` mostra 2 arquivos
+
+**Download direto:**
+```
+https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
+```
 
 ---
 
@@ -147,12 +172,14 @@ git push origin v0.0.6
 - [x] Documentação atualizada
 - [x] CHANGELOG completo
 - [x] Commit criado
-- [ ] Push para GitHub
-- [ ] Tag de versão criada
+- [x] Push para GitHub (commits: 7f06443, c43dafe, 7dcedca, e98647f, cd1ec52, 4035c17)
+- [x] Tag de versão criada (v0.0.6)
+- [x] Git LFS configurado
+- [x] Binário enviado via LFS (114 MB)
 
 ### Release
 - [ ] Release notes no GitHub
-- [ ] Executável anexado
+- [ ] Link para download LFS na release
 - [ ] Landing page atualizada (Vercel)
 - [ ] Anúncio no LinkedIn
 - [ ] Compartilhamento em comunidades

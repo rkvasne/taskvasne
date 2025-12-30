@@ -105,9 +105,21 @@ npm test
 
 Baixe a versão mais recente em [taskvasne.vercel.app](https://taskvasne.vercel.app) ou diretamente do GitHub:
 
+**Opção 1: Via Site (Recomendado)**
 ```bash
-# Extraia o arquivo ZIP e execute Taskvasne.exe
+https://taskvasne.vercel.app/#download
 ```
+
+**Opção 2: Direto do GitHub (Git LFS)**
+```bash
+# Link direto para download (114 MB)
+https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
+```
+
+**Instalação:**
+1. Extraia o arquivo ZIP
+2. Execute `Taskvasne.exe`
+3. Pronto! Sem instalação necessária (aplicação portátil)
 
 ## 🌐 Site (Documentação Web)
 
@@ -150,24 +162,165 @@ O arquivo `Taskvasne.zip` é uma compressão da pasta gerada acima. Ele contém 
     *   `resources/`: Pasta contendo o código da aplicação (`main.js`, `renderer.js`, `index.html`, etc.), geralmente empacotado.
 
 #### Versionamento no Git (Git LFS)
-Devido ao tamanho do binário (`Taskvasne.zip` ~140MB), utilizamos o **Git LFS (Large File Storage)** para versionamento.
+Devido ao tamanho do binário (`Taskvasne.zip` ~114MB), utilizamos o **Git LFS (Large File Storage)** para versionamento.
 
-1.  **Configuração (.gitattributes)**:
-    O arquivo foi configurado para ser rastreado pelo LFS:
-    ```ini
-    docs/Taskvasne.zip filter=lfs diff=lfs merge=lfs -text
-    ```
+##### 📌 Por que Git LFS?
 
-2.  **Como o arquivo foi aceito**:
-    Como arquivos `.zip` estão listados no `.gitignore` para evitar commits acidentais de builds locais, foi necessário forçar a adição do arquivo de distribuição oficial:
-    ```bash
-    git add -f docs/Taskvasne.zip
-    ```
-    Isso garante que apenas este zip específico (hospedado na pasta `docs/` para download via GitHub Pages/Raw) seja versionado, enquanto outros zips temporários continuam ignorados.
+**Sem LFS (problema):**
+- ❌ Repositório incha com cada versão (~100+ MB por release)
+- ❌ Clone lento (baixa todo histórico de binários)
+- ❌ Operações Git ficam lentas
 
-3.  **Download via Raw URL**:
-    Para garantir o download direto do binário (e não do ponteiro LFS), o link no site utiliza o parâmetro `?raw=true`:
-    `https://github.com/rkvasne/taskvasne/blob/main/docs/Taskvasne.zip?raw=true`
+**Com LFS (solução):**
+- ✅ Apenas ponteiros no Git (~100 bytes)
+- ✅ Clone rápido (binários baixados sob demanda)
+- ✅ Repositório permanece leve
+- ✅ Versionamento eficiente de binários
+
+##### 🔧 Configuração Inicial (Setup)
+
+**1. Instalação do Git LFS:**
+```bash
+git lfs install
+git lfs version  # Verificar instalação
+```
+
+**2. Configuração (.gitattributes):**
+```ini
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+```
+
+Este arquivo configura quais tipos de arquivo são rastreados pelo LFS.
+
+##### 📦 Envio de Novos Binários (Release)
+
+**Passo 1: Gerar Build**
+```bash
+npm run dist  # Gera dist-portable/Taskvasne-win32-x64/
+```
+
+**Passo 2: Criar ZIP (opcional)**
+```powershell
+# PowerShell
+Compress-Archive -Path dist-portable/Taskvasne-win32-x64 -DestinationPath dist-portable/Taskvasne.zip
+```
+
+**Passo 3: Adicionar ao Git LFS**
+```bash
+# Forçar adição (ignora .gitignore)
+git add -f dist-portable/Taskvasne.zip
+git add .gitattributes
+```
+
+**Passo 4: Commit**
+```bash
+git commit -m "release: v0.0.7 - Add new portable build to LFS
+
+- Taskvasne.zip (~114 MB)
+- Bug fixes and improvements"
+```
+
+**Passo 5: Push (Upload LFS)**
+```bash
+git push origin main
+```
+
+**Saída esperada:**
+```
+Uploading LFS objects: 100% (1/1), 114 MB | 9.2 MB/s, done
+Enumerating objects: 5, done.
+...
+To https://github.com/rkvasne/taskvasne.git
+   abc1234..def5678  main -> main
+```
+
+##### ✅ Verificação
+
+**Listar arquivos no LFS:**
+```bash
+git lfs ls-files
+```
+
+**Saída esperada:**
+```
+65b2de1e3a * dist-portable/Taskvasne.zip
+454beb7c1c * docs/Taskvasne.zip
+```
+
+**Verificar status:**
+```bash
+git lfs status
+```
+
+##### 🔄 Clone do Repositório (para novos colaboradores)
+
+**Com LFS instalado (recomendado):**
+```bash
+git clone https://github.com/rkvasne/taskvasne.git
+cd taskvasne
+git lfs pull  # Baixa arquivos LFS
+```
+
+**Sem LFS (apenas código):**
+```bash
+git clone https://github.com/rkvasne/taskvasne.git
+# Binários aparecem como ponteiros (texto pequeno)
+# Para baixar: git lfs install && git lfs pull
+```
+
+##### 🚨 Troubleshooting
+
+**Problema: Arquivo não vai para LFS**
+```bash
+# Remover do cache
+git rm --cached dist-portable/Taskvasne.zip
+
+# Adicionar novamente (com LFS)
+git add -f dist-portable/Taskvasne.zip
+
+# Amend commit
+git commit --amend --no-edit
+
+# Force push (CUIDADO!)
+git push origin main --force
+```
+
+**Problema: Clone sem LFS**
+```bash
+git lfs install
+git lfs pull
+```
+
+**Problema: Autenticação**
+```bash
+git config lfs.url https://github.com/rkvasne/taskvasne.git/info/lfs
+git credential reject
+git push origin main  # Redigitar credenciais
+```
+
+##### 📊 Histórico de Uploads
+
+| Data | Versão | Arquivo | Tamanho | Commit |
+|------|--------|---------|---------|--------|
+| 2025-12-30 | v0.0.6 | dist-portable/Taskvasne.zip | 114 MB | cd1ec52 |
+| 2025-11-28 | - | docs/Taskvasne.zip | 109 MB | (anterior) |
+
+##### 📖 Documentação Completa
+
+Para mais detalhes sobre Git LFS, veja:
+- [GIT_LFS_SETUP.md](GIT_LFS_SETUP.md) - Guia completo de configuração
+- [Git LFS Documentation](https://git-lfs.github.com/)
+- [GitHub LFS Guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files)
+
+##### 🔗 Download via Raw URL
+
+Para garantir o download direto do binário (e não do ponteiro LFS), o link no site utiliza:
+```
+https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
+```
+
+O GitHub detecta automaticamente arquivos LFS e serve o binário real, não o ponteiro.
 
 ## 🛠️ Tecnologias
 
@@ -201,6 +354,111 @@ taskvasne/
 *   **Funções Testáveis**: Lógica extraída em funções puras
 *   **Documentação JSDoc**: Todas as funções públicas documentadas
 *   **Segurança por Design**: Context isolation, input sanitization, CSP headers
+## 📋 Processo de Release
+
+Para criar uma nova versão do Taskvasne:
+
+### 1. Atualizar Versão
+
+**package.json:**
+```json
+{
+  "version": "0.0.7"
+}
+```
+
+**README.md:**
+```markdown
+![Version](https://img.shields.io/badge/version-0.0.7-purple?style=for-the-badge)
+```
+
+**docs/index.html:**
+```html
+<title>Taskvasne v0.0.7 - Kvasne.com</title>
+<div class="badge">v0.0.7 BETA</div>
+```
+
+### 2. Atualizar CHANGELOG.md
+
+```markdown
+## [0.0.7] - 2025-01-15
+
+### Adicionado
+- Nova feature X
+- Suporte para Y
+
+### Corrigido
+- Bug Z
+```
+
+### 3. Build e Upload
+
+```bash
+# 1. Gerar build
+npm run dist
+
+# 2. Criar ZIP
+Compress-Archive -Path dist-portable/Taskvasne-win32-x64 -DestinationPath dist-portable/Taskvasne.zip
+
+# 3. Adicionar ao Git LFS
+git add -f dist-portable/Taskvasne.zip
+git add package.json README.md docs/index.html CHANGELOG.md
+
+# 4. Commit
+git commit -m "release: v0.0.7 - Description
+
+- Feature 1
+- Feature 2
+- Bug fixes"
+
+# 5. Tag
+git tag -a v0.0.7 -m "Release v0.0.7
+
+Highlights:
+- Feature 1
+- Feature 2"
+
+# 6. Push
+git push origin main
+git push origin v0.0.7
+```
+
+### 4. GitHub Release
+
+1. Acesse: https://github.com/rkvasne/taskvasne/releases/new
+2. **Tag:** `v0.0.7`
+3. **Title:** "Taskvasne v0.0.7 - [Nome da Release]"
+4. **Description:** Copie do CHANGELOG.md
+5. **Binário:** Não precisa anexar (já está no LFS)
+6. **Link:** Adicione na descrição:
+   ```markdown
+   📦 **Download:** [Taskvasne.zip](https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip) (114 MB)
+   ```
+7. Marque como **Pre-release** se for BETA
+8. Clique em **Publish release**
+
+### 5. Verificar Deploy
+
+- ✅ Landing page atualizada: https://taskvasne.vercel.app
+- ✅ GitHub Release criada
+- ✅ Download funcionando
+- ✅ CI/CD passou (GitHub Actions)
+
+### Checklist de Release Completo
+
+- [ ] Versão atualizada (package.json, README, landing page)
+- [ ] CHANGELOG.md atualizado
+- [ ] Todos os testes passando (`npm test`)
+- [ ] Linting sem erros (`npm run lint`)
+- [ ] Build gerado (`npm run dist`)
+- [ ] ZIP criado e adicionado ao LFS
+- [ ] Commit e tag criados
+- [ ] Push realizado (main + tag)
+- [ ] GitHub Release publicada
+- [ ] Landing page verificada (Vercel)
+- [ ] Download testado
+- [ ] CI/CD passou
+
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Veja o [CONTRIBUTING.md](CONTRIBUTING.md) para orientações completas.
@@ -218,6 +476,15 @@ Contribuições são bem-vindas! Veja o [CONTRIBUTING.md](CONTRIBUTING.md) para 
 - Execute `npm run format` (código formatado)
 
 Veja o [CHANGELOG.md](CHANGELOG.md) para histórico completo de mudanças.
+
+### 📚 Documentação Adicional
+
+- [SPRINT1_REPORT.md](SPRINT1_REPORT.md) - Relatório Sprint 1 (Segurança & Qualidade)
+- [SPRINT2_REPORT.md](SPRINT2_REPORT.md) - Relatório Sprint 2 (Testes & Infraestrutura)
+- [SPRINT3_REPORT.md](SPRINT3_REPORT.md) - Relatório Sprint 3 (i18n & Documentação)
+- [RELEASE_NOTES.md](RELEASE_NOTES.md) - Notas de release completas v0.0.6
+- [GIT_LFS_SETUP.md](GIT_LFS_SETUP.md) - Guia completo de Git LFS
+- [CONTRIBUTING.md](CONTRIBUTING.md) - Guia de contribuição
 
 ## 👨‍💻 Autor
 
