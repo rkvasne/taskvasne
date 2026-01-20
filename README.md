@@ -1,38 +1,43 @@
-# Taskvasne
+<div align="center">
+  <h1>Taskvasne</h1>
+  <p>
+    <img src="icon.svg" width="128" alt="Taskvasne Icon">
+  </p>
+  <p><strong>Taskvasne</strong> é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.). <em>Status: v0.0.6 (BETA-READY)</em></p>
+  <p>
+    <img src="https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue" alt="License">
+    <img src="https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge" alt="Version">
+    <img src="https://img.shields.io/badge/platform-windows-purple?style=for-the-badge" alt="Platform">
+    <img src="https://img.shields.io/badge/vercel-deployed-black?style=for-the-badge&logo=vercel" alt="Vercel">
+    <img src="https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge" alt="Tests">
+    <img src="https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge" alt="Coverage">
+  </p>
+  <p>
+    <a href="#-instalação">Instalação</a> •
+    <a href="#-site-documentação-web">Documentação</a> •
+    <a href="#-contribuindo">Contribuir</a> •
+    <a href="CHANGELOG.md">Changelog</a> •
+    <a href="LICENSE">Licença</a>
+  </p>
+  <p><strong>Site oficial:</strong> <a href="https://taskvasne.vercel.app">taskvasne.vercel.app</a> (PT-BR e EN)</p>
+</div>
 
-![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)
-![Version](https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge)
-![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)
-![Vercel](https://img.shields.io/badge/vercel-deployed-black?style=for-the-badge&logo=vercel)
-![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)
-![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)
+## Funcionalidades
 
-> **Taskvasne** é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.).
->
-> **Status:** v0.0.6 (✨ BETA-READY)
->
-> 🌐 **Acesse o site oficial:** [taskvasne.vercel.app](https://taskvasne.vercel.app) (Disponível em PT-BR e EN)
-
-<p align="center">
-  <img src="icon.svg" width="128" alt="Taskvasne Icon">
-</p>
-
-## ✨ Funcionalidades
-
-*   **⚡ Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
-*   **🧠 Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java, facilitando a identificação de qual projeto está rodando em qual porta.
-*   **� Internacionalização**: Suporte completo a PT-BR e EN com troca em tempo real (localStorage persistente).
-*   **�🎨 Design Windows 11**: Interface moderna, compacta, frameless e com modo escuro nativo.
-*   **🛡️ System Tray**: Vive silenciosamente na sua bandeja do sistema. Um clique para abrir, um clique para fechar.
-*   **ℹ️ Modal Sobre**: Janela "Sobre" com informações do aplicativo, links para GitHub, LinkedIn e site oficial.
-*   **🛑 Kill Process**: Encerre processos travados ou indesejados com um único clique.
+*   **Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
+*   **Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java, facilitando a identificação de qual projeto está rodando em qual porta.
+*   **Internacionalização**: Suporte completo a PT-BR e EN com troca em tempo real (localStorage persistente).
+*   **Design Windows 11**: Interface moderna, compacta, frameless e com modo escuro nativo.
+*   **System Tray**: Vive silenciosamente na sua bandeja do sistema. Um clique para abrir, um clique para fechar.
+*   **Modal Sobre**: Janela "Sobre" com informações do aplicativo, links para GitHub, LinkedIn e site oficial.
+*   **Kill Process**: Encerre processos travados ou indesejados com um único clique.
     *   *Feedback Visual*: O item desliza e desaparece suavemente ao ser encerrado.
     *   *Sem Interrupções*: Ação imediata para manter seu fluxo de trabalho rápido.
-*   **🔄 Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos. Também possui botão de refresh manual.
-*   **🔗 Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` instantaneamente no seu navegador padrão.
-*   **🔒 Instância Única**: Previne múltiplas janelas, mantendo seu fluxo de trabalho limpo.
+*   **Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos. Também possui botão de refresh manual.
+*   **Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` instantaneamente no seu navegador padrão.
+*   **Instância Única**: Previne múltiplas janelas, mantendo seu fluxo de trabalho limpo.
 
-## 🛡️ Segurança e Privacidade
+## Segurança e Privacidade
 
 *   **Código Aberto**: Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.
 *   **Zero Telemetria**: Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.
@@ -41,7 +46,7 @@
 *   **Input Sanitization**: Todos os inputs do usuário são validados antes de execução de comandos do sistema.
 *   **Content Security Policy**: Headers CSP configurados para prevenir ataques XSS.
 
-## �‍💻 Desenvolvimento
+## 👨‍💻 Desenvolvimento
 
 ### Pré-requisitos
 *   Node.js 18+ instalado
@@ -303,13 +308,12 @@ git push origin main  # Redigitar credenciais
 
 | Data | Versão | Arquivo | Tamanho | Commit |
 |------|--------|---------|---------|--------|
-| 2025-12-30 | v0.0.6 | dist-portable/Taskvasne.zip | 114 MB | cd1ec52 |
-| 2025-11-28 | - | docs/Taskvasne.zip | 109 MB | (anterior) |
+| 30/12/2025 | v0.0.6 | dist-portable/Taskvasne.zip | 114 MB | cd1ec52 |
+| 28/11/2025 | - | docs/Taskvasne.zip | 109 MB | (anterior) |
 
 ##### 📖 Documentação Completa
 
 Para mais detalhes sobre Git LFS, veja:
-- [GIT_LFS_SETUP.md](GIT_LFS_SETUP.md) - Guia completo de configuração
 - [Git LFS Documentation](https://git-lfs.github.com/)
 - [GitHub LFS Guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files)
 
@@ -326,7 +330,8 @@ O GitHub detecta automaticamente arquivos LFS e serve o binário real, não o po
 
 *   **Electron**: Core do aplicativo.
 *   **Vanilla JS/CSS**: Para máxima performance e leveza.
-*   **Windows API**: Integração nativa via `netstat` e `tasklist`.*   **electron-log**: Sistema de logging estruturado para debugging e monitoramento.
+*   **Windows API**: Integração nativa via `netstat` e `tasklist`.
+*   **electron-log**: Sistema de logging estruturado para debugging e monitoramento.
 
 ## 🏛️ Arquitetura e Boas Práticas
 
@@ -381,7 +386,7 @@ Para criar uma nova versão do Taskvasne:
 ### 2. Atualizar CHANGELOG.md
 
 ```markdown
-## [0.0.7] - 2025-01-15
+## [0.0.7] - 15/01/2025
 
 ### Adicionado
 - Nova feature X
@@ -479,11 +484,10 @@ Veja o [CHANGELOG.md](CHANGELOG.md) para histórico completo de mudanças.
 
 ### 📚 Documentação Adicional
 
-- [SPRINT1_REPORT.md](SPRINT1_REPORT.md) - Relatório Sprint 1 (Segurança & Qualidade)
-- [SPRINT2_REPORT.md](SPRINT2_REPORT.md) - Relatório Sprint 2 (Testes & Infraestrutura)
-- [SPRINT3_REPORT.md](SPRINT3_REPORT.md) - Relatório Sprint 3 (i18n & Documentação)
-- [RELEASE_NOTES.md](RELEASE_NOTES.md) - Notas de release completas v0.0.6
-- [GIT_LFS_SETUP.md](GIT_LFS_SETUP.md) - Guia completo de Git LFS
+- [docs/sprint-1-report.md](docs/sprint-1-report.md) - Relatório Sprint 1 (Segurança & Qualidade)
+- [docs/sprint-2-report.md](docs/sprint-2-report.md) - Relatório Sprint 2 (Testes & Infraestrutura)
+- [docs/sprint-3-report.md](docs/sprint-3-report.md) - Relatório Sprint 3 (i18n & Documentação)
+- [ANALISE_TECNICA.md](ANALISE_TECNICA.md) - Análise técnica do projeto
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Guia de contribuição
 
 ## 👨‍💻 Autor

@@ -5,7 +5,12 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
-## [0.0.6] - 2025-12-30
+## [0.0.6] - 30/12/2025
+
+### 📝 Resumo curto
+- i18n completo (PT-BR/EN), segurança endurecida e CI/CD configurado
+- 31 testes unitários e ~70% de cobertura no port-manager
+- Documentação principal consolidada (README, CONTRIBUTING, CHANGELOG)
 
 ### 🌍 Internacionalização
 - **[NOVO]** Sistema de i18n completo para PT-BR e EN
