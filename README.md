@@ -250,7 +250,6 @@ git lfs ls-files
 **Saída esperada:**
 ```
 65b2de1e3a * dist-portable/Taskvasne.zip
-454beb7c1c * docs/Taskvasne.zip
 ```
 
 **Verificar status:**
@@ -309,7 +308,6 @@ git push origin main  # Redigitar credenciais
 | Data | Versão | Arquivo | Tamanho | Commit |
 |------|--------|---------|---------|--------|
 | 30/12/2025 | v0.0.6 | dist-portable/Taskvasne.zip | 114 MB | cd1ec52 |
-| 28/11/2025 | - | docs/Taskvasne.zip | 109 MB | (anterior) |
 
 ##### 📖 Documentação Completa
 

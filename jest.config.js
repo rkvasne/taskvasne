@@ -17,5 +17,7 @@ module.exports = {
       lines: 60,
       statements: 60
     }
-  }
+  },
+  modulePathIgnorePatterns: ['<rootDir>/dist-portable/'],
+  watchPathIgnorePatterns: ['<rootDir>/dist-portable/']
 };

@@ -183,7 +183,7 @@ describe('extractProjectName', () => {
 
 ### Reportar Vulnerabilidades
 **NÃO** abra issues públicas para vulnerabilidades de segurança. Envie um email privado para:
-- **Email:** [seu-email@example.com]
+- **Email:** [raphael@kvasne.com](mailto:raphael@kvasne.com)
 - **Assunto:** `[SECURITY] Vulnerabilidade em Taskvasne`
 
 Responderemos em até **48 horas**.
