@@ -53,7 +53,7 @@
     "devDependencies": {
         "@types/jest": "^30.0.0",
         "electron": "^39.2.4",
-        "electron-builder": "^26.0.12",
+        "electron-builder": "^26.4.0",
         "electron-packager": "^17.1.2",
         "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",
@@ -64,5 +64,8 @@
     },
     "dependencies": {
         "electron-log": "^5.4.3"
+    },
+    "overrides": {
+        "tar": "7.5.6"
     }
 }

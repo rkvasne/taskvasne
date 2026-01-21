@@ -17,7 +17,7 @@
     <a href="#-site-documentação-web">Documentação</a> •
     <a href="#-contribuindo">Contribuir</a> •
     <a href="CHANGELOG.md">Changelog</a> •
-    <a href="LICENSE">Licença</a>
+    <a href="LICENSE.md">Licença</a>
   </p>
   <p><strong>Site oficial:</strong> <a href="https://taskvasne.vercel.app">taskvasne.vercel.app</a> (PT-BR e EN)</p>
 </div>
@@ -45,6 +45,7 @@
 *   **Context Isolation**: Utiliza `contextIsolation` e `preload scripts` para isolar código e prevenir vulnerabilidades.
 *   **Input Sanitization**: Todos os inputs do usuário são validados antes de execução de comandos do sistema.
 *   **Content Security Policy**: Headers CSP configurados para prevenir ataques XSS.
+*   **Auditoria de Dependências**: `npm audit` mantido limpo com override de `tar` para corrigir CVEs transitivos.
 
 ## 👨‍💻 Desenvolvimento
 
@@ -485,7 +486,7 @@ Veja o [CHANGELOG.md](CHANGELOG.md) para histórico completo de mudanças.
 - [docs/sprint-1-report.md](docs/sprint-1-report.md) - Relatório Sprint 1 (Segurança & Qualidade)
 - [docs/sprint-2-report.md](docs/sprint-2-report.md) - Relatório Sprint 2 (Testes & Infraestrutura)
 - [docs/sprint-3-report.md](docs/sprint-3-report.md) - Relatório Sprint 3 (i18n & Documentação)
-- [ANALISE_TECNICA.md](ANALISE_TECNICA.md) - Análise técnica do projeto
+- [docs/analise-tecnica.md](docs/analise-tecnica.md) - Análise técnica do projeto
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Guia de contribuição
 
 ## 👨‍💻 Autor
@@ -499,4 +500,4 @@ Desenvolvido por **Raphael Kvasne**.
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.

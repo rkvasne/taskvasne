@@ -14,119 +14,135 @@
 <body>
     <div class="glow-bg"></div>
 
-    <nav>
-        <div class="brand">
-            <img src="logo.png" alt="Logo" class="brand-icon">
-            <div class="logo">Taskvasne</div>
-        </div>
-        <button id="mobile-menu-btn" class="mobile-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-            <span class="mobile-menu-bar"></span>
-            <span class="mobile-menu-bar"></span>
-            <span class="mobile-menu-bar"></span>
-        </button>
+    <header class="header">
+        <div class="container header-container">
+            <a href="#download" class="brand">
+                <img src="logo.png" alt="Logo" class="brand-icon">
+                <div class="logo">Taskvasne</div>
+            </a>
 
-        <ul class="nav-menu" id="nav-menu" aria-label="Primary navigation">
-            <li><a class="nav-link" href="#download" data-i18n="nav.download">Download</a></li>
-            <li><a class="nav-link" href="#features" data-i18n="nav.features">Funcionalidades</a></li>
-            <li><a class="nav-link" href="#author" data-i18n="nav.author">Autor</a></li>
-            <li><button id="lang-toggle" class="lang-btn" type="button">EN</button></li>
-        </ul>
-    </nav>
+            <nav class="nav-desktop" aria-label="Primary navigation">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a class="nav-link" href="#download" data-i18n="nav.download">Download</a></li>
+                    <li><a class="nav-link" href="#features" data-i18n="nav.features">Funcionalidades</a></li>
+                    <li><a class="nav-link" href="#author" data-i18n="nav.author">Autor</a></li>
+                </ul>
+            </nav>
 
-    <div id="menu-overlay" class="menu-overlay" hidden></div>
-
-    <header class="hero" id="download">
-        <div class="hero-content">
-            <div class="hero-header">
-                <img src="icon.svg" alt="Taskvasne Logo" class="hero-logo">
-                <div class="badge">v0.0.6 BETA</div>
-            </div>
-            <h1 data-i18n="hero.title">Controle suas portas.<br><span>Com Estilo.</span></h1>
-            <p data-i18n="hero.subtitle">O gerenciador de processos mais rápido e minimalista para
-                desenvolvedores Windows.</p>
-            <div class="cta-group">
-                <a href="https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip" class="btn primary"
-                    data-i18n="hero.download">Baixar para Windows (ZIP)</a>
-                <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank" rel="noopener noreferrer"
-                    data-i18n="hero.github">Ver no GitHub</a>
+            <div class="header-actions">
+                <button id="lang-toggle" class="lang-btn" type="button">EN</button>
+                <button id="mobile-menu-btn" class="mobile-menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <span class="mobile-menu-bar"></span>
+                    <span class="mobile-menu-bar"></span>
+                    <span class="mobile-menu-bar"></span>
+                </button>
             </div>
         </div>
-        <div class="hero-image">
-            <div class="interactive-demo">
-                <div class="app-popup" id="demo-popup">
-                    <div class="mockup-header">
-                        <span class="title">Taskvasne</span>
-                        <div class="win-controls">
-                            <span>&#8722;</span>
-                            <span>&#10005;</span>
-                        </div>
-                    </div>
-                    <div class="mockup-body">
-                        <div class="mockup-row">
-                            <div class="row-info">
-                                <span class="port">:5040</span>
-                                <span class="proc">svchost.exe</span>
-                            </div>
-                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
-                        </div>
-                        <div class="mockup-row">
-                            <div class="row-info">
-                                <span class="port">:3000</span>
-                                <span class="proc">node.exe (api)</span>
-                            </div>
-                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
-                        </div>
-                        <div class="mockup-row">
-                            <div class="row-info">
-                                <span class="port">:5173</span>
-                                <span class="proc">vite.exe</span>
-                            </div>
-                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
-                        </div>
-                        <div class="mockup-row">
-                            <div class="row-info">
-                                <span class="port">:8080</span>
-                                <span class="proc">java.exe</span>
-                            </div>
-                            <span class="kill-btn" data-i18n="demo.kill">Parar</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="tray-area">
-                    <div class="tray-icon-wrapper" id="demo-trigger">
-                        <img src="logo.png" alt="Tray Icon" class="tray-icon">
-                        <div class="click-hint">
-                            <span data-i18n="demo.hint">Teste aqui</span>
-                            <div class="arrow-down"></div>
-                        </div>
-                    </div>
-                    <div class="system-icons">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                            <line x1="12" y1="20" x2="12.01" y2="20"></line>
-                        </svg>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                        </svg>
-                    </div>
-                    <div class="clock">
-                        <span id="clock-time">12:45</span>
-                        <span id="clock-date">29/11/2025</span>
-                    </div>
-                </div>
-            </div>
+        <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+            <a class="nav-link" href="#download" data-i18n="nav.download">Download</a>
+            <a class="nav-link" href="#features" data-i18n="nav.features">Funcionalidades</a>
+            <a class="nav-link" href="#author" data-i18n="nav.author">Autor</a>
+            <button id="lang-toggle-mobile" class="lang-btn" type="button">EN</button>
         </div>
     </header>
 
-    <section id="features" class="features">
-        <h2 class="section-title" data-i18n="features.title">Por que escolher o Taskvasne?</h2>
-        <div class="features-grid">
+    <main>
+        <section class="hero" id="download">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-header">
+                        <img src="icon.svg" alt="Taskvasne Logo" class="hero-logo">
+                        <div class="badge">v0.0.6 BETA</div>
+                    </div>
+                    <h1 data-i18n="hero.title">Controle suas portas.<br><span>Com Estilo.</span></h1>
+                    <p data-i18n="hero.subtitle">O gerenciador de processos mais rápido e minimalista para
+                        desenvolvedores Windows.</p>
+                    <div class="cta-group">
+                        <a href="https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip" class="btn primary"
+                            data-i18n="hero.download">Baixar para Windows (ZIP)</a>
+                        <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank" rel="noopener noreferrer"
+                            data-i18n="hero.github">Ver no GitHub</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="interactive-demo">
+                        <div class="app-popup" id="demo-popup">
+                            <div class="mockup-header">
+                                <span class="title">Taskvasne</span>
+                                <div class="win-controls">
+                                    <span>&#8722;</span>
+                                    <span>&#10005;</span>
+                                </div>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="mockup-row">
+                                    <div class="row-info">
+                                        <span class="port">:5040</span>
+                                        <span class="proc">svchost.exe</span>
+                                    </div>
+                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                </div>
+                                <div class="mockup-row">
+                                    <div class="row-info">
+                                        <span class="port">:3000</span>
+                                        <span class="proc">node.exe (api)</span>
+                                    </div>
+                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                </div>
+                                <div class="mockup-row">
+                                    <div class="row-info">
+                                        <span class="port">:5173</span>
+                                        <span class="proc">vite.exe</span>
+                                    </div>
+                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                </div>
+                                <div class="mockup-row">
+                                    <div class="row-info">
+                                        <span class="port">:8080</span>
+                                        <span class="proc">java.exe</span>
+                                    </div>
+                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tray-area">
+                            <div class="tray-icon-wrapper" id="demo-trigger">
+                                <img src="logo.png" alt="Tray Icon" class="tray-icon">
+                                <div class="click-hint">
+                                    <span data-i18n="demo.hint">Teste aqui</span>
+                                    <div class="arrow-down"></div>
+                                </div>
+                            </div>
+                            <div class="system-icons">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                                </svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                </svg>
+                            </div>
+                            <div class="clock">
+                                <span id="clock-time">12:45</span>
+                                <span id="clock-date">29/11/2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title" data-i18n="features.title">Por que escolher o Taskvasne?</h2>
+                <div class="features-grid">
             <div class="feature-card">
                 <div class="icon">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -159,136 +175,144 @@
                 <p data-i18n="features.tray.desc">Vive silenciosamente na sua bandeja. Um clique para abrir, matar o
                     processo e voltar ao código.</p>
             </div>
-        </div>
-    </section>
+                </div>
+            </div>
+        </section>
 
-    <section id="security" class="security-section">
-        <div class="security-content">
-            <h2 data-i18n="security.title">Segurança e Transparência</h2>
-            <p data-i18n="security.subtitle">Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
+        <section id="security" class="security-section">
+            <div class="container">
+                <div class="security-content">
+                    <h2 data-i18n="security.title">Segurança e Transparência</h2>
+                    <p data-i18n="security.subtitle">Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="security.opensource.title">Código Aberto</h3>
+                            <p data-i18n="security.opensource.desc">Todo o código fonte está disponível no GitHub. Você pode
+                                auditar cada linha.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                                    </path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>
+                            </div>
+                            <h3 data-i18n="security.telemetry.title">Zero Telemetria</h3>
+                            <p data-i18n="security.telemetry.desc">Não coletamos dados, não rastreamos seu uso e não enviamos
+                                nada para a nuvem.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    <path d="M9 12l2 2 4-4" />
+                                </svg>
+                            </div>
+                            <h3 data-i18n="security.malware.title">Sem Malware</h3>
+                            <p data-i18n="security.malware.desc">Livre de vírus, keyloggers ou qualquer software malicioso.
+                                Garantia de código limpo.</p>
+                        </div>
                     </div>
-                    <h3 data-i18n="security.opensource.title">Código Aberto</h3>
-                    <p data-i18n="security.opensource.desc">Todo o código fonte está disponível no GitHub. Você pode
-                        auditar cada linha.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
-                            </path>
-                            <line x1="1" y1="1" x2="23" y2="23"></line>
-                        </svg>
-                    </div>
-                    <h3 data-i18n="security.telemetry.title">Zero Telemetria</h3>
-                    <p data-i18n="security.telemetry.desc">Não coletamos dados, não rastreamos seu uso e não enviamos
-                        nada para a nuvem.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            <path d="M9 12l2 2 4-4" />
-                        </svg>
-                    </div>
-                    <h3 data-i18n="security.malware.title">Sem Malware</h3>
-                    <p data-i18n="security.malware.desc">Livre de vírus, keyloggers ou qualquer software malicioso.
-                        Garantia de código limpo.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="author" class="developer-section">
-        <div class="dev-container">
-            <div class="dev-image-wrapper">
-                <div class="dev-avatar">RK</div>
-            </div>
-            <div class="dev-content">
-                <span class="dev-label" data-i18n="dev.label">Desenvolvedor</span>
-                <h2 class="dev-name">Raphael Kvasne</h2>
-                <h3 class="dev-role" data-i18n="dev.role">Full Stack Developer</h3>
-                <p class="dev-bio" data-i18n="dev.bio">
-                    Especialista em criar ferramentas que unem produtividade e design. Criador do <strong>ProfitColors</strong>, <strong>Dahora App</strong> e <strong>Taskvasne</strong>. Focado em simplicidade e usabilidade.
-                </p>
-                <div class="dev-socials">
-                    <a href="https://kvasne.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Website">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                    </a>
-                    <a href="https://github.com/rkvasne" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="mailto:raphael@kvasne.com" class="social-btn" aria-label="Email">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    </a>
+        <section id="author" class="developer-section">
+            <div class="container">
+                <div class="dev-container">
+                    <div class="dev-image-wrapper">
+                        <div class="dev-avatar">RK</div>
+                    </div>
+                    <div class="dev-content">
+                        <span class="dev-label" data-i18n="dev.label">Desenvolvedor</span>
+                        <h2 class="dev-name">Raphael Kvasne</h2>
+                        <h3 class="dev-role" data-i18n="dev.role">Full Stack Developer</h3>
+                        <p class="dev-bio" data-i18n="dev.bio">
+                            Especialista em criar ferramentas que unem produtividade e design. Criador do <strong>ProfitColors</strong>, <strong>Dahora App</strong> e <strong>Taskvasne</strong>. Focado em simplicidade e usabilidade.
+                        </p>
+                        <div class="dev-socials">
+                            <a href="https://kvasne.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Website">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </a>
+                            <a href="https://github.com/rkvasne" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </a>
+                            <a href="mailto:raphael@kvasne.com" class="social-btn" aria-label="Email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="brand">
-                    <img src="logo.png" alt="Logo" class="brand-icon">
-                    <div class="logo">Taskvasne</div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand">
+                        <img src="logo.png" alt="Logo" class="brand-icon">
+                        <div class="logo">Taskvasne</div>
+                    </div>
+                    <p data-i18n="footer.desc">O gerenciador de portas definitivo para Windows.</p>
                 </div>
-                <p data-i18n="footer.desc">O gerenciador de portas definitivo para Windows.</p>
-            </div>
-            <div class="footer-links">
-                <h4 data-i18n="footer.links">Links Rápidos</h4>
-                <ul class="link-list">
-                    <li><a href="#download" data-i18n="nav.download">Download</a></li>
-                    <li><a href="#features" data-i18n="nav.features">Funcionalidades</a></li>
-                    <li><a href="#author" data-i18n="nav.author">Autor</a></li>
-                </ul>
-            </div>
-            <div class="footer-social">
-                <h4 data-i18n="footer.social">Conecte-se</h4>
-                <div class="social-icons">
-                    <a href="https://github.com/rkvasne/taskvasne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                            </path>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/rkvasne/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                            </path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
-                    <a href="https://kvasne.com" target="_blank" rel="noopener noreferrer" aria-label="Portfolio">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="2" y1="12" x2="22" y2="12"></line>
-                            <path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                            </path>
-                        </svg>
-                    </a>
+                <div class="footer-links">
+                    <h4 data-i18n="footer.links">Links Rápidos</h4>
+                    <ul class="link-list">
+                        <li><a href="#download" data-i18n="nav.download">Download</a></li>
+                        <li><a href="#features" data-i18n="nav.features">Funcionalidades</a></li>
+                        <li><a href="#author" data-i18n="nav.author">Autor</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4 data-i18n="footer.social">Conecte-se</h4>
+                    <div class="social-icons">
+                        <a href="https://github.com/rkvasne/taskvasne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                </path>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/rkvasne/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="https://kvasne.com" target="_blank" rel="noopener noreferrer" aria-label="Portfolio">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p data-i18n="footer.copyright">&copy; <span id="current-year">2025</span> Taskvasne. Open Source sob licença MIT.</p>
+            <div class="footer-bottom">
+                <p data-i18n="footer.copyright">&copy; <span id="current-year">2025</span> Taskvasne. Open Source sob licença MIT.</p>
+            </div>
         </div>
     </footer>
 
@@ -365,11 +389,17 @@
 
         let currentLang = 'pt-BR';
         const langToggle = document.getElementById('lang-toggle');
+        const langToggleMobile = document.getElementById('lang-toggle-mobile');
 
         function updateLanguage(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
-            langToggle.textContent = lang === 'pt-BR' ? 'EN' : 'PT';
+            if (langToggle) {
+                langToggle.textContent = lang === 'pt-BR' ? 'EN' : 'PT';
+            }
+            if (langToggleMobile) {
+                langToggleMobile.textContent = lang === 'pt-BR' ? 'EN' : 'PT';
+            }
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
@@ -379,10 +409,18 @@
             });
         }
 
-        langToggle.addEventListener('click', () => {
-            const newLang = currentLang === 'pt-BR' ? 'en' : 'pt-BR';
-            updateLanguage(newLang);
-        });
+        if (langToggle) {
+            langToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'pt-BR' ? 'en' : 'pt-BR';
+                updateLanguage(newLang);
+            });
+        }
+        if (langToggleMobile) {
+            langToggleMobile.addEventListener('click', () => {
+                const newLang = currentLang === 'pt-BR' ? 'en' : 'pt-BR';
+                updateLanguage(newLang);
+            });
+        }
 
         // Interactive Demo Script
         const trigger = document.getElementById('demo-trigger');
@@ -392,29 +430,24 @@
 
         // Mobile menu (drawer)
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navMenu = document.getElementById('nav-menu');
-        const menuOverlay = document.getElementById('menu-overlay');
+        const mobileMenu = document.getElementById('mobile-menu');
 
         function setMobileMenuOpen(open) {
-            if (!mobileMenuBtn || !navMenu || !menuOverlay) return;
+            if (!mobileMenuBtn || !mobileMenu) return;
             mobileMenuBtn.setAttribute('aria-expanded', String(open));
-            navMenu.classList.toggle('active', open);
-            menuOverlay.classList.toggle('active', open);
-            menuOverlay.hidden = !open;
+            mobileMenu.classList.toggle('active', open);
             document.body.style.overflow = open ? 'hidden' : '';
         }
 
-        if (mobileMenuBtn && navMenu && menuOverlay) {
+        if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const open = !navMenu.classList.contains('active');
+                const open = !mobileMenu.classList.contains('active');
                 setMobileMenuOpen(open);
             });
 
-            menuOverlay.addEventListener('click', () => setMobileMenuOpen(false));
-
-            navMenu.querySelectorAll('a').forEach((a) => {
-                a.addEventListener('click', () => setMobileMenuOpen(false));
+            mobileMenu.querySelectorAll('a, button').forEach((element) => {
+                element.addEventListener('click', () => setMobileMenuOpen(false));
             });
 
             window.addEventListener('resize', () => {

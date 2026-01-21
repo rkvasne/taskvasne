@@ -13,7 +13,7 @@ Este documento mantém um resumo histórico da análise técnica original e apon
 
 ## ✅ Itens já resolvidos no CHANGELOG
 
-Os tópicos abaixo foram tratados e constam no [CHANGELOG.md](CHANGELOG.md):
+Os tópicos abaixo foram tratados e constam no [CHANGELOG.md](../CHANGELOG.md):
 - Correções de segurança (sanitização de PID, context isolation, CSP)
 - Testes automatizados e cobertura (~70%)
 - JSDoc, linting e formatação
@@ -39,5 +39,5 @@ Os tópicos abaixo foram tratados e constam no [CHANGELOG.md](CHANGELOG.md):
 
 ## 📎 Referências
 
-- Histórico de mudanças: [CHANGELOG.md](CHANGELOG.md)
-- Relatórios de sprint: [docs/sprint-1-report.md](docs/sprint-1-report.md), [docs/sprint-2-report.md](docs/sprint-2-report.md), [docs/sprint-3-report.md](docs/sprint-3-report.md)
+- Histórico de mudanças: [CHANGELOG.md](../CHANGELOG.md)
+- Relatórios de sprint: [sprint-1-report.md](sprint-1-report.md), [sprint-2-report.md](sprint-2-report.md), [sprint-3-report.md](sprint-3-report.md)

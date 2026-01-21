@@ -5,6 +5,15 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
+## [Unreleased]
+
+### Changed
+- Landing page reestruturada para o esqueleto canônico mantendo conteúdo e visual
+- Dependências de build atualizadas para corrigir alertas de segurança
+
+### Security
+- Override de `tar` para versão segura e auditoria `npm` limpa
+
 ## [0.0.6] - 30/12/2025
 
 ### 📝 Resumo curto
@@ -68,7 +77,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
   - Guia de Contribuição
   - Informações de Segurança implementadas
 - Adicionado CHANGELOG.md
-- Criado ANALISE_TECNICA.md com relatório completo do projeto
+- Criado docs/analise-tecnica.md com relatório completo do projeto
 - **[NOVO]** Criado CONTRIBUTING.md com guia completo de contribuição
 - Corrigida referência de `icon.png` para `icon.svg`
 
