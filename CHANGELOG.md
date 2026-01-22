@@ -14,6 +14,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Changed
 - Landing page reestruturada para o esqueleto canônico mantendo conteúdo e visual
+- README.md atualizado para o padrão visual Dahora (Hero centralizado, Logo 256px, Emoji no título)
 - Padronização de layout (padding, largura, grid) com o projeto Dahora
 - Header: removido sublinhado do nome do projeto
 - Seção Desenvolvedor: atualizada com foto, cores e efeitos do Dahora

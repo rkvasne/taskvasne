@@ -1,25 +1,20 @@
+# 💀 Taskvasne
+
 <div align="center">
-  <h1>Taskvasne</h1>
-  <p>
-    <img src="icon.svg" width="128" alt="Taskvasne Icon">
-  </p>
-  <p><strong>Taskvasne</strong> é um gerenciador de portas minimalista e elegante para Windows 11, projetado para desenvolvedores que precisam de controle rápido sobre seus ambientes locais (Node.js, Docker, etc.). <em>Status: v0.0.6 (BETA-READY)</em></p>
-  <p>
-    <img src="https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue" alt="License">
-    <img src="https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge" alt="Version">
-    <img src="https://img.shields.io/badge/platform-windows-purple?style=for-the-badge" alt="Platform">
-    <img src="https://img.shields.io/badge/vercel-deployed-black?style=for-the-badge&logo=vercel" alt="Vercel">
-    <img src="https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge" alt="Tests">
-    <img src="https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge" alt="Coverage">
-  </p>
-  <p>
-    <a href="#-instalação">Instalação</a> •
-    <a href="#-site-documentação-web">Documentação</a> •
-    <a href="#-contribuindo">Contribuir</a> •
-    <a href="CHANGELOG.md">Changelog</a> •
-    <a href="LICENSE.md">Licença</a>
-  </p>
-  <p><strong>Site oficial:</strong> <a href="https://taskvasne.vercel.app">taskvasne.vercel.app</a> (PT-BR e EN)</p>
+
+<img src="icon.svg" width="256" height="256" alt="Taskvasne Icon">
+
+**O gerenciador de portas minimalista e elegante para Windows 11.**  
+*Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno.*
+
+[![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)](LICENSE.md)
+[![Version](https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge)](CHANGELOG.md)
+[![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)](https://www.microsoft.com/windows)
+[![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)](npm test)
+[![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)](npm run test:coverage)
+
+[Instalação](#-instalação) • [Documentação](#-site-documentação-web) • [Contribuir](#-contribuindo) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+
 </div>
 
 ## Funcionalidades

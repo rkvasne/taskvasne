@@ -492,10 +492,19 @@ p {
     padding: var(--section-padding) 0;
 }
 
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
 .section-title {
     text-align: center;
     font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 3rem;
+    margin: 0;
 }
 
 .features-grid {
@@ -540,17 +549,17 @@ p {
 }
 
 .security-content {
-    text-align: center;
-}
-
-.security-content h2 {
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .security-content > p {
     margin: 0;
     font-size: 1.125rem;
     color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    text-align: center;
 }
 
 .security-content .features-grid {
@@ -562,21 +571,21 @@ p {
     padding: 80px var(--page-gutter);
     position: relative;
     overflow: hidden;
-    background-color: #0B0F19;
-    color: #ECEFF4;
+    background-color: var(--bg);
+    color: var(--text);
     
     --dev-primary: var(--primary);
     --dev-glow: rgba(138, 43, 226, 0.15);
-    --dev-bg: #0B0F19;
+    --dev-bg: var(--bg);
 }
 
 .dev-container {
     max-width: 1000px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--glass);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
     border-radius: 24px;
     padding: 3.5rem;
     display: flex;
@@ -719,7 +728,7 @@ p {
 /* Donation Section */
 .donate-section {
     padding: var(--section-padding) 0;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 90px), var(--bg);
+    background: linear-gradient(180deg, rgba(138, 43, 226, 0.05) 0%, rgba(138, 43, 226, 0) 90px), var(--bg);
 }
 
 .donate-container {
@@ -813,7 +822,7 @@ p {
     padding: 2rem;
     border-radius: 10px;
     border: 1px solid var(--border);
-    border-left: 4px solid #4CAF50;
+    border-left: 4px solid var(--primary);
     margin-bottom: 2rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -874,16 +883,16 @@ p {
 .donate-note-box {
     text-align: center;
     padding: 1.5rem;
-    background: rgba(76, 175, 80, 0.1);
-    border: 1px solid rgba(76, 175, 80, 0.3);
-    border-left: 4px solid #4CAF50;
+    background: rgba(138, 43, 226, 0.1);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    border-left: 4px solid var(--primary);
     border-radius: 10px;
 }
 
 .donate-note-text {
     margin: 0;
     font-size: 0.95rem;
-    color: #81c784;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 @media (max-width: 768px) {
