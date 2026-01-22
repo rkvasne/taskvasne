@@ -481,20 +481,20 @@ p {
 
 .section-title {
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 60px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 3rem;
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
 }
 
 .feature-card {
     background: var(--glass);
     border: 1px solid var(--border);
-    padding: 30px;
+    padding: 2.5rem;
     border-radius: 16px;
     transition: transform 0.3s, border-color 0.3s;
 }
@@ -527,13 +527,13 @@ p {
 }
 
 .security-content {
-    max-width: 1200px;
+    max-width: 1312px;
     margin: 0 auto;
     text-align: center;
 }
 
 .security-content .features-grid {
-    margin-top: 60px;
+    margin-top: 3rem;
 }
 
 /* Developer Section - Modern Design */
@@ -708,14 +708,12 @@ p {
 /* Footer */
 .footer {
     border-top: 1px solid var(--border);
-    padding: var(--section-padding-compact) 0 24px;
+    padding: 60px 0 20px;
     background: #050505;
 }
 
 .footer-grid {
     width: 100%;
-    max-width: 1312px;
-    margin: 0 auto;
     display: flex;
     align-items: flex-start;
     gap: 40px;
@@ -748,6 +746,12 @@ p {
     flex-direction: column;
     align-items: flex-end;
     text-align: right;
+}
+
+.footer-social-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .footer-links h4, .footer-social h4 {
@@ -805,12 +809,16 @@ p {
 @media (max-width: 768px) {
     :root {
         --page-gutter: var(--page-gutter-mobile);
-        --section-padding: 4rem;
+        --section-padding: 3.5rem;
         --section-padding-compact: 3.5rem;
     }
 
     .container {
         padding: 0 var(--page-gutter);
+    }
+
+    .hero {
+        padding: 6rem 0 4rem;
     }
 
     .hero-container {
@@ -833,6 +841,38 @@ p {
     .header-container {
         padding: 16px 0;
     }
+
+    .footer {
+        padding: 40px 0 20px;
+    }
+
+    .footer-grid {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-brand,
+    .footer-links,
+    .footer-social {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-social-wrapper {
+        align-items: center;
+    }
+
+    .footer-links h4,
+    .footer-social h4 {
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
 
     .mobile-menu-btn {
         display: inline-flex;
@@ -868,6 +908,10 @@ p {
 
     .nav-link {
         font-size: 16px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
     }
 
     .footer-grid {
