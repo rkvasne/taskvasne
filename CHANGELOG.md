@@ -19,6 +19,9 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Header: removido sublinhado do nome do projeto
 - Seção Desenvolvedor: atualizada com foto, cores e efeitos do Dahora
 - Dependências de build atualizadas para corrigir alertas de segurança
+- Padronização global de tipografia com variáveis CSS (`--font-size-xs` a `--font-size-5xl`)
+- Seção de Segurança: Layout ajustado para cards lado a lado (grid fix)
+- Seção de Doação: Cores neutralizadas e alinhadas à identidade visual do tema
 
 ### Security
 - Override de `tar` para versão segura e auditoria `npm` limpa
