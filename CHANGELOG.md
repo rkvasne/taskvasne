@@ -7,8 +7,16 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ## [Unreleased]
 
+### Added
+- Seção de Doação na landing page (cópia fiel do projeto Dahora)
+- Imagens e ícones para seção de doação e desenvolvedor
+- Suporte a dark mode na seção de doação
+
 ### Changed
 - Landing page reestruturada para o esqueleto canônico mantendo conteúdo e visual
+- Padronização de layout (padding, largura, grid) com o projeto Dahora
+- Header: removido sublinhado do nome do projeto
+- Seção Desenvolvedor: atualizada com foto, cores e efeitos do Dahora
 - Dependências de build atualizadas para corrigir alertas de segurança
 
 ### Security
