@@ -22,6 +22,8 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Padronização global de tipografia com variáveis CSS (`--font-size-xs` a `--font-size-5xl`)
 - Seção de Segurança: Layout ajustado para cards lado a lado (grid fix)
 - Seção de Doação: Cores neutralizadas e alinhadas à identidade visual do tema
+- README.md atualizado com seção de doações (links e QR codes)
+- CI simplificado para job único com lint e testes
 
 ### Security
 - Override de `tar` para versão segura e auditoria `npm` limpa

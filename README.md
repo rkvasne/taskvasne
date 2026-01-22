@@ -1,6 +1,6 @@
-# 💀 Taskvasne
-
 <div align="center">
+
+# 💀 Taskvasne
 
 <img src="icon.svg" width="256" height="256" alt="Taskvasne Icon">
 
@@ -13,11 +13,11 @@
 [![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)](npm test)
 [![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)](npm run test:coverage)
 
-[Instalação](#-instalação) • [Documentação](#-site-documentação-web) • [Contribuir](#-contribuindo) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+[Instalação](#-instalação) • [Documentação](#-site-documentação-web) • [Doações](#-apoie-o-projeto) • [Contribuir](#-contribuindo) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
 
 </div>
 
-## Funcionalidades
+## ✨ Funcionalidades
 
 *   **Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
 *   **Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java, facilitando a identificação de qual projeto está rodando em qual porta.
@@ -32,7 +32,7 @@
 *   **Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` instantaneamente no seu navegador padrão.
 *   **Instância Única**: Previne múltiplas janelas, mantendo seu fluxo de trabalho limpo.
 
-## Segurança e Privacidade
+## 🔒 Segurança e Privacidade
 
 *   **Código Aberto**: Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.
 *   **Zero Telemetria**: Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.
@@ -319,6 +319,26 @@ https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
 ```
 
 O GitHub detecta automaticamente arquivos LFS e serve o binário real, não o ponteiro.
+
+## ☕ Apoie o Projeto
+
+Se este projeto ajuda no seu dia a dia, considere apoiar sua evolução.
+
+**Opções de apoio:**
+- **GitHub Sponsors:** https://github.com/sponsors/rkvasne
+- **Mercado Pago:** https://link.mercadopago.com.br/kvasne
+- **PayPal:** https://www.paypal.com/donate/?hosted_button_id=JJFQZK647286S
+
+### 📱 QR Codes (Pix / PayPal)
+
+<div align="center">
+  <img src="docs/landing/images/qr_pix.png" width="180" alt="QR code Pix">
+  <img src="docs/landing/images/qr_paypal.png" width="180" alt="QR code PayPal">
+</div>
+
+**Pix (Brasil) — Chave aleatória:** `fa550c5d-fdaf-4484-b52b-760071fe524d`
+
+O Taskvasne permanece 100% open-source e gratuito. Doações são opcionais e ajudam a manter o desenvolvimento.
 
 ## 🛠️ Tecnologias
 
