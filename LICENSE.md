@@ -1,3 +1,9 @@
+# ⚖️ Licença MIT — Taskvasne
+
+> Navegação: [README do projeto](README.md) • [Contribuição](CONTRIBUTING.md)
+
+---
+
 MIT License
 
 Copyright (c) 2025 Raphael Kvasne
