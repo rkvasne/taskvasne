@@ -414,7 +414,7 @@ p {
 /* Tray Area */
 .tray-area {
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     right: 0;
     background: rgba(30, 30, 30, 0.9);
     backdrop-filter: blur(10px);
