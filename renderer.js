@@ -56,7 +56,7 @@ function renderPorts(ports) {
 
         // Add click listener to badge
         const badge = item.querySelector('.port-badge');
-        badge.onclick = (e) => {
+        badge.onclick = e => {
             e.stopPropagation();
             window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
         };
@@ -64,7 +64,7 @@ function renderPorts(ports) {
         // Add click listener to process name to also open URL
         const processName = item.querySelector('.process-name');
         processName.style.cursor = 'pointer';
-        processName.onclick = (e) => {
+        processName.onclick = e => {
             e.stopPropagation();
             window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
         };
@@ -75,7 +75,7 @@ function renderPorts(ports) {
         killBtn.title = window.i18n.t('stopProcess');
         // Stop icon (filled square)
         killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> ${window.i18n.t('stop')}`;
-        killBtn.onclick = (e) => {
+        killBtn.onclick = e => {
             e.stopPropagation(); // Prevent row click
             killProcess(port.PID, item);
         };

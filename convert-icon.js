@@ -12,7 +12,8 @@ if (typeof pngToIco === 'function') {
         })
         .catch(console.error);
 } else if (typeof pngToIco.default === 'function') {
-    pngToIco.default('icon.png')
+    pngToIco
+        .default('icon.png')
         .then(buf => {
             fs.writeFileSync('icon.ico', buf);
             console.log('Created icon.ico');

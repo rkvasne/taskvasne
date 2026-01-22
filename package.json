@@ -22,7 +22,8 @@
         "test:coverage": "jest --coverage",
         "lint": "eslint *.js",
         "lint:fix": "eslint *.js --fix",
-        "format": "prettier --write \"*.{js,json,md}\""
+        "format": "prettier --write \"*.{js,json,md}\"",
+        "format:check": "prettier --check \"*.{js,json,md}\""
     },
     "build": {
         "appId": "com.kvasne.taskvasne",

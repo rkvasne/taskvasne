@@ -17,37 +17,40 @@ function extractProjectName(commandLine, processName) {
         if (!commandLine || typeof commandLine !== 'string') {
             return null;
         }
-        
+
         // Match quoted paths: "C:\path\to\file.js" or unquoted: C:\path\to\file.js
         const pathRegex = /"([^"]+\\[^"]+)"|([^\s]+:\\.+?)(?:\s|$)/g;
         let match;
-        
+
         while ((match = pathRegex.exec(commandLine)) !== null) {
             const cleanPart = match[1] || match[2];
-            
+
             if (!cleanPart) continue;
-            
+
             // Skip if it ends with the process executable name
             if (cleanPart.toLowerCase().endsWith(processName.toLowerCase())) {
                 continue;
             }
-            
+
             // Must contain a valid Windows path
             if (cleanPart.includes(':\\')) {
                 const pathParts = cleanPart.split('\\');
                 if (pathParts.length > 1) {
                     let folderName = pathParts[pathParts.length - 2];
-                    
+
                     // If last part doesn't have extension, use it as folder name
                     if (!pathParts[pathParts.length - 1].includes('.')) {
                         folderName = pathParts[pathParts.length - 1];
                     }
-                    
+
                     // Skip common build/output folders
-                    if (IGNORED_FOLDERS.includes(folderName.toLowerCase()) && pathParts.length > 2) {
+                    if (
+                        IGNORED_FOLDERS.includes(folderName.toLowerCase()) &&
+                        pathParts.length > 2
+                    ) {
                         folderName = pathParts[pathParts.length - 3];
                     }
-                    
+
                     if (folderName) {
                         return folderName;
                     }
@@ -123,35 +126,41 @@ function getPorts() {
                 });
 
                 // 3. Enrichment: Try to get project name for generic processes
-                const enrichedResults = await Promise.all(results.map(async (item) => {
-                    if (ENRICHABLE_PROCESSES.includes(item.ProcessName.toLowerCase())) {
-                        try {
-                            const cmd = await new Promise(res => {
-                                // Use PowerShell for reliable command line retrieval
-                                const psCommand = `powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'ProcessId = ${item.PID}' | Select-Object -ExpandProperty CommandLine"`;
-                                exec(psCommand, (e, out) => {
-                                    if (e || !out) {
-                                        log.debug(`Could not get command line for PID ${item.PID}`);
-                                        res('');
-                                    } else {
-                                        res(out.trim());
-                                    }
+                const enrichedResults = await Promise.all(
+                    results.map(async item => {
+                        if (ENRICHABLE_PROCESSES.includes(item.ProcessName.toLowerCase())) {
+                            try {
+                                const cmd = await new Promise(res => {
+                                    // Use PowerShell for reliable command line retrieval
+                                    const psCommand = `powershell -NoProfile -Command "Get-CimInstance Win32_Process -Filter 'ProcessId = ${item.PID}' | Select-Object -ExpandProperty CommandLine"`;
+                                    exec(psCommand, (e, out) => {
+                                        if (e || !out) {
+                                            log.debug(
+                                                `Could not get command line for PID ${item.PID}`
+                                            );
+                                            res('');
+                                        } else {
+                                            res(out.trim());
+                                        }
+                                    });
                                 });
-                            });
-                            
-                            if (cmd) {
-                                const projectName = extractProjectName(cmd, item.ProcessName);
-                                if (projectName) {
-                                    item.ProcessName += ` (${projectName})`;
-                                    log.debug(`Enriched ${item.PID}: ${item.ProcessName}`);
+
+                                if (cmd) {
+                                    const projectName = extractProjectName(cmd, item.ProcessName);
+                                    if (projectName) {
+                                        item.ProcessName += ` (${projectName})`;
+                                        log.debug(`Enriched ${item.PID}: ${item.ProcessName}`);
+                                    }
                                 }
+                            } catch (error) {
+                                log.error(
+                                    `Enrichment failed for PID ${item.PID}: ${error.message}`
+                                );
                             }
-                        } catch (error) {
-                            log.error(`Enrichment failed for PID ${item.PID}: ${error.message}`);
                         }
-                    }
-                    return item;
-                }));
+                        return item;
+                    })
+                );
 
                 enrichedResults.sort((a, b) => a.LocalPort - b.LocalPort);
                 log.info(`Found ${enrichedResults.length} active ports`);

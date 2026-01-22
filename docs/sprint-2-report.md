@@ -40,7 +40,7 @@ Sprint focado em **testes automatizados**, **documentação JSDoc**, **linting/f
 | Cobertura de Código | ✅ ~70% |
 | ESLint Errors | ✅ 0 |
 | JSDoc | ✅ 10+ funções |
-| CI/CD Pipeline | ✅ 3 jobs (test, lint, build) |
+| CI/CD Pipeline | ✅ 1 job (lint + test) |
 | Bugs Conhecidos | ✅ 0 (4 corrigidos via TDD) |
 
 ---
@@ -61,8 +61,7 @@ Detalhes de arquivos criados/modificados e mudanças do Sprint 2 estão no [CHAN
 
 ### Desenvolvimento
 - ✅ **TDD** descobriu 4 bugs antes de produção
-- ✅ **CI/CD** automatiza validação de PRs
-- ✅ **Artifacts** disponibilizam builds testados
+- ✅ **CI/CD** automatiza lint e testes em PRs
 - ✅ **Linting automático** mantém padrões
 
 ### Dívida Técnica

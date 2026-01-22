@@ -7,6 +7,7 @@ Obrigado por considerar contribuir com o **Taskvasne**! Este documento fornece d
 ## 📋 Código de Conduta
 
 Este projeto adota um ambiente inclusivo e respeitoso. Ao participar, você concorda em:
+
 - Usar linguagem acolhedora e inclusiva
 - Respeitar pontos de vista e experiências diferentes
 - Aceitar críticas construtivas com profissionalismo
@@ -19,6 +20,7 @@ Este projeto adota um ambiente inclusivo e respeitoso. Ao participar, você conc
 ### 1️⃣ Reportar Bugs
 
 Antes de criar uma issue:
+
 - Verifique se já não existe uma issue similar
 - Use o template de bug report
 - Inclua informações do sistema (Windows version, Node.js version)
@@ -26,9 +28,11 @@ Antes de criar uma issue:
 - Anexe logs relevantes (veja `%APPDATA%\taskvasne\logs\`)
 
 **Exemplo de bug report:**
+
 ```markdown
 **Descrição:** Erro ao matar processo com PID inválido
 **Passos para reproduzir:**
+
 1. Abra o Taskvasne
 2. Clique em "Matar" em um processo inexistente
 3. Observe o erro no console
@@ -43,6 +47,7 @@ Antes de criar uma issue:
 ### 2️⃣ Sugerir Melhorias
 
 Para sugestões de features:
+
 - Descreva claramente o problema que a feature resolve
 - Explique o comportamento desejado
 - Considere alternativas
@@ -70,6 +75,7 @@ npm test
 ```
 
 #### Pré-requisitos
+
 - **Node.js:** 18.x ou superior
 - **npm:** 9.x ou superior
 - **Git:** Qualquer versão recente
@@ -81,24 +87,24 @@ npm test
 
 1. **Fork o repositório**
 2. **Crie uma branch** para sua feature:
-   ```bash
-   git checkout -b feature/nome-da-feature
-   ```
+    ```bash
+    git checkout -b feature/nome-da-feature
+    ```
 3. **Desenvolva** seguindo os padrões do projeto (veja abaixo)
 4. **Escreva testes** para novas funcionalidades
 5. **Rode os testes** e garanta que todos passam:
-   ```bash
-   npm test
-   npm run lint
-   ```
+    ```bash
+    npm test
+    npm run lint
+    ```
 6. **Commit** com mensagens descritivas:
-   ```bash
-   git commit -m "feat: adiciona filtro de portas por intervalo"
-   ```
+    ```bash
+    git commit -m "feat: adiciona filtro de portas por intervalo"
+    ```
 7. **Push** para o seu fork:
-   ```bash
-   git push origin feature/nome-da-feature
-   ```
+    ```bash
+    git push origin feature/nome-da-feature
+    ```
 8. **Abra um Pull Request** no repositório original
 
 ---
@@ -106,6 +112,7 @@ npm test
 ## 📝 Padrões de Código
 
 ### Linting e Formatação
+
 ```bash
 # Verifica erros de linting
 npm run lint
@@ -118,6 +125,7 @@ npm run format:check
 ```
 
 ### Estilo de Código
+
 - **Indentação:** 2 espaços
 - **Aspas:** Single quotes (`'`) para strings
 - **Ponto e vírgula:** Opcional (o Prettier decide)
@@ -125,6 +133,7 @@ npm run format:check
 - **Nomes:** camelCase para funções/variáveis, PascalCase para classes
 
 ### Documentação JSDoc
+
 Todas as funções públicas devem ter JSDoc:
 
 ```javascript
@@ -138,7 +147,7 @@ Todas as funções públicas devem ter JSDoc:
  * // Returns: 'app'
  */
 function extractProjectName(commandLine, processName) {
-  // ...
+    // ...
 }
 ```
 
@@ -147,6 +156,7 @@ function extractProjectName(commandLine, processName) {
 ## 🧪 Testes
 
 ### Executando Testes
+
 ```bash
 # Roda todos os testes
 npm test
@@ -159,21 +169,22 @@ npm run test:coverage
 ```
 
 ### Escrevendo Testes
+
 - Mantenha cobertura acima de **60%**
 - Teste casos de sucesso E casos de erro
 - Use nomes descritivos:
 
 ```javascript
 describe('extractProjectName', () => {
-  test('should extract project name from valid path', () => {
-    const result = extractProjectName('node C:\\Users\\dev\\myapp\\index.js', 'node.exe');
-    expect(result).toBe('myapp');
-  });
+    test('should extract project name from valid path', () => {
+        const result = extractProjectName('node C:\\Users\\dev\\myapp\\index.js', 'node.exe');
+        expect(result).toBe('myapp');
+    });
 
-  test('should return null for invalid paths', () => {
-    const result = extractProjectName('', 'node.exe');
-    expect(result).toBeNull();
-  });
+    test('should return null for invalid paths', () => {
+        const result = extractProjectName('', 'node.exe');
+        expect(result).toBeNull();
+    });
 });
 ```
 
@@ -182,13 +193,16 @@ describe('extractProjectName', () => {
 ## 🔒 Segurança
 
 ### Reportar Vulnerabilidades
+
 **NÃO** abra issues públicas para vulnerabilidades de segurança. Envie um email privado para:
+
 - **Email:** [raphael@kvasne.com](mailto:raphael@kvasne.com)
 - **Assunto:** `[SECURITY] Vulnerabilidade em Taskvasne`
 
 Responderemos em até **48 horas**.
 
 ### Checklist de Segurança
+
 - ✅ Validar/sanitizar inputs de usuário
 - ✅ Usar `contextIsolation: true` em Electron
 - ✅ Nunca usar `nodeIntegration: true`
@@ -210,6 +224,7 @@ Siga [Conventional Commits](https://www.conventionalcommits.org/):
 ```
 
 **Tipos:**
+
 - `feat`: Nova funcionalidade
 - `fix`: Correção de bug
 - `docs`: Mudanças em documentação
@@ -219,6 +234,7 @@ Siga [Conventional Commits](https://www.conventionalcommits.org/):
 - `chore`: Tarefas de manutenção
 
 **Exemplos:**
+
 ```bash
 feat(port-manager): adiciona suporte para processos Java
 fix(main): corrige vazamento de memória em killProcess
@@ -248,6 +264,7 @@ tasks-app/
 ## ❓ Perguntas Frequentes
 
 ### Como depurar o aplicativo?
+
 ```bash
 # Modo dev com DevTools
 npm start
@@ -257,6 +274,7 @@ npm start
 ```
 
 ### Como adicionar uma nova dependência?
+
 ```bash
 npm install <pacote> --save
 # OU
@@ -264,9 +282,11 @@ npm install <pacote> --save-dev  # dev dependencies
 ```
 
 ### Posso contribuir com traduções?
+
 Sim! Veja a issue de internacionalização ou abra uma nova sugerindo seu idioma.
 
 ### Quanto tempo leva para revisar um PR?
+
 Geralmente **2-5 dias úteis**. PRs com testes têm prioridade.
 
 ---

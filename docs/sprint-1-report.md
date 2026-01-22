@@ -13,7 +13,7 @@ Sprint focado em correções **CRÍTICAS** de segurança, refatoração e melhor
 
 ---
 
-## � Resumo do Sprint
+## 🧾 Resumo do Sprint
 
 - Correções críticas de segurança e refatorações essenciais
 - Melhorias de qualidade e documentação base
