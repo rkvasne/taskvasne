@@ -1,34 +1,36 @@
-# Política de Segurança
+# 🔐 Política de Segurança — Taskvasne
 
-Obrigado por ajudar a manter este projeto seguro.
-
----
-
-## ✅ Versões Suportadas
-
-| Versão | Suportada |
-|--------|-----------|
-| 0.0.6 | ✅ |
-| <= 0.0.5 | ❌ |
+**Versão:** v0.0.6  
+**Data:** 23/01/2026
 
 ---
 
-## 🛡️ Relatar Vulnerabilidades
+## 1) Reporte de vulnerabilidades
 
-Não abra issues públicas para vulnerabilidades. Envie detalhes para: [raphael@kvasne.com](mailto:raphael@kvasne.com)
+Se você encontrar um problema de segurança:
+- Não abra issues públicas para vulnerabilidades. Envie detalhes para: [raphael@kvasne.com](mailto:raphael@kvasne.com)
+- Inclua:
+  - Passos para reproduzir
+  - Impacto observado/esperado
+  - Versão do Taskvasne e do Windows
+  - Evidências (logs, prints, PoC)
+  - Logs relevantes em `%APPDATA%\taskvasne\logs\`
 
-Inclua:
-- Passos para reproduzir
-- Impacto estimado
-- Evidências (logs, prints, PoC)
-- Versão do Taskvasne e do Windows
-- Logs relevantes em `%APPDATA%\taskvasne\logs\`
+Repositório: https://github.com/rkvasne/taskvasne
 
 ---
 
-## 🔄 Processo de Divulgação
+## 2) Escopo
 
-- Confirmação do recebimento
-- Análise e correção
-- Divulgação coordenada após patch
- - Retorno em até 48 horas úteis quando possível
+O Taskvasne é um utilitário local. Ainda assim, são considerados problemas relevantes:
+- Execução de comandos inesperados via PID/processo
+- Vazamento de dados locais (logs, histórico, paths sensíveis)
+- Falhas de permissões e persistência insegura
+- Corrupção de dados com impacto relevante
+
+---
+
+## 3) Versões suportadas
+
+- A versão suportada é a mais recente publicada em Releases (v0.0.6 no momento).
+- Consulte o histórico em [CHANGELOG.md](CHANGELOG.md).

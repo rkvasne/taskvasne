@@ -1,10 +1,19 @@
-# 🤝 Guia de Contribuição - Taskvasne
+# 🤝 Contribuindo — Taskvasne
 
-Obrigado por considerar contribuir com o **Taskvasne**! Este documento fornece diretrizes para garantir um processo de contribuição suave e consistente.
+Obrigado por considerar contribuir com o Taskvasne.
+
+> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
 ---
 
-## 📋 Código de Conduta
+## 1) Comece aqui
+
+- Documentação: [docs/README.md](docs/README.md)
+- Visão geral e uso: [README.md](README.md)
+
+---
+
+## 2) Código de Conduta
 
 Este projeto adota um ambiente inclusivo e respeitoso. Ao participar, você concorda em:
 
@@ -17,9 +26,9 @@ Este projeto segue o [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 
 ---
 
-## 🚀 Como Contribuir
+## 3) Como Contribuir
 
-### 1️⃣ Reportar Bugs
+### 3.1) Reportar Bugs
 
 Antes de criar uma issue:
 
@@ -46,7 +55,7 @@ Antes de criar uma issue:
 
 ---
 
-### 2️⃣ Sugerir Melhorias
+### 3.2) Sugerir Melhorias
 
 Para sugestões de features:
 
@@ -57,7 +66,7 @@ Para sugestões de features:
 
 ---
 
-### 3️⃣ Desenvolver Código
+### 3.3) Desenvolver Código
 
 #### Setup do Ambiente
 
@@ -85,7 +94,7 @@ npm test
 
 ---
 
-### 4️⃣ Workflow de Pull Request
+### 3.4) Workflow de Pull Request
 
 1. **Fork o repositório**
 2. **Crie uma branch** para sua feature:
@@ -111,7 +120,7 @@ npm test
 
 ---
 
-## 📝 Padrões de Código
+## 4) Padrões de Código
 
 ### Linting e Formatação
 
@@ -219,7 +228,7 @@ Siga a política em [SECURITY.md](SECURITY.md).
 
 Siga [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 <tipo>(<escopo>): <descrição curta>
 
 [corpo opcional]
@@ -250,8 +259,8 @@ test(renderer): adiciona testes para loadPorts()
 
 ## 🏗️ Estrutura do Projeto
 
-```
-tasks-app/
+```text
+taskvasne/
 ├── main.js              # Processo principal Electron
 ├── renderer.js          # Lógica da UI
 ├── preload.js           # Bridge seguro main↔renderer

@@ -1,9 +1,9 @@
-# Changelog
+# Registro de Mudanças
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
-e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
+e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
@@ -32,23 +32,11 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Documentação consolidada no CHANGELOG (sprints)
 - Diagnósticos pendentes movidos para ISSUES.md
 
-### Deprecated
-
-- 
-
-### Removed
-
-- 
-
-### Fixed
-
-- 
-
 ### Security
 
 - Override de `tar` para versão segura e auditoria `npm` limpa
 
-## [0.0.6] - 30/12/2025
+## [0.0.6] - 2025-12-30
 
 ### 📝 Resumo curto
 

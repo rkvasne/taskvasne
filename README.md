@@ -13,7 +13,7 @@ _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design
 [![Tests](https://img.shields.io/badge/tests-automated-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md#-testes)
 [![Architecture](https://img.shields.io/badge/architecture-documented-brightblue.svg?style=for-the-badge)](#-arquitetura-e-boas-praticas)
 
-[Sobre](#-sobre) • [Funcionalidades](#-funcionalidades) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Apoie o Projeto](#-apoie-o-projeto) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+[Sobre](#-sobre) • [Funcionalidades](#-funcionalidades) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Apoie o Projeto](#-apoie-o-projeto-opcional) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
 
 </div>
 
@@ -230,7 +230,7 @@ git push origin main
 
 **Saída esperada:**
 
-```
+```text
 Uploading LFS objects: 100% (1/1), 114 MB | 9.2 MB/s, done
 Enumerating objects: 5, done.
 ...
@@ -248,7 +248,7 @@ git lfs ls-files
 
 **Saída esperada:**
 
-```
+```text
 65b2de1e3a * dist-portable/Taskvasne.zip
 ```
 
@@ -326,32 +326,43 @@ Para mais detalhes sobre Git LFS, veja:
 
 Para garantir o download direto do binário (e não do ponteiro LFS), o link no site utiliza:
 
-```
+```text
 https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
 ```
 
 O GitHub detecta automaticamente arquivos LFS e serve o binário real, não o ponteiro.
 
-## ☕ Apoie o Projeto
+## ☕ Apoie o Projeto (Opcional)
 
-Se este projeto ajuda no seu dia a dia, considere apoiar sua evolução.
+Se o Taskvasne te ajuda no dia a dia e você quiser apoiar o desenvolvimento, você tem várias formas de contribuir financeiramente:
 
-**Opções de apoio:**
+### 💳 Métodos de Doação
 
-- **GitHub Sponsors:** https://github.com/sponsors/rkvasne
-- **Mercado Pago:** https://link.mercadopago.com.br/kvasne
-- **PayPal:** https://www.paypal.com/donate/?hosted_button_id=JJFQZK647286S
+- **GitHub Sponsors** → https://github.com/sponsors/rkvasne
+- **Mercado Pago** (Brasil) → https://link.mercadopago.com.br/kvasne
+- **PayPal** (Internacional) → https://www.paypal.com/donate/?hosted_button_id=JJFQZK647286S
+- **Pix** (Brasil) → `fa550c5d-fdaf-4484-b52b-760071fe524d`
 
 ### 📱 QR Codes (Pix / PayPal)
 
+Escaneie para doação rápida via **Pix** ou **PayPal**:
+
 <div align="center">
-  <img src="docs/landing/images/qr_pix.png" width="180" alt="QR code Pix">
-  <img src="docs/landing/images/qr_paypal.png" width="180" alt="QR code PayPal">
+
+| Pix | PayPal |
+|:---:|:------:|
+| <img src="docs/landing/images/qr_pix.png" alt="QR Pix" width="150" height="150"> | <img src="docs/landing/images/qr_paypal.png" alt="QR PayPal" width="150" height="150"> |
+
 </div>
 
-**Pix (Brasil) — Chave aleatória:** `fa550c5d-fdaf-4484-b52b-760071fe524d`
+### 🤝 Outras Formas de Apoio
 
-O Taskvasne permanece 100% open-source e gratuito. Doações são opcionais e ajudam a manter o desenvolvimento.
+Não tem condições financeiras? Sem problema! Você também pode ajudar:
+- Contribuindo com **issues, PRs e sugestões** de melhoria
+- Divulgando o projeto com amigos e na comunidade
+- Reportando bugs e sugestões de features
+
+> **Nota:** O Taskvasne permanece **100% open-source e gratuito**. Doações são completamente opcionais e ajudam a manter o ritmo de desenvolvimento e novas features.
 
 ## 🛠️ Tecnologias
 
@@ -364,7 +375,7 @@ O Taskvasne permanece 100% open-source e gratuito. Doações são opcionais e aj
 
 ### Estrutura do Projeto
 
-```
+```text
 taskvasne/
 ├── main.js                  # Main process (Electron)
 ├── renderer.js              # Renderer process (UI)
