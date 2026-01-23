@@ -29,6 +29,20 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Demo interativa da landing page ampliada em ~10%
 - Template de release do README atualizado com placeholders
 - Documentação de CI/CD alinhada ao workflow atual
+- Documentação consolidada no CHANGELOG (sprints)
+- Diagnósticos pendentes movidos para ISSUES.md
+
+### Deprecated
+
+- 
+
+### Removed
+
+- 
+
+### Fixed
+
+- 
 
 ### Security
 
@@ -104,7 +118,6 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
     - Guia de Contribuição
     - Informações de Segurança implementadas
 - Adicionado CHANGELOG.md
-- Criado docs/analise-tecnica.md com relatório completo do projeto
 - **[NOVO]** Criado CONTRIBUTING.md com guia completo de contribuição
 - Corrigida referência de `icon.png` para `icon.svg`
 
@@ -129,6 +142,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Imports otimizados (removidos `Menu`, `dialog` não utilizados)
 - Parâmetros não utilizados prefixados com `_` (convenção ESLint)
 - Adicionado tratamento de null/undefined em `extractProjectName()`
+
+### 📊 Resumo dos Sprints
+
+- **Sprint 1 (Segurança & Qualidade):** vulnerabilidades críticas corrigidas, isolamento de contexto, CSP, refatoração e logging estruturado.
+- **Sprint 2 (Testes & Infraestrutura):** testes automatizados, cobertura ~70%, linting/formatting e CI/CD com validação automática.
+- **Sprint 3 (Documentação & i18n):** documentação consolidada, suporte a dois idiomas e estabilização de métricas.
+- **Qualidade final:** 31 testes (100% passing), ~70% cobertura, 0 erros de linting.
+- **Segurança final:** 0 vulnerabilidades críticas, context isolation em todas as janelas.
 
 ---
 

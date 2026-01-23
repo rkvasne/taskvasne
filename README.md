@@ -8,14 +8,19 @@
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
 [![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)](LICENSE.md)
-[![Version](https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-X.Y.Z-purple?style=for-the-badge)](CHANGELOG.md)
+[![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)](https://www.microsoft.com/windows)
 [![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)](npm test)
 [![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)](npm run test:coverage)
 
-[Instalação](#-instalação) • [Documentação](#-site-documentação-web) • [Doações](#-apoie-o-projeto) • [Contribuir](#-contribuindo) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+[Sobre](#-sobre) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Doações](#-apoie-o-projeto) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
 
 </div>
+
+## 📖 Sobre
+
+Taskvasne é um gerenciador de portas para Windows 11 que facilita visualizar e encerrar processos em portas locais, com foco em rapidez, clareza e uma interface minimalista.
 
 ## ✨ Funcionalidades
 
@@ -34,13 +39,8 @@ _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design
 
 ## 🔒 Segurança e Privacidade
 
-- **Código Aberto**: Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.
-- **Zero Telemetria**: Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.
-- **Sem Malware**: Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.
-- **Context Isolation**: Utiliza `contextIsolation` e `preload scripts` para isolar código e prevenir vulnerabilidades.
-- **Input Sanitization**: Todos os inputs do usuário são validados antes de execução de comandos do sistema.
-- **Content Security Policy**: Headers CSP configurados para prevenir ataques XSS.
-- **Auditoria de Dependências**: `npm audit` mantido limpo com override de `tar` para corrigir CVEs transitivos.
+- Resumo público: https://taskvasne.vercel.app/#security
+- Detalhes técnicos e mudanças: [CHANGELOG.md](CHANGELOG.md)
 
 ## 👨‍💻 Desenvolvimento
 
@@ -51,19 +51,7 @@ _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design
 
 ### Configuração do Ambiente
 
-1.  Clone o repositório:
-    ```bash
-    git clone https://github.com/rkvasne/taskvasne.git
-    cd taskvasne
-    ```
-2.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-3.  Inicie o aplicativo em modo desenvolvimento:
-    ```bash
-    npm start
-    ```
+Para setup completo, scripts, testes e fluxo de PR, veja [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Scripts Disponíveis
 
@@ -75,29 +63,11 @@ npm run test:coverage  # Gera relatório de cobertura
 npm run lint           # Verifica qualidade do código
 npm run lint:fix       # Corrige automaticamente problemas de linting
 npm run format         # Formata código com Prettier
+npm run format:check   # Verifica formatação sem alterar arquivos
 npm run dist           # Gera build portátil (.exe)
+npm run build:portable # Gera build portátil via electron-builder
+npm run build:win      # Gera build instalador (NSIS)
 ```
-
-### Testes Automatizados
-
-O projeto conta com testes unitários usando Jest:
-
-```bash
-npm test
-```
-
-**Cobertura atual:** ~70% (módulo port-manager)
-
-- 17 testes implementados
-- Validação de extração de nomes de projetos
-- Tratamento de edge cases e erros
-
-### Qualidade de Código
-
-- **ESLint**: Linting automático configurado
-- **Prettier**: Formatação consistente
-- **JSDoc**: Documentação completa de funções
-- **CI/CD**: GitHub Actions pipeline automático
 
 ## 🚀 Instalação
 
@@ -128,6 +98,13 @@ https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
 2. Execute `Taskvasne.exe`
 3. Pronto! Sem instalação necessária (aplicação portátil)
 
+## 🚀 Como Usar
+
+1. Abra o `Taskvasne.exe`.
+2. Aguarde a lista carregar ou clique em **Refresh**.
+3. Clique na porta para abrir `http://localhost:<porta>` no navegador.
+4. Clique em **Stop** para encerrar processos indesejados.
+
 ## 🌐 Site (Documentação Web)
 
 O site publicado em [taskvasne.vercel.app](https://taskvasne.vercel.app) é servido a partir da pasta `docs/`.
@@ -135,6 +112,10 @@ O site publicado em [taskvasne.vercel.app](https://taskvasne.vercel.app) é serv
 - A configuração de deploy/rotas está em `vercel.json`.
 - Para pré-visualizar localmente, basta servir a pasta `docs/` via qualquer servidor estático.
     - Exemplo: `npx serve docs`
+
+## 📚 Documentação
+
+Consulte o índice central em [docs/README.md](docs/README.md).
 
 ### 📦 Distribuição e Arquitetura
 
@@ -333,7 +314,7 @@ git push origin main  # Redigitar credenciais
 
 | Data       | Versão | Arquivo                     | Tamanho | Commit  |
 | ---------- | ------ | --------------------------- | ------- | ------- |
-| 30/12/2025 | v0.0.6 | dist-portable/Taskvasne.zip | 114 MB  | cd1ec52 |
+| DD/MM/AAAA | vX.Y.Z | dist-portable/Taskvasne.zip | 114 MB  | cd1ec52 |
 
 ##### 📖 Documentação Completa
 
@@ -516,33 +497,18 @@ git push origin vX.Y.Z
 - [ ] Landing page verificada (Vercel)
 - [ ] Download testado
 - [ ] CI/CD passou
+- [ ] Ignorar pasta dist em validações (evitar falsos positivos)
 
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Veja o [CONTRIBUTING.md](CONTRIBUTING.md) para orientações completas.
 
-**Resumo rápido:**
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-**Antes de submeter:**
-
-- Execute `npm test` (todos os 31 testes devem passar)
-- Execute `npm run lint` (zero erros)
-- Execute `npm run format` (código formatado)
-
 Veja o [CHANGELOG.md](CHANGELOG.md) para histórico completo de mudanças.
 
 ### 📚 Documentação Adicional
 
-- [docs/sprint-1-report.md](docs/sprint-1-report.md) - Relatório Sprint 1 (Segurança & Qualidade)
-- [docs/sprint-2-report.md](docs/sprint-2-report.md) - Relatório Sprint 2 (Testes & Infraestrutura)
-- [docs/sprint-3-report.md](docs/sprint-3-report.md) - Relatório Sprint 3 (i18n & Documentação)
-- [docs/analise-tecnica.md](docs/analise-tecnica.md) - Análise técnica do projeto
+- [CHANGELOG.md](CHANGELOG.md) - Histórico de mudanças
+- [ISSUES.md](ISSUES.md) - Diagnósticos pendentes
 - [CONTRIBUTING.md](CONTRIBUTING.md) - Guia de contribuição
 
 ## 👨‍💻 Autor

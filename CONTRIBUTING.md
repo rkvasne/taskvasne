@@ -13,6 +13,8 @@ Este projeto adota um ambiente inclusivo e respeitoso. Ao participar, você conc
 - Aceitar críticas construtivas com profissionalismo
 - Focar no que é melhor para a comunidade
 
+Este projeto segue o [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ---
 
 ## 🚀 Como Contribuir
@@ -126,9 +128,9 @@ npm run format:check
 
 ### Estilo de Código
 
-- **Indentação:** 2 espaços
+- **Indentação:** 4 espaços
 - **Aspas:** Single quotes (`'`) para strings
-- **Ponto e vírgula:** Opcional (o Prettier decide)
+- **Ponto e vírgula:** Obrigatório (Prettier)
 - **Variáveis:** Prefira `const` sobre `let`, nunca use `var`
 - **Nomes:** camelCase para funções/variáveis, PascalCase para classes
 
@@ -200,6 +202,8 @@ describe('extractProjectName', () => {
 - **Assunto:** `[SECURITY] Vulnerabilidade em Taskvasne`
 
 Responderemos em até **48 horas**.
+
+Siga a política em [SECURITY.md](SECURITY.md).
 
 ### Checklist de Segurança
 
@@ -299,3 +303,9 @@ Obrigado por contribuir! Seu trabalho ajuda a tornar o Taskvasne melhor para tod
 
 **Mantido por:** [RKvasne](https://github.com/rkvasne)  
 **Última atualização:** 30/12/2025
+
+---
+
+## 📄 Licença
+
+Ao contribuir, você concorda com a licença descrita em [LICENSE.md](LICENSE.md).
