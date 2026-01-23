@@ -8,8 +8,8 @@
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
 [![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)](LICENSE.md)
-[![Version](https://img.shields.io/badge/version-X.Y.Z-purple?style=for-the-badge)](CHANGELOG.md)
-[![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge)](CHANGELOG.md)
+[![Status](https://github.com/rkvasne/taskvasne/actions/workflows/ci.yml/badge.svg?branch=main&style=for-the-badge)](https://github.com/rkvasne/taskvasne/actions/workflows/ci.yml)
 [![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)](https://www.microsoft.com/windows)
 [![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)](CONTRIBUTING.md#-testes)
 [![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)](CONTRIBUTING.md#-testes)
