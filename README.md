@@ -7,14 +7,13 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![License](https://img.shields.io/github/license/rkvasne/taskvasne?style=for-the-badge&color=blue)](LICENSE.md)
-[![Version](https://img.shields.io/badge/version-0.0.6-purple?style=for-the-badge)](CHANGELOG.md)
-[![Status](https://github.com/rkvasne/taskvasne/actions/workflows/ci.yml/badge.svg?branch=main&style=for-the-badge)](https://github.com/rkvasne/taskvasne/actions/workflows/ci.yml)
-[![Platform](https://img.shields.io/badge/platform-windows-purple?style=for-the-badge)](https://www.microsoft.com/windows)
-[![Tests](https://img.shields.io/badge/tests-31%20passing-brightgreen?style=for-the-badge)](CONTRIBUTING.md#-testes)
-[![Coverage](https://img.shields.io/badge/coverage-70%25-yellow?style=for-the-badge)](CONTRIBUTING.md#-testes)
+[![Version](https://img.shields.io/badge/version-0.0.6-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Node](https://img.shields.io/badge/node-18%2B-green.svg?style=for-the-badge)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
+[![Tests](https://img.shields.io/badge/tests-automated-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md#-testes)
+[![Architecture](https://img.shields.io/badge/architecture-documented-brightblue.svg?style=for-the-badge)](#-arquitetura-e-boas-praticas)
 
-[Sobre](#-sobre) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Doações](#-apoie-o-projeto) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+[Sobre](#-sobre) • [Funcionalidades](#-funcionalidades) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Apoie o Projeto](#-apoie-o-projeto) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
 
 </div>
 
