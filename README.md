@@ -13,7 +13,7 @@ _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design
 [![Tests](https://img.shields.io/badge/tests-automated-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md#-testes)
 [![Architecture](https://img.shields.io/badge/architecture-documented-brightblue.svg?style=for-the-badge)](#-arquitetura-e-boas-praticas)
 
-[Sobre](#-sobre) • [Funcionalidades](#-funcionalidades) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Apoie o Projeto](#-apoie-o-projeto-opcional) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Licença](LICENSE.md) • [Changelog](CHANGELOG.md) • [Site Oficial](https://taskvasne.vercel.app)
+[Sobre](#-sobre) • [Funcionalidades](#-funcionalidades) • [Instalação](#-instalação) • [Como Usar](#-como-usar) • [Documentação](#-documentação) • [Apoie o Projeto](#-apoie-o-projeto-opcional) • [Contribuição](CONTRIBUTING.md) • [Segurança](SECURITY.md) • [Changelog](CHANGELOG.md)
 
 </div>
 

@@ -38,6 +38,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Documentação consolidada no CHANGELOG (sprints)
 - Diagnósticos pendentes movidos para ISSUES.md
 - Guias de navegação padronizados nos documentos principais
+- Navegação do README simplificada (remoção de Licença e Site Oficial)
 
 ### Security
 
