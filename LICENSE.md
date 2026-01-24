@@ -1,6 +1,10 @@
 # ⚖️ Licença MIT — Taskvasne
 
-> Navegação: [README do projeto](README.md) • [Contribuição](CONTRIBUTING.md)
+> **Licença oficial** do projeto Taskvasne.
+>
+> Navegação: [README do projeto](README.md) • [Contribuição](CONTRIBUTING.md) • [Documentação](docs/README.md)
+>
+> **Última atualização:** 23 de janeiro de 2026
 
 ---
 

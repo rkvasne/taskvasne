@@ -1,8 +1,12 @@
 # 🤝 Contribuindo — Taskvasne
 
-Obrigado por considerar contribuir com o Taskvasne.
+> **Guia de contribuição** para issues, PRs e padrões do projeto.
+>
+> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [Código de Conduta](CODE_OF_CONDUCT.md)
+>
+> **Última atualização:** 23 de janeiro de 2026
 
-> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
+Obrigado por considerar contribuir com o Taskvasne.
 
 ---
 

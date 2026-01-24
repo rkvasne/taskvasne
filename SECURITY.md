@@ -1,7 +1,12 @@
 # 🔐 Política de Segurança — Taskvasne
 
-**Versão:** v0.0.6  
-**Data:** 23/01/2026
+> **Política de segurança** e contato para reporte responsável.
+>
+> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [CHANGELOG](CHANGELOG.md)
+>
+> **Última atualização:** 23 de janeiro de 2026
+
+**Versão:** v0.0.6
 
 ---
 

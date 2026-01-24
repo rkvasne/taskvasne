@@ -1,5 +1,11 @@
 # Código de Conduta
 
+> **Regras de convivência** para comunidade e contribuições.
+>
+> Navegação: [README do projeto](README.md) • [Contribuição](CONTRIBUTING.md) • [Documentação](docs/README.md)
+>
+> **Última atualização:** 23 de janeiro de 2026
+
 Este projeto é um espaço aberto e inclusivo. Esperamos respeito e colaboração em issues, pull requests, discussões e releases.
 
 ---

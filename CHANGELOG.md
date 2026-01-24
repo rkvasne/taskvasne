@@ -1,5 +1,11 @@
 # Registro de Mudanças
 
+> **Registro oficial** das mudanças por versão no Taskvasne.
+>
+> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [Contribuição](CONTRIBUTING.md)
+>
+> **Última atualização:** 23 de janeiro de 2026
+
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
@@ -31,6 +37,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Documentação de CI/CD alinhada ao workflow atual
 - Documentação consolidada no CHANGELOG (sprints)
 - Diagnósticos pendentes movidos para ISSUES.md
+- Guias de navegação padronizados nos documentos principais
 
 ### Security
 
