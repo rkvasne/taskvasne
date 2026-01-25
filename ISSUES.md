@@ -1,4 +1,4 @@
-# Diagnósticos Pendentes
+# 🧭 Diagnósticos Pendentes - Taskvasne
 
 > **Lista de diagnósticos pendentes** e dívidas técnicas em aberto.
 >

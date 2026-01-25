@@ -1,4 +1,4 @@
-# ⚖️ Licença MIT — Taskvasne
+# ⚖️ Licença MIT - Taskvasne
 
 > **Licença oficial** do projeto Taskvasne.
 >

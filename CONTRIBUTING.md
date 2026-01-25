@@ -1,4 +1,4 @@
-# 🤝 Contribuindo — Taskvasne
+# 🤝 Contribuindo - Taskvasne
 
 > **Guia de contribuição** para issues, PRs e padrões do projeto.
 >

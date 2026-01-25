@@ -1,4 +1,4 @@
-# Registro de Mudanças
+# 📝 Changelog - Taskvasne
 
 > **Registro oficial** das mudanças por versão no Taskvasne.
 >
@@ -39,6 +39,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Diagnósticos pendentes movidos para ISSUES.md
 - Guias de navegação padronizados nos documentos principais
 - Navegação do README simplificada (remoção de Licença e Site Oficial)
+- Títulos dos documentos padronizados com hífen no cabeçalho
 
 ### Security
 

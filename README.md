@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💀 Taskvasne
+# 💀 README - Taskvasne
 
 <img src="icon.svg" width="256" height="256" alt="Taskvasne Icon">
 

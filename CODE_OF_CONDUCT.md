@@ -1,4 +1,4 @@
-# Código de Conduta
+# 🤝 Código de Conduta - Taskvasne
 
 > **Regras de convivência** para comunidade e contribuições.
 >

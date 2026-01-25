@@ -1,4 +1,4 @@
-# 🔐 Política de Segurança — Taskvasne
+# 🔐 Política de Segurança - Taskvasne
 
 > **Política de segurança** e contato para reporte responsável.
 >
