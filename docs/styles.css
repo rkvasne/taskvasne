@@ -738,6 +738,58 @@ p {
     color: white;
 }
 
+.download-section {
+    padding: var(--section-padding) 0;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.download-box {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    text-align: center;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.download-title {
+    margin: 0 0 0.75rem 0;
+    font-size: var(--font-size-3xl);
+    color: var(--text);
+}
+
+.download-subtitle {
+    margin: 0;
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.download-cta {
+    display: inline-flex;
+    margin-top: 1.75rem;
+}
+
+.download-trust {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    font-size: var(--font-size-sm);
+}
+
+.download-trust a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.download-trust a:hover {
+    color: var(--primary);
+}
+
 /* Donation Section */
 .donate-section {
     padding: var(--section-padding) 0;

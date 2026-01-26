@@ -18,6 +18,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Seção de Doação na landing page (cópia fiel do projeto Dahora)
 - Imagens e ícones para seção de doação e desenvolvedor
 - Suporte a dark mode na seção de doação
+- Seção de download final na landing page
 
 ### Changed
 
