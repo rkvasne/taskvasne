@@ -2,7 +2,7 @@
 
 > **Guia de contribuição** para issues, PRs e padrões do projeto.
 >
-> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [Código de Conduta](CODE_OF_CONDUCT.md)
+Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [Código de Conduta](CODE_OF_CONDUCT.md)
 >
 > **Última atualização:** 23 de janeiro de 2026
 

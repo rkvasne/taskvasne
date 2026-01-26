@@ -2,7 +2,7 @@
 
 > **Política de segurança** e contato para reporte responsável.
 >
-> Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [CHANGELOG](CHANGELOG.md)
+Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [CHANGELOG](CHANGELOG.md)
 >
 > **Última atualização:** 23 de janeiro de 2026
 

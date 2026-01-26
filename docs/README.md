@@ -2,7 +2,7 @@
 
 > **Ponto central de navegação** para toda documentação do projeto Taskvasne v0.0.6
 
-> Navegação: [README do projeto](../README.md) • [CHANGELOG](../CHANGELOG.md)
+Navegação: [README do projeto](../README.md) • [CHANGELOG](../CHANGELOG.md)
 
 > **Última atualização:** 23 de janeiro de 2026
 
