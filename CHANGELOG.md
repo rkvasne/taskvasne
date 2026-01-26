@@ -2,7 +2,7 @@
 
 > **Registro oficial** das mudanças por versão no Taskvasne.
 >
-Navegação: [README do projeto](README.md) • [Documentação](docs/README.md) • [Contribuição](CONTRIBUTING.md)
+Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 >
 > **Última atualização:** 23 de janeiro de 2026
 

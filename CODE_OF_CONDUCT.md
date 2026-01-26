@@ -2,7 +2,7 @@
 
 > **Regras de convivência** para comunidade e contribuições.
 >
-Navegação: [README do projeto](README.md) • [Contribuição](CONTRIBUTING.md) • [Documentação](docs/README.md)
+Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 >
 > **Última atualização:** 23 de janeiro de 2026
 
