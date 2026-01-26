@@ -8,10 +8,6 @@ Política de segurança e contato para reporte responsável.
 
 ---
 
-**Versão:** v0.0.6
-
----
-
 ## 1) Reporte de vulnerabilidades
 
 Se você encontrar um problema de segurança:

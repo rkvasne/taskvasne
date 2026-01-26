@@ -4,11 +4,8 @@ Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
 ---
 
-Guia de contribuição para issues, PRs e padrões do projeto.
-
----
-
-Obrigado por considerar contribuir com o Taskvasne.
+Obrigado por investir seu tempo contribuindo com o **Taskvasne**! 🎉
+Siga este guia para entender como você pode ajudar a melhorar o projeto.
 
 ---
 

@@ -4,11 +4,7 @@ Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
 ---
 
-Regras de convivência para comunidade e contribuições.
-
----
-
-Este projeto é um espaço aberto e inclusivo. Esperamos respeito e colaboração em issues, pull requests, discussões e releases.
+Este repositório adota um padrão de convivência respeitoso em issues, discussões e pull requests.
 
 ---
 
