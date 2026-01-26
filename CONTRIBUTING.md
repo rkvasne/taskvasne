@@ -1,10 +1,12 @@
 # 🤝 Contribuindo - Taskvasne
 
-> **Guia de contribuição** para issues, PRs e padrões do projeto.
->
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
->
-> **Última atualização:** 23 de janeiro de 2026
+
+---
+
+Guia de contribuição para issues, PRs e padrões do projeto.
+
+---
 
 Obrigado por considerar contribuir com o Taskvasne.
 

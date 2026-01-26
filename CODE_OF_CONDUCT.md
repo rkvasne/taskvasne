@@ -1,10 +1,12 @@
 # 🤝 Código de Conduta - Taskvasne
 
-> **Regras de convivência** para comunidade e contribuições.
->
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
->
-> **Última atualização:** 23 de janeiro de 2026
+
+---
+
+Regras de convivência para comunidade e contribuições.
+
+---
 
 Este projeto é um espaço aberto e inclusivo. Esperamos respeito e colaboração em issues, pull requests, discussões e releases.
 

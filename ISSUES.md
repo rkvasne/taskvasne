@@ -1,10 +1,12 @@
 # 🧭 Diagnósticos Pendentes - Taskvasne
 
-> **Lista de diagnósticos pendentes** e dívidas técnicas em aberto.
->
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
->
-> **Última atualização:** 23 de janeiro de 2026
+
+---
+
+Lista de diagnósticos pendentes e dívidas técnicas em aberto.
+
+---
 
 ## Performance
 - Parser de processos ainda pode ser custoso com múltiplas chamadas shell; avaliar cache por PID e debounce no refresh.

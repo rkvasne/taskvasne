@@ -1,10 +1,12 @@
 # 📝 Changelog - Taskvasne
 
-> **Registro oficial** das mudanças por versão no Taskvasne.
->
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
->
-> **Última atualização:** 23 de janeiro de 2026
+
+---
+
+Registro oficial das mudanças por versão no Taskvasne.
+
+---
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 

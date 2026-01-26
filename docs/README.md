@@ -1,10 +1,10 @@
 # 📚 Índice de Documentação - Taskvasne
 
-> **Ponto central de navegação** para toda documentação do projeto Taskvasne v0.0.6
-
 Navegação: [README do projeto](../README.md) • [Documentação](README.md)
 
-> **Última atualização:** 23 de janeiro de 2026
+---
+
+Ponto central de navegação para toda documentação do projeto Taskvasne v0.0.6
 
 ---
 
