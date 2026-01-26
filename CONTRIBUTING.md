@@ -74,20 +74,7 @@ Para sugestões de features:
 
 #### Setup do Ambiente
 
-```bash
-# Clone o repositório
-git clone https://github.com/rkvasne/taskvasne.git
-cd taskvasne
-
-# Instale dependências
-npm install
-
-# Execute em modo de desenvolvimento
-npm start
-
-# Rode os testes
-npm test
-```
+Scripts e comandos do projeto em [README.md](README.md#-scripts-disponíveis).
 
 #### Pré-requisitos
 
@@ -209,13 +196,6 @@ describe('extractProjectName', () => {
 
 ### Reportar Vulnerabilidades
 
-**NÃO** abra issues públicas para vulnerabilidades de segurança. Envie um email privado para:
-
-- **Email:** [raphael@kvasne.com](mailto:raphael@kvasne.com)
-- **Assunto:** `[SECURITY] Vulnerabilidade em Taskvasne`
-
-Responderemos em até **48 horas**.
-
 Siga a política em [SECURITY.md](SECURITY.md).
 
 ### Checklist de Segurança
@@ -263,18 +243,7 @@ test(renderer): adiciona testes para loadPorts()
 
 ## 🏗️ Estrutura do Projeto
 
-```text
-taskvasne/
-├── main.js              # Processo principal Electron
-├── renderer.js          # Lógica da UI
-├── preload.js           # Bridge seguro main↔renderer
-├── port-manager.js      # Lógica de negócio (ports/processos)
-├── __tests__/           # Testes unitários
-│   └── port-manager.test.js
-├── docs/                # Landing page (Vercel)
-│   └── index.html
-└── dist-portable/       # Build do executável
-```
+Estrutura detalhada em [README.md](README.md#-arquitetura-e-boas-praticas).
 
 ---
 

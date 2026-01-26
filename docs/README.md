@@ -10,10 +10,7 @@ Navegação: [README do projeto](../README.md) • [CHANGELOG](../CHANGELOG.md)
 
 ## 🎉 Novidades
 
-- ✅ Seção de doação alinhada ao padrão Dahora no README e landing page
-- ✅ Documentação consolidada no CHANGELOG (sprints)
-- ✅ Diagnósticos pendentes centralizados em [ISSUES.md](../ISSUES.md)
-- ✅ CI simplificado para job único com lint e testes
+Mudanças recentes em [CHANGELOG.md](../CHANGELOG.md).
 
 ---
 

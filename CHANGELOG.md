@@ -41,6 +41,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Navegação do README simplificada (remoção de Licença e Site Oficial)
 - Títulos dos documentos padronizados com hífen no cabeçalho
 - Navegação padronizada para linha simples nos documentos
+- Documentação de hubs ajustada para remover redundâncias
 
 ### Security
 
