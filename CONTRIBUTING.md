@@ -6,7 +6,7 @@ Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
 Obrigado por investir seu tempo contribuindo com o **Taskvasne**! 🎉
 
-Siga este guia para entender como você pode ajudar a melhorar o ecossistema de regras para agentes de IA.
+Siga este guia para entender como contribuir com o Taskvasne, melhorar a aplicação e manter a documentação alinhada.
 
 ---
 
