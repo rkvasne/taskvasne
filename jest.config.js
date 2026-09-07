@@ -2,13 +2,7 @@ module.exports = {
     testEnvironment: 'node',
     testMatch: ['**/__tests__/**/*.test.js'],
     collectCoverageFrom: [
-        '*.js',
-        '!main.js', // Skip main.js (requires Electron runtime)
-        '!preload.js',
-        '!preload-about.js',
-        '!renderer.js', // Skip renderer (requires DOM)
-        '!convert-icon.js',
-        '!jest.config.js'
+        'ui/i18n.js'
     ],
     coverageThreshold: {
         global: {
@@ -18,6 +12,16 @@ module.exports = {
             statements: 60
         }
     },
-    modulePathIgnorePatterns: ['<rootDir>/dist-portable/'],
-    watchPathIgnorePatterns: ['<rootDir>/dist-portable/']
+    modulePathIgnorePatterns: [
+        '<rootDir>/dist-portable/',
+        '<rootDir>/src-tauri/'
+    ],
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        '/src-tauri/'
+    ],
+    watchPathIgnorePatterns: [
+        '<rootDir>/dist-portable/',
+        '<rootDir>/src-tauri/'
+    ]
 };

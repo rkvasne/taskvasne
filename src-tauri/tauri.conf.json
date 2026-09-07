@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Taskvasne",
+  "version": "0.1.0",
+  "identifier": "com.kvasne.taskvasne",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Taskvasne",
+        "width": 360,
+        "height": 500,
+        "resizable": false,
+        "maximizable": false,
+        "minimizable": false,
+        "fullscreen": false,
+        "decorations": false,
+        "transparent": true,
+        "skipTaskbar": true,
+        "visible": false,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "plugins": {
+    "single-instance": {}
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ]
+  }
+}

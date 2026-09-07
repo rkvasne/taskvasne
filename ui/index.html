@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
   <title>Taskvasne</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -41,6 +41,25 @@
     </div>
     <div id="port-list" class="port-list">
       <!-- Items will be injected here -->
+    </div>
+
+    <!-- Modal Sobre -->
+    <div id="about-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="about-header">
+          <img src="icon.png" class="about-icon" alt="Taskvasne" />
+          <h2 class="about-title">Taskvasne</h2>
+          <span class="about-version">v0.1.0</span>
+        </div>
+        <p class="about-desc" id="about-desc">Gerenciador de portas minimalista para Windows.</p>
+        <div class="about-links">
+          <button class="link-btn" data-url="https://kvasne.com">Website</button>
+          <button class="link-btn" data-url="https://github.com/rkvasne/taskvasne">GitHub</button>
+          <button class="link-btn" data-url="https://linkedin.com/in/rkvasne">LinkedIn</button>
+        </div>
+        <p class="about-author" id="about-author">Desenvolvido por Raphael Kvasne.</p>
+        <button id="close-about" class="btn-close">Fechar</button>
+      </div>
     </div>
   </div>
   <script src="i18n.js"></script>

@@ -1,0 +1,333 @@
+:root {
+    --bg-color: rgba(32, 32, 32, 0.98);
+    --text-color: #ffffff;
+    --accent-color: #60cdff;
+    --danger-color: #ff4d4f;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-hover: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+    user-select: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-app-region: drag;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    gap: 4px;
+    -webkit-app-region: no-drag;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background: var(--card-hover);
+}
+
+.icon-btn.danger:hover {
+    background: rgba(255, 77, 79, 0.2);
+    color: var(--danger-color);
+}
+
+.icon-btn svg.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.port-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.port-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 2px;
+    background: var(--card-bg);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    height: 32px;
+}
+
+.port-item.removing {
+    opacity: 0;
+    transform: translateX(20px);
+    pointer-events: none;
+}
+
+.port-item:hover {
+    background: var(--card-hover);
+    border-color: var(--border-color);
+}
+
+.port-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.port-badge {
+    background: var(--accent-color);
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    min-width: 45px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.port-badge:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+.process-name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-color);
+}
+
+.pid {
+    font-size: 11px;
+    opacity: 0.5;
+    margin-top: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.actions {
+    display: flex;
+    margin-left: 8px;
+}
+
+.kill-btn {
+    background: var(--danger-color);
+    color: white;
+    border: 1px solid var(--danger-color);
+    padding: 2px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+    font-weight: 600;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(255, 77, 79, 0.2);
+}
+
+.kill-btn:hover {
+    background: #ff7875;
+    border-color: #ff7875;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(255, 77, 79, 0.3);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0.5;
+    font-size: 13px;
+}
+
+/* Modal Sobre */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.modal-content {
+    background: rgba(36, 36, 36, 0.95);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 24px;
+    width: 280px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.about-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+}
+
+.about-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.about-version {
+    font-size: 11px;
+    color: var(--accent-color);
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+.about-desc {
+    font-size: 12px;
+    opacity: 0.8;
+    margin: 8px 0 16px;
+    line-height: 1.4;
+}
+
+.about-links {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+    justify-content: center;
+}
+
+.link-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.link-btn:hover {
+    background: var(--card-hover);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.about-author {
+    font-size: 11px;
+    opacity: 0.6;
+    margin: 0 0 16px;
+}
+
+.btn-close {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    width: 100%;
+}
+
+.btn-close:hover {
+    background: var(--card-hover);
+    border-color: rgba(255, 255, 255, 0.3);
+}

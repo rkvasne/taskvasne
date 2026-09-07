@@ -30,7 +30,7 @@ describe('i18n Module', () => {
     jest.resetModules();
     
     // Require the i18n module fresh
-    require('../i18n.js');
+    require('../ui/i18n.js');
     i18n = window.i18n;
   });
 
@@ -49,7 +49,7 @@ describe('i18n Module', () => {
       
       // Clear and reload module
       jest.resetModules();
-      require('../i18n.js');
+      require('../ui/i18n.js');
       const newI18n = window.i18n;
       
       expect(newI18n.getLanguage()).toBe('en');

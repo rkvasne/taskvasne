@@ -4,6 +4,26 @@ const ANIMATION_DURATION = 300; // 300ms - sync with CSS transition duration
 
 const listElement = document.getElementById('port-list');
 const refreshBtn = document.getElementById('refresh');
+const aboutBtn = document.getElementById('about');
+const quitBtn = document.getElementById('quit');
+const aboutModal = document.getElementById('about-modal');
+const closeAboutBtn = document.getElementById('close-about');
+
+/**
+ * Helper to invoke Tauri IPC safely
+ * @param {string} cmd
+ * @param {Object} args
+ * @returns {Promise<any>}
+ */
+async function tauriInvoke(cmd, args = {}) {
+    if (window.__TAURI__ && window.__TAURI__.core) {
+        return await window.__TAURI__.core.invoke(cmd, args);
+    }
+    if (window.__TAURI_INTERNALS__) {
+        return await window.__TAURI_INTERNALS__.invoke(cmd, args);
+    }
+    throw new Error('Tauri API indisponível');
+}
 
 /**
  * Loads and displays the list of active ports
@@ -18,7 +38,7 @@ async function loadPorts() {
     }
 
     try {
-        const ports = await window.electronAPI.getPorts();
+        const ports = await tauriInvoke('get_ports');
         renderPorts(ports);
     } catch (error) {
         listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loadingError')}: ${error}</div>`;
@@ -27,7 +47,7 @@ async function loadPorts() {
 
 /**
  * Renders the ports list in the UI
- * @param {Array<{LocalPort: number, PID: string, ProcessName: string}>} ports - Array of port objects
+ * @param {Array<{LocalPort: number, PID: number, ProcessName: string}>} ports - Array of port objects
  * @returns {void}
  */
 function renderPorts(ports) {
@@ -37,7 +57,6 @@ function renderPorts(ports) {
         return;
     }
 
-    // Simple diffing could be better but innerHTML is fast enough for small lists
     listElement.innerHTML = '';
 
     ports.forEach(port => {
@@ -58,7 +77,7 @@ function renderPorts(ports) {
         const badge = item.querySelector('.port-badge');
         badge.onclick = e => {
             e.stopPropagation();
-            window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
+            tauriInvoke('open_external', { url: `http://localhost:${port.LocalPort}` });
         };
 
         // Add click listener to process name to also open URL
@@ -66,17 +85,16 @@ function renderPorts(ports) {
         processName.style.cursor = 'pointer';
         processName.onclick = e => {
             e.stopPropagation();
-            window.electronAPI.openExternal(`http://localhost:${port.LocalPort}`);
+            tauriInvoke('open_external', { url: `http://localhost:${port.LocalPort}` });
         };
 
         // Create button manually to attach event listener properly
         const killBtn = document.createElement('button');
         killBtn.className = 'kill-btn';
         killBtn.title = window.i18n.t('stopProcess');
-        // Stop icon (filled square)
         killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> ${window.i18n.t('stop')}`;
         killBtn.onclick = e => {
-            e.stopPropagation(); // Prevent row click
+            e.stopPropagation();
             killProcess(port.PID, item);
         };
 
@@ -88,12 +106,11 @@ function renderPorts(ports) {
 /**
  * Kills a process by PID with visual feedback
  * @async
- * @param {string} pid - Process ID to kill
+ * @param {number|string} pid - Process ID to kill
  * @param {HTMLElement} btnElement - Button element that triggered the action
  * @returns {Promise<void>}
  */
 async function killProcess(pid, btnElement) {
-    // 2. Visual Feedback (Optimistic UI)
     let row = null;
     if (btnElement) {
         row = btnElement.closest('.port-item');
@@ -102,18 +119,22 @@ async function killProcess(pid, btnElement) {
         }
     }
 
-    // 3. Perform Action
-    const result = await window.electronAPI.killProcess(pid);
+    try {
+        const result = await tauriInvoke('kill_process', { pid: parseInt(pid, 10) });
 
-    if (result.success) {
-        // Wait for animation to finish before reloading
-        setTimeout(() => {
-            loadPorts();
-        }, ANIMATION_DURATION);
-    } else {
-        // Revert visual change if failed
+        if (result && result.success) {
+            // Wait for animation to finish before reloading
+            setTimeout(() => {
+                loadPorts();
+            }, ANIMATION_DURATION);
+        } else {
+            if (row) row.classList.remove('removing');
+            const errMsg = result && result.error ? result.error : 'Erro desconhecido';
+            alert(`${window.i18n.t('errorKillingProcess')}: ${errMsg}`);
+        }
+    } catch (err) {
         if (row) row.classList.remove('removing');
-        alert(`${window.i18n.t('errorKillingProcess')}: ${result.error}`);
+        alert(`${window.i18n.t('errorKillingProcess')}: ${err}`);
     }
 }
 
@@ -128,12 +149,32 @@ refreshBtn.addEventListener('click', () => {
     });
 });
 
-document.getElementById('about').addEventListener('click', () => {
-    window.electronAPI.showAbout();
+aboutBtn.addEventListener('click', () => {
+    aboutModal.classList.remove('hidden');
 });
 
-document.getElementById('quit').addEventListener('click', () => {
-    window.electronAPI.quitApp();
+closeAboutBtn.addEventListener('click', () => {
+    aboutModal.classList.add('hidden');
+});
+
+aboutModal.addEventListener('click', e => {
+    if (e.target === aboutModal) {
+        aboutModal.classList.add('hidden');
+    }
+});
+
+// Modal external links
+document.querySelectorAll('.modal-content .link-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const url = btn.dataset.url;
+        if (url) {
+            tauriInvoke('open_external', { url });
+        }
+    });
+});
+
+quitBtn.addEventListener('click', () => {
+    tauriInvoke('quit_app');
 });
 
 // Initial load

@@ -1,0 +1,25 @@
+[package]
+name = "taskvasne"
+version = "0.1.0"
+description = "A Windows 11 styled port manager for developers"
+authors = ["Raphael Kvasne <raphael@kvasne.com>"]
+edition = "2021"
+
+[lib]
+name = "taskvasne_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+netstat2 = "0.9.1"
+sysinfo = "0.33"
+regex = "1.10"
+open = "5"
+log = "0.4"
+

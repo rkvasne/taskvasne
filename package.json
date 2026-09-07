@@ -1,6 +1,6 @@
 {
     "name": "taskvasne",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "description": "A Windows 11 styled port manager for developers",
     "repository": {
         "type": "git",
@@ -10,13 +10,9 @@
         "url": "https://github.com/rkvasne/taskvasne/issues"
     },
     "homepage": "https://github.com/rkvasne/taskvasne#readme",
-    "main": "main.js",
     "scripts": {
-        "start": "electron .",
-        "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist-portable --overwrite --icon=icon.ico --ignore=\"^/dist\" --ignore=\"^/docs\" --ignore=\"^/.git\" --ignore=\"^/.vscode\" && powershell -Command \"Remove-Item -Path 'dist-portable/Taskvasne-win32-x64/resources/app/ANALISE_TECNICA.md','dist-portable/Taskvasne-win32-x64/resources/app/SPRINT*.md','dist-portable/Taskvasne-win32-x64/resources/app/RELATORIO_SPRINT*.md' -ErrorAction SilentlyContinue\"",
-        "build:portable": "electron-builder --win portable",
-        "build:win": "electron-builder",
-        "build": "echo 'Vercel build skipped'",
+        "dev": "tauri dev",
+        "build": "tauri build",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
@@ -25,48 +21,26 @@
         "format": "prettier --write \"*.{js,json,md}\"",
         "format:check": "prettier --check \"*.{js,json,md}\""
     },
-    "build": {
-        "appId": "com.kvasne.taskvasne",
-        "productName": "Taskvasne",
-        "win": {
-            "target": "nsis",
-            "icon": "icon.ico"
-        },
-        "portable": {
-            "artifactName": "Taskvasne.exe"
-        },
-        "nsis": {
-            "oneClick": false,
-            "allowToChangeInstallationDirectory": true,
-            "createDesktopShortcut": true,
-            "createStartMenuShortcut": true
-        }
-    },
     "keywords": [
-        "electron",
+        "tauri",
+        "rust",
         "port",
         "manager",
         "kill",
-        "process"
+        "process",
+        "windows11"
     ],
     "author": "Raphael Kvasne <raphael@kvasne.com> (https://kvasne.com)",
     "license": "MIT",
     "devDependencies": {
+        "@tauri-apps/api": "^2.2.0",
+        "@tauri-apps/cli": "^2.2.4",
         "@types/jest": "^30.0.0",
-        "electron": "^39.2.4",
-        "electron-builder": "^26.4.0",
-        "electron-packager": "^17.1.2",
         "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",
         "jest": "^30.2.0",
         "jest-environment-jsdom": "^30.2.0",
         "png-to-ico": "^3.0.1",
         "prettier": "^3.7.4"
-    },
-    "dependencies": {
-        "electron-log": "^5.4.3"
-    },
-    "overrides": {
-        "tar": "7.5.6"
     }
 }

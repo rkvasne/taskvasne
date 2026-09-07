@@ -7,8 +7,9 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.0.6-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
-[![Node](https://img.shields.io/badge/node-18%2B-green.svg?style=for-the-badge)](https://nodejs.org/)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
+[![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
 [![Tests](https://img.shields.io/badge/tests-automated-brightgreen.svg?style=for-the-badge)](CONTRIBUTING.md#-testes)
 [![Architecture](https://img.shields.io/badge/architecture-documented-brightblue.svg?style=for-the-badge)](#-arquitetura-e-boas-praticas)
@@ -19,22 +20,22 @@ _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design
 
 ## 📖 Sobre
 
-Taskvasne é um gerenciador de portas para Windows 11 que facilita visualizar e encerrar processos em portas locais, com foco em rapidez, clareza e uma interface minimalista.
+Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em **Rust** e **Tauri v2**, substituindo runtimes pesados por um binário nativo de alto desempenho (~8.6 MB, ~25 MB de RAM). Facilita visualizar e encerrar processos em portas locais, com foco em rapidez, clareza e interface moderna com tema escuro.
 
 ## ✨ Funcionalidades
 
+- **Motor Nativo Rust**: Varredura direta de sockets TCP em memória via APIs de sistema, sem processos externos lentos.
+- **Ultra Leve**: Consumo mínimo de memória (~20-30 MB de RAM) e binário executável otimizado.
 - **Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
-- **Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java, facilitando a identificação de qual projeto está rodando em qual porta.
+- **Identificação Inteligente**: Reconhece automaticamente o nome do projeto (pasta) para processos Node.js, Python e Java a partir da linha de comando.
 - **Internacionalização**: Suporte completo a PT-BR e EN com troca em tempo real (localStorage persistente).
 - **Design Windows 11**: Interface moderna, compacta, frameless e com modo escuro nativo.
-- **System Tray**: Vive silenciosamente na sua bandeja do sistema. Um clique para abrir, um clique para fechar.
-- **Modal Sobre**: Janela "Sobre" com informações do aplicativo, links para GitHub, LinkedIn e site oficial.
-- **Kill Process**: Encerre processos travados ou indesejados com um único clique.
-    - _Feedback Visual_: O item desliza e desaparece suavemente ao ser encerrado.
-    - _Sem Interrupções_: Ação imediata para manter seu fluxo de trabalho rápido.
-- **Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos. Também possui botão de refresh manual.
-- **Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` instantaneamente no seu navegador padrão.
-- **Instância Única**: Previne múltiplas janelas, mantendo seu fluxo de trabalho limpo.
+- **System Tray**: Vive silenciosamente na bandeja do sistema. Um clique para abrir, um clique para fechar.
+- **Modal Sobre**: Janela "Sobre" embutida com informações do aplicativo, links para GitHub, LinkedIn e site oficial.
+- **Kill Process**: Encerre processos travados ou indesejados com um único clique e feedback visual suave.
+- **Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos com botão de refresh manual.
+- **Click-to-Open**: Clique no número da porta ou no nome do processo para abrir `http://localhost:<porta>` no navegador padrão.
+- **Instância Única**: Previne múltiplas janelas, focando a instância existente caso seja aberta novamente.
 
 ## 🔒 Segurança e Privacidade
 
@@ -45,6 +46,7 @@ Taskvasne é um gerenciador de portas para Windows 11 que facilita visualizar e 
 
 ### Pré-requisitos
 
+- Rust 1.77+ (com `cargo` e `rustc`)
 - Node.js 18+ instalado
 - Windows 10 ou 11
 
@@ -55,17 +57,12 @@ Para setup completo, scripts, testes e fluxo de PR, veja [CONTRIBUTING.md](CONTR
 ### Scripts Disponíveis
 
 ```bash
-npm start              # Inicia o app em modo desenvolvimento
-npm test               # Executa testes unitários
-npm run test:watch     # Executa testes em modo watch
-npm run test:coverage  # Gera relatório de cobertura
-npm run lint           # Verifica qualidade do código
-npm run lint:fix       # Corrige automaticamente problemas de linting
+npm run dev            # Inicia o app em modo desenvolvimento (Tauri Dev)
+npm run build          # Gera os instaladores NSIS e MSI de release (Tauri Build)
+npm test               # Executa testes unitários do Frontend (Jest)
+cargo test --manifest-path src-tauri/Cargo.toml # Executa testes unitários do Rust
+npm run lint           # Verifica qualidade do código JS
 npm run format         # Formata código com Prettier
-npm run format:check   # Verifica formatação sem alterar arquivos
-npm run dist           # Gera build portátil (.exe)
-npm run build:portable # Gera build portátil via electron-builder
-npm run build:win      # Gera build instalador (NSIS)
 ```
 
 ## 🚀 Instalação

@@ -15,6 +15,28 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-07
+
+### Added
+- Migração completa de Electron para arquitetura nativa Rust + Tauri v2.
+- Motor nativo em Rust para listagem de sockets TCP em memória via crate `netstat2`.
+- Enriquecimento inteligente de processos Node.js, Python e Java a partir da linha de comando via `sysinfo`.
+- Ícone na bandeja do sistema (System Tray) nativo em Rust com reposicionamento dinâmico e auto-hide ao perder foco (`blur`).
+- Trava de instância única via `tauri-plugin-single-instance`.
+- Modal "Sobre" integrado com efeito acrílico e backdrop blur.
+- Suíte de testes unitários do backend em Rust (`cargo test`).
+- Empacotamento de release com instaladores nativos NSIS e MSI.
+
+### Removed
+- Dependências do Electron (`electron`, `electron-builder`, `electron-packager`, `electron-log`).
+- Runtimes e scripts legados (`main.js`, `port-manager.js`, `preload.js`, `preload-about.js`, `about.html`).
+
+### Changed
+- Tamanho do binário reduzido de ~180 MB para ~8.6 MB.
+- Tamanho do instalador reduzido para ~1.9 MB (redução de ~98%).
+- Consumo de memória reduzido para ~20-30 MB de RAM.
+
+
 ### Added
 
 - Seção de Doação na landing page (cópia fiel do projeto Dahora)
