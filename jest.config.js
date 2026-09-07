@@ -1,9 +1,7 @@
 module.exports = {
     testEnvironment: 'node',
     testMatch: ['**/__tests__/**/*.test.js'],
-    collectCoverageFrom: [
-        'ui/i18n.js'
-    ],
+    collectCoverageFrom: ['ui/i18n.js'],
     coverageThreshold: {
         global: {
             branches: 50,
@@ -12,16 +10,7 @@ module.exports = {
             statements: 60
         }
     },
-    modulePathIgnorePatterns: [
-        '<rootDir>/dist-portable/',
-        '<rootDir>/src-tauri/'
-    ],
-    testPathIgnorePatterns: [
-        '/node_modules/',
-        '/src-tauri/'
-    ],
-    watchPathIgnorePatterns: [
-        '<rootDir>/dist-portable/',
-        '<rootDir>/src-tauri/'
-    ]
+    modulePathIgnorePatterns: ['<rootDir>/dist-portable/', '<rootDir>/src-tauri/'],
+    testPathIgnorePatterns: ['/node_modules/', '/src-tauri/'],
+    watchPathIgnorePatterns: ['<rootDir>/dist-portable/', '<rootDir>/src-tauri/']
 };

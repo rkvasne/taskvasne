@@ -81,35 +81,37 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
 
     for socket in sockets {
         if let ProtocolSocketInfo::Tcp(tcp_info) = socket.protocol_socket_info {
-            if tcp_info.state == TcpState::Listen && tcp_info.local_port > PORT_THRESHOLD {
-                if seen_ports.insert(tcp_info.local_port) {
-                    let pid = socket.associated_pids.first().copied().unwrap_or(0);
-                    let mut process_name = "Desconhecido".to_string();
+            if tcp_info.state == TcpState::Listen
+                && tcp_info.local_port > PORT_THRESHOLD
+                && seen_ports.insert(tcp_info.local_port)
+            {
+                let pid = socket.associated_pids.first().copied().unwrap_or(0);
+                let mut process_name = "Desconhecido".to_string();
 
-                    if pid > 0 {
-                        if let Some(proc) = sys.process(Pid::from_u32(pid)) {
-                            let raw_name = proc.name().to_string_lossy().to_string();
-                            process_name = raw_name.clone();
+                if pid > 0 {
+                    if let Some(proc) = sys.process(Pid::from_u32(pid)) {
+                        let raw_name = proc.name().to_string_lossy().to_string();
+                        process_name = raw_name.clone();
 
-                            let is_enrichable = ENRICHABLE_PROCESSES
-                                .iter()
-                                .any(|p| raw_name.eq_ignore_ascii_case(p));
+                        let is_enrichable = ENRICHABLE_PROCESSES
+                            .iter()
+                            .any(|p| raw_name.eq_ignore_ascii_case(p));
 
-                            if is_enrichable {
-                                if let Some(proj) = extract_project_name(proc.cmd(), &raw_name) {
-                                    process_name = format!("{} ({})", raw_name, proj);
-                                }
+                        if is_enrichable {
+                            if let Some(proj) = extract_project_name(proc.cmd(), &raw_name) {
+                                process_name = format!("{} ({})", raw_name, proj);
                             }
                         }
                     }
-
-                    results.push(PortInfo {
-                        local_port: tcp_info.local_port,
-                        pid,
-                        process_name,
-                    });
                 }
+
+                results.push(PortInfo {
+                    local_port: tcp_info.local_port,
+                    pid,
+                    process_name,
+                });
             }
+
         }
     }
 

@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
@@ -346,8 +346,8 @@ Escaneie para doação rápida via **Pix** ou **PayPal**:
 
 <div align="center">
 
-| Pix | PayPal |
-|:---:|:------:|
+|                                       Pix                                        |                                         PayPal                                         |
+| :------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------: |
 | <img src="docs/landing/images/qr_pix.png" alt="QR Pix" width="150" height="150"> | <img src="docs/landing/images/qr_paypal.png" alt="QR PayPal" width="150" height="150"> |
 
 </div>
@@ -355,6 +355,7 @@ Escaneie para doação rápida via **Pix** ou **PayPal**:
 ### 🤝 Outras Formas de Apoio
 
 Não tem condições financeiras? Sem problema! Você também pode ajudar:
+
 - Contribuindo com **issues, PRs e sugestões** de melhoria
 - Divulgando o projeto com amigos e na comunidade
 - Reportando bugs e sugestões de features

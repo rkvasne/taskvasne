@@ -53,7 +53,7 @@ Antes de criar uma issue:
 3. Observe o erro no console
 
 **Comportamento esperado:** Mensagem de erro clara ao usuário
-**Sistema:** Windows 11 Pro | Node.js 18.20.4 | Taskvasne 0.0.6
+**Sistema:** Windows 11 Pro | Rust 1.77+ | Node.js 20 | Taskvasne 0.1.0
 **Logs:** [anexar arquivo]
 ```
 
@@ -78,6 +78,7 @@ Scripts e comandos do projeto em [README.md](README.md#-scripts-disponíveis).
 
 #### Pré-requisitos
 
+- **Rust:** 1.77 ou superior (com `cargo` e `rustc`)
 - **Node.js:** 18.x ou superior
 - **npm:** 9.x ou superior
 - **Git:** Qualquer versão recente
@@ -95,10 +96,13 @@ Scripts e comandos do projeto em [README.md](README.md#-scripts-disponíveis).
 3. **Desenvolva** seguindo os padrões do projeto (veja abaixo)
 4. **Escreva testes** para novas funcionalidades
 5. **Rode os testes** e garanta que todos passam:
+
     ```bash
     npm test
+    cargo test --manifest-path src-tauri/Cargo.toml
     npm run lint
     ```
+
 6. **Commit** com mensagens descritivas:
     ```bash
     git commit -m "feat: adiciona filtro de portas por intervalo"

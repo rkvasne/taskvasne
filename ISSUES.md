@@ -1,20 +1,27 @@
-# 🧭 Diagnósticos Pendentes - Taskvasne
+# 🧭 Diagnósticos e Dívida Técnica - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
 ---
 
-Lista de diagnósticos pendentes e dívidas técnicas em aberto.
+Registro de diagnósticos, dívidas técnicas resolvidas e itens em acompanhamento.
 
 ---
 
-## Performance
-- Parser de processos ainda pode ser custoso com múltiplas chamadas shell; avaliar cache por PID e debounce no refresh.
-- Renderização total da lista pode ser otimizada se o volume de portas crescer.
+## ✅ Dívidas Resolvidas (v0.1.0 - Migração Rust / Tauri v2)
 
-## Arquitetura
-- Separação de responsabilidades em `port-manager.js` pode melhorar testabilidade e manutenibilidade.
-- Lógica de UI e controle em `renderer.js` pode ser desacoplada caso o app cresça.
+- **[Performance] Overhead de Parser Shell**: Resolvido. O app migrou para Rust nativo utilizando a crate `netstat2` e `sysinfo`, eliminando spawn repetitivo de comandos de console (`tasklist`, `netstat`, PowerShell).
+- **[Arquitetura] Acoplamento de port-manager**: Resolvido. A lógica foi encapsulada no módulo tipado `taskvasne_lib` em Rust, com testes unitários automatizados integrados ao Cargo.
+- **[Performance] Consumo de Memória**: Resolvido. Consumo reduzido de ~180 MB (Electron) para ~20-30 MB (Rust + Tauri v2).
 
-## UX e Permissões
-- Clarificar limitações de permissões do `taskkill` quando o processo não pertence ao usuário atual.
+---
+
+## 📌 Itens em Acompanhamento
+
+### UX e Permissões
+
+- Clarificar limitações de permissões do `taskkill` quando o processo alvo for de sistema ou de outro usuário sem privilégios de administrador.
+
+### Monitoramento
+
+- Acompanhar comportamento do flyout e eventos de perda de foco (`blur`) em múltiplos monitores com resoluções e taxas de DPI distintas.

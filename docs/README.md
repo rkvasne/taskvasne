@@ -4,7 +4,7 @@ Navegação: [README do projeto](../README.md) • [Documentação](README.md)
 
 ---
 
-Ponto central de navegação para toda documentação do projeto Taskvasne v0.0.6
+Ponto central de navegação para toda documentação do projeto Taskvasne v0.1.1
 
 ---
 

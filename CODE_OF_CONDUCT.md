@@ -39,6 +39,7 @@ Violações podem resultar em advertência, remoção de conteúdo ou banimento.
 Para relatar incidentes, contate: [raphael@kvasne.com](mailto:raphael@kvasne.com).
 
 Inclua:
+
 - Link para a discussão ou PR.
 - Descrição objetiva do ocorrido.
 - Data e horário aproximados.
