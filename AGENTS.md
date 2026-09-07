@@ -1,7 +1,7 @@
 ﻿# 🤖 AI Agents - Taskvasne
 
 > **Link do Hub:** `.agent/hub/` (Obrigatório)
-> **Hub Version:** v0.12.0
+> **Hub Version:** v0.12.1
 > **Modo:** Hub-First & SSoT (Single Source of Truth)
 
 Este projeto integra o ecossistema Agents Hub. O Agente de IA deve priorizar as definições centralizadas no Hub para comportamento e governança.

@@ -343,26 +343,77 @@ fn quit_app(app: tauri::AppHandle) {
     app.exit(0);
 }
 
+#[cfg(target_os = "windows")]
+fn get_windows_work_area() -> Option<(i32, i32, i32, i32)> {
+    #[repr(C)]
+    struct RECT {
+        left: i32,
+        top: i32,
+        right: i32,
+        bottom: i32,
+    }
+    extern "system" {
+        fn SystemParametersInfoW(
+            uiAction: u32,
+            uiParam: u32,
+            pvParam: *mut std::ffi::c_void,
+            fWinIni: u32,
+        ) -> i32;
+    }
+    let mut rect = RECT { left: 0, top: 0, right: 0, bottom: 0 };
+    let ok = unsafe {
+        SystemParametersInfoW(
+            0x0030, // SPI_GETWORKAREA
+            0,
+            &mut rect as *mut _ as *mut std::ffi::c_void,
+            0,
+        )
+    };
+    if ok != 0 {
+        Some((rect.left, rect.top, rect.right, rect.bottom))
+    } else {
+        None
+    }
+}
+
 fn show_window(window: &WebviewWindow) {
     if let Ok(Some(monitor)) = window.primary_monitor() {
         let scale = monitor.scale_factor();
-        let screen_size = monitor.size();
         let win_size = window.outer_size().unwrap_or(PhysicalSize::new(
-            (380.0 * scale) as u32,
-            (520.0 * scale) as u32,
+            (410.0 * scale) as u32,
+            (580.0 * scale) as u32,
         ));
 
         let margin_x = (14.0 * scale) as i32;
-        // Altura padrão da barra de tarefas do Windows 11 (48px lógicos) + margem confortável de respiro (16px lógicos)
-        let bottom_offset = ((48.0 + 16.0) * scale) as i32;
+        let margin_y = (3.0 * scale) as i32; // Colado na barra de tarefas
 
-        let mut x = screen_size.width as i32 - win_size.width as i32 - margin_x;
-        let mut y = screen_size.height as i32 - win_size.height as i32 - bottom_offset;
+        #[cfg(target_os = "windows")]
+        let (pos_x, pos_y) = if let Some((_, _, right, bottom)) = get_windows_work_area() {
+            // SPI_GETWORKAREA desconta pixel-perfect a barra de tarefas do Windows
+            let x = right - win_size.width as i32 - margin_x;
+            let y = bottom - win_size.height as i32 - margin_y;
+            (x, y)
+        } else {
+            let screen_size = monitor.size();
+            let bottom_offset = ((48.0 + 3.0) * scale) as i32;
+            let x = screen_size.width as i32 - win_size.width as i32 - margin_x;
+            let y = screen_size.height as i32 - win_size.height as i32 - bottom_offset;
+            (x, y)
+        };
 
-        if x < 0 { x = 0; }
-        if y < 0 { y = 0; }
+        #[cfg(not(target_os = "windows"))]
+        let (pos_x, pos_y) = {
+            let screen_size = monitor.size();
+            let bottom_offset = ((48.0 + 3.0) * scale) as i32;
+            let x = screen_size.width as i32 - win_size.width as i32 - margin_x;
+            let y = screen_size.height as i32 - win_size.height as i32 - bottom_offset;
+            (x, y)
+        };
 
-        let _ = window.set_position(Position::Physical(PhysicalPosition::new(x, y)));
+        let final_x = pos_x.max(0);
+        let final_y = pos_y.max(0);
+
+        let _ = window.set_position(Position::Physical(PhysicalPosition::new(final_x, final_y)));
     }
     let _ = window.set_always_on_top(true);
     let _ = window.show();

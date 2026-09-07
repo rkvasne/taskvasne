@@ -1,4 +1,4 @@
-# ⚖️ Licença MIT - Taskvasne
+﻿# ⚖️ Licença MIT - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 

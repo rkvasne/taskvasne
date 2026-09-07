@@ -1,10 +1,10 @@
-# 📚 Índice de Documentação - Taskvasne
+﻿# 📚 Índice de Documentação - Taskvasne
 
 Navegação: [README do projeto](../README.md) • [Documentação](README.md)
 
 ---
 
-Ponto central de navegação para toda documentação do projeto Taskvasne v0.1.1
+Ponto central de navegação para toda documentação do projeto Taskvasne v0.1.2
 
 ---
 
@@ -17,16 +17,19 @@ Mudanças recentes em [CHANGELOG.md](../CHANGELOG.md).
 ## 🚀 Começando (Novos Usuários)
 
 ### Para Usuários Finais
+
 - **[README.md](../README.md)** - 📖 Visão geral, instalação e uso
 - **[CHANGELOG.md](../CHANGELOG.md)** - 📝 Histórico de mudanças por versão
 - **[Apoie o projeto (opcional)](../README.md#-apoie-o-projeto-opcional)** - ☕ Doações (Sponsors/Mercado Pago/PayPal/Pix) + QR
 
 ### Para Desenvolvedores
+
 - **[CONTRIBUTING.md](../CONTRIBUTING.md)** - 🧭 Setup, padrões e fluxo de contribuição
 - **[README.md](../README.md#-desenvolvimento)** - Scripts e pré-requisitos
 - **[CHANGELOG.md](../CHANGELOG.md)** - Registro oficial de mudanças
 
 ### Para Manutenedores
+
 - **[README.md](../README.md#-processo-de-release)** - 🚀 Processo de build e release
 - **[CHANGELOG.md](../CHANGELOG.md)** - Sempre atualizar na release
 
@@ -35,12 +38,19 @@ Mudanças recentes em [CHANGELOG.md](../CHANGELOG.md).
 ## 📖 Documentação Técnica
 
 ### Landing Page
+
 - **[docs/index.html](index.html)** - Página pública com i18n (PT-BR/EN)
 
 ### Arquitetura e Boas Práticas
+
 - **[README.md](../README.md#-arquitetura-e-boas-praticas)** - Estrutura do projeto e princípios implementados
 
+### Histórico de Sessões
+
+- **[Sessão de 07/09/2026 (Migração e Melhorias)](sessions/2026-09-07-historico-sessao-migracao-e-melhorias.md)** - Log detalhado da migração e aprimoramentos de interface
+
 ### Release e Distribuição
+
 - **[README.md](../README.md#-desenvolvimento)** - Scripts de desenvolvimento e build (Tauri)
 
 ---
@@ -62,11 +72,13 @@ docs/
 ## 🔗 Links Úteis
 
 ### Repositório
+
 - **[Repositório no GitHub](https://github.com/rkvasne/taskvasne)**
 - **[Releases](https://github.com/rkvasne/taskvasne/releases)**
 - **[Issues](https://github.com/rkvasne/taskvasne/issues)**
 
 ### Site
+
 - **[Página do site (landing)](https://taskvasne.vercel.app/)**
 
 ---

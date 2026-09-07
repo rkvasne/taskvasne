@@ -1,41 +1,36 @@
 {
-  "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Taskvasne",
-  "version": "0.1.1",
-  "identifier": "com.kvasne.taskvasne",
-  "build": {
-    "frontendDist": "../ui"
-  },
-  "app": {
-    "windows": [
-      {
-        "label": "main",
-        "title": "Taskvasne",
-        "width": 380,
-        "height": 520,
-        "resizable": false,
-        "maximizable": false,
-        "minimizable": false,
-        "fullscreen": false,
-        "decorations": false,
-        "transparent": true,
-        "skipTaskbar": true,
-        "visible": true,
-        "shadow": false
-      }
-    ],
-    "security": {
-      "csp": null
+    "$schema": "https://schema.tauri.app/config/2",
+    "productName": "Taskvasne",
+    "version": "0.1.2",
+    "identifier": "com.kvasne.taskvasne",
+    "build": {
+        "frontendDist": "../ui"
+    },
+    "app": {
+        "windows": [
+            {
+                "label": "main",
+                "title": "Taskvasne",
+                "width": 410,
+                "height": 580,
+                "resizable": false,
+                "maximizable": false,
+                "minimizable": false,
+                "fullscreen": false,
+                "decorations": false,
+                "transparent": true,
+                "skipTaskbar": true,
+                "visible": true,
+                "shadow": false
+            }
+        ],
+        "security": {
+            "csp": null
+        }
+    },
+    "bundle": {
+        "active": true,
+        "targets": "all",
+        "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.ico"]
     }
-  },
-  "bundle": {
-    "active": true,
-    "targets": "all",
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.ico"
-    ]
-  }
 }

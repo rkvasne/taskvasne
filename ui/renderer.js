@@ -38,12 +38,25 @@ if (statusBanner) {
 if (categoryFilters) {
     categoryFilters.querySelectorAll('.filter-pill').forEach(pill => {
         pill.addEventListener('click', () => {
-            categoryFilters.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            categoryFilters
+                .querySelectorAll('.filter-pill')
+                .forEach(p => p.classList.remove('active'));
             pill.classList.add('active');
             activeCategory = pill.dataset.category || 'all';
             renderFilteredPorts();
         });
     });
+
+    categoryFilters.addEventListener(
+        'wheel',
+        e => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                categoryFilters.scrollLeft += e.deltaY;
+            }
+        },
+        { passive: false }
+    );
 }
 
 // Search input handling
@@ -161,7 +174,7 @@ function renderFilteredPorts() {
         const cleanQuery = searchQuery.startsWith(':') ? searchQuery.slice(1) : searchQuery;
         filtered = filtered.filter(p => {
             const portStr = String(p.LocalPort);
-            const portMatch = portStr.includes(cleanQuery) || (`:${portStr}`).includes(searchQuery);
+            const portMatch = portStr.includes(cleanQuery) || `:${portStr}`.includes(searchQuery);
             const nameMatch = (p.ProcessName || '').toLowerCase().includes(searchQuery);
             const projMatch = (p.ProjectName || '').toLowerCase().includes(searchQuery);
             const detailsMatch = (p.Details || '').toLowerCase().includes(searchQuery);
@@ -181,7 +194,9 @@ function renderFilteredPorts() {
 function renderPorts(ports) {
     const headerTitle = document.querySelector('.header .title');
     if (headerTitle) {
-        const badgeCount = searchQuery ? `${ports.length}/${allPorts.length}` : `${allPorts.length}`;
+        const badgeCount = searchQuery
+            ? `${ports.length}/${allPorts.length}`
+            : `${allPorts.length}`;
         headerTitle.innerHTML = `Taskvasne <span class="active-count-badge" title="Portas ativas">${badgeCount}</span>`;
     }
 
@@ -220,7 +235,9 @@ function renderPorts(ports) {
             `Processo: ${port.ProcessName}${port.ProjectName ? ` (${port.ProjectName})` : ''}`,
             detailsText,
             port.CommandLine ? `Comando: ${port.CommandLine}` : ''
-        ].filter(Boolean).join('\n');
+        ]
+            .filter(Boolean)
+            .join('\n');
 
         item.title = tooltipLines;
 
@@ -263,7 +280,9 @@ function renderPorts(ports) {
         killBtn.onclick = e => {
             e.stopPropagation();
             if (isSystem) {
-                const confirmed = window.confirm(`⚠️ Atenção: ${port.ProcessName} é um processo crítico do Sistema Windows.\n\nFinalizá-lo pode causar encerramento de serviços ou instabilidade no Windows.\n\nDeseja realmente forçar o encerramento?`);
+                const confirmed = window.confirm(
+                    `⚠️ Atenção: ${port.ProcessName} é um processo crítico do Sistema Windows.\n\nFinalizá-lo pode causar encerramento de serviços ou instabilidade no Windows.\n\nDeseja realmente forçar o encerramento?`
+                );
                 if (!confirmed) return;
             }
             killProcess(port.PID, item);

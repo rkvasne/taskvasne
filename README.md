@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <h1>💀 Taskvasne</h1>
 
@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.1.2-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
@@ -87,8 +87,8 @@ Acesse [taskvasne.vercel.app](https://taskvasne.vercel.app) para baixar o instal
 
 Acesse [GitHub Releases](https://github.com/rkvasne/taskvasne/releases/latest) e baixe o formato desejado:
 
-- `taskvasne_0.1.1_x64-setup.exe` (Instalador NSIS, ~1.9 MB)
-- `taskvasne_0.1.1_x64_en-US.msi` (Instalador MSI, ~2.9 MB)
+- `taskvasne_0.1.2_x64-setup.exe` (Instalador NSIS, ~1.9 MB)
+- `taskvasne_0.1.2_x64_en-US.msi` (Instalador MSI, ~2.9 MB)
 - `taskvasne.exe` (Binário standalone portátil, ~8.6 MB)
 
 **Instalação:**
@@ -132,8 +132,8 @@ O projeto utiliza o motor nativo do **Tauri v2** acoplado ao compilador **Rust**
 2. **Resultado:**
    Os artefatos finais são gerados em `src-tauri/target/release/`:
     - `taskvasne.exe`: Executável nativo standalone (~8.6 MB).
-    - `bundle/nsis/taskvasne_0.1.1_x64-setup.exe`: Instalador moderno NSIS (~1.9 MB).
-    - `bundle/msi/taskvasne_0.1.1_x64_en-US.msi`: Instalador MSI para ambientes corporativos (~2.9 MB).
+    - `bundle/nsis/taskvasne_0.1.2_x64-setup.exe`: Instalador moderno NSIS (~1.9 MB).
+    - `bundle/msi/taskvasne_0.1.2_x64_en-US.msi`: Instalador MSI para ambientes corporativos (~2.9 MB).
 
 #### Vantagens da Arquitetura Rust + Tauri v2 vs Electron:
 

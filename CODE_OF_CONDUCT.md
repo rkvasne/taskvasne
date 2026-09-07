@@ -1,4 +1,4 @@
-# 🤝 Código de Conduta - Taskvasne
+﻿# 🤝 Código de Conduta - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 

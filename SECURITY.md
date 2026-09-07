@@ -1,4 +1,4 @@
-# 🔐 Política de Segurança - Taskvasne
+﻿# 🔐 Política de Segurança - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
@@ -37,5 +37,5 @@ O Taskvasne é um utilitário local. Ainda assim, são considerados problemas re
 
 ## 3) Versões suportadas
 
-- A versão suportada é a mais recente publicada em Releases (v0.1.1 no momento).
+- A versão suportada é a mais recente publicada em Releases (v0.1.2 no momento).
 - Consulte o histórico em [CHANGELOG.md](CHANGELOG.md).

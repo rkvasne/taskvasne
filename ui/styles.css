@@ -115,11 +115,12 @@ body {
 .category-filters {
     display: flex;
     gap: 4px;
-    padding: 6px 10px;
+    padding: 6px 8px;
     overflow-x: auto;
     border-bottom: 1px solid var(--border-color);
     background: rgba(0, 0, 0, 0.1);
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .category-filters::-webkit-scrollbar {
@@ -130,15 +131,16 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.7);
-    padding: 3px 8px;
+    padding: 3px 6px;
     border-radius: 12px;
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    flex-shrink: 0;
     transition: all 0.2s ease;
 }
 
@@ -156,8 +158,8 @@ body {
 }
 
 .pill-count {
-    font-size: 9.5px;
-    opacity: 0.6;
+    font-size: 9px;
+    opacity: 0.65;
     background: rgba(0, 0, 0, 0.25);
     padding: 0 4px;
     border-radius: 8px;
@@ -170,12 +172,13 @@ body {
 }
 
 .category-badge {
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 600;
-    padding: 1px 5px;
+    padding: 1px 4px;
     border-radius: 3px;
     letter-spacing: 0.2px;
     flex-shrink: 0;
+    line-height: 1.2;
 }
 
 .category-badge.cat-dev {
@@ -367,8 +370,8 @@ body {
 
 .process-header-line {
     display: flex;
-    align-items: baseline;
-    gap: 6px;
+    align-items: center;
+    gap: 5px;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -395,14 +398,14 @@ body {
 }
 
 .process-name {
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-color);
     flex-shrink: 1;
-    min-width: 50px;
+    min-width: 40px;
 }
 
 .process-tag {
@@ -414,7 +417,7 @@ body {
     flex-shrink: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 70px;
+    max-width: 90px;
 }
 
 .process-sub-details {

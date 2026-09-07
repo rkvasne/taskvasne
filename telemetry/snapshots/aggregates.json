@@ -1,0 +1,61 @@
+{
+    "version": "0.12.0",
+    "createdAt": "2026-09-07T16:15:15.726Z",
+    "lastUpdated": "2026-09-07T23:33:21.012Z",
+    "satellites": {},
+    "modesUsed": {},
+    "skillsUsed": {},
+    "promptsUsed": {
+        "11": {
+            "count": 1,
+            "executions": 1,
+            "firstUsed": "2026-09-07T23:18:36.110Z",
+            "lastUsed": "2026-09-07T23:18:36.110Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-07T23:18:36.110Z",
+            "sources": {
+                "official-recorder": 1
+            }
+        },
+        "19": {
+            "count": 1,
+            "executions": 1,
+            "firstUsed": "2026-09-07T20:55:39.935Z",
+            "lastUsed": "2026-09-07T20:55:39.935Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-07T20:55:39.935Z",
+            "sources": {
+                "official-recorder": 1
+            }
+        },
+        "23": {
+            "count": 1,
+            "executions": 1,
+            "firstUsed": "2026-09-07T23:15:35.869Z",
+            "lastUsed": "2026-09-07T23:15:35.869Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-07T23:15:35.869Z",
+            "sources": {
+                "official-recorder": 1
+            }
+        },
+        "36": {
+            "count": 1,
+            "executions": 1,
+            "firstUsed": "2026-09-07T23:24:51.372Z",
+            "lastUsed": "2026-09-07T23:24:51.372Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-07T23:24:51.372Z",
+            "sources": {
+                "official-recorder": 1
+            }
+        }
+    },
+    "validationRuns": 21,
+    "buildRuns": 0,
+    "snapshotAt": "2026-09-07T23:36:51.246Z",
+    "partitions": {
+        "files": ["events-2026-09.jsonl"],
+        "note": "Buraco na sequencia de meses e ESPERADO: mes sem atividade nao gera arquivo. Ausencia nao e arquivo faltando nem dado perdido."
+    }
+}

@@ -1,4 +1,4 @@
-# 🧭 Diagnósticos e Dívida Técnica - Taskvasne
+﻿# 🧭 Diagnósticos e Dívida Técnica - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 

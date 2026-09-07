@@ -1,4 +1,4 @@
-# 📝 Changelog - Taskvasne
+﻿# 📝 Changelog - Taskvasne
 
 Navegação: [README do projeto](README.md) • [Documentação](docs/README.md)
 
@@ -15,8 +15,12 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-09-07
+
 ### Added
 
+- Posicionamento da janela via API Win32 `SPI_GETWORKAREA` para alinhamento pixel-perfect sobre a barra de tarefas do Windows 11.
+- Suporte a rolagem horizontal das pílulas de categorias (`category-filters`) com a roda do mouse (`wheel`).
 - Barra de busca rápida compacta no topo para filtrar instantaneamente por porta (`:3000`), nome do processo ou caminho.
 - Categorização automática de processos por tipo (`dev`, `database`, `app`, `system`) com badges coloridos e descritivos.
 - Filtros rápidos por pílulas no topo da lista com contagem em tempo real de cada categoria.
@@ -28,7 +32,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Fixed
 
 - Posicionamento vertical da janela ajustado para respeitar a barra de tarefas do Windows 11 e o fator de escala DPI (`scale_factor`), evitando que o rodapé da janela abra cortado abaixo da tela.
-- Ajuste no dimensionamento da janela para 380x520 e maior flexibilidade na largura do nome do projeto, evitando truncamento excessivo.
+- Ajuste no dimensionamento da janela para 410x580 e maior flexibilidade na largura do nome do projeto, evitando truncamento excessivo.
 
 ### Changed
 

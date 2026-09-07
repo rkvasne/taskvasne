@@ -1,6 +1,6 @@
 {
     "name": "taskvasne",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A Windows 11 styled port manager for developers",
     "repository": {
         "type": "git",
