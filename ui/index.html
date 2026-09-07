@@ -39,6 +39,18 @@
         </button>
       </div>
     </div>
+    <div id="status-banner" class="status-banner">
+      <span class="pulse-dot"></span>
+      <span id="status-text">Taskvasne ativo na bandeja do sistema</span>
+      <button id="close-status" class="status-close-btn" title="Fechar aviso">×</button>
+    </div>
+    <div class="category-filters" id="category-filters">
+      <button class="filter-pill active" data-category="all">Todos <span class="pill-count" id="count-all">0</span></button>
+      <button class="filter-pill" data-category="dev">⚡ Dev <span class="pill-count" id="count-dev">0</span></button>
+      <button class="filter-pill" data-category="database">🗄️ Bancos <span class="pill-count" id="count-database">0</span></button>
+      <button class="filter-pill" data-category="app">📦 Apps <span class="pill-count" id="count-app">0</span></button>
+      <button class="filter-pill" data-category="system">🛡️ Sistema <span class="pill-count" id="count-system">0</span></button>
+    </div>
     <div id="port-list" class="port-list">
       <!-- Items will be injected here -->
     </div>

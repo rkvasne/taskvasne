@@ -15,7 +15,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
-## [0.1.1] - 2026-09-07
+### Added
+
+- Categorização automática de processos por tipo (`dev`, `database`, `app`, `system`) com badges coloridos e descritivos.
+- Filtros rápidos por pílulas no topo da lista com contagem em tempo real de cada categoria.
+- Enriquecimento detalhado da listagem: identificação da pasta do projeto (`cwd`), do script em execução e exibição da linha de comando completa em tooltip.
+- Notificação do sistema operacional no Windows Toast na inicialização e banner animado com indicador de status ativo na bandeja.
+- Trava de confirmação de segurança antes de forçar o encerramento de processos críticos do sistema Windows.
+- Abertura imediata com visibilidade e foco ao iniciar o executável.
 
 ### Changed
 

@@ -8,6 +8,40 @@ const aboutBtn = document.getElementById('about');
 const quitBtn = document.getElementById('quit');
 const aboutModal = document.getElementById('about-modal');
 const closeAboutBtn = document.getElementById('close-about');
+const statusBanner = document.getElementById('status-banner');
+const closeStatusBtn = document.getElementById('close-status');
+const categoryFilters = document.getElementById('category-filters');
+
+let allPorts = [];
+let activeCategory = 'all';
+
+// Auto-hide status banner after 6 seconds
+if (statusBanner) {
+    setTimeout(() => {
+        statusBanner.classList.add('fade-out');
+        setTimeout(() => {
+            statusBanner.style.display = 'none';
+        }, 500);
+    }, 6000);
+
+    if (closeStatusBtn) {
+        closeStatusBtn.addEventListener('click', () => {
+            statusBanner.style.display = 'none';
+        });
+    }
+}
+
+// Category filter buttons
+if (categoryFilters) {
+    categoryFilters.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            categoryFilters.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            activeCategory = pill.dataset.category || 'all';
+            renderFilteredPorts();
+        });
+    });
+}
 
 /**
  * Helper to invoke Tauri IPC safely
@@ -26,61 +60,135 @@ async function tauriInvoke(cmd, args = {}) {
 }
 
 /**
+ * Updates count indicators on category filter pills
+ * @param {Array<Object>} ports
+ */
+function updateCategoryCounts(ports) {
+    const counts = {
+        all: ports.length,
+        dev: 0,
+        database: 0,
+        app: 0,
+        system: 0
+    };
+
+    ports.forEach(p => {
+        const cat = p.Category || 'app';
+        if (counts[cat] !== undefined) {
+            counts[cat]++;
+        }
+    });
+
+    Object.keys(counts).forEach(key => {
+        const el = document.getElementById(`count-${key}`);
+        if (el) {
+            el.textContent = counts[key];
+        }
+    });
+}
+
+/**
  * Loads and displays the list of active ports
  * Shows loading state only if list is empty to avoid flicker
  * @async
  * @returns {Promise<void>}
  */
 async function loadPorts() {
-    // Only show loading if empty to avoid flicker
     if (listElement.children.length === 0) {
         listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loading')}</div>`;
     }
 
     try {
         const ports = await tauriInvoke('get_ports');
-        renderPorts(ports);
+        allPorts = ports || [];
+        updateCategoryCounts(allPorts);
+        renderFilteredPorts();
     } catch (error) {
         listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loadingError')}: ${error}</div>`;
     }
 }
 
 /**
+ * Filters allPorts by activeCategory and renders
+ */
+function renderFilteredPorts() {
+    let filtered = allPorts;
+    if (activeCategory !== 'all') {
+        filtered = allPorts.filter(p => (p.Category || 'app') === activeCategory);
+    }
+    renderPorts(filtered);
+}
+
+/**
  * Renders the ports list in the UI
- * @param {Array<{LocalPort: number, PID: number, ProcessName: string}>} ports - Array of port objects
+ * @param {Array<{LocalPort: number, PID: number, ProcessName: string, ProjectName?: string, Details?: string, CommandLine?: string, Category?: string}>} ports - Array of port objects
  * @returns {void}
  */
 function renderPorts(ports) {
-    // If we have ports, clear list. If not, show empty state.
+    const headerTitle = document.querySelector('.header .title');
+    if (headerTitle) {
+        headerTitle.innerHTML = `Taskvasne <span class="active-count-badge" title="Portas ativas">${allPorts.length}</span>`;
+    }
+
     if (!ports || ports.length === 0) {
-        listElement.innerHTML = `<div class="empty-state">${window.i18n.t('noPortsFound')}</div>`;
+        const emptyMsg = activeCategory === 'all'
+            ? window.i18n.t('noPortsFound')
+            : `Nenhum processo na categoria "${activeCategory}".`;
+        listElement.innerHTML = `<div class="empty-state">${emptyMsg}</div>`;
         return;
     }
 
     listElement.innerHTML = '';
 
+    const categoryLabels = {
+        dev: { label: '⚡ Dev', class: 'cat-dev', desc: 'Ambiente de desenvolvimento' },
+        database: { label: '🗄️ Banco', class: 'cat-database', desc: 'Banco de dados' },
+        app: { label: '📦 App', class: 'cat-app', desc: 'Aplicativo de usuário' },
+        system: { label: '🛡️ Sistema', class: 'cat-system', desc: 'Processo do sistema Windows' }
+    };
+
     ports.forEach(port => {
         const item = document.createElement('div');
         item.className = 'port-item';
 
+        const mainTitle = port.ProjectName || port.ProcessName || window.i18n.t('unknown');
+        const subTag = port.ProjectName && port.ProcessName ? port.ProcessName : '';
+        const detailsText = port.Details || '';
+        const catInfo = categoryLabels[port.Category] || categoryLabels.app;
+
+        const tooltipLines = [
+            `Porta :${port.LocalPort} | PID: ${port.PID}`,
+            `Categoria: ${catInfo.label} (${catInfo.desc})`,
+            `Processo: ${port.ProcessName}${port.ProjectName ? ` (${port.ProjectName})` : ''}`,
+            detailsText,
+            port.CommandLine ? `Comando: ${port.CommandLine}` : ''
+        ].filter(Boolean).join('\n');
+
+        item.title = tooltipLines;
+
         item.innerHTML = `
-      <div class="port-info">
+      <div class="port-main-row">
         <div class="port-badge" title="${window.i18n.t('openPort', { port: port.LocalPort })}">:${port.LocalPort}</div>
-        <div class="process-name" title="${port.ProcessName}">${port.ProcessName || window.i18n.t('unknown')}</div>
-        <div class="pid">${window.i18n.t('pid', { pid: port.PID })}</div>
-      </div>
-      <div class="actions">
+        <div class="process-info-col">
+          <div class="process-header-line">
+            <span class="process-name" title="${mainTitle}">${mainTitle}</span>
+            <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
+            ${subTag ? `<span class="process-tag">${subTag}</span>` : ''}
+            <span class="pid">${window.i18n.t('pid', { pid: port.PID })}</span>
+          </div>
+          ${detailsText ? `<div class="process-sub-details" title="${detailsText}">${detailsText}</div>` : ''}
+        </div>
+        <div class="actions">
+        </div>
       </div>
     `;
 
-        // Add click listener to badge
         const badge = item.querySelector('.port-badge');
         badge.onclick = e => {
             e.stopPropagation();
             tauriInvoke('open_external', { url: `http://localhost:${port.LocalPort}` });
         };
 
-        // Add click listener to process name to also open URL
         const processName = item.querySelector('.process-name');
         processName.style.cursor = 'pointer';
         processName.onclick = e => {
@@ -88,13 +196,18 @@ function renderPorts(ports) {
             tauriInvoke('open_external', { url: `http://localhost:${port.LocalPort}` });
         };
 
-        // Create button manually to attach event listener properly
         const killBtn = document.createElement('button');
-        killBtn.className = 'kill-btn';
-        killBtn.title = window.i18n.t('stopProcess');
+        const isSystem = port.Category === 'system';
+        killBtn.className = isSystem ? 'kill-btn system-warning' : 'kill-btn';
+        killBtn.title = isSystem ? 'Atenção: Processo do Sistema' : window.i18n.t('stopProcess');
         killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> ${window.i18n.t('stop')}`;
+
         killBtn.onclick = e => {
             e.stopPropagation();
+            if (isSystem) {
+                const confirmed = window.confirm(`⚠️ Atenção: ${port.ProcessName} é um processo crítico do Sistema Windows.\n\nFinalizá-lo pode causar encerramento de serviços ou instabilidade no Windows.\n\nDeseja realmente forçar o encerramento?`);
+                if (!confirmed) return;
+            }
             killProcess(port.PID, item);
         };
 
