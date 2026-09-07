@@ -1,4 +1,6 @@
 {
+    "buildCommand": null,
+    "outputDirectory": "docs",
     "rewrites": [
         {
             "source": "/",
@@ -8,6 +10,5 @@
             "source": "/(.*)",
             "destination": "/docs/$1"
         }
-    ],
-    "outputDirectory": "docs"
+    ]
 }

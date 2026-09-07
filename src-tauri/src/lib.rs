@@ -223,6 +223,9 @@ pub fn run() {
                         let _ = win_clone.hide();
                     }
                 });
+
+                // Mostra a janela posicionada ao lado da bandeja na inicialização
+                show_window(&window);
             }
 
             Ok(())

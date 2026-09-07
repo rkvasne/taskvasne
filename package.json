@@ -15,7 +15,7 @@
     },
     "scripts": {
         "dev": "tauri dev",
-        "build": "tauri build",
+        "build": "node -e \"if(process.env.VERCEL){console.log('Docs static assets ready for Vercel');process.exit(0)}else{require('child_process').execSync('tauri build',{stdio:'inherit'})}\"",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
