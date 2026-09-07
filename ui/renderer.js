@@ -11,9 +11,12 @@ const closeAboutBtn = document.getElementById('close-about');
 const statusBanner = document.getElementById('status-banner');
 const closeStatusBtn = document.getElementById('close-status');
 const categoryFilters = document.getElementById('category-filters');
+const searchInput = document.getElementById('search-input');
+const clearSearchBtn = document.getElementById('clear-search');
 
 let allPorts = [];
 let activeCategory = 'all';
+let searchQuery = '';
 
 // Auto-hide status banner after 6 seconds
 if (statusBanner) {
@@ -40,6 +43,42 @@ if (categoryFilters) {
             activeCategory = pill.dataset.category || 'all';
             renderFilteredPorts();
         });
+    });
+}
+
+// Search input handling
+if (searchInput) {
+    searchInput.addEventListener('input', () => {
+        searchQuery = searchInput.value.trim().toLowerCase();
+        if (clearSearchBtn) {
+            if (searchQuery.length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+        }
+        renderFilteredPorts();
+    });
+
+    searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            searchInput.value = '';
+            searchQuery = '';
+            if (clearSearchBtn) clearSearchBtn.classList.add('hidden');
+            renderFilteredPorts();
+        }
+    });
+}
+
+if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', () => {
+        if (searchInput) {
+            searchInput.value = '';
+            searchInput.focus();
+        }
+        searchQuery = '';
+        clearSearchBtn.classList.add('hidden');
+        renderFilteredPorts();
     });
 }
 
@@ -109,13 +148,28 @@ async function loadPorts() {
 }
 
 /**
- * Filters allPorts by activeCategory and renders
+ * Filters allPorts by activeCategory and searchQuery, then renders
  */
 function renderFilteredPorts() {
     let filtered = allPorts;
+
     if (activeCategory !== 'all') {
-        filtered = allPorts.filter(p => (p.Category || 'app') === activeCategory);
+        filtered = filtered.filter(p => (p.Category || 'app') === activeCategory);
     }
+
+    if (searchQuery) {
+        const cleanQuery = searchQuery.startsWith(':') ? searchQuery.slice(1) : searchQuery;
+        filtered = filtered.filter(p => {
+            const portStr = String(p.LocalPort);
+            const portMatch = portStr.includes(cleanQuery) || (`:${portStr}`).includes(searchQuery);
+            const nameMatch = (p.ProcessName || '').toLowerCase().includes(searchQuery);
+            const projMatch = (p.ProjectName || '').toLowerCase().includes(searchQuery);
+            const detailsMatch = (p.Details || '').toLowerCase().includes(searchQuery);
+            const cmdMatch = (p.CommandLine || '').toLowerCase().includes(searchQuery);
+            return portMatch || nameMatch || projMatch || detailsMatch || cmdMatch;
+        });
+    }
+
     renderPorts(filtered);
 }
 
@@ -127,13 +181,17 @@ function renderFilteredPorts() {
 function renderPorts(ports) {
     const headerTitle = document.querySelector('.header .title');
     if (headerTitle) {
-        headerTitle.innerHTML = `Taskvasne <span class="active-count-badge" title="Portas ativas">${allPorts.length}</span>`;
+        const badgeCount = searchQuery ? `${ports.length}/${allPorts.length}` : `${allPorts.length}`;
+        headerTitle.innerHTML = `Taskvasne <span class="active-count-badge" title="Portas ativas">${badgeCount}</span>`;
     }
 
     if (!ports || ports.length === 0) {
-        const emptyMsg = activeCategory === 'all'
-            ? window.i18n.t('noPortsFound')
-            : `Nenhum processo na categoria "${activeCategory}".`;
+        let emptyMsg = window.i18n.t('noPortsFound');
+        if (searchQuery) {
+            emptyMsg = `Nenhum processo encontrado para "${searchQuery}".`;
+        } else if (activeCategory !== 'all') {
+            emptyMsg = `Nenhum processo na categoria "${activeCategory}".`;
+        }
         listElement.innerHTML = `<div class="empty-state">${emptyMsg}</div>`;
         return;
     }

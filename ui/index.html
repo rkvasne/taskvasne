@@ -51,6 +51,16 @@
       <button class="filter-pill" data-category="app">📦 Apps <span class="pill-count" id="count-app">0</span></button>
       <button class="filter-pill" data-category="system">🛡️ Sistema <span class="pill-count" id="count-system">0</span></button>
     </div>
+    <div class="search-bar-container">
+      <div class="search-input-wrapper">
+        <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-input" placeholder="Buscar porta (:3000), processo ou pasta..." autocomplete="off" spellcheck="false">
+        <button id="clear-search" class="clear-search-btn hidden" title="Limpar busca">×</button>
+      </div>
+    </div>
     <div id="port-list" class="port-list">
       <!-- Items will be injected here -->
     </div>

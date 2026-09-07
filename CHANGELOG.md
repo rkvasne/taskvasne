@@ -17,12 +17,18 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+- Barra de busca rápida compacta no topo para filtrar instantaneamente por porta (`:3000`), nome do processo ou caminho.
 - Categorização automática de processos por tipo (`dev`, `database`, `app`, `system`) com badges coloridos e descritivos.
 - Filtros rápidos por pílulas no topo da lista com contagem em tempo real de cada categoria.
 - Enriquecimento detalhado da listagem: identificação da pasta do projeto (`cwd`), do script em execução e exibição da linha de comando completa em tooltip.
 - Notificação do sistema operacional no Windows Toast na inicialização e banner animado com indicador de status ativo na bandeja.
 - Trava de confirmação de segurança antes de forçar o encerramento de processos críticos do sistema Windows.
 - Abertura imediata com visibilidade e foco ao iniciar o executável.
+
+### Fixed
+
+- Posicionamento vertical da janela ajustado para respeitar a barra de tarefas do Windows 11 e o fator de escala DPI (`scale_factor`), evitando que o rodapé da janela abra cortado abaixo da tela.
+- Ajuste no dimensionamento da janela para 380x520 e maior flexibilidade na largura do nome do projeto, evitando truncamento excessivo.
 
 ### Changed
 

@@ -11,8 +11,8 @@
       {
         "label": "main",
         "title": "Taskvasne",
-        "width": 360,
-        "height": 500,
+        "width": 380,
+        "height": 520,
         "resizable": false,
         "maximizable": false,
         "minimizable": false,

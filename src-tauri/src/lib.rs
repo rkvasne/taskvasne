@@ -345,11 +345,19 @@ fn quit_app(app: tauri::AppHandle) {
 
 fn show_window(window: &WebviewWindow) {
     if let Ok(Some(monitor)) = window.primary_monitor() {
+        let scale = monitor.scale_factor();
         let screen_size = monitor.size();
-        let win_size = window.outer_size().unwrap_or(PhysicalSize::new(360, 500));
+        let win_size = window.outer_size().unwrap_or(PhysicalSize::new(
+            (380.0 * scale) as u32,
+            (520.0 * scale) as u32,
+        ));
 
-        let mut x = screen_size.width as i32 - win_size.width as i32 - 12;
-        let mut y = screen_size.height as i32 - win_size.height as i32 - 50;
+        let margin_x = (14.0 * scale) as i32;
+        // Altura padrão da barra de tarefas do Windows 11 (48px lógicos) + margem confortável de respiro (16px lógicos)
+        let bottom_offset = ((48.0 + 16.0) * scale) as i32;
+
+        let mut x = screen_size.width as i32 - win_size.width as i32 - margin_x;
+        let mut y = screen_size.height as i32 - win_size.height as i32 - bottom_offset;
 
         if x < 0 { x = 0; }
         if y < 0 { y = 0; }

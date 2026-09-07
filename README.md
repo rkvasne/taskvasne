@@ -26,6 +26,7 @@ Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em 
 
 - **Motor Nativo Rust**: Varredura direta de sockets TCP em memória via APIs de sistema, sem processos externos lentos.
 - **Ultra Leve**: Consumo mínimo de memória (~20-30 MB de RAM) e binário executável otimizado.
+- **Busca Rápida**: Campo de pesquisa compacto para filtrar instantaneamente por porta (`:3000`), nome de processo ou pasta/caminho.
 - **Categorização Automática**: Classificação inteligente em **Dev**, **Bancos de Dados**, **Apps** e **Sistema Windows**, com badges visuais e filtros rápidos por pílula.
 - **Identificação Aprofundada**: Exibe o nome do projeto, pasta de trabalho (`cwd`), script em execução (`telemetry-server.js`, `index.mjs`) e linha de comando completa em tooltip.
 - **Segurança Operacional**: Trava de confirmação de segurança para processos críticos do sistema operacional.
