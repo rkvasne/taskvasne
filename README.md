@@ -375,16 +375,20 @@ Não tem condições financeiras? Sem problema! Você também pode ajudar:
 
 ```text
 taskvasne/
-├── main.js                  # Main process (Electron)
-├── renderer.js              # Renderer process (UI)
-├── port-manager.js          # Lógica de gerenciamento de portas
-├── preload.js               # Preload script (contextBridge)
-├── preload-about.js         # Preload para modal About
-├── index.html               # UI principal
-├── about.html               # Modal "Sobre"
-├── styles.css               # Estilos da aplicação
-├── __tests__/               # Testes unitários
-└── docs/                    # Landing page (Vercel)
+├── src-tauri/               # Backend nativo Rust (Tauri v2)
+│   ├── Cargo.toml           # Dependências Rust e metadados
+│   ├── tauri.conf.json      # Configuração da janela, tray e empacotamento
+│   └── src/
+│       ├── main.rs          # Entrypoint Windows sem console
+│       └── lib.rs           # Motor de portas, enriquecimento, IPC e Tray
+├── ui/                      # Frontend do App Desktop (HTML/CSS/JS)
+│   ├── index.html           # Layout flyout e modal Sobre
+│   ├── styles.css           # Estilos Fluent Windows 11
+│   ├── renderer.js          # IPC bridge e renderizador de portas
+│   └── i18n.js              # Internacionalização runtime (PT-BR/EN)
+├── tests/                   # Testes unitários do frontend (Jest)
+├── docs/                    # Landing page pública (Vercel)
+└── package.json             # Scripts Tauri CLI e linters
 ```
 
 ### Princípios Implementados

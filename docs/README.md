@@ -41,7 +41,7 @@ Mudanças recentes em [CHANGELOG.md](../CHANGELOG.md).
 - **[README.md](../README.md#-arquitetura-e-boas-praticas)** - Estrutura do projeto e princípios implementados
 
 ### Release e Distribuição
-- **[README.md](../README.md#-processo-de-release)** - Build, ZIP e Git LFS
+- **[README.md](../README.md#-desenvolvimento)** - Scripts de desenvolvimento e build (Tauri)
 
 ---
 

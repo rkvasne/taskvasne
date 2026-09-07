@@ -1,6 +1,6 @@
 module.exports = {
     testEnvironment: 'node',
-    testMatch: ['**/__tests__/**/*.test.js'],
+    testMatch: ['<rootDir>/tests/**/*.test.js'],
     collectCoverageFrom: ['ui/i18n.js'],
     coverageThreshold: {
         global: {

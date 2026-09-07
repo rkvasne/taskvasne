@@ -28,6 +28,6 @@ module.exports = [
         }
     },
     {
-        ignores: ['node_modules/', 'dist/', 'dist-portable/', '__tests__/', 'jest.config.js']
+        ignores: ['node_modules/', 'dist/', 'dist-portable/', 'tests/', 'src-tauri/', 'jest.config.js']
     }
 ];
