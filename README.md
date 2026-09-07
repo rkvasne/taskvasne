@@ -75,24 +75,22 @@ npm run format         # Formata código com Prettier
 
 Baixe a versão mais recente em [taskvasne.vercel.app](https://taskvasne.vercel.app) ou diretamente do GitHub:
 
-**Opção 1: Via Site (Recomendado)**
+**Opção 1: Via Site Oficial (Recomendado)**
 
-```bash
-https://taskvasne.vercel.app/#download
-```
+Acesse [taskvasne.vercel.app](https://taskvasne.vercel.app) para baixar o instalador oficial.
 
-**Opção 2: Direto do GitHub (Git LFS)**
+**Opção 2: Direto das Releases do GitHub**
 
-```bash
-# Link direto para download (114 MB)
-https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
-```
+Acesse [GitHub Releases](https://github.com/rkvasne/taskvasne/releases/latest) e baixe o formato desejado:
+
+- `taskvasne_0.1.1_x64-setup.exe` (Instalador NSIS, ~1.9 MB)
+- `taskvasne_0.1.1_x64_en-US.msi` (Instalador MSI, ~2.9 MB)
+- `taskvasne.exe` (Binário standalone portátil, ~8.6 MB)
 
 **Instalação:**
 
-1. Extraia o arquivo ZIP
-2. Execute `Taskvasne.exe`
-3. Pronto! Sem instalação necessária (aplicação portátil)
+1. Baixe o instalador (`.exe` ou `.msi`) ou utilize a versão portátil standalone.
+2. Execute o Taskvasne. O aplicativo iniciará minimizado na bandeja do sistema (System Tray).
 
 ## 🚀 Como Usar
 
@@ -115,219 +113,30 @@ Consulte o índice central em [docs/README.md](docs/README.md).
 
 ### 📦 Distribuição e Arquitetura
 
-#### Geração do Executável
+#### Geração do Executável (Tauri v2 + Rust)
 
-O projeto utiliza o `electron-packager` para criar uma versão portátil e otimizada para Windows x64.
+O projeto utiliza o motor nativo do **Tauri v2** acoplado ao compilador **Rust** para gerar binários otimizados, protegidos e compactos para Windows 10/11.
 
-1.  **Comando de Build**:
+1. **Comando de Build:**
 
     ```bash
-    npm run dist
+    npm run build
     ```
 
-    Este comando executa o script configurado no `package.json`:
+    Este comando compila o código Rust em modo release (`cargo build --release`) e empacota o executável e instaladores oficiais.
 
-    ```json
-    "dist": "electron-packager . \"Taskvasne\" --platform=win32 --arch=x64 --out=dist-portable --overwrite --icon=icon.ico ..."
-    ```
+2. **Resultado:**
+   Os artefatos finais são gerados em `src-tauri/target/release/`:
+    - `taskvasne.exe`: Executável nativo standalone (~8.6 MB).
+    - `bundle/nsis/taskvasne_0.1.1_x64-setup.exe`: Instalador moderno NSIS (~1.9 MB).
+    - `bundle/msi/taskvasne_0.1.1_x64_en-US.msi`: Instalador MSI para ambientes corporativos (~2.9 MB).
 
-2.  **Resultado**:
-    O processo gera a pasta `dist-portable/Taskvasne-win32-x64`, contendo o executável e todas as dependências necessárias.
+#### Vantagens da Arquitetura Rust + Tauri v2 vs Electron:
 
-#### Conteúdo do Pacote (Zip)
-
-O arquivo `Taskvasne.zip` é uma compressão da pasta gerada acima. Ele contém tudo o que o aplicativo precisa para rodar isoladamente (Standalone):
-
-- **Taskvasne.exe**: O ponto de entrada do aplicativo.
-- **Bibliotecas Gráficas e Multimídia (DLLs)**:
-    - `ffmpeg.dll`: Suporte a áudio e vídeo.
-    - `libGLESv2.dll`, `libEGL.dll`: Renderização gráfica (OpenGL/WebGL).
-    - `vulkan-1.dll`, `vk_swiftshader.dll`: Suporte a Vulkan.
-    - `d3dcompiler_47.dll`, `dxcompiler.dll`: Compiladores DirectX.
-- **Core do Electron**:
-    - `resources.pak`, `chrome_*.pak`: Recursos visuais do Chromium.
-    - `icudtl.dat`: Suporte a internacionalização (i18n).
-- **Código Fonte**:
-    - `resources/`: Pasta contendo o código da aplicação (`main.js`, `renderer.js`, `index.html`, etc.), geralmente empacotado.
-
-#### Versionamento no Git (Git LFS)
-
-Devido ao tamanho do binário (`Taskvasne.zip` ~114MB), utilizamos o **Git LFS (Large File Storage)** para versionamento.
-
-##### 📌 Por que Git LFS?
-
-**Sem LFS (problema):**
-
-- ❌ Repositório incha com cada versão (~100+ MB por release)
-- ❌ Clone lento (baixa todo histórico de binários)
-- ❌ Operações Git ficam lentas
-
-**Com LFS (solução):**
-
-- ✅ Apenas ponteiros no Git (~100 bytes)
-- ✅ Clone rápido (binários baixados sob demanda)
-- ✅ Repositório permanece leve
-- ✅ Versionamento eficiente de binários
-
-##### 🔧 Configuração Inicial (Setup)
-
-**1. Instalação do Git LFS:**
-
-```bash
-git lfs install
-git lfs version  # Verificar instalação
-```
-
-**2. Configuração (.gitattributes):**
-
-```ini
-*.exe filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
-```
-
-Este arquivo configura quais tipos de arquivo são rastreados pelo LFS.
-
-##### 📦 Envio de Novos Binários (Release)
-
-**Passo 1: Gerar Build**
-
-```bash
-npm run dist  # Gera dist-portable/Taskvasne-win32-x64/
-```
-
-**Passo 2: Criar ZIP (opcional)**
-
-```powershell
-# PowerShell
-Compress-Archive -Path dist-portable/Taskvasne-win32-x64 -DestinationPath dist-portable/Taskvasne.zip
-```
-
-**Passo 3: Adicionar ao Git LFS**
-
-```bash
-# Forçar adição (ignora .gitignore)
-git add -f dist-portable/Taskvasne.zip
-git add .gitattributes
-```
-
-**Passo 4: Commit**
-
-```bash
-git commit -m "release: v0.0.7 - Add new portable build to LFS
-
-- Taskvasne.zip (~114 MB)
-- Bug fixes and improvements"
-```
-
-**Passo 5: Push (Upload LFS)**
-
-```bash
-git push origin main
-```
-
-**Saída esperada:**
-
-```text
-Uploading LFS objects: 100% (1/1), 114 MB | 9.2 MB/s, done
-Enumerating objects: 5, done.
-...
-To https://github.com/rkvasne/taskvasne.git
-   abc1234..def5678  main -> main
-```
-
-##### ✅ Verificação
-
-**Listar arquivos no LFS:**
-
-```bash
-git lfs ls-files
-```
-
-**Saída esperada:**
-
-```text
-65b2de1e3a * dist-portable/Taskvasne.zip
-```
-
-**Verificar status:**
-
-```bash
-git lfs status
-```
-
-##### 🔄 Clone do Repositório (para novos colaboradores)
-
-**Com LFS instalado (recomendado):**
-
-```bash
-git clone https://github.com/rkvasne/taskvasne.git
-cd taskvasne
-git lfs pull  # Baixa arquivos LFS
-```
-
-**Sem LFS (apenas código):**
-
-```bash
-git clone https://github.com/rkvasne/taskvasne.git
-# Binários aparecem como ponteiros (texto pequeno)
-# Para baixar: git lfs install && git lfs pull
-```
-
-##### 🚨 Troubleshooting
-
-**Problema: Arquivo não vai para LFS**
-
-```bash
-# Remover do cache
-git rm --cached dist-portable/Taskvasne.zip
-
-# Adicionar novamente (com LFS)
-git add -f dist-portable/Taskvasne.zip
-
-# Amend commit
-git commit --amend --no-edit
-
-# Force push (CUIDADO!)
-git push origin main --force
-```
-
-**Problema: Clone sem LFS**
-
-```bash
-git lfs install
-git lfs pull
-```
-
-**Problema: Autenticação**
-
-```bash
-git config lfs.url https://github.com/rkvasne/taskvasne.git/info/lfs
-git credential reject
-git push origin main  # Redigitar credenciais
-```
-
-##### 📊 Histórico de Uploads
-
-| Data       | Versão | Arquivo                     | Tamanho | Commit  |
-| ---------- | ------ | --------------------------- | ------- | ------- |
-| DD/MM/AAAA | vX.Y.Z | dist-portable/Taskvasne.zip | 114 MB  | cd1ec52 |
-
-##### 📖 Documentação Completa
-
-Para mais detalhes sobre Git LFS, veja:
-
-- [Git LFS Documentation](https://git-lfs.github.com/)
-- [GitHub LFS Guide](https://docs.github.com/en/repositories/working-with-files/managing-large-files)
-
-##### 🔗 Download via Raw URL
-
-Para garantir o download direto do binário (e não do ponteiro LFS), o link no site utiliza:
-
-```text
-https://github.com/rkvasne/taskvasne/raw/main/dist-portable/Taskvasne.zip
-```
-
-O GitHub detecta automaticamente arquivos LFS e serve o binário real, não o ponteiro.
+- **Tamanho Reduzido:** O download caiu de ~114 MB (Electron ZIP) para apenas ~1.9 MB (instalador) e ~8.6 MB (standalone).
+- **Consumo de Memória:** Queda drástica de ~180 MB para ~20-30 MB de RAM.
+- **Segurança e Desempenho:** Inspeção nativa em memória via `sysinfo` e `netstat2`, sem criação de processos shell paralelos.
+- **Distribuição Direta:** Releases distribuídas diretamente via GitHub Releases, eliminando dependência de Git LFS no repositório de código.
 
 ## ☕ Apoie o Projeto (Opcional)
 

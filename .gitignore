@@ -1,7 +1,22 @@
 node_modules
 dist
 dist-*
+target
+src-tauri/target
+src-tauri/gen
 .env
 .DS_Store
 Thumbs.db
 *.zip
+.agent/hub
+
+# Telemetria local
+telemetry/usage.json
+telemetry/events-archive.jsonl
+telemetry/prompt-lifecycle.json
+telemetry/prompt-usage-sync.json
+telemetry/mcp-trace.log
+telemetry/mcp-error.log
+telemetry/backups/
+!telemetry/snapshots/
+!telemetry/snapshots/**

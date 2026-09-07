@@ -3,7 +3,7 @@ const js = require('@eslint/js');
 module.exports = [
     js.configs.recommended,
     {
-        files: ['*.js'],
+        files: ['**/*.js'],
         languageOptions: {
             ecmaVersion: 'latest',
             sourceType: 'commonjs',
@@ -28,6 +28,14 @@ module.exports = [
         }
     },
     {
-        ignores: ['node_modules/', 'dist/', 'dist-portable/', 'tests/', 'src-tauri/', 'jest.config.js']
+        ignores: [
+            'node_modules/',
+            'dist/',
+            'dist-portable/',
+            'tests/',
+            'src-tauri/',
+            'jest.config.js',
+            '.agent/'
+        ]
     }
 ];

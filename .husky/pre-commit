@@ -1,0 +1,106 @@
+#!/bin/sh
+# ============================================
+# HUSKY PRE-COMMIT HOOK - SATELLITE PROJECTS
+# ============================================
+# Este hook bloqueia commits em .agent/hub/ e executa validações básicas.
+# Copie para .husky/pre-commit no seu projeto satélite.
+
+echo "Executando verificações de pré-commit..."
+
+STAGED_FILES="$(git diff --cached --name-only --diff-filter=ACMR)"
+STAGED_COUNT="$(printf '%s\n' "$STAGED_FILES" | sed '/^$/d' | wc -l | tr -d ' ')"
+LINT_STAGED_DIRECT_THRESHOLD="${LINT_STAGED_DIRECT_THRESHOLD:-1}"
+
+if [ -z "$STAGED_FILES" ]; then
+  echo "Nenhum arquivo staged. Pre-commit encerrado."
+  exit 0
+fi
+
+NODE_BIN="$(command -v node 2>/dev/null || true)"
+
+if [ -z "$NODE_BIN" ] && [ -n "$HOME" ] && [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh"
+  NODE_BIN="$(command -v node 2>/dev/null || true)"
+fi
+
+if [ -z "$NODE_BIN" ]; then
+  echo "ERRO: Node.js não encontrado no PATH. Abortando pre-commit."
+  exit 1
+fi
+
+if [ -d "./node_modules/.bin" ]; then
+  export PATH="$(pwd)/node_modules/.bin:$PATH"
+fi
+
+restage_staged_files() {
+  printf '%s\n' "$STAGED_FILES" | while IFS= read -r file; do
+    if [ -n "$file" ] && [ -e "$file" ]; then
+      git add -- "$file"
+    fi
+  done
+}
+
+# 1. PROTEÇÃO DO HUB (CRÍTICO)
+if git diff --cached --name-only | grep -q "^\.agent/hub/"; then
+  echo ""
+  echo "ERRO: VIOLAÇÃO DE HUB DETECTADA!"
+  echo ""
+  echo "   Você está tentando commitar arquivos em .agent/hub/"
+  echo "   Esta pasta é READ-ONLY (apenas leitura)."
+  echo ""
+  echo "   Para corrigir:"
+  echo "   git restore --staged .agent/hub/"
+  echo ""
+  echo "   Se você precisa alterar regras do Hub:"
+  echo "   1. Navegue até D:\\Agents"
+  echo "   2. Faça as alterações lá"
+  echo "   3. Commit e push no repositório do Hub"
+  echo ""
+  exit 1
+fi
+
+echo "Proteção do Hub: OK"
+
+# 1.5 COMPATIBILIDADE DE TOOLING
+# Roda antes de formatar: o formatador precisa ser confiável. Prettier abaixo de
+# 3.9.0 escapa globs `**` em markdown e o commit grava a corrupção sem nenhum
+# gate reclamar. Só executa se o Hub estiver vinculado.
+if [ -f ".agent/hub/system/validators/validator-tooling-contract.js" ]; then
+  if ! "$NODE_BIN" .agent/hub/system/validators/validator-tooling-contract.js --project .; then
+    echo ""
+    echo "ERRO: Tooling incompatível com o contrato do Hub."
+    echo "   Atualize as versões indicadas acima antes de commitar."
+    echo "   Detalhes: .agent/hub/docs/guides/guide-satellite-governance-update-feed.md"
+    exit 1
+  fi
+fi
+
+# 2. FORMATAÇÃO (lint-staged)
+if [ -f package.json ] && (grep -q '"lint-staged"' package.json 2>/dev/null || [ -f .lintstagedrc.cjs ] || [ -f .lintstagedrc.json ] || [ -f .lintstagedrc.yml ] || [ -f .lintstagedrc.yaml ]); then
+  CURSOR_ONLY_PATTERN='^(\.cursor/commands/.*\.md|\.cursor/rules/.*\.mdc)$'
+
+  if printf '%s\n' "$STAGED_FILES" | grep -Eqv "$CURSOR_ONLY_PATTERN"; then
+    if [ "$STAGED_COUNT" -ge "$LINT_STAGED_DIRECT_THRESHOLD" ]; then
+      echo "Threshold staged ativo ($STAGED_COUNT arquivo(s)); usando fluxo interno --staged."
+      "$NODE_BIN" .agent/hub/system/scripts/format-worktree.js --staged
+      "$NODE_BIN" .agent/hub/system/validators/validator-encoding.js --profile gate --fix --staged
+      restage_staged_files
+    else
+      echo "Formatando arquivos staged (lint-staged)..."
+      "$NODE_BIN" ./node_modules/lint-staged/bin/lint-staged.js --no-stash
+      restage_staged_files
+    fi
+  else
+    echo "Lote somente .cursor/* detectado; lint-staged pulado para evitar falso commit vazio."
+  fi
+else
+  echo "lint-staged não configurado; pulando format no hook para evitar arquivos pendentes fora do stage."
+fi
+
+# 3. VALIDAÇÃO (Opcional - descomente se quiser)
+# echo "Executando validação..."
+# HUB_TELEMETRY_MODE=readonly "$NODE_BIN" .agent/hub/system/validators/validator-integrity.js --staged --profile gate 2>/dev/null || true
+
+echo ""
+echo "Pre-commit concluído com sucesso!"

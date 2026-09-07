@@ -1,0 +1,6 @@
+# >>> hub:prompt-usage-sync (gerado por governance:bootstrap)
+if [ -f ".agent/hub/system/scripts/sync-prompt-usage-from-git.js" ]; then
+	NODE_BIN="$(command -v node 2>/dev/null || true)"
+	[ -n "$NODE_BIN" ] && "$NODE_BIN" .agent/hub/system/scripts/sync-prompt-usage-from-git.js >/dev/null 2>&1 || true
+fi
+# <<< hub:prompt-usage-sync

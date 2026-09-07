@@ -205,10 +205,9 @@ Siga a política em [SECURITY.md](SECURITY.md).
 ### Checklist de Segurança
 
 - ✅ Validar/sanitizar inputs de usuário
-- ✅ Usar `contextIsolation: true` em Electron
-- ✅ Nunca usar `nodeIntegration: true`
-- ✅ Adicionar CSP headers em páginas HTML
-- ✅ Escapar comandos shell (`exec`, `spawn`)
+- ✅ Princípio de menor privilégio nas capabilities Tauri (`src-tauri/capabilities/default.json`)
+- ✅ Backend seguro e tipado em Rust com tratamento de erros explícito (`Result<T, String>`)
+- ✅ Manter isolamento de IPC sem execução arbitrária de comandos externos
 
 ---
 
@@ -237,10 +236,10 @@ Siga [Conventional Commits](https://www.conventionalcommits.org/):
 **Exemplos:**
 
 ```bash
-feat(port-manager): adiciona suporte para processos Java
-fix(main): corrige vazamento de memória em killProcess
-docs(README): atualiza seção de instalação
-test(renderer): adiciona testes para loadPorts()
+feat(tauri): adiciona filtro de portas por protocolo
+fix(renderer): corrige renderização de status
+docs(README): atualiza instruções de build
+test(i18n): adiciona testes para novas chaves
 ```
 
 ---
@@ -256,11 +255,11 @@ Estrutura detalhada em [README.md](README.md#-arquitetura-e-boas-praticas).
 ### Como depurar o aplicativo?
 
 ```bash
-# Modo dev com DevTools
-npm start
+# Modo dev (Tauri Dev com hot reload e Webview DevTools)
+npm run dev
 
-# Logs da aplicação
-%APPDATA%\taskvasne\logs\main.log
+# Build de produção (binário e instaladores NSIS/MSI)
+npm run build
 ```
 
 ### Como adicionar uma nova dependência?

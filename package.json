@@ -10,16 +10,44 @@
         "url": "https://github.com/rkvasne/taskvasne/issues"
     },
     "homepage": "https://github.com/rkvasne/taskvasne#readme",
+    "engines": {
+        "node": ">=20.0.0"
+    },
     "scripts": {
         "dev": "tauri dev",
         "build": "tauri build",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
-        "lint": "eslint *.js",
-        "lint:fix": "eslint *.js --fix",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "format": "prettier --write \"*.{js,json,md}\"",
-        "format:check": "prettier --check \"*.{js,json,md}\""
+        "format:check": "prettier --check \"*.{js,json,md}\"",
+        "analyze:circular": "node .agent/hub/system/scripts/run-madge-circular.js --target .",
+        "verify:changed": "node .agent/hub/system/validators/validator-integrity.js --changed --profile gate",
+        "verify:fix:changed": "node .agent/hub/system/validators/validator-integrity.js --changed --fix --profile gate",
+        "verify:staged": "node .agent/hub/system/validators/validator-integrity.js --staged --profile gate",
+        "verify:full": "node .agent/hub/system/validators/validator-integrity.js --profile full",
+        "verify:fix:full": "node .agent/hub/system/validators/validator-integrity.js --fix --profile full",
+        "audit:quality": "node .agent/hub/system/validators/validator-integrity.js --profile audit",
+        "verify": "node .agent/hub/system/scripts/verify-auto.js",
+        "verify:fix": "node .agent/hub/system/scripts/verify-auto.js --fix",
+        "verify:auto": "node .agent/hub/system/scripts/verify-auto.js",
+        "verify:governance": "node .agent/hub/system/scripts/verify-auto.js --profile governance",
+        "format:staged": "node .agent/hub/system/scripts/format-worktree.js --staged",
+        "format:all": "node .agent/hub/system/scripts/format-worktree.js --all",
+        "format:check:all": "node .agent/hub/system/scripts/format-worktree.js --all --check",
+        "doctor:satellite": "node .agent/hub/system/scripts/doctor-satellite.js",
+        "check:hub": "node .agent/hub/system/scripts/check-hub-version.js",
+        "prompt:next": "node .agent/hub/system/scripts/prompt-next.js",
+        "build:workbench": "node .agent/hub/system/generators/build-workbench.js",
+        "workbench:serve": "node .agent/hub/system/scripts/workbench-server.js",
+        "state": "node .agent/hub/system/scripts/hub-state.js --project .",
+        "qa:governance": "npm run analyze:circular",
+        "lint:stack": "eslint .",
+        "qa:stack": "npm run lint:stack",
+        "qa:full": "npm run verify:full && npm run qa:stack",
+        "prepare": "husky"
     },
     "keywords": [
         "tauri",
@@ -38,8 +66,10 @@
         "@types/jest": "^30.0.0",
         "eslint": "^9.39.2",
         "eslint-config-prettier": "^10.1.8",
+        "husky": "^9.1.7",
         "jest": "^30.2.0",
         "jest-environment-jsdom": "^30.2.0",
-        "prettier": "^3.7.4"
+        "lint-staged": "^15.5.2",
+        "prettier": "3.9.6"
     }
 }

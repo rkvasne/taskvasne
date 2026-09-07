@@ -1,0 +1,15 @@
+# >>> hub:generated-artifacts (gerado por governance:bootstrap)
+# Artefatos de build-ide/build-prompts: o gerador define o byte final.
+.github/copilot-instructions.md
+.github/prompts/*.prompt.md
+.cursor/commands/*.md
+.cursor/rules/*.mdc
+.trae/rules/project_rules.md
+.trae/skills/*/SKILL.md
+.kiro/skills/*/SKILL.md
+.agents/skills/*/SKILL.md
+.grok/skills/*/SKILL.md
+.opencode/skills/*/SKILL.md
+.omp/AGENTS.md
+.omp/RULES.md
+# <<< hub:generated-artifacts
