@@ -20,3 +20,20 @@ telemetry/mcp-error.log
 telemetry/backups/
 !telemetry/snapshots/
 !telemetry/snapshots/**
+
+# >>> hub:telemetry-retention (gerado por governance:bootstrap)
+# Volátil (ignorado): usage.json é a janela de 200 eventos do dashboard,
+# reescrita a cada evento; logs e backups são ruído de diff.
+telemetry/usage.json
+telemetry/prompt-lifecycle.json
+telemetry/prompt-usage-sync.json
+telemetry/events-archive.jsonl
+telemetry/backups/
+telemetry/hub-sync.json
+telemetry/*.log
+#
+# Durável (VERSIONADO): snapshots particionados por mês — a cópia que
+# sobrevive a perda de disco.
+!telemetry/snapshots/
+!telemetry/snapshots/**
+# <<< hub:telemetry-retention
