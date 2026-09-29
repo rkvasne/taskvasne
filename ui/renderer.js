@@ -466,17 +466,23 @@ function renderPorts(ports) {
             ? `<span class="orphan-badge" title="Processo abandonado (processo pai fechado)">👻 ${window.i18n.t('orphanBadge')}</span>`
             : '';
 
-        const memText = port.MemoryMb && port.MemoryMb > 0 ? `${port.MemoryMb} MB` : null;
+        const memFormatted =
+            port.MemoryMb && port.MemoryMb > 1024
+                ? `${(port.MemoryMb / 1024).toFixed(1)} GB`
+                : port.MemoryMb && port.MemoryMb > 0
+                  ? `${port.MemoryMb} MB`
+                  : null;
         const cpuText =
-            port.CpuUsage && port.CpuUsage > 0.1 ? `${port.CpuUsage.toFixed(1)}%` : null;
-        let ioText = null;
+            port.CpuUsage && port.CpuUsage > 0.5 ? `${port.CpuUsage.toFixed(1)}% CPU` : null;
+        const metricSummary = [memFormatted, cpuText].filter(Boolean).join(' • ');
+
+        let ioTooltip = '';
         if (
             (port.DiskReadKb && port.DiskReadKb > 0) ||
             (port.DiskWrittenKb && port.DiskWrittenKb > 0)
         ) {
-            ioText = `I/O: ${port.DiskReadKb || 0}K R / ${port.DiskWrittenKb || 0}K W`;
+            ioTooltip = `I/O: ${port.DiskReadKb || 0} KB Lidos / ${port.DiskWrittenKb || 0} KB Escritos`;
         }
-        const metricSummary = [memText, cpuText, ioText].filter(Boolean).join(' • ');
 
         const tooltipLines = [
             `Porta :${port.LocalPort} | PID: ${port.PID}`,
@@ -484,6 +490,7 @@ function renderPorts(ports) {
             `Categoria: ${catInfo.label} (${catInfo.desc})`,
             `Processo: ${port.ProcessName}${port.ProjectName ? ` (${port.ProjectName})` : ''}`,
             metricSummary ? `Consumo: ${metricSummary}` : '',
+            ioTooltip,
             port.Cwd ? `Pasta: ${port.Cwd}` : '',
             detailsText,
             port.CommandLine ? `Comando: ${port.CommandLine}` : ''
@@ -494,12 +501,12 @@ function renderPorts(ports) {
         const subRowItems = [];
         if (port.Cwd) {
             subRowItems.push(
-                `<span class="cwd-path" title="Pasta: ${port.Cwd}">📁 ${port.Cwd}</span>`
+                `<span class="cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${port.Cwd}</span>`
             );
         }
         if (metricSummary) {
             subRowItems.push(
-                `<span class="metric-badge" title="Consumo de Recursos">${metricSummary}</span>`
+                `<span class="metric-badge" title="Consumo: ${metricSummary}${ioTooltip ? `\n${ioTooltip}` : ''}">${metricSummary}</span>`
             );
         }
         if (detailsText) {
@@ -516,7 +523,7 @@ function renderPorts(ports) {
       <div class="port-main-row">
         <div class="col-cell col-port">
           <div class="port-badge" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
-            <span class="health-dot unknown" id="health-${port.LocalPort}" title="Status HTTP"></span>
+            <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
             <span>:${port.LocalPort}</span>
             <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
             <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
@@ -538,6 +545,15 @@ function renderPorts(ports) {
       </div>
       ${subRowHtml}
     `;
+
+        // Clique na pasta da sub-linha abre no Explorer
+        const cwdEl = item.querySelector('.cwd-path');
+        if (cwdEl && port.Cwd) {
+            cwdEl.onclick = e => {
+                e.stopPropagation();
+                tauriInvoke('open_folder', { path: port.Cwd });
+            };
+        }
 
         // Context menu com clique com o botão direito
         item.addEventListener('contextmenu', e => {
@@ -597,22 +613,27 @@ function renderPorts(ports) {
 
         const actionsContainer = item.querySelector('.actions');
 
-        // Botão Abrir Pasta (CWD)
-        if (port.Cwd) {
-            const openFolderBtn = document.createElement('button');
-            openFolderBtn.className = 'action-icon-btn';
-            openFolderBtn.title = `Abrir pasta do projeto:\n${port.Cwd}`;
-            openFolderBtn.innerHTML = `
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-              </svg>
-            `;
-            openFolderBtn.onclick = e => {
-                e.stopPropagation();
-                tauriInvoke('open_folder', { path: port.Cwd });
-            };
-            actionsContainer.appendChild(openFolderBtn);
-        }
+        // Botão Stop Process
+        const killBtn = document.createElement('button');
+        const isSystem = port.Category === 'system';
+        killBtn.className = isSystem ? 'kill-btn system-warning' : 'kill-btn';
+        killBtn.title = isSystem
+            ? window.i18n.t('systemProcessWarning')
+            : window.i18n.t('stopProcess');
+        killBtn.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg> <span>${window.i18n.t('stop')}</span>`;
+
+        killBtn.onclick = e => {
+            e.stopPropagation();
+            if (isSystem) {
+                const confirmed = window.confirm(
+                    `⚠️ Atenção: ${port.ProcessName} é um processo crítico do Sistema Windows.\n\nFinalizá-lo pode causar encerramento de serviços ou instabilidade no Windows.\n\nDeseja realmente forçar o encerramento?`
+                );
+                if (!confirmed) return;
+            }
+            killProcess(port.PID, item);
+        };
+
+        actionsContainer.appendChild(killBtn);
 
         // Botão Mais Ações (Context Menu)
         const moreBtn = document.createElement('button');
@@ -632,27 +653,6 @@ function renderPorts(ports) {
         };
         actionsContainer.appendChild(moreBtn);
 
-        // Botão Stop Process
-        const killBtn = document.createElement('button');
-        const isSystem = port.Category === 'system';
-        killBtn.className = isSystem ? 'kill-btn system-warning' : 'kill-btn';
-        killBtn.title = isSystem
-            ? window.i18n.t('systemProcessWarning')
-            : window.i18n.t('stopProcess');
-        killBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;"><rect x="6" y="6" width="12" height="12" rx="2"/></svg> ${window.i18n.t('stop')}`;
-
-        killBtn.onclick = e => {
-            e.stopPropagation();
-            if (isSystem) {
-                const confirmed = window.confirm(
-                    `⚠️ Atenção: ${port.ProcessName} é um processo crítico do Sistema Windows.\n\nFinalizá-lo pode causar encerramento de serviços ou instabilidade no Windows.\n\nDeseja realmente forçar o encerramento?`
-                );
-                if (!confirmed) return;
-            }
-            killProcess(port.PID, item);
-        };
-
-        actionsContainer.appendChild(killBtn);
         listElement.appendChild(item);
     });
 }
