@@ -15,6 +15,26 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-09-28
+
+### Added
+
+- Criação da memória de projeto local em `.agent/memory/project-status.md` com arquitetura e histórico de sessões.
+
+### Changed
+
+- Sincronização de governança com o Hub v0.12.5 e avanço automático do canal para `2da70f1f`.
+- Atualização do contrato de governança local ([AGENTS.md](AGENTS.md), [GEMINI.md](GEMINI.md)) com inclusão da salvaguarda de reversão em lote.
+- Higiene e refatoração de código Rust em `src-tauri/src/lib.rs` (resolução de avisos do Clippy `manual_map` e conformidade com `upper_case_acronyms`).
+- Inclusão de `*.exe` e `coverage/` no `.gitignore` para proteção contra versionamento acidental de artefatos.
+- Remoção de artefato binário excedente da raiz do repositório.
+- Atualização da documentação ([README.md](README.md), [docs/index.html](docs/index.html), [docs/README.md](docs/README.md)) para alinhamento com a versão 0.1.3.
+
+### Aprendizado da Release
+
+- **Fato observado:** A auditoria estrutural e o linter de Rust (`clippy`) identificaram oportunidades de tipagem limpa sem qualquer impacto de runtime. A suíte de testes unitários em JavaScript e Rust permaneceu 100% verde com 0 warnings.
+- **Diretriz consolidada:** Manter a proteção de `*.exe` e `coverage/` no `.gitignore` e preservar UTF-8 BOM em todos os arquivos de documentação Markdown.
+
 ## [0.1.2] - 2026-09-07
 
 ### Added

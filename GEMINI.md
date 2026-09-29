@@ -6,7 +6,7 @@ trigger: always_on
 
 > **Hub Link:** `.agent/hub/` (READ-ONLY)
 > **Priority:** P0 (GEMINI.md) > P1 (Persona) > P2 (Skill)
-> **Hub Version:** v0.12.1
+> **Hub Version:** v0.12.5
 > **Isolamento:** Hub ↔ Satélite (Governança Bidirecional)
 
 Este projeto consome inteligência centralizada do Agents Hub através de links para `.agent/hub/` (`junction` no Windows; `symlink` em Linux/WSL).
@@ -208,7 +208,7 @@ NUNCA adicione trailers ou assinaturas de IDE em mensagens de commit.
 
 Antes de qualquer comando de escrita, valide o caminho absoluto:
 
-- Se operando no Hub (`D:\Agents`), **NÃO toque em satélites**.
+- Se operando no Hub (raiz do Hub, ex.: `D:\Agents`), **NÃO toque em satélites**.
 - Se operando num projeto Satélite, **NÃO toque no Hub** via `.agent/hub/`.
 
 ### 🛑 PROTEÇÃO DE SSoT (Source of Truth)
@@ -333,6 +333,15 @@ state`) e achados via Issue com `npm run findings:check` — não precisa report
 - `git clean -fd` / `git clean -fx` (qualquer `git clean` com força)
 - `git stash` / `git stash drop` / `git stash clear` sobre worktree com alterações não commitadas
 - Equivalentes por GUI, script, alias ou automação
+
+**Reversão em lote (2+ arquivos num só comando):** revisar `git diff` de CADA arquivo
+individualmente antes de rodar o comando batch. Achado real (oficina-uas, 09/09/2026):
+`git checkout -- CHANGELOG.md docs/development/observability-runbook.md docs/reports/AUDIT-RELATORIO.md`
+pra reverter corrupção de `npx prettier --write` em 2 arquivos também descartou, no terceiro,
+uma mudança não commitada e sem relação com a tarefa — perda silenciosa, sem stash, sem reflog
+(working-tree-only nunca foi staged). Autorização geral do usuário para "reverter a corrupção"
+não cobre arquivo que carrega mudança anterior e não relacionada — isso só aparece revisando por
+arquivo, não pelo lote inteiro.
 
 ### Filesystem destrutivo
 
@@ -521,9 +530,9 @@ Ao finalizar uma tarefa:
 
 ---
 
-_Configurado via Agents Hub (v0.12.0)_
+_Configurado via Agents Hub (v0.12.5)_
 
 ---
 
-_Última atualização: 19/08/2026 • v0.12.0_
-_Editado via: Codex | Modelo: GPT-5 | OS: Windows 11_
+_Última atualização: 28/09/2026 • v0.12.5_
+_Editado via: Antigravity | Modelo: Gemini 3.8 Flash | OS: Windows 11_

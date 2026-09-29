@@ -1,6 +1,6 @@
 {
     "name": "taskvasne",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A Windows 11 styled port manager for developers",
     "repository": {
         "type": "git",
@@ -47,7 +47,8 @@
         "lint:stack": "eslint .",
         "qa:stack": "npm run lint:stack",
         "qa:full": "npm run verify:full && npm run qa:stack",
-        "prepare": "husky"
+        "prepare": "husky",
+        "check:runtime": "node .agent/hub/system/validators/validator-node-runtime.js --satellite-local --project ."
     },
     "keywords": [
         "tauri",

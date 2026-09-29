@@ -64,7 +64,9 @@ docs/
 ├── styles.css         # Estilos principais do site
 ├── favicon.ico        # Favicon
 ├── icon.svg           # Ícone vetorial
-└── landing/           # Assets de imagens
+├── logo.png           # Logo do projeto
+├── landing/           # Assets de imagens
+└── sessions/          # Registros detalhados de sessões
 ```
 
 ---

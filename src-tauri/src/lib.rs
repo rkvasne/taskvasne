@@ -198,15 +198,11 @@ fn extract_process_details(proc: &sysinfo::Process, raw_name: &str) -> (Option<S
             let lower = cwd.to_lowercase();
             if !lower.contains("system32") && !lower.contains("windows") {
                 Some(format!("📁 {}", cwd.trim_end_matches('\\')))
-            } else if let Some(ref exe) = exe_path {
-                Some(format!("📍 {}", exe))
             } else {
-                None
+                exe_path.as_ref().map(|exe| format!("📍 {}", exe))
             }
-        } else if let Some(ref exe) = exe_path {
-            Some(format!("📍 {}", exe))
         } else {
-            None
+            exe_path.as_ref().map(|exe| format!("📍 {}", exe))
         };
 
         (project_name, details, command_line, category)
@@ -346,6 +342,7 @@ fn quit_app(app: tauri::AppHandle) {
 #[cfg(target_os = "windows")]
 fn get_windows_work_area() -> Option<(i32, i32, i32, i32)> {
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct RECT {
         left: i32,
         top: i32,

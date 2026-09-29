@@ -1,7 +1,7 @@
 ﻿# 🤖 AI Agents - Taskvasne
 
 > **Link do Hub:** `.agent/hub/` (Obrigatório)
-> **Hub Version:** v0.12.1
+> **Hub Version:** v0.12.5
 > **Modo:** Hub-First & SSoT (Single Source of Truth)
 
 Este projeto integra o ecossistema Agents Hub. O Agente de IA deve priorizar as definições centralizadas no Hub para comportamento e governança.
@@ -229,7 +229,7 @@ NUNCA adicione trailers ou assinaturas de IDE em mensagens de commit.
 
 Antes de qualquer comando de escrita, valide o caminho absoluto:
 
-- Se operando no Hub (`D:\Agents`), **NÃO toque em satélites**.
+- Se operando no Hub (raiz do Hub, ex.: `D:\Agents`), **NÃO toque em satélites**.
 - Se operando num projeto Satélite, **NÃO toque no Hub** via `.agent/hub/`.
 
 ### 🛑 PROTEÇÃO DE SSoT (Source of Truth)
@@ -354,6 +354,15 @@ state`) e achados via Issue com `npm run findings:check` — não precisa report
 - `git clean -fd` / `git clean -fx` (qualquer `git clean` com força)
 - `git stash` / `git stash drop` / `git stash clear` sobre worktree com alterações não commitadas
 - Equivalentes por GUI, script, alias ou automação
+
+**Reversão em lote (2+ arquivos num só comando):** revisar `git diff` de CADA arquivo
+individualmente antes de rodar o comando batch. Achado real (oficina-uas, 09/09/2026):
+`git checkout -- CHANGELOG.md docs/development/observability-runbook.md docs/reports/AUDIT-RELATORIO.md`
+pra reverter corrupção de `npx prettier --write` em 2 arquivos também descartou, no terceiro,
+uma mudança não commitada e sem relação com a tarefa — perda silenciosa, sem stash, sem reflog
+(working-tree-only nunca foi staged). Autorização geral do usuário para "reverter a corrupção"
+não cobre arquivo que carrega mudança anterior e não relacionada — isso só aparece revisando por
+arquivo, não pelo lote inteiro.
 
 ### Filesystem destrutivo
 
@@ -584,7 +593,7 @@ Ao alterar qualquer documento Markdown neste projeto, o agente DEVE adicionar/at
 
 ```markdown
 _Última atualização: DD/MM/AAAA • vX.Y.Z_
-_Editado via: [IDE ou CLI] | Modelo: [modelo] | OS: [sistema operacional]_
+_Editado via: Antigravity | Modelo: Gemini 3.8 Flash | OS: Windows 11_
 ```
 
 Para docs com frontmatter YAML, usar campos no frontmatter (sem duplicar no footer):
@@ -598,9 +607,9 @@ last-edited-os: [sistema operacional]
 
 ---
 
-_Configurado via Agents Hub (v0.12.0)_
+_Configurado via Agents Hub (v0.12.5)_
 
 ---
 
-_Última atualização: 19/08/2026 • v0.12.0_
+_Última atualização: 28/09/2026 • v0.12.5_
 _Editado via: Codex | Modelo: GPT-5 | OS: Windows 11_
