@@ -447,17 +447,19 @@ function renderPorts(ports) {
 
     const categoryLabels = {
         dev: { label: '⚡ Dev', class: 'cat-dev', desc: 'Ambiente de desenvolvimento' },
-        database: { label: '🗄️ Banco', class: 'cat-database', desc: 'Banco de dados' },
+        database: { label: '🗄️ DB', class: 'cat-database', desc: 'Banco de dados' },
         app: { label: '📦 App', class: 'cat-app', desc: 'Aplicativo de usuário' },
-        system: { label: '🛡️ Sistema', class: 'cat-system', desc: 'Processo do sistema Windows' }
+        system: { label: '🛡️ Sist.', class: 'cat-system', desc: 'Processo do sistema Windows' }
     };
 
     ports.forEach(port => {
         const item = document.createElement('div');
         item.className = 'port-item';
 
-        const mainTitle = port.ProjectName || port.ProcessName || window.i18n.t('unknown');
-        const subTag = port.ProjectName && port.ProcessName ? port.ProcessName : '';
+        let mainTitle = port.ProjectName || port.ProcessName || window.i18n.t('unknown');
+        if (mainTitle.startsWith('Microsoft Visual Studio Code')) {
+            mainTitle = 'Visual Studio Code';
+        }
         const detailsText = port.Details || '';
         const catInfo = categoryLabels[port.Category] || categoryLabels.app;
 
@@ -507,14 +509,16 @@ function renderPorts(ports) {
                 `<span class="meta-item metrics" title="Consumo: ${metricSummary}${ioTooltip ? `\n${ioTooltip}` : ''}">${metricSummary}</span>`
             );
         }
-        if (port.Cwd) {
+        const isSystemDir =
+            port.Cwd &&
+            (port.Cwd === 'C:\\' ||
+                port.Cwd === 'C:/' ||
+                port.Cwd.toLowerCase().startsWith('c:\\windows'));
+        if (port.Cwd && !isSystemDir) {
+            const parts = port.Cwd.replace(/\\/g, '/').split('/').filter(Boolean);
+            const shortCwd = parts.length > 2 ? `.../${parts.slice(-2).join('/')}` : port.Cwd;
             metaItems.push(
-                `<span class="meta-item cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${port.Cwd}</span>`
-            );
-        }
-        if (detailsText) {
-            metaItems.push(
-                `<span class="meta-item details-snippet" title="${detailsText}">${detailsText}</span>`
+                `<span class="meta-item cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${shortCwd}</span>`
             );
         }
         const metaRowHtml = `<div class="port-meta-row">${metaItems.join('<span class="meta-sep">•</span>')}</div>`;
@@ -532,7 +536,6 @@ function renderPorts(ports) {
           </div>
           <div class="process-info" title="${mainTitle}">
             <span class="process-name">${mainTitle}</span>
-            ${subTag ? `<span class="process-tag" title="${subTag}">(${subTag})</span>` : ''}
           </div>
           <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
           ${orphanTag}
@@ -566,7 +569,7 @@ function renderPorts(ports) {
             navigator.clipboard
                 .writeText(`http://localhost:${port.LocalPort}`)
                 .then(() => {
-                    const spanPort = badge.querySelector('span:nth-child(2)');
+                    const spanPort = badge.querySelector('.port-number');
                     if (spanPort) {
                         const orig = spanPort.textContent;
                         spanPort.textContent = window.i18n.t('copied');
@@ -610,14 +613,18 @@ function renderPorts(ports) {
 
         const actionsContainer = item.querySelector('.actions');
 
-        // Botão Stop Process
+        // Botão Stop Process (Minimalista - Icon Only)
         const killBtn = document.createElement('button');
         const isSystem = port.Category === 'system';
-        killBtn.className = isSystem ? 'kill-btn system-warning' : 'kill-btn';
+        killBtn.className = isSystem ? 'kill-btn icon-only system-warning' : 'kill-btn icon-only';
         killBtn.title = isSystem
-            ? window.i18n.t('systemProcessWarning')
-            : window.i18n.t('stopProcess');
-        killBtn.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="4" y="4" width="16" height="16" rx="2"/></svg> <span>${window.i18n.t('stop')}</span>`;
+            ? `⚠️ ${window.i18n.t('systemProcessWarning')}`
+            : `${window.i18n.t('stopProcess')} (${port.ProcessName} - PID ${port.PID})`;
+        killBtn.innerHTML = `
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="4" width="16" height="16" rx="2.5"/>
+          </svg>
+        `;
 
         killBtn.onclick = e => {
             e.stopPropagation();

@@ -357,11 +357,11 @@ body {
 .port-item {
     display: flex;
     flex-direction: column;
-    padding: 6px 10px;
-    margin-bottom: 4px;
-    background: var(--card-bg);
+    padding: 5px 8px;
+    margin-bottom: 3px;
+    background: rgba(255, 255, 255, 0.035);
     border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     transition: all 0.15s ease;
     box-sizing: border-box;
 }
@@ -373,9 +373,9 @@ body {
 }
 
 .port-item:hover {
-    background: var(--card-hover);
+    background: rgba(255, 255, 255, 0.065);
     border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .port-top-row {
@@ -397,12 +397,12 @@ body {
 }
 
 .port-badge {
-    background: rgba(96, 205, 255, 0.12);
+    background: rgba(96, 205, 255, 0.08);
     color: #60cdff;
-    border: 1px solid rgba(96, 205, 255, 0.28);
+    border: 1px solid rgba(96, 205, 255, 0.2);
     font-size: 11px;
     font-weight: 600;
-    padding: 2px 6px;
+    padding: 2px 5px;
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -415,7 +415,7 @@ body {
 }
 
 .port-badge:hover {
-    background: rgba(96, 205, 255, 0.22);
+    background: rgba(96, 205, 255, 0.2);
     border-color: #60cdff;
     color: #ffffff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
@@ -428,19 +428,19 @@ body {
 
 .process-info {
     display: flex;
-    align-items: baseline;
-    gap: 4px;
+    align-items: center;
     min-width: 0;
     overflow: hidden;
+    flex: 1;
 }
 
 .process-name {
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--text-color);
+    color: #ffffff;
     line-height: 1.25;
 }
 
@@ -462,20 +462,20 @@ body {
 }
 
 .kill-btn {
-    background: rgba(239, 68, 68, 0.16);
+    background: rgba(239, 68, 68, 0.14);
     color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.35);
-    padding: 2px 7px;
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    padding: 0;
+    width: 24px;
+    height: 24px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 11px;
     transition: all 0.15s ease;
-    font-weight: 600;
-    height: 22px;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    white-space: nowrap;
+    justify-content: center;
+    flex-shrink: 0;
     box-sizing: border-box;
 }
 
@@ -483,7 +483,7 @@ body {
     background: #dc2626;
     border-color: #ef4444;
     color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.4);
 }
 
 .port-meta-row {
@@ -816,8 +816,8 @@ body {
 }
 
 .health-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
@@ -826,10 +826,12 @@ body {
 
 .health-dot.online {
     background: #22c55e;
+    box-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
 }
 
 .health-dot.offline {
     background: #eab308;
+    box-shadow: 0 0 3px rgba(234, 179, 8, 0.4);
 }
 
 .health-dot.unknown {
