@@ -15,6 +15,30 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.6] - 2026-09-29
+
+### Added
+
+- **Tabela Contínua de Alta Densidade (Estilo Windows 11 Task Manager):**
+    - Lista de portas reconstruída como tabela contínua de linha única (31px) com divisórias sutis de 1px e efeito de hover abrangente.
+    - Cabeçalho fixo com 5 colunas estritas: `Porta (58px)`, `Processo (1fr)`, `Consumo / PID (86px)`, `Tipo (56px)` e `Ações (44px)`.
+    - Exibição de alta densidade permitindo visualizar de 12 a 14 processos simultaneamente na viewport (o dobro da interface anterior).
+    - Indicador de porta simplificado: número `:PORTA` em fonte mono limpa (`Cascadia Code`), health-dot luminoso de 4px e sublinhado interativo ao passar o mouse.
+    - Categorias naturais em Title Case (`Dev`, `Banco`, `App`, `Sistema`) com alinhamento geométrico milimétrico e texto perfeitamente centralizado na pílula.
+    - Botão de encerramento em ícone `✕` moderno e discreto, com opacidade reduzida em repouso e realce no hover da linha.
+
+### Changed
+
+- **Higiene e Limpeza de Código Órfão (Code & Docs Janitor):**
+    - Remoção de 50+ linhas de regras CSS mortas em `ui/styles.css` (`.meta-item`, `.meta-label`, `.meta-sep`, etc.) remanescentes da interface antiga.
+    - Sincronização e validação de 100% dos links e referências de versão da documentação em `docs/README.md`.
+    - Garantia do piso tipográfico de 11px no design system, mantendo zero anti-patterns no Impeccable detect.
+
+### Aprendizado da Release
+
+- **Fato observado:** Estruturas visuais com múltiplos cartões individuais empilhados (box-in-box) causam fadiga visual e desperdício de espaço vertical em listas densas com dezenas de itens. O modelo de tabela contínua com divisórias de 1px e hover que ilumina a linha inteira dobra a densidade de informação sem poluição visual.
+- **Diretriz consolidada:** Para gerenciadores de processos e ferramentas de desenvolvedor no Windows 11, priorizar grids contínuos com colunas de largura estrita e tipografia alinhada em vez de contêineres de cards empilhados.
+
 ## [0.1.5] - 2026-09-29
 
 ### Added
@@ -39,13 +63,6 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
-- **Tabela Contínua de Alta Densidade (Estilo Windows 11 Task Manager):**
-    - Migração da exibição de portas de cards empilhados de 2 linhas para tabela contínua de linha única (31px) com divisórias sutis de 1px e hover abrangente.
-    - Cabeçalho fixo com 5 colunas estritas: `Porta (58px)`, `Processo (1fr)`, `Consumo / PID (86px)`, `Tipo (56px)` e `Ações (44px)`.
-    - Eliminação da caixa pesada do número da porta: agora com tipografia mono limpa (`Cascadia Code`), health-dot luminoso de 4px e sublinhado interativo.
-    - Categorias padronizadas em Title Case (`Dev`, `Banco`, `App`, `Sistema`) com centralização geométrica rigorosa em pílula de 18px.
-    - Botão de parada migrado para ícone `✕` moderno com opacidade atenuada em repouso e realce no hover.
-    - Dobro de processos visíveis na viewport (12 a 14 processos sem rolagem excessiva).
 - **Correções de Segurança e Code Review:**
     - Escape estrito de aspas simples no PowerShell (`replace('\'', "''")`) para evitar quebras em pastas com apóstrofes ou caracteres especiais.
     - Delimitação com aspas duplas escapadas no comando CMD do VS Code.

@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.5-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.1.6-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)

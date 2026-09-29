@@ -16,11 +16,17 @@
 
 ## 📝 Histórico de Sessões
 
+### 2026-09-29 — Release v0.1.6: Tabela Contínua Windows 11 e Code/Docs Janitor
+
+- **Versão v0.1.6:** Bump de patch com persistência e suíte completa de testes verdes (Jest 17/17, Cargo test 9/9, Clippy 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns, verify:full 100% conforme).
+- **Tabela Contínua de Alta Densidade (Estilo Windows 11 Task Manager):** Lista de portas reestruturada como tabela contínua com divisórias de 1px e altura de 31px, dobrando os processos visíveis sem rolagem (12-14 itens simultâneos).
+- **Higiene Visual & Tipografia Impeccable:** Eliminação de caixas retangulares pesadas na porta (`:PORTA` limpo com health-dot de 4px), alinhamento geométrico de badges de categoria em Title Case (`Dev`, `Banco`, `App`, `Sistema`), botões de ação com realce no hover.
+- **Auditoria Code & Docs Janitor (Prompts 20+25):** Limpeza de CSS órfão (`.meta-item`), sincronização de versões documentais (`docs/README.md`) e 100% de conformidade no `verify:full`.
+- **Aprendizado da Release:** Grids contínuos com colunas de largura estrita reduzem fadiga visual e duplicam o espaço útil em relação a cartões empilhados (box-in-box).
+
 ### 2026-09-29 — Release v0.1.5: Menu de Contexto, Health Probes, QR Code Wi-Fi e Delta Watcher
 
-- **Versão v0.1.5:** Bump de patch com suíte completa de testes verdes (Jest 17/17, Cargo check 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns).
-- **Tabela Contínua de Alta Densidade (Estilo Windows 11 Task Manager):** Lista de portas reestruturada como tabela contínua com divisórias de 1px e altura de 31px, dobrando os processos visíveis sem rolagem (12-14 itens).
-- **Higiene Visual & Tipografia Impeccable:** Eliminação de caixas retangulares pesadas na porta, alinhamento geométrico de badges de categoria em Title Case (`Dev`, `Banco`, `App`, `Sistema`), botões de ação integrados com realce no hover.
+- **Versão v0.1.5:** Bump de patch com suíte completa de testes verdes (Jest 18/18, Cargo test 9/9, Clippy 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns).
 - **Menu de Contexto Rápido:** Abrir projeto diretamente no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer via botão direito.
 - **Health Probes com Sparklines:** Sondagem HTTP em background medindo latência RTT em milissegundos com sparklines inline dinâmicos.
 - **Compartilhamento Wi-Fi / QR Code:** Descoberta de IP local e geração nativa em SVG de QR Code para teste imediato em dispositivos móveis.
@@ -52,5 +58,5 @@
 
 ---
 
-_Última atualização: 29/09/2026 • v0.1.5_
+_Última atualização: 29/09/2026 • v0.1.6_
 _Editado via: Antigravity | Modelo: Gemini 3.8 Flash | OS: Windows 11_
