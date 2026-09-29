@@ -447,9 +447,9 @@ function renderPorts(ports) {
 
     const categoryLabels = {
         dev: { label: 'Dev', class: 'cat-dev', desc: 'Ambiente de desenvolvimento' },
-        database: { label: 'DB', class: 'cat-database', desc: 'Banco de dados' },
-        app: { label: 'App', class: 'cat-app', desc: 'Aplicativo de usuário' },
-        system: { label: 'Sist.', class: 'cat-system', desc: 'Processo do sistema Windows' }
+        database: { label: 'Banco', class: 'cat-database', desc: 'Banco de dados' },
+        app: { label: 'App', class: 'cat-app', desc: 'Aplicativo' },
+        system: { label: 'Sistema', class: 'cat-system', desc: 'Sistema Windows' }
     };
 
     ports.forEach(port => {
@@ -527,18 +527,20 @@ function renderPorts(ports) {
 
         item.innerHTML = `
       <div class="port-top-row">
-        <div class="port-identity">
+        <div class="port-badge-col">
           <div class="port-badge" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
             <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
             <span class="port-number">:${port.LocalPort}</span>
             <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
             <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
           </div>
-          <div class="process-info" title="${mainTitle}">
-            <span class="process-name">${mainTitle}</span>
-          </div>
-          <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
+        </div>
+        <div class="process-info" title="${mainTitle}">
+          <span class="process-name">${mainTitle}</span>
           ${orphanTag}
+        </div>
+        <div class="category-col">
+          <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
         </div>
         <div class="port-actions actions">
         </div>
