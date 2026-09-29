@@ -39,6 +39,13 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- **Tabela Contínua de Alta Densidade (Estilo Windows 11 Task Manager):**
+    - Migração da exibição de portas de cards empilhados de 2 linhas para tabela contínua de linha única (31px) com divisórias sutis de 1px e hover abrangente.
+    - Cabeçalho fixo com 5 colunas estritas: `Porta (58px)`, `Processo (1fr)`, `Consumo / PID (86px)`, `Tipo (56px)` e `Ações (44px)`.
+    - Eliminação da caixa pesada do número da porta: agora com tipografia mono limpa (`Cascadia Code`), health-dot luminoso de 4px e sublinhado interativo.
+    - Categorias padronizadas em Title Case (`Dev`, `Banco`, `App`, `Sistema`) com centralização geométrica rigorosa em pílula de 18px.
+    - Botão de parada migrado para ícone `✕` moderno com opacidade atenuada em repouso e realce no hover.
+    - Dobro de processos visíveis na viewport (12 a 14 processos sem rolagem excessiva).
 - **Correções de Segurança e Code Review:**
     - Escape estrito de aspas simples no PowerShell (`replace('\'', "''")`) para evitar quebras em pastas com apóstrofes ou caracteres especiais.
     - Delimitação com aspas duplas escapadas no comando CMD do VS Code.

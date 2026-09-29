@@ -610,57 +610,6 @@ body {
     color: #ffffff;
 }
 
-.meta-item {
-    display: inline-flex;
-    align-items: center;
-    min-width: 0;
-    line-height: 1.2;
-}
-
-.meta-item.pid {
-    font-family: 'Cascadia Code', Consolas, monospace;
-    color: rgba(255, 255, 255, 0.65);
-    flex-shrink: 0;
-}
-
-.meta-label {
-    font-size: 9.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    opacity: 0.55;
-    margin-right: 3px;
-}
-
-.meta-sep {
-    opacity: 0.25;
-    font-size: 8px;
-    flex-shrink: 0;
-}
-
-.meta-item.metrics {
-    color: rgba(255, 255, 255, 0.65);
-    flex-shrink: 0;
-}
-
-.meta-item.cwd-path {
-    color: rgba(255, 255, 255, 0.55);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-    transition: color 0.15s ease;
-}
-
-.meta-item.cwd-path:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.meta-item.details-snippet {
-    color: rgba(255, 255, 255, 0.4);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
