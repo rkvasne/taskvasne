@@ -500,62 +500,28 @@ function renderPorts(ports) {
             .filter(Boolean)
             .join('\n');
 
-        const metaItems = [];
-        metaItems.push(
-            `<span class="meta-item pid" title="PID: ${port.PID}"><span class="meta-label">PID</span>${port.PID}</span>`
-        );
-        if (metricSummary) {
-            metaItems.push(
-                `<span class="meta-item metrics" title="Consumo: ${metricSummary}${ioTooltip ? `\n${ioTooltip}` : ''}">${metricSummary}</span>`
-            );
-        }
-        const isSystemDir =
-            port.Cwd &&
-            (port.Cwd === 'C:\\' ||
-                port.Cwd === 'C:/' ||
-                port.Cwd.toLowerCase().startsWith('c:\\windows'));
-        if (port.Cwd && !isSystemDir) {
-            const parts = port.Cwd.replace(/\\/g, '/').split('/').filter(Boolean);
-            const shortCwd = parts.length > 2 ? `.../${parts.slice(-2).join('/')}` : port.Cwd;
-            metaItems.push(
-                `<span class="meta-item cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${shortCwd}</span>`
-            );
-        }
-        const metaRowHtml = `<div class="port-meta-row">${metaItems.join('<span class="meta-sep">•</span>')}</div>`;
-
         item.title = tooltipLines;
 
         item.innerHTML = `
-      <div class="port-top-row">
-        <div class="port-badge-col">
-          <div class="port-badge" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
-            <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
-            <span class="port-number">:${port.LocalPort}</span>
-            <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
-            <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
-          </div>
-        </div>
-        <div class="process-info" title="${mainTitle}">
-          <span class="process-name">${mainTitle}</span>
-          ${orphanTag}
-        </div>
-        <div class="category-col">
-          <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
-        </div>
-        <div class="port-actions actions">
-        </div>
+      <div class="col-port" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
+        <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
+        <span class="port-number">:${port.LocalPort}</span>
+        <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
+        <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
       </div>
-      ${metaRowHtml}
+      <div class="col-process" title="${mainTitle}">
+        <span class="process-name">${mainTitle}</span>
+        ${orphanTag}
+      </div>
+      <div class="col-metrics" title="PID: ${port.PID}${metricSummary ? `\nConsumo: ${metricSummary}` : ''}">
+        <span class="metrics-val">${metricSummary || `PID ${port.PID}`}</span>
+      </div>
+      <div class="col-category">
+        <span class="category-pill ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
+      </div>
+      <div class="col-actions actions">
+      </div>
     `;
-
-        // Clique na pasta da sub-linha abre no Explorer
-        const cwdEl = item.querySelector('.cwd-path');
-        if (cwdEl && port.Cwd) {
-            cwdEl.onclick = e => {
-                e.stopPropagation();
-                tauriInvoke('open_folder', { path: port.Cwd });
-            };
-        }
 
         // Context menu com clique com o botão direito
         item.addEventListener('contextmenu', e => {
@@ -564,14 +530,14 @@ function renderPorts(ports) {
             openContextMenu(port, e.clientX, e.clientY);
         });
 
-        // Copiar URL ao clicar na porta e abrir no navegador com duplo-clique
-        const badge = item.querySelector('.port-badge');
-        badge.onclick = e => {
+        // Copiar URL ao clicar na porta
+        const portCol = item.querySelector('.col-port');
+        portCol.onclick = e => {
             e.stopPropagation();
             navigator.clipboard
                 .writeText(`http://localhost:${port.LocalPort}`)
                 .then(() => {
-                    const spanPort = badge.querySelector('.port-number');
+                    const spanPort = portCol.querySelector('.port-number');
                     if (spanPort) {
                         const orig = spanPort.textContent;
                         spanPort.textContent = window.i18n.t('copied');
@@ -623,8 +589,9 @@ function renderPorts(ports) {
             ? `⚠️ ${window.i18n.t('systemProcessWarning')}`
             : `${window.i18n.t('stopProcess')} (${port.ProcessName} - PID ${port.PID})`;
         killBtn.innerHTML = `
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
-            <rect x="4" y="4" width="16" height="16" rx="2.5"/>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         `;
 
