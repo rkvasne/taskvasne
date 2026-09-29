@@ -15,6 +15,42 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-09-29
+
+### Added
+
+- **Desbloqueador de Pastas Presas (Folder Unlocker):**
+    - Nova aba `[ Desbloquear Pasta ]` para inspeção e encerramento de processos que travam diretórios ou arquivos impedindo renomeação ou exclusão.
+    - Implementado backend em Rust com FFI nativa para a API Win32 `Restart Manager` (`Rstrtmgr.dll`) combinada a scanner de CWD (`sysinfo`).
+    - Botão de liberação rápida em lote (`Liberar Pasta`) com diálogo de salvaguarda para processos do sistema.
+- **Data Grid / Alinhamento em Colunas:**
+    - Layout da lista de portas reestruturado em grade estrita com cabeçalho de colunas: `PORTA`, `PROCESSO`, `TIPO`, `PID`, `AÇÃO`.
+    - Alinhamento horizontal estável dos badges de categoria e valores de PID, eliminando flutuações visuais decorrentes do tamanho dos nomes de processo.
+    - Sub-linha dedicada para caminhos CWD (`📁 C:\...`) e métricas de sistema sem quebrar o alinhamento da grade principal.
+- **Botão Parar Todos Dev (`kill-all-dev`):**
+    - Ação em lote para encerrar simultaneamente todos os servidores de desenvolvimento ativos, com atalho global de teclado (`Ctrl+Shift+K`).
+- **Atalhos Globais de Teclado:**
+    - `Ctrl+F` para focar na busca rápida, `F5` / `Ctrl+R` para atualização instantânea e `Ctrl+Shift+K` para encerramento de processos Dev.
+- **Suporte de Internacionalização (i18n):**
+    - Chaves de tabela e mensagens do desbloqueador traduzidas em `pt-BR` e `en` com testes unitários em Jest.
+
+### Changed
+
+- **Polimento Impeccable Design (Zero Anti-Patterns):**
+    - Erradicação de 100% dos 13 anti-patterns catalogados pelo detector nativo Impeccable.
+    - Eliminação de halos cromáticos artificiais (`#4ade80`, `#ef4444`, `var(--accent-color)`), substituídos por elevação neutra Fluent 2 (`box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3)`).
+    - Elevação de tipografia funcional para o piso mínimo de 11px em botões, tags, PIDs e micro-labels, e 12px para textos descritivos e subtítulos.
+    - Indicador de status calmo e estático (`.status-dot`), substituindo a animação contínua de pulso.
+    - Substituição da animação horizontal de shimmer no skeleton loader por pulso de opacidade suave e calmo.
+    - Adoção de `font-variant-numeric: tabular-nums;` para estabilidade visual de números durante atualizações periódicas.
+    - Customização de superfícies nativas do navegador (`::selection`, `:focus-visible`, `caret-color` e `::placeholder` contrastante).
+    - Empty state com ícone vetorial e mensagem contextual.
+
+### Aprendizado da Release
+
+- **Fato observado:** O alinhamento flexível sem largura de colunas fixas causava dispersão dos elementos de metadados na tela conforme a variabilidade do comprimento dos nomes de executáveis. A adoção de CSS Grid rígido de 5 colunas com overflow controlado resolveu o problema estético mantendo o tamanho compacto de 410px. O detector do Impeccable comprovou 0 anti-patterns após as correções.
+- **Diretriz consolidada:** Manter colunas com larguras pré-definidas para listas com dados tabulares densos em flyouts compactos, e utilizar `tabular-nums` sempre que houver métricas ou contadores atualizados em tempo real.
+
 ## [0.1.3] - 2026-09-28
 
 ### Added

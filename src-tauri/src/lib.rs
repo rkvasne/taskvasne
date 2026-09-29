@@ -26,6 +26,41 @@ pub struct PortInfo {
     pub command_line: Option<String>,
     #[serde(rename = "Category")]
     pub category: String,
+    #[serde(rename = "Cwd")]
+    pub cwd: Option<String>,
+    #[serde(rename = "MemoryMb")]
+    pub memory_mb: u64,
+    #[serde(rename = "CpuUsage")]
+    pub cpu_usage: f32,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct LockedProcessInfo {
+    #[serde(rename = "PID")]
+    pub pid: u32,
+    #[serde(rename = "ProcessName")]
+    pub process_name: String,
+    #[serde(rename = "LockType")]
+    pub lock_type: String, // "cwd" ou "handle"
+    #[serde(rename = "Details")]
+    pub details: Option<String>,
+    #[serde(rename = "CommandLine")]
+    pub command_line: Option<String>,
+    #[serde(rename = "MemoryMb")]
+    pub memory_mb: u64,
+    #[serde(rename = "CpuUsage")]
+    pub cpu_usage: f32,
+    #[serde(rename = "IsSystem")]
+    pub is_system: bool,
+    #[serde(rename = "Cwd")]
+    pub cwd: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ReleaseResult {
+    pub success: bool,
+    pub killed_count: u32,
+    pub errors: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -262,6 +297,9 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                 let mut details = None;
                 let mut command_line = None;
                 let mut category = "app".to_string();
+                let mut cwd = None;
+                let mut memory_mb = 0;
+                let mut cpu_usage = 0.0;
 
                 if pid > 0 {
                     if let Some(proc) = sys.process(Pid::from_u32(pid)) {
@@ -273,6 +311,9 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                         details = det;
                         command_line = cmd;
                         category = cat;
+                        cwd = proc.cwd().map(|p| sanitize_path(&p.to_string_lossy()));
+                        memory_mb = proc.memory() / (1024 * 1024);
+                        cpu_usage = proc.cpu_usage();
                     }
                 }
 
@@ -284,6 +325,9 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                     details,
                     command_line,
                     category,
+                    cwd,
+                    memory_mb,
+                    cpu_usage,
                 });
             }
         }
@@ -332,6 +376,298 @@ fn kill_process(pid: u32) -> KillResult {
 #[tauri::command]
 fn open_external(url: String) -> Result<(), String> {
     open::that(&url).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn open_folder(path: String) -> Result<(), String> {
+    let clean = sanitize_path(&path);
+    let p = Path::new(&clean);
+    let target = if p.is_file() {
+        p.parent().unwrap_or(p)
+    } else {
+        p
+    };
+    open::that(target).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn kill_all_dev() -> Result<u32, String> {
+    let ports = get_ports()?;
+    let mut killed_pids = HashSet::new();
+    let mut count = 0;
+
+    for port in ports {
+        if port.category == "dev" && port.pid > 0 && killed_pids.insert(port.pid) {
+            let res = kill_process(port.pid);
+            if res.success {
+                count += 1;
+            }
+        }
+    }
+
+    Ok(count)
+}
+
+#[cfg(target_os = "windows")]
+mod restart_manager {
+    use std::os::windows::ffi::OsStrExt;
+    use std::path::Path;
+
+    #[repr(C)]
+    #[derive(Clone, Copy)]
+    #[allow(non_snake_case, clippy::upper_case_acronyms)]
+    struct FILETIME {
+        dwLowDateTime: u32,
+        dwHighDateTime: u32,
+    }
+
+    #[repr(C)]
+    #[derive(Clone, Copy)]
+    #[allow(non_snake_case, clippy::upper_case_acronyms)]
+    struct RM_UNIQUE_PROCESS {
+        dwProcessId: u32,
+        ProcessStartTime: FILETIME,
+    }
+
+    const CCH_RM_MAX_APP_NAME: usize = 255;
+    const CCH_RM_MAX_SVC_NAME: usize = 63;
+    const CCH_RM_SESSION_KEY: usize = 32;
+
+    #[repr(C)]
+    #[allow(non_snake_case, clippy::upper_case_acronyms)]
+    struct RM_PROCESS_INFO {
+        Process: RM_UNIQUE_PROCESS,
+        strAppName: [u16; CCH_RM_MAX_APP_NAME + 1],
+        strServiceShortName: [u16; CCH_RM_MAX_SVC_NAME + 1],
+        ApplicationType: u32,
+        AppStatus: u32,
+        TSSessionId: u32,
+        bRestartable: i32,
+    }
+
+    #[link(name = "rstrtmgr")]
+    extern "system" {
+        fn RmStartSession(
+            pSessionHandle: *mut u32,
+            dwSessionFlags: u32,
+            strSessionKey: *mut u16,
+        ) -> u32;
+
+        fn RmRegisterResources(
+            dwSessionHandle: u32,
+            nFiles: u32,
+            rgsFilenames: *const *const u16,
+            nApplications: u32,
+            rgApplications: *const std::ffi::c_void,
+            nServices: u32,
+            rgsServiceNames: *const *const u16,
+        ) -> u32;
+
+        fn RmGetList(
+            dwSessionHandle: u32,
+            pnProcInfoNeeded: *mut u32,
+            pnProcInfo: *mut u32,
+            rgAffectedApps: *mut RM_PROCESS_INFO,
+            lpdwRebootReasons: *mut u32,
+        ) -> u32;
+
+        fn RmEndSession(dwSessionHandle: u32) -> u32;
+    }
+
+    pub fn get_locking_pids(path: &Path) -> Vec<u32> {
+        let mut pids = Vec::new();
+        let wide_path: Vec<u16> = path.as_os_str().encode_wide().chain(std::iter::once(0)).collect();
+
+        unsafe {
+            let mut session_handle: u32 = 0;
+            let mut session_key = [0u16; CCH_RM_SESSION_KEY + 1];
+
+            if RmStartSession(&mut session_handle, 0, session_key.as_mut_ptr()) != 0 {
+                return pids;
+            }
+
+            let path_ptr = wide_path.as_ptr();
+            let reg_res = RmRegisterResources(
+                session_handle,
+                1,
+                &path_ptr,
+                0,
+                std::ptr::null(),
+                0,
+                std::ptr::null(),
+            );
+
+            if reg_res == 0 {
+                let mut n_needed: u32 = 0;
+                let mut n_proc_info: u32 = 0;
+                let mut reboot_reasons: u32 = 0;
+
+                let _ = RmGetList(
+                    session_handle,
+                    &mut n_needed,
+                    &mut n_proc_info,
+                    std::ptr::null_mut(),
+                    &mut reboot_reasons,
+                );
+
+                if n_needed > 0 {
+                    let mut proc_infos: Vec<RM_PROCESS_INFO> = Vec::with_capacity(n_needed as usize);
+                    n_proc_info = n_needed;
+                    let list_res = RmGetList(
+                        session_handle,
+                        &mut n_needed,
+                        &mut n_proc_info,
+                        proc_infos.as_mut_ptr(),
+                        &mut reboot_reasons,
+                    );
+
+                    if list_res == 0 {
+                        proc_infos.set_len(n_proc_info as usize);
+                        for info in proc_infos {
+                            if info.Process.dwProcessId > 0 {
+                                pids.push(info.Process.dwProcessId);
+                            }
+                        }
+                    }
+                }
+            }
+
+            let _ = RmEndSession(session_handle);
+        }
+
+        pids
+    }
+}
+
+#[cfg(not(target_os = "windows"))]
+mod restart_manager {
+    use std::path::Path;
+    pub fn get_locking_pids(_path: &Path) -> Vec<u32> {
+        Vec::new()
+    }
+}
+
+#[tauri::command]
+fn inspect_locked_path(path_str: String) -> Result<Vec<LockedProcessInfo>, String> {
+    let clean = sanitize_path(&path_str);
+    if clean.trim().is_empty() {
+        return Err("Caminho não fornecido".to_string());
+    }
+
+    let target_path = Path::new(&clean);
+    let target_lower = clean.to_lowercase().trim_end_matches('\\').to_string();
+
+    let mut sys = System::new();
+    sys.refresh_processes_specifics(
+        sysinfo::ProcessesToUpdate::All,
+        true,
+        sysinfo::ProcessRefreshKind::everything(),
+    );
+
+    let mut found_pids: std::collections::HashMap<u32, String> = std::collections::HashMap::new();
+
+    // 1. Usar Restart Manager API para handles de arquivos e diretórios
+    let rm_pids = restart_manager::get_locking_pids(target_path);
+    for pid in rm_pids {
+        found_pids.insert(pid, "handle".to_string());
+    }
+
+    // 2. Verificar processos cujo CWD ou executável esteja dentro da pasta
+    for (pid, proc) in sys.processes() {
+        let u_pid = pid.as_u32();
+        if found_pids.contains_key(&u_pid) {
+            continue;
+        }
+
+        let mut matches = false;
+        if let Some(cwd) = proc.cwd() {
+            let cwd_lower = sanitize_path(&cwd.to_string_lossy()).to_lowercase();
+            let cwd_clean = cwd_lower.trim_end_matches('\\').to_string();
+            if cwd_clean == target_lower || cwd_clean.starts_with(&format!("{}\\", target_lower)) {
+                matches = true;
+            }
+        }
+
+        if !matches {
+            if let Some(exe) = proc.exe() {
+                let exe_lower = sanitize_path(&exe.to_string_lossy()).to_lowercase();
+                if exe_lower.starts_with(&format!("{}\\", target_lower)) {
+                    matches = true;
+                }
+            }
+        }
+
+        if matches {
+            found_pids.insert(u_pid, "cwd".to_string());
+        }
+    }
+
+    let mut results = Vec::new();
+    for (pid, lock_type) in found_pids {
+        if pid == 0 {
+            continue;
+        }
+
+        if let Some(proc) = sys.process(Pid::from_u32(pid)) {
+            let raw_name = proc.name().to_string_lossy().to_string();
+            let (proj, det, cmd, cat) = extract_process_details(proc, &raw_name);
+            let memory_mb = proc.memory() / (1024 * 1024);
+            let cpu_usage = proc.cpu_usage();
+            let is_system = cat == "system";
+            let cwd = proc.cwd().map(|p| sanitize_path(&p.to_string_lossy()));
+
+            let details = det.or(proj);
+
+            results.push(LockedProcessInfo {
+                pid,
+                process_name: raw_name,
+                lock_type,
+                details,
+                command_line: cmd,
+                memory_mb,
+                cpu_usage,
+                is_system,
+                cwd,
+            });
+        } else {
+            results.push(LockedProcessInfo {
+                pid,
+                process_name: "Processo Finalizado ou Desconhecido".to_string(),
+                lock_type,
+                details: None,
+                command_line: None,
+                memory_mb: 0,
+                cpu_usage: 0.0,
+                is_system: false,
+                cwd: None,
+            });
+        }
+    }
+
+    results.sort_by_key(|p| p.pid);
+    Ok(results)
+}
+
+#[tauri::command]
+fn release_locked_path(path_str: String) -> Result<ReleaseResult, String> {
+    let locked = inspect_locked_path(path_str)?;
+    let mut killed_count = 0;
+    let mut errors = Vec::new();
+
+    for proc in locked {
+        let res = kill_process(proc.pid);
+        if res.success {
+            killed_count += 1;
+        } else if let Some(e) = res.error {
+            errors.push(format!("PID {}: {}", proc.pid, e));
+        }
+    }
+
+    Ok(ReleaseResult {
+        success: errors.is_empty(),
+        killed_count,
+        errors,
+    })
 }
 
 #[tauri::command]
@@ -483,7 +819,11 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             get_ports,
             kill_process,
+            kill_all_dev,
             open_external,
+            open_folder,
+            inspect_locked_path,
+            release_locked_path,
             quit_app
         ])
         .run(tauri::generate_context!())
@@ -539,6 +879,21 @@ mod tests {
         for p in list {
             assert!(p.local_port > PORT_THRESHOLD);
         }
+    }
+
+    #[test]
+    fn test_inspect_locked_path_empty() {
+        let res = inspect_locked_path("".to_string());
+        assert!(res.is_err());
+        assert_eq!(res.unwrap_err(), "Caminho não fornecido".to_string());
+    }
+
+    #[test]
+    fn test_inspect_locked_path_valid() {
+        // Testa com o próprio diretório de trabalho atual
+        let cwd = std::env::current_dir().unwrap();
+        let res = inspect_locked_path(cwd.to_string_lossy().to_string());
+        assert!(res.is_ok());
     }
 }
 

@@ -8,10 +8,21 @@
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
+::selection {
+    background: rgba(96, 205, 255, 0.35);
+    color: #ffffff;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 1px;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    font-family: 'Segoe UI Variable', 'Segoe UI', -apple-system, sans-serif;
+    font-variant-numeric: tabular-nums;
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow: hidden;
@@ -47,7 +58,7 @@ body {
 }
 
 .active-count-badge {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     background: rgba(96, 205, 255, 0.15);
     color: var(--accent-color);
@@ -68,12 +79,14 @@ body {
     align-items: center;
     gap: 8px;
     padding: 6px 12px;
-    background: rgba(34, 197, 94, 0.15);
-    border-bottom: 1px solid rgba(34, 197, 94, 0.3);
+    background: rgba(34, 197, 94, 0.12);
+    border-bottom: 1px solid rgba(34, 197, 94, 0.25);
     color: #4ade80;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
 }
 
 .status-banner.fade-out {
@@ -81,19 +94,12 @@ body {
     transform: translateY(-8px);
 }
 
-.pulse-dot {
-    width: 6px;
-    height: 6px;
-    background: #4ade80;
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
     border-radius: 50%;
-    box-shadow: 0 0 8px #4ade80;
-    animation: pulse 1.8s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
-    70% { transform: scale(1.1); box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    flex-shrink: 0;
 }
 
 .status-close-btn {
@@ -131,15 +137,15 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.7);
-    padding: 3px 6px;
+    padding: 4px 8px;
     border-radius: 12px;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
     cursor: pointer;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     flex-shrink: 0;
     transition: all 0.2s ease;
 }
@@ -158,11 +164,12 @@ body {
 }
 
 .pill-count {
-    font-size: 9px;
-    opacity: 0.65;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 0 4px;
+    font-size: 11px;
+    opacity: 0.75;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0 5px;
     border-radius: 8px;
+    line-height: 1.3;
 }
 
 .filter-pill.active .pill-count {
@@ -172,13 +179,19 @@ body {
 }
 
 .category-badge {
-    font-size: 8.5px;
+    font-size: 11px;
     font-weight: 600;
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
     letter-spacing: 0.2px;
     flex-shrink: 0;
     line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .category-badge.cat-dev {
@@ -233,15 +246,16 @@ body {
     border-radius: 4px;
     padding: 5px 24px 5px 28px;
     color: #fff;
-    font-size: 11px;
+    font-size: 11.5px;
     font-family: inherit;
     outline: none;
+    caret-color: var(--accent-color);
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
 .search-input::placeholder {
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .search-input:focus {
@@ -327,16 +341,61 @@ body {
     padding: 8px;
 }
 
+/* ==========================================================================
+   Tabela de Portas & Alinhamento em Colunas
+   ========================================================================== */
+.port-table-header {
+    display: grid;
+    grid-template-columns: 58px minmax(70px, 1fr) 68px 46px 66px;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.28);
+    border-bottom: 1px solid var(--border-color);
+    user-select: none;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.col-head {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.col-head.col-port {
+    text-align: center;
+}
+
+.col-head.col-process {
+    text-align: left;
+    padding-left: 2px;
+}
+
+.col-head.col-category {
+    text-align: center;
+}
+
+.col-head.col-pid {
+    text-align: right;
+    padding-right: 2px;
+}
+
+.col-head.col-actions {
+    text-align: right;
+    padding-right: 4px;
+}
+
 .port-item {
     display: flex;
     flex-direction: column;
-    padding: 6px 10px;
+    padding: 6px 8px;
     margin-bottom: 4px;
     background: var(--card-bg);
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.2s ease;
-    min-height: 42px;
     box-sizing: border-box;
 }
 
@@ -349,31 +408,48 @@ body {
 .port-item:hover {
     background: var(--card-hover);
     border-color: var(--border-color);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .port-main-row {
-    display: flex;
+    display: grid;
+    grid-template-columns: 58px minmax(70px, 1fr) 68px 46px 66px;
+    gap: 6px;
     align-items: center;
-    gap: 10px;
     width: 100%;
+    box-sizing: border-box;
 }
 
-.process-info-col {
-    flex: 1;
+.col-cell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.col-cell.col-port {
+    justify-content: center;
+}
+
+.col-cell.col-process {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     overflow: hidden;
-    min-width: 0;
-    gap: 2px;
+    gap: 1px;
 }
 
-.process-header-line {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    overflow: hidden;
-    white-space: nowrap;
+.col-cell.col-category {
+    justify-content: center;
+}
+
+.col-cell.col-pid {
+    justify-content: flex-end;
+}
+
+.col-cell.col-actions {
+    justify-content: flex-end;
+    gap: 4px;
 }
 
 .port-badge {
@@ -381,20 +457,23 @@ body {
     color: #000;
     font-size: 11.5px;
     font-weight: 700;
-    padding: 2px 6px;
+    padding: 3px 4px;
     border-radius: 4px;
-    min-width: 44px;
+    width: 100%;
     text-align: center;
-    flex-shrink: 0;
     cursor: pointer;
     transition: all 0.2s;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
 }
 
 .port-badge:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
-    box-shadow: 0 0 8px var(--accent-color);
+    filter: brightness(1.15);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .process-name {
@@ -404,50 +483,62 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-color);
-    flex-shrink: 1;
-    min-width: 40px;
+    width: 100%;
 }
 
 .process-tag {
-    font-size: 9.5px;
-    color: rgba(255, 255, 255, 0.45);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
     background: rgba(255, 255, 255, 0.06);
     padding: 0 4px;
     border-radius: 3px;
-    flex-shrink: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 90px;
-}
-
-.process-sub-details {
-    font-size: 10.5px;
-    color: rgba(255, 255, 255, 0.6);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: 1.2;
+    max-width: 100%;
 }
 
-.pid {
-    font-size: 10px;
-    opacity: 0.45;
+.pid-value {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Cascadia Code', Consolas, monospace;
     white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: auto;
+    text-align: right;
 }
 
-.actions {
+.port-sub-row {
+    margin-top: 4px;
+    padding-top: 4px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
     display: flex;
-    margin-left: 6px;
-    flex-shrink: 0;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+    font-size: 11px;
+}
+
+.cwd-path {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+}
+
+.details-snippet {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .kill-btn {
     background: var(--danger-color);
     color: white;
     border: 1px solid var(--danger-color);
-    padding: 2px 10px;
+    padding: 2px 8px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 11px;
@@ -456,14 +547,14 @@ body {
     height: 24px;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(255, 77, 79, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
 }
 
 .kill-btn:hover {
     background: #ff7875;
     border-color: #ff7875;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(255, 77, 79, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 /* Scrollbar */
@@ -485,10 +576,23 @@ body {
 }
 
 .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 40px 20px;
-    opacity: 0.5;
-    font-size: 13px;
+    padding: 48px 24px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 12px;
+    gap: 10px;
+    line-height: 1.4;
+}
+
+.empty-state-icon {
+    width: 32px;
+    height: 32px;
+    opacity: 0.45;
+    color: var(--accent-color);
 }
 
 /* Modal Sobre */
@@ -546,7 +650,7 @@ body {
 }
 
 .about-version {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--accent-color);
     margin-top: 2px;
     font-weight: 500;
@@ -573,7 +677,7 @@ body {
     color: var(--text-color);
     padding: 5px 10px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 11.5px;
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
@@ -586,7 +690,7 @@ body {
 }
 
 .about-author {
-    font-size: 11px;
+    font-size: 12px;
     opacity: 0.6;
     margin: 0 0 16px;
 }
@@ -608,4 +712,406 @@ body {
 .btn-close:hover {
     background: var(--card-hover);
     border-color: rgba(255, 255, 255, 0.3);
-}
+}
+
+/* ==========================================================================
+   Abas de Navegação (Windows 11 Tab Navigation)
+   ========================================================================== */
+.tabs-nav {
+    display: flex;
+    gap: 4px;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 11.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-color);
+}
+
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.tab-badge {
+    font-size: 11px;
+    background: rgba(96, 205, 255, 0.18);
+    color: var(--accent-color);
+    padding: 1px 6px;
+    border-radius: 8px;
+    line-height: 1.2;
+}
+
+.view-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.view-panel.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Botão Parar Todos Dev (Kill All Dev)
+   ========================================================================== */
+.btn-kill-dev {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #f87171;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.btn-kill-dev:hover {
+    background: rgba(239, 68, 68, 0.28);
+    border-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-kill-dev.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Métricas de Processo (RAM / CPU) & Botão Abrir Pasta
+   ========================================================================== */
+.metric-badge {
+    font-size: 11px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 1px 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    letter-spacing: 0.2px;
+}
+
+.health-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.health-dot.online {
+    background: #22c55e;
+}
+
+.health-dot.offline {
+    background: #eab308;
+}
+
+.health-dot.unknown {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.action-icon-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: rgba(255, 255, 255, 0.75);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.action-icon-btn:hover {
+    background: var(--card-hover);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* ==========================================================================
+   Skeleton Loaders
+   ========================================================================== */
+.skeleton-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: skeleton-pulse 1.4s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-pulse {
+    0% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.85;
+    }
+}
+
+.skeleton-badge {
+    width: 48px;
+    height: 22px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.skeleton-lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.skeleton-line {
+    height: 10px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   Desbloqueador de Pastas (Unlocker View)
+   ========================================================================== */
+.unlocker-container {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.unlocker-intro {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
+.unlocker-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 2px;
+}
+
+.unlocker-subtitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.35;
+}
+
+.unlocker-input-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.unlocker-input-row .search-input-wrapper {
+    flex: 1;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 10px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.action-btn.primary {
+    background: rgba(96, 205, 255, 0.2);
+    border: 1px solid rgba(96, 205, 255, 0.4);
+    color: var(--accent-color);
+}
+
+.action-btn.primary:hover {
+    background: rgba(96, 205, 255, 0.3);
+    border-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.action-btn.secondary {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: rgba(255, 255, 255, 0.8);
+    width: 32px;
+    padding: 0;
+}
+
+.action-btn.secondary:hover {
+    background: var(--card-hover);
+    color: var(--text-color);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.unlocker-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 10px;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 6px;
+}
+
+.unlocker-action-bar.hidden {
+    display: none !important;
+}
+
+.unlocker-status-msg {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fca5a5;
+}
+
+.btn-release-all {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #dc2626;
+    border: 1px solid #ef4444;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.btn-release-all:hover {
+    background: #ef4444;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.locked-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 2px;
+}
+
+.locked-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.locked-item:hover {
+    background: var(--card-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.locked-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
+    margin-right: 8px;
+}
+
+.locked-item-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lock-type-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.2px;
+}
+
+.lock-type-badge.cwd {
+    background: rgba(245, 158, 11, 0.18);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    color: #fbbf24;
+}
+
+.lock-type-badge.handle {
+    background: rgba(168, 85, 247, 0.18);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: #c084fc;
+}
+
+.locked-item-sub {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.success-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 12px;
+    text-align: center;
+    color: #4ade80;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 6px;
+    gap: 6px;
+    font-size: 11px;
+}

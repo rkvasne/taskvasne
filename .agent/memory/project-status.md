@@ -1,20 +1,28 @@
-﻿# 📊 Status do Projeto - Taskvasne
+# 📊 Status do Projeto - Taskvasne
 
-> **Última Atualização:** 28/09/2026  
-> **Fase Atual:** Estável / Manutenção
+> **Última Atualização:** 29/09/2026  
+> **Fase Atual:** Estável / Produção
 
 ---
 
 ## 🏗️ Arquitetura Atual
 
-- **Frontend:** HTML5, CSS3 vanilla (design Windows 11 Fluent / Mica), Vanilla JavaScript ([renderer.js](file:///d:/Taskvasne/taskvasne-app/ui/renderer.js), [i18n.js](file:///d:/Taskvasne/taskvasne-app/ui/i18n.js))
-- **Backend:** Rust + Tauri v2 ([src-tauri/src/lib.rs](file:///d:/Taskvasne/taskvasne-app/src-tauri/src/lib.rs), [main.rs](file:///d:/Taskvasne/taskvasne-app/src-tauri/src/main.rs))
-- **Testes:** Jest ([tests/i18n.test.js](file:///d:/Taskvasne/taskvasne-app/tests/i18n.test.js))
+- **Frontend:** HTML5, CSS3 vanilla (design Windows 11 Fluent 2), Vanilla JavaScript ([renderer.js](file:///d:/Taskvasne/taskvasne-app/ui/renderer.js), [i18n.js](file:///d:/Taskvasne/taskvasne-app/ui/i18n.js))
+- **Backend:** Rust + Tauri v2 ([src-tauri/src/lib.rs](file:///d:/Taskvasne/taskvasne-app/src-tauri/src/lib.rs), [main.rs](file:///d:/Taskvasne/taskvasne-app/src-tauri/src/main.rs)), Win32 FFI Restart Manager API (`Rstrtmgr.dll`)
+- **Testes:** Jest ([tests/i18n.test.js](file:///d:/Taskvasne/taskvasne-app/tests/i18n.test.js)), Cargo tests ([src-tauri/src/lib.rs](file:///d:/Taskvasne/taskvasne-app/src-tauri/src/lib.rs))
 - **Documentação & Landing:** [docs/](file:///d:/Taskvasne/taskvasne-app/docs/) (servido via Vercel)
 
 ---
 
 ## 📝 Histórico de Sessões
+
+### 2026-09-29 — Release v0.1.4: Desbloqueador de Pastas, Data Grid e Impeccable Polish
+
+- **Versão v0.1.4:** Bump de patch com suite completa de testes verdes (Jest 14/14, Cargo test 7/7, Clippy 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns).
+- **Desbloqueador de Pastas Presas:** Win32 Restart Manager API FFI + scanner de CWD para liberar diretórios e arquivos bloqueados.
+- **Data Grid Alinhado:** Lista de processos reestruturada em 5 colunas estritas (`PORTA`, `PROCESSO`, `TIPO`, `PID`, `AÇÃO`) com cabeçalho de tabela e sub-linha de metadados.
+- **Impeccable Design Polish:** Eliminação de 100% dos 13 anti-patterns detectados (remoção de glows artificiais, tipografia com piso mínimo de 11px/12px, tabular-nums e empty-states).
+- **Ações em lote & Atalhos:** Botão `Parar Dev` (kill-all-dev com atalho `Ctrl+Shift+K`), `Ctrl+F` e `F5`.
 
 ### 2026-09-28 — Release v0.1.3: Sincronização, Higiene e Checkpoint
 
@@ -31,5 +39,5 @@
 
 ---
 
-_Última atualização: 28/09/2026 • v0.1.3_
+_Última atualização: 29/09/2026 • v0.1.4_
 _Editado via: Antigravity | Modelo: Gemini 3.8 Flash | OS: Windows 11_

@@ -52,7 +52,37 @@ const translations = {
         theme: 'Tema',
         autoRefresh: 'Atualização Automática',
         refreshInterval: 'Intervalo de Atualização',
-        seconds: 'segundos'
+        seconds: 'segundos',
+
+        // Tabs & New Features
+        tabPorts: 'Portas',
+        tabUnlocker: 'Desbloquear Pasta',
+        openFolder: 'Abrir pasta do projeto',
+        killAllDev: 'Parar Todos Dev',
+        killAllDevConfirm:
+            'Deseja realmente encerrar todos os {{count}} processos de desenvolvimento?',
+        copied: 'Copiado!',
+        unlockerTitle: 'Desbloqueador de Pastas e Arquivos',
+        unlockerSubtitle: 'Descubra e encerre processos que impedem renomear ou excluir pastas.',
+        unlockerPlaceholder: 'Cole o caminho da pasta (ex: D:\\projetos\\meu-app)...',
+        inspect: 'Inspecionar',
+        paste: 'Colar',
+        unlockAll: 'Liberar Pasta (Encerrar Todos)',
+        noLocksFound:
+            'Nenhum processo está bloqueando este caminho. Pasta livre para renomear/excluir!',
+        locksFoundCount: '{{count}} processo(s) bloqueando este caminho',
+        lockTypeCwd: 'Diretório de Trabalho (CWD)',
+        lockTypeHandle: 'Handle de Arquivo Aberto',
+        releaseSuccess: 'Pasta liberada com sucesso!',
+        releaseError: 'Erro ao liberar pasta',
+        systemProcessWarning: 'Atenção: Processo do Sistema',
+
+        // Table headers
+        colPort: 'Porta',
+        colProcess: 'Processo',
+        colCategory: 'Tipo',
+        colPid: 'PID',
+        colActions: 'Ação'
     },
 
     en: {
@@ -94,7 +124,35 @@ const translations = {
         theme: 'Theme',
         autoRefresh: 'Auto Refresh',
         refreshInterval: 'Refresh Interval',
-        seconds: 'seconds'
+        seconds: 'seconds',
+
+        // Tabs & New Features
+        tabPorts: 'Ports',
+        tabUnlocker: 'Unlock Folder',
+        openFolder: 'Open project folder',
+        killAllDev: 'Stop All Dev',
+        killAllDevConfirm: 'Do you really want to terminate all {{count}} development processes?',
+        copied: 'Copied!',
+        unlockerTitle: 'Folder & File Unlocker',
+        unlockerSubtitle: 'Find and kill processes preventing folder rename or deletion.',
+        unlockerPlaceholder: 'Paste folder or file path (e.g. D:\\projects\\my-app)...',
+        inspect: 'Inspect',
+        paste: 'Paste',
+        unlockAll: 'Release Folder (Kill All)',
+        noLocksFound: 'No processes locking this path. Folder is free to rename/delete!',
+        locksFoundCount: '{{count}} process(es) locking this path',
+        lockTypeCwd: 'Working Directory (CWD)',
+        lockTypeHandle: 'Open File Handle',
+        releaseSuccess: 'Folder released successfully!',
+        releaseError: 'Error releasing folder',
+        systemProcessWarning: 'Warning: System Process',
+
+        // Table headers
+        colPort: 'Port',
+        colProcess: 'Process',
+        colCategory: 'Type',
+        colPid: 'PID',
+        colActions: 'Action'
     }
 };
 

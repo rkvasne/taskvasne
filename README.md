@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.3-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.1.4-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
@@ -24,17 +24,18 @@ Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em 
 
 ## ✨ Funcionalidades
 
+- **Desbloqueador de Pastas Presas (Novo)**: Descubra e encerre processos que estão segurando pastas e impedindo renomear ou excluir, via Win32 Restart Manager API e scanner de CWD.
+- **Data Grid Alinhado (Novo)**: Colunas estritas e alinhadas (`PORTA`, `PROCESSO`, `TIPO`, `PID`, `AÇÃO`) para leitura visual limpa e sem flutuações.
+- **Botão Parar Dev (Novo)**: Encerramento de todos os servidores de desenvolvimento ativos com um clique ou atalho `Ctrl+Shift+K`.
 - **Motor Nativo Rust**: Varredura direta de sockets TCP em memória via APIs de sistema, sem processos externos lentos.
 - **Ultra Leve**: Consumo mínimo de memória (~20-30 MB de RAM) e binário executável otimizado.
-- **Busca Rápida**: Campo de pesquisa compacto para filtrar instantaneamente por porta (`:3000`), nome de processo ou pasta/caminho.
+- **Busca Rápida**: Campo de pesquisa compacto para filtrar instantaneamente por porta (`:3000`), nome de processo ou pasta/caminho (`Ctrl+F`).
 - **Categorização Automática**: Classificação inteligente em **Dev**, **Bancos de Dados**, **Apps** e **Sistema Windows**, com badges visuais e filtros rápidos por pílula.
-- **Identificação Aprofundada**: Exibe o nome do projeto, pasta de trabalho (`cwd`), script em execução (`telemetry-server.js`, `index.mjs`) e linha de comando completa em tooltip.
+- **Identificação Aprofundada**: Exibe o nome do projeto, pasta de trabalho (`cwd`), script em execução e métricas de consumo de memória/CPU.
 - **Segurança Operacional**: Trava de confirmação de segurança para processos críticos do sistema operacional.
-- **Visibilidade no Startup**: Notificação no Windows ao iniciar e banner visual animado indicando atividade na bandeja.
-- **Monitoramento Instantâneo**: Visualize todas as portas TCP ativas (acima de 1000) em tempo real.
-- **Internacionalização**: Suporte completo a PT-BR e EN com troca em tempo real (localStorage persistente).
-- **Design Windows 11**: Interface moderna, compacta, frameless e com modo escuro nativo.
+- **Design Impeccable Windows 11**: Interface moderna, compacta, frameless, sem ruídos cromáticos e com suporte a `tabular-nums` nativo.
 - **System Tray**: Vive silenciosamente na bandeja do sistema. Um clique para abrir, um clique para fechar.
+- **Internacionalização**: Suporte completo a PT-BR e EN com troca em tempo real.
 - **Modal Sobre**: Janela "Sobre" embutida com informações do aplicativo, links para GitHub, LinkedIn e site oficial.
 - **Kill Process**: Encerre processos travados ou indesejados com um único clique e feedback visual suave.
 - **Atualização Automática**: A lista de portas se atualiza automaticamente a cada 5 segundos com botão de refresh manual.
