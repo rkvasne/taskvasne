@@ -185,42 +185,42 @@ body {
 }
 
 .category-badge {
-    font-size: 10.5px;
+    font-size: 10px;
     font-weight: 600;
-    padding: 1px 5px;
-    border-radius: 4px;
-    letter-spacing: 0.2px;
+    padding: 1px 4.5px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
     flex-shrink: 0;
     line-height: 1.2;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    text-transform: uppercase;
     box-sizing: border-box;
 }
 
 .category-badge.cat-dev {
-    background: rgba(96, 205, 255, 0.15);
+    background: rgba(96, 205, 255, 0.12);
     color: #60cdff;
-    border: 1px solid rgba(96, 205, 255, 0.3);
+    border: 1px solid rgba(96, 205, 255, 0.25);
 }
 
 .category-badge.cat-database {
-    background: rgba(74, 222, 128, 0.15);
+    background: rgba(74, 222, 128, 0.12);
     color: #4ade80;
-    border: 1px solid rgba(74, 222, 128, 0.3);
+    border: 1px solid rgba(74, 222, 128, 0.25);
 }
 
 .category-badge.cat-app {
-    background: rgba(192, 132, 252, 0.15);
+    background: rgba(192, 132, 252, 0.12);
     color: #c084fc;
-    border: 1px solid rgba(192, 132, 252, 0.3);
+    border: 1px solid rgba(192, 132, 252, 0.25);
 }
 
 .category-badge.cat-system {
-    background: rgba(148, 163, 184, 0.15);
+    background: rgba(148, 163, 184, 0.1);
     color: #94a3b8;
-    border: 1px solid rgba(148, 163, 184, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 /* Search Bar */
@@ -397,33 +397,35 @@ body {
 }
 
 .port-badge {
-    background: rgba(96, 205, 255, 0.08);
+    background: rgba(96, 205, 255, 0.06);
     color: #60cdff;
-    border: 1px solid rgba(96, 205, 255, 0.2);
-    font-size: 11px;
+    border: 1px solid rgba(96, 205, 255, 0.16);
+    font-size: 10px;
     font-weight: 600;
-    padding: 2px 5px;
-    border-radius: 4px;
+    padding: 1px 4.5px;
+    height: 18px;
+    border-radius: 3px;
     cursor: pointer;
     transition: all 0.15s ease;
     user-select: none;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3.5px;
     flex-shrink: 0;
     box-sizing: border-box;
+    line-height: 1;
 }
 
 .port-badge:hover {
-    background: rgba(96, 205, 255, 0.2);
+    background: rgba(96, 205, 255, 0.16);
     border-color: #60cdff;
     color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .port-number {
-    font-family: inherit;
-    font-variant-numeric: tabular-nums;
+    font-family: 'Cascadia Code', Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: -0.2px;
 }
 
 .process-info {
@@ -462,15 +464,16 @@ body {
 }
 
 .kill-btn {
-    background: rgba(239, 68, 68, 0.14);
+    background: rgba(239, 68, 68, 0.12);
     color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.25);
+    border: 1px solid rgba(239, 68, 68, 0.2);
     padding: 0;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 11px;
+    opacity: 0.5;
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
@@ -479,11 +482,17 @@ body {
     box-sizing: border-box;
 }
 
+.port-item:hover .kill-btn,
+.port-item:hover .action-icon-btn {
+    opacity: 1;
+}
+
 .kill-btn:hover {
     background: #dc2626;
     border-color: #ef4444;
     color: #ffffff;
-    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.4);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+    opacity: 1 !important;
 }
 
 .port-meta-row {
@@ -816,8 +825,8 @@ body {
 }
 
 .health-dot {
-    width: 5px;
-    height: 5px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
@@ -826,12 +835,10 @@ body {
 
 .health-dot.online {
     background: #22c55e;
-    box-shadow: 0 0 4px rgba(34, 197, 94, 0.6);
 }
 
 .health-dot.offline {
     background: #eab308;
-    box-shadow: 0 0 3px rgba(234, 179, 8, 0.4);
 }
 
 .health-dot.unknown {
@@ -841,14 +848,15 @@ body {
 .action-icon-btn {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    color: rgba(255, 255, 255, 0.75);
-    width: 24px;
-    height: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    width: 22px;
+    height: 22px;
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    opacity: 0.5;
     transition: all 0.15s ease;
 }
 
@@ -856,6 +864,7 @@ body {
     background: var(--card-hover);
     color: var(--accent-color);
     border-color: var(--accent-color);
+    opacity: 1 !important;
 }
 
 /* ==========================================================================

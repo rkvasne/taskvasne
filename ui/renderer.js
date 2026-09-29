@@ -446,10 +446,10 @@ function renderPorts(ports) {
     listElement.innerHTML = '';
 
     const categoryLabels = {
-        dev: { label: '⚡ Dev', class: 'cat-dev', desc: 'Ambiente de desenvolvimento' },
-        database: { label: '🗄️ DB', class: 'cat-database', desc: 'Banco de dados' },
-        app: { label: '📦 App', class: 'cat-app', desc: 'Aplicativo de usuário' },
-        system: { label: '🛡️ Sist.', class: 'cat-system', desc: 'Processo do sistema Windows' }
+        dev: { label: 'Dev', class: 'cat-dev', desc: 'Ambiente de desenvolvimento' },
+        database: { label: 'DB', class: 'cat-database', desc: 'Banco de dados' },
+        app: { label: 'App', class: 'cat-app', desc: 'Aplicativo de usuário' },
+        system: { label: 'Sist.', class: 'cat-system', desc: 'Processo do sistema Windows' }
     };
 
     ports.forEach(port => {
