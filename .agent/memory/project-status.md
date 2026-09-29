@@ -16,6 +16,17 @@
 
 ## 📝 Histórico de Sessões
 
+### 2026-09-29 — Release v0.1.5: Menu de Contexto, Health Probes, QR Code Wi-Fi e Delta Watcher
+
+- **Versão v0.1.5:** Bump de patch com suíte completa de testes verdes (Jest 18/18, Cargo test 9/9, Clippy 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns).
+- **Menu de Contexto Rápido:** Abrir projeto diretamente no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer via botão direito.
+- **Health Probes com Sparklines:** Sondagem HTTP em background medindo latência RTT em milissegundos com sparklines inline dinâmicos.
+- **Compartilhamento Wi-Fi / QR Code:** Descoberta de IP local e geração nativa em SVG de QR Code para teste imediato em dispositivos móveis.
+- **Exportadores:** Exportação para tabela Markdown e gerador de arquivo de ambiente `.env.local`.
+- **Delta Watcher de Sockets:** Reatividade instantânea com detecção em tempo real via Tauri IPC (`ports-changed`).
+- **Limpeza de Zumbis / Órfãos:** Detecção e eliminação de processos Dev desvinculados de árvores ativas.
+- **Code Review Formal:** Resiliência em concorrência de sockets, mitigação de vazamento de memória em caches (`syncPortsState`), tratamento em chamadas ao clipboard e proteção de shell contra injeção de caracteres especiais.
+
 ### 2026-09-29 — Release v0.1.4: Desbloqueador de Pastas, Data Grid e Impeccable Polish
 
 - **Versão v0.1.4:** Bump de patch com suite completa de testes verdes (Jest 14/14, Cargo test 7/7, Clippy 0 warnings, ESLint 0 erros, Impeccable detect 0 anti-patterns).
@@ -39,5 +50,5 @@
 
 ---
 
-_Última atualização: 29/09/2026 • v0.1.4_
+_Última atualização: 29/09/2026 • v0.1.5_
 _Editado via: Antigravity | Modelo: Gemini 3.8 Flash | OS: Windows 11_

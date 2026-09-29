@@ -15,6 +15,42 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [0.1.5] - 2026-09-29
+
+### Added
+
+- **Menu de Contexto de Ações Rápidas (Power Actions):**
+    - Clique com o botão direito em qualquer porta para exibir menu de contexto flutuante no estilo Fluent 2.
+    - Ações diretas: `Abrir no VS Code`, `Abrir no Terminal` (com auto-detecção entre Windows Terminal `wt.exe` e PowerShell com `Set-Location`), `Abrir Pasta no Explorer`, `Copiar URL`, `Copiar comando cURL` e `Encerrar Árvore (/T)`.
+- **Health Probes com Latência e Sparklines Inline:**
+    - Sondagem periódica via `fetch` HTTP (`no-cors`) medindo RTT em milissegundos com feedback em mini gráfico vetorial sparkline (`<svg>`) inline.
+    - Classificação visual de desempenho: verde/rápido (<50ms), amarelo/médio (50-150ms) e laranja/lento (>150ms).
+- **Compartilhamento Wi-Fi / Rede Local com QR Code SVG Nativo:**
+    - Comando Rust `get_local_ip` via socket UDP local para descoberta do endereço IPv4 da máquina na LAN.
+    - Gerador autocontido de QR Code puro JavaScript (`ui/qrcode.js`) gerando SVG vetorial direto, sem nenhuma biblioteca externa pesada.
+    - Modal de escaneamento para abrir aplicações móveis no smartphone com a mesma rede Wi-Fi.
+- **Exportadores de Portas (Markdown e .env.local):**
+    - Exportação da lista de portas para tabela Markdown pronta para documentação e issues.
+    - Gerador de arquivo de variáveis de ambiente (`.env.local`) mapeando `<NOME>_PORT` e `<NOME>_URL`.
+- **Delta Watcher de Sockets e Reatividade Instantânea:**
+    - Thread em background em Rust monitorando assinaturas de portas TCP abertas com notificação em tempo real via Tauri IPC (`ports-changed`), reduzindo a dependência de polling estrito.
+- **Detecção e Limpeza de Processos Zumbis / Órfãos:**
+    - Botão `Limpar Zumbis` e comando Rust `kill_all_orphans` para identificar processos de desenvolvimento cuja árvore de execução original foi perdida (`explorer.exe`, `services.exe` ou pai ausente).
+
+### Changed
+
+- **Correções de Segurança e Code Review:**
+    - Escape estrito de aspas simples no PowerShell (`replace('\'', "''")`) para evitar quebras em pastas com apóstrofes ou caracteres especiais.
+    - Delimitação com aspas duplas escapadas no comando CMD do VS Code.
+    - Sincronização e purga automática de chaves obsoletas nos caches de status e latência (`syncPortsState`), prevenindo vazamentos de memória em sessões contínuas.
+    - Tratamento resiliente `.catch(() => {})` em todas as interações com `navigator.clipboard`.
+    - Resiliência no Delta Watcher: assinatura só é confirmada após retorno com sucesso da lista de portas.
+
+### Aprendizado da Release
+
+- **Fato observado:** Operações de cópia e invocação de shells externos no Windows exigem sanitização estrita de aspas e tratamento assíncrono para prevenir interrupções de fluxo no WebView2. O uso de SVG puro para QR Code e Sparklines manteve a aplicação ultraleve sem inflar o bundle com dependências externas.
+- **Diretriz consolidada:** Sempre sanitizar caminhos de diretório antes de passar para interpolações de shell no Windows (`wt.exe`, `powershell.exe`, `cmd.exe`) e proteger chamadas ao clipboard contra perda transitória de foco.
+
 ## [0.1.4] - 2026-09-29
 
 ### Added

@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.4-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.1.5-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
@@ -24,9 +24,15 @@ Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em 
 
 ## ✨ Funcionalidades
 
-- **Desbloqueador de Pastas Presas (Novo)**: Descubra e encerre processos que estão segurando pastas e impedindo renomear ou excluir, via Win32 Restart Manager API e scanner de CWD.
-- **Data Grid Alinhado (Novo)**: Colunas estritas e alinhadas (`PORTA`, `PROCESSO`, `TIPO`, `PID`, `AÇÃO`) para leitura visual limpa e sem flutuações.
-- **Botão Parar Dev (Novo)**: Encerramento de todos os servidores de desenvolvimento ativos com um clique ou atalho `Ctrl+Shift+K`.
+- **Menu de Contexto Rápido (Novo)**: Botão direito para abrir projeto no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer, além de copiar URL e comando cURL.
+- **Health Probes com Latência e Sparklines (Novo)**: Sondagem HTTP com medição de RTT e mini gráfico vetorial inline mostrando histórico recente de resposta.
+- **Compartilhamento Wi-Fi / Rede Local com QR Code (Novo)**: Geração instantânea de URL com IP local e QR Code SVG autocontido para testar em smartphones ou outros dispositivos da LAN.
+- **Exportação de Portas (Novo)**: Exporte rapidamente a tabela de portas ativas em Markdown ou gere variáveis de ambiente `.env.local` com um clique.
+- **Delta Watcher de Sockets (Novo)**: Thread em background em Rust que detecta abertura/fechamento de portas instantaneamente sem depender exclusivamente de polling.
+- **Encerramento de Processos Zumbis (Novo)**: Detecção e eliminação de processos Dev órfãos cujos processos-pai (VS Code, terminal) foram encerrados.
+- **Desbloqueador de Pastas Presas**: Descubra e encerre processos que estão segurando pastas e impedindo renomear ou excluir, via Win32 Restart Manager API e scanner de CWD.
+- **Data Grid Alinhado**: Colunas estritas e alinhadas (`PORTA`, `PROCESSO`, `TIPO`, `PID`, `AÇÃO`) para leitura visual limpa e sem flutuações.
+- **Botão Parar Dev**: Encerramento de todos os servidores de desenvolvimento ativos com um clique ou atalho `Ctrl+Shift+K`.
 - **Motor Nativo Rust**: Varredura direta de sockets TCP em memória via APIs de sistema, sem processos externos lentos.
 - **Ultra Leve**: Consumo mínimo de memória (~20-30 MB de RAM) e binário executável otimizado.
 - **Busca Rápida**: Campo de pesquisa compacto para filtrar instantaneamente por porta (`:3000`), nome de processo ou pasta/caminho (`Ctrl+F`).

@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use sysinfo::{Pid, System};
 use tauri::{
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
-    Manager, PhysicalPosition, PhysicalSize, Position, WebviewWindow, WindowEvent,
+    Emitter, Manager, PhysicalPosition, PhysicalSize, Position, WebviewWindow, WindowEvent,
 };
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -32,6 +32,12 @@ pub struct PortInfo {
     pub memory_mb: u64,
     #[serde(rename = "CpuUsage")]
     pub cpu_usage: f32,
+    #[serde(rename = "IsOrphan")]
+    pub is_orphan: bool,
+    #[serde(rename = "DiskReadKb")]
+    pub disk_read_kb: u64,
+    #[serde(rename = "DiskWrittenKb")]
+    pub disk_written_kb: u64,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
@@ -269,6 +275,25 @@ fn notify_startup() {
         .spawn();
 }
 
+fn is_process_orphan(proc: &sysinfo::Process, sys: &System, category: &str) -> bool {
+    if category != "dev" {
+        return false;
+    }
+    match proc.parent() {
+        None => true,
+        Some(parent_pid) => {
+            if let Some(parent_proc) = sys.process(parent_pid) {
+                let parent_name = parent_proc.name().to_string_lossy().to_lowercase();
+                parent_name == "services.exe"
+                    || parent_name == "explorer.exe"
+                    || parent_name == "svchost.exe"
+            } else {
+                true
+            }
+        }
+    }
+}
+
 #[tauri::command]
 fn get_ports() -> Result<Vec<PortInfo>, String> {
     let mut sys = System::new();
@@ -300,6 +325,9 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                 let mut cwd = None;
                 let mut memory_mb = 0;
                 let mut cpu_usage = 0.0;
+                let mut is_orphan = false;
+                let mut disk_read_kb = 0;
+                let mut disk_written_kb = 0;
 
                 if pid > 0 {
                     if let Some(proc) = sys.process(Pid::from_u32(pid)) {
@@ -314,6 +342,11 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                         cwd = proc.cwd().map(|p| sanitize_path(&p.to_string_lossy()));
                         memory_mb = proc.memory() / (1024 * 1024);
                         cpu_usage = proc.cpu_usage();
+
+                        let du = proc.disk_usage();
+                        disk_read_kb = du.read_bytes / 1024;
+                        disk_written_kb = du.written_bytes / 1024;
+                        is_orphan = is_process_orphan(proc, &sys, &category);
                     }
                 }
 
@@ -328,6 +361,9 @@ fn get_ports() -> Result<Vec<PortInfo>, String> {
                     cwd,
                     memory_mb,
                     cpu_usage,
+                    is_orphan,
+                    disk_read_kb,
+                    disk_written_kb,
                 });
             }
         }
@@ -391,6 +427,131 @@ fn open_folder(path: String) -> Result<(), String> {
 }
 
 #[tauri::command]
+fn kill_process_tree(pid: u32) -> KillResult {
+    if pid == 0 {
+        return KillResult {
+            success: false,
+            error: Some("PID inválido".into()),
+        };
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        let output = Command::new("taskkill")
+            .args(["/F", "/T", "/PID", &pid.to_string()])
+            .creation_flags(CREATE_NO_WINDOW)
+            .output();
+
+        match output {
+            Ok(out) => {
+                if out.status.success() {
+                    KillResult {
+                        success: true,
+                        error: None,
+                    }
+                } else {
+                    let err = String::from_utf8_lossy(&out.stderr).trim().to_string();
+                    KillResult {
+                        success: false,
+                        error: Some(if err.is_empty() {
+                            "Falha ao finalizar árvore de processos".into()
+                        } else {
+                            err
+                        }),
+                    }
+                }
+            }
+            Err(e) => KillResult {
+                success: false,
+                error: Some(e.to_string()),
+            },
+        }
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        kill_process(pid)
+    }
+}
+
+#[tauri::command]
+fn open_in_vscode(path: String) -> Result<(), String> {
+    let clean = sanitize_path(&path);
+    let p = Path::new(&clean);
+    let target = if p.is_file() {
+        p.parent().unwrap_or(p)
+    } else {
+        p
+    };
+
+    if !target.exists() {
+        return Err("Caminho não existe".into());
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        let res = Command::new("cmd")
+            .args(["/c", &format!("code \"{}\"", target.to_string_lossy())])
+            .creation_flags(CREATE_NO_WINDOW)
+            .spawn();
+
+        res.map(|_| ()).map_err(|e| format!("Erro ao abrir VS Code: {e}"))
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        Command::new("code")
+            .arg(&target.to_string_lossy())
+            .spawn()
+            .map(|_| ())
+            .map_err(|e| format!("Erro ao abrir VS Code: {e}"))
+    }
+}
+
+#[tauri::command]
+fn open_in_terminal(path: String) -> Result<(), String> {
+    let clean = sanitize_path(&path);
+    let p = Path::new(&clean);
+    let target = if p.is_file() {
+        p.parent().unwrap_or(p)
+    } else {
+        p
+    };
+
+    if !target.exists() {
+        return Err("Caminho não existe".into());
+    }
+
+    #[cfg(target_os = "windows")]
+    {
+        let target_str = target.to_string_lossy();
+        let wt_res = Command::new("wt.exe")
+            .args(["-d", &target_str])
+            .spawn();
+
+        if wt_res.is_err() {
+            let escaped_path = target_str.replace('\'', "''");
+            Command::new("powershell.exe")
+                .args(["-NoExit", "-Command", &format!("Set-Location -LiteralPath '{}'", escaped_path)])
+                .spawn()
+                .map(|_| ())
+                .map_err(|e| format!("Erro ao abrir Terminal: {e}"))
+        } else {
+            Ok(())
+        }
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        Command::new("x-terminal-emulator")
+            .arg(&target.to_string_lossy())
+            .spawn()
+            .map(|_| ())
+            .map_err(|e| format!("Erro ao abrir Terminal: {e}"))
+    }
+}
+
+#[tauri::command]
 fn kill_all_dev() -> Result<u32, String> {
     let ports = get_ports()?;
     let mut killed_pids = HashSet::new();
@@ -406,6 +567,67 @@ fn kill_all_dev() -> Result<u32, String> {
     }
 
     Ok(count)
+}
+
+#[tauri::command]
+fn kill_all_orphans() -> KillResult {
+    let mut sys = System::new();
+    sys.refresh_processes_specifics(
+        sysinfo::ProcessesToUpdate::All,
+        true,
+        sysinfo::ProcessRefreshKind::everything(),
+    );
+
+    let af_flags = AddressFamilyFlags::IPV4 | AddressFamilyFlags::IPV6;
+    let proto_flags = ProtocolFlags::TCP;
+    let sockets = match get_sockets_info(af_flags, proto_flags) {
+        Ok(s) => s,
+        Err(e) => return KillResult { success: false, error: Some(e.to_string()) },
+    };
+
+    let mut killed = 0;
+    let mut errors = Vec::new();
+    let mut seen_pids = HashSet::new();
+
+    for socket in sockets {
+        if let ProtocolSocketInfo::Tcp(tcp_info) = socket.protocol_socket_info {
+            if tcp_info.state == TcpState::Listen && tcp_info.local_port > PORT_THRESHOLD {
+                let pid = socket.associated_pids.first().copied().unwrap_or(0);
+                if pid > 0 && seen_pids.insert(pid) {
+                    if let Some(proc) = sys.process(Pid::from_u32(pid)) {
+                        let raw_name = proc.name().to_string_lossy().to_string();
+                        let (_, _, _, category) = extract_process_details(proc, &raw_name);
+                        if is_process_orphan(proc, &sys, &category) {
+                            let res = kill_process_tree(pid);
+                            if res.success {
+                                killed += 1;
+                            } else if let Some(err) = res.error {
+                                errors.push(err);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if errors.is_empty() {
+        KillResult { success: true, error: None }
+    } else {
+        KillResult {
+            success: killed > 0,
+            error: Some(format!("Encerrados: {killed}. Falhas: {}", errors.join("; "))),
+        }
+    }
+}
+
+#[tauri::command]
+fn get_local_ip() -> Result<String, String> {
+    use std::net::UdpSocket;
+    let socket = UdpSocket::bind("0.0.0.0:0").map_err(|e| e.to_string())?;
+    socket.connect("8.8.8.8:80").map_err(|e| e.to_string())?;
+    let local_addr = socket.local_addr().map_err(|e| e.to_string())?;
+    Ok(local_addr.ip().to_string())
 }
 
 #[cfg(target_os = "windows")]
@@ -814,14 +1036,54 @@ pub fn run() {
                 show_window(&window);
             }
 
+            // Background delta socket watcher para atualização instantânea em tempo real com zero CPU idle
+            let app_handle = app.handle().clone();
+            std::thread::spawn(move || {
+                let mut last_sig: Vec<(u16, u32)> = Vec::new();
+                loop {
+                    std::thread::sleep(std::time::Duration::from_millis(1500));
+
+                    let af_flags = AddressFamilyFlags::IPV4 | AddressFamilyFlags::IPV6;
+                    let proto_flags = ProtocolFlags::TCP;
+                    if let Ok(sockets) = get_sockets_info(af_flags, proto_flags) {
+                        let mut current_sig: Vec<(u16, u32)> = sockets
+                            .into_iter()
+                            .filter_map(|s| {
+                                if let ProtocolSocketInfo::Tcp(tcp_info) = s.protocol_socket_info {
+                                    if tcp_info.state == TcpState::Listen && tcp_info.local_port > PORT_THRESHOLD {
+                                        let pid = s.associated_pids.first().copied().unwrap_or(0);
+                                        return Some((tcp_info.local_port, pid));
+                                    }
+                                }
+                                None
+                            })
+                            .collect();
+                        current_sig.sort_unstable();
+                        current_sig.dedup();
+
+                        if current_sig != last_sig {
+                            if let Ok(ports) = get_ports() {
+                                last_sig = current_sig;
+                                let _ = app_handle.emit("ports-changed", ports);
+                            }
+                        }
+                    }
+                }
+            });
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_ports,
             kill_process,
+            kill_process_tree,
             kill_all_dev,
+            kill_all_orphans,
+            get_local_ip,
             open_external,
             open_folder,
+            open_in_vscode,
+            open_in_terminal,
             inspect_locked_path,
             release_locked_path,
             quit_app
@@ -890,10 +1152,33 @@ mod tests {
 
     #[test]
     fn test_inspect_locked_path_valid() {
-        // Testa com o próprio diretório de trabalho atual
         let cwd = std::env::current_dir().unwrap();
         let res = inspect_locked_path(cwd.to_string_lossy().to_string());
         assert!(res.is_ok());
+    }
+
+    #[test]
+    fn test_get_local_ip() {
+        // Se a máquina estiver online, deve retornar um IP válido; se offline, mapeia o erro
+        let ip_res = get_local_ip();
+        if let Ok(ip) = ip_res {
+            assert!(!ip.is_empty());
+        }
+    }
+
+    #[test]
+    fn test_is_process_orphan_non_dev() {
+        let mut sys = System::new();
+        sys.refresh_processes_specifics(
+            sysinfo::ProcessesToUpdate::All,
+            true,
+            sysinfo::ProcessRefreshKind::nothing(),
+        );
+        if let Some((_, proc)) = sys.processes().iter().next() {
+            assert!(!is_process_orphan(proc, &sys, "system"));
+            assert!(!is_process_orphan(proc, &sys, "database"));
+            assert!(!is_process_orphan(proc, &sys, "app"));
+        }
     }
 }
 

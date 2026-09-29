@@ -82,7 +82,35 @@ const translations = {
         colProcess: 'Processo',
         colCategory: 'Tipo',
         colPid: 'PID',
-        colActions: 'Ação'
+        colActions: 'Ação',
+
+        // Context Menu & Export
+        copyUrl: 'Copiar URL',
+        copyCurl: 'Copiar como cURL',
+        openInVsCode: 'Abrir no VS Code',
+        openInTerminal: 'Abrir no Terminal',
+        openFolderContext: 'Abrir Pasta no Explorer',
+        killTree: 'Encerrar Árvore de Processos',
+        killTreeConfirm:
+            'Deseja encerrar este processo e todos os seus subprocessos (PID {{pid}})?',
+        exportTitle: 'Exportar',
+        exportMarkdown: 'Copiar Tabela (Markdown)',
+        exportEnv: 'Copiar Variáveis (.env.local)',
+        exportSuccess: 'Copiado para a área de transferência!',
+        probeStatus: 'Status: {{status}} ({{rtt}}ms)',
+        moreActions: 'Mais ações',
+
+        // Zombies & Sharing
+        orphanBadge: 'Zumbi',
+        killOrphans: 'Limpar Zumbis',
+        killOrphansConfirm:
+            'Deseja encerrar os {{count}} processos zumbis/órfãos de desenvolvimento?',
+        shareNetwork: 'Compartilhar na Rede (Wi-Fi)',
+        shareNetworkTitle: 'Compartilhar no Celular / Wi-Fi',
+        shareNetworkDesc:
+            'Acesse pelo celular ou outros dispositivos conectados na mesma rede local:',
+        qrScan: 'Escaneie o QR Code com a câmera do celular:',
+        networkIpError: 'Não foi possível detectar o IP da rede local'
     },
 
     en: {
@@ -152,7 +180,34 @@ const translations = {
         colProcess: 'Process',
         colCategory: 'Type',
         colPid: 'PID',
-        colActions: 'Action'
+        colActions: 'Action',
+
+        // Context Menu & Export
+        copyUrl: 'Copy URL',
+        copyCurl: 'Copy as cURL',
+        openInVsCode: 'Open in VS Code',
+        openInTerminal: 'Open in Terminal',
+        openFolderContext: 'Open Folder in Explorer',
+        killTree: 'Kill Process Tree',
+        killTreeConfirm:
+            'Do you really want to terminate this process and all its subprocesses (PID {{pid}})?',
+        exportTitle: 'Export',
+        exportMarkdown: 'Copy Table (Markdown)',
+        exportEnv: 'Copy Variables (.env.local)',
+        exportSuccess: 'Copied to clipboard!',
+        probeStatus: 'Status: {{status}} ({{rtt}}ms)',
+        moreActions: 'More actions',
+
+        // Zombies & Sharing
+        orphanBadge: 'Zombie',
+        killOrphans: 'Kill Zombies',
+        killOrphansConfirm: 'Do you really want to terminate {{count}} orphaned dev processes?',
+        shareNetwork: 'Share on Local Network (Wi-Fi)',
+        shareNetworkTitle: 'Share to Mobile / Local Wi-Fi',
+        shareNetworkDesc:
+            'Access from your phone or other devices connected to the same local network:',
+        qrScan: 'Scan the QR Code with your phone camera:',
+        networkIpError: 'Could not detect local network IP'
     }
 };
 

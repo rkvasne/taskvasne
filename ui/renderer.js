@@ -1,4 +1,4 @@
-/* global AbortController, fetch, clearTimeout, navigator */
+/* global AbortController, fetch, clearTimeout, navigator, performance */
 
 // Configuration Constants
 const AUTO_REFRESH_INTERVAL = 5000; // 5 seconds - sync with README documentation
@@ -17,6 +17,8 @@ const searchInput = document.getElementById('search-input');
 const clearSearchBtn = document.getElementById('clear-search');
 const btnKillDev = document.getElementById('btn-kill-dev');
 const devCountLabel = document.getElementById('dev-count-label');
+const btnKillOrphans = document.getElementById('btn-kill-orphans');
+const orphanCountLabel = document.getElementById('orphan-count-label');
 const mainTabs = document.getElementById('main-tabs');
 const tabPortsCount = document.getElementById('tab-ports-count');
 const portsView = document.getElementById('ports-view');
@@ -36,6 +38,7 @@ let searchQuery = '';
 let currentLockedPath = '';
 let currentLockedProcesses = [];
 const healthStatusCache = new Map();
+const latencyHistoryMap = new Map();
 
 // Auto-hide status banner after 6 seconds
 if (statusBanner) {
@@ -156,6 +159,72 @@ if (btnKillDev) {
     });
 }
 
+// Kill Orphans (Zombies) button
+if (btnKillOrphans) {
+    btnKillOrphans.addEventListener('click', async () => {
+        const orphanPorts = allPorts.filter(
+            p => p.IsOrphan && (p.Category || '').toLowerCase() === 'dev'
+        );
+        const count = new Set(orphanPorts.map(p => p.PID)).size;
+        if (count === 0) return;
+
+        const confirmed = window.confirm(window.i18n.t('killOrphansConfirm', { count }));
+        if (!confirmed) return;
+
+        btnKillOrphans.disabled = true;
+        try {
+            const res = await tauriInvoke('kill_all_orphans');
+            if (res && res.success) {
+                await loadPorts();
+            } else {
+                alert(`Aviso ao limpar zumbis: ${res?.error || 'Erro desconhecido'}`);
+                await loadPorts();
+            }
+        } catch (e) {
+            alert(`Erro ao limpar zumbis: ${e}`);
+        } finally {
+            btnKillOrphans.disabled = false;
+        }
+    });
+}
+
+/**
+ * Generates inline sparkline SVG for latency history
+ * @param {Array<number|null>} history
+ * @returns {string} SVG HTML
+ */
+function generateSparklineSvg(history) {
+    if (!history || history.length < 2) return '';
+    const valid = history.filter(v => typeof v === 'number');
+    if (valid.length < 2) return '';
+
+    const width = 36;
+    const height = 12;
+    const maxVal = Math.max(80, ...valid);
+    const minVal = 0;
+    const range = Math.max(1, maxVal - minVal);
+
+    const stepX = width / (history.length - 1);
+    const points = history.map((val, idx) => {
+        const x = (idx * stepX).toFixed(1);
+        if (val === null) {
+            return `${x},${height}`;
+        }
+        const clamped = Math.min(val, maxVal);
+        const y = (height - ((clamped - minVal) / range) * (height - 2) - 1).toFixed(1);
+        return `${x},${y}`;
+    });
+
+    const lastVal = valid[valid.length - 1];
+    const speedClass = lastVal < 50 ? 'fast' : lastVal < 150 ? 'med' : 'slow';
+
+    return `
+      <svg class="sparkline-svg" viewBox="0 0 ${width} ${height}">
+        <polyline class="sparkline-line ${speedClass}" points="${points.join(' ')}" />
+      </svg>
+    `;
+}
+
 /**
  * Helper to invoke Tauri IPC safely
  * @param {string} cmd
@@ -173,28 +242,41 @@ async function tauriInvoke(cmd, args = {}) {
 }
 
 /**
- * HTTP health probe for local ports
+ * HTTP health probe for local ports with latency (RTT) measurement and history
  * @param {number} portNum
- * @returns {Promise<string>}
+ * @returns {Promise<{status: string, rtt: number|null, statusText: string|null, history: Array<number|null>}>}
  */
 async function probePort(portNum) {
-    if (healthStatusCache.has(portNum)) {
-        return healthStatusCache.get(portNum);
-    }
+    const t0 = performance.now();
     try {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 900);
-        await fetch(`http://localhost:${portNum}/`, {
-            method: 'HEAD',
+        const timeoutId = setTimeout(() => controller.abort(), 950);
+        const res = await fetch(`http://localhost:${portNum}/`, {
+            method: 'GET',
             mode: 'no-cors',
             signal: controller.signal
         });
         clearTimeout(timeoutId);
-        healthStatusCache.set(portNum, 'online');
-        return 'online';
+        const rtt = Math.max(1, Math.round(performance.now() - t0));
+        const statusText = res.status > 0 ? `${res.status} OK` : '200 OK';
+
+        const history = latencyHistoryMap.get(portNum) || [];
+        history.push(rtt);
+        if (history.length > 8) history.shift();
+        latencyHistoryMap.set(portNum, history);
+
+        const info = { status: 'online', rtt, statusText, history };
+        healthStatusCache.set(portNum, info);
+        return info;
     } catch {
-        healthStatusCache.set(portNum, 'offline');
-        return 'offline';
+        const history = latencyHistoryMap.get(portNum) || [];
+        history.push(null);
+        if (history.length > 8) history.shift();
+        latencyHistoryMap.set(portNum, history);
+
+        const info = { status: 'offline', rtt: null, statusText: null, history };
+        healthStatusCache.set(portNum, info);
+        return info;
     }
 }
 
@@ -227,6 +309,28 @@ function updateCategoryCounts(ports) {
 }
 
 /**
+ * Synchronizes port state and purges dead ports from health and latency caches
+ * to prevent memory leaks during long-running sessions.
+ * @param {Array<Object>} newPorts
+ */
+function syncPortsState(newPorts) {
+    allPorts = newPorts || [];
+    const currentPortSet = new Set(allPorts.map(p => p.LocalPort));
+    for (const key of healthStatusCache.keys()) {
+        if (!currentPortSet.has(key)) {
+            healthStatusCache.delete(key);
+        }
+    }
+    for (const key of latencyHistoryMap.keys()) {
+        if (!currentPortSet.has(key)) {
+            latencyHistoryMap.delete(key);
+        }
+    }
+    updateCategoryCounts(allPorts);
+    renderFilteredPorts();
+}
+
+/**
  * Loads and displays the list of active ports
  * Shows skeleton loading state only if list is empty
  * @async
@@ -243,9 +347,7 @@ async function loadPorts() {
 
     try {
         const ports = await tauriInvoke('get_ports');
-        allPorts = ports || [];
-        updateCategoryCounts(allPorts);
-        renderFilteredPorts();
+        syncPortsState(ports);
     } catch (error) {
         listElement.innerHTML = `<div class="empty-state">${window.i18n.t('loadingError')}: ${error}</div>`;
     }
@@ -308,6 +410,20 @@ function renderPorts(ports) {
         }
     }
 
+    // Atualiza botão Kill Orphans (Zumbis)
+    const orphanProcesses = allPorts.filter(
+        p => p.IsOrphan && (p.Category || '').toLowerCase() === 'dev'
+    );
+    const orphanUniquePids = new Set(orphanProcesses.map(p => p.PID));
+    if (btnKillOrphans && orphanCountLabel) {
+        orphanCountLabel.textContent = orphanUniquePids.size;
+        if (orphanUniquePids.size > 0) {
+            btnKillOrphans.classList.remove('hidden');
+        } else {
+            btnKillOrphans.classList.add('hidden');
+        }
+    }
+
     if (!ports || ports.length === 0) {
         let emptyMsg = window.i18n.t('noPortsFound');
         if (searchQuery) {
@@ -345,13 +461,26 @@ function renderPorts(ports) {
         const detailsText = port.Details || '';
         const catInfo = categoryLabels[port.Category] || categoryLabels.app;
 
+        const isOrphanDev = port.IsOrphan && (port.Category || '').toLowerCase() === 'dev';
+        const orphanTag = isOrphanDev
+            ? `<span class="orphan-badge" title="Processo abandonado (processo pai fechado)">👻 ${window.i18n.t('orphanBadge')}</span>`
+            : '';
+
         const memText = port.MemoryMb && port.MemoryMb > 0 ? `${port.MemoryMb} MB` : null;
         const cpuText =
             port.CpuUsage && port.CpuUsage > 0.1 ? `${port.CpuUsage.toFixed(1)}%` : null;
-        const metricSummary = [memText, cpuText].filter(Boolean).join(' • ');
+        let ioText = null;
+        if (
+            (port.DiskReadKb && port.DiskReadKb > 0) ||
+            (port.DiskWrittenKb && port.DiskWrittenKb > 0)
+        ) {
+            ioText = `I/O: ${port.DiskReadKb || 0}K R / ${port.DiskWrittenKb || 0}K W`;
+        }
+        const metricSummary = [memText, cpuText, ioText].filter(Boolean).join(' • ');
 
         const tooltipLines = [
             `Porta :${port.LocalPort} | PID: ${port.PID}`,
+            isOrphanDev ? '⚠️ Processo Órfão / Zumbi de Desenvolvimento' : '',
             `Categoria: ${catInfo.label} (${catInfo.desc})`,
             `Processo: ${port.ProcessName}${port.ProjectName ? ` (${port.ProjectName})` : ''}`,
             metricSummary ? `Consumo: ${metricSummary}` : '',
@@ -389,10 +518,13 @@ function renderPorts(ports) {
           <div class="port-badge" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
             <span class="health-dot unknown" id="health-${port.LocalPort}" title="Status HTTP"></span>
             <span>:${port.LocalPort}</span>
+            <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
+            <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
           </div>
         </div>
         <div class="col-cell col-process" title="${mainTitle}">
           <span class="process-name">${mainTitle}</span>
+          ${orphanTag}
           ${subTag ? `<span class="process-tag" title="${subTag}">${subTag}</span>` : ''}
         </div>
         <div class="col-cell col-category">
@@ -407,20 +539,30 @@ function renderPorts(ports) {
       ${subRowHtml}
     `;
 
+        // Context menu com clique com o botão direito
+        item.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            openContextMenu(port, e.clientX, e.clientY);
+        });
+
         // Copiar URL ao clicar na porta e abrir no navegador com duplo-clique
         const badge = item.querySelector('.port-badge');
         badge.onclick = e => {
             e.stopPropagation();
-            navigator.clipboard.writeText(`http://localhost:${port.LocalPort}`).then(() => {
-                const spanPort = badge.querySelector('span:last-child');
-                if (spanPort) {
-                    const orig = spanPort.textContent;
-                    spanPort.textContent = window.i18n.t('copied');
-                    setTimeout(() => {
-                        spanPort.textContent = orig;
-                    }, 1000);
-                }
-            });
+            navigator.clipboard
+                .writeText(`http://localhost:${port.LocalPort}`)
+                .then(() => {
+                    const spanPort = badge.querySelector('span:nth-child(2)');
+                    if (spanPort) {
+                        const orig = spanPort.textContent;
+                        spanPort.textContent = window.i18n.t('copied');
+                        setTimeout(() => {
+                            spanPort.textContent = orig;
+                        }, 1000);
+                    }
+                })
+                .catch(() => {});
         };
 
         const processName = item.querySelector('.process-name');
@@ -430,15 +572,26 @@ function renderPorts(ports) {
             tauriInvoke('open_external', { url: `http://localhost:${port.LocalPort}` });
         };
 
-        // Probe assíncrono de saúde HTTP
-        probePort(port.LocalPort).then(status => {
+        // Probe assíncrono de saúde HTTP, latência RTT e sparkline
+        probePort(port.LocalPort).then(health => {
             const dot = item.querySelector(`#health-${port.LocalPort}`);
+            const latencyBadge = item.querySelector(`#latency-${port.LocalPort}`);
+            const sparklineSpan = item.querySelector(`#sparkline-${port.LocalPort}`);
             if (dot) {
-                dot.className = `health-dot ${status}`;
+                dot.className = `health-dot ${health.status}`;
                 dot.title =
-                    status === 'online'
-                        ? 'Servidor HTTP respondendo (200 OK)'
+                    health.status === 'online'
+                        ? `Servidor HTTP respondendo (${health.statusText}, ${health.rtt}ms)`
                         : 'Porta aberta (sem resposta HTTP direta)';
+            }
+            if (latencyBadge && health.status === 'online' && health.rtt !== null) {
+                latencyBadge.textContent = `${health.rtt}ms`;
+                const speedClass = health.rtt < 50 ? 'fast' : health.rtt < 150 ? 'med' : 'slow';
+                latencyBadge.className = `latency-badge ${speedClass}`;
+                latencyBadge.title = `Tempo de resposta RTT: ${health.rtt}ms (${health.statusText})`;
+            }
+            if (sparklineSpan && health.history) {
+                sparklineSpan.innerHTML = generateSparklineSvg(health.history);
             }
         });
 
@@ -460,6 +613,24 @@ function renderPorts(ports) {
             };
             actionsContainer.appendChild(openFolderBtn);
         }
+
+        // Botão Mais Ações (Context Menu)
+        const moreBtn = document.createElement('button');
+        moreBtn.className = 'action-icon-btn';
+        moreBtn.title = window.i18n.t('moreActions');
+        moreBtn.innerHTML = `
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="1.5"></circle>
+            <circle cx="12" cy="5" r="1.5"></circle>
+            <circle cx="12" cy="19" r="1.5"></circle>
+          </svg>
+        `;
+        moreBtn.onclick = e => {
+            e.stopPropagation();
+            const rect = moreBtn.getBoundingClientRect();
+            openContextMenu(port, rect.left - 180, rect.bottom + 4);
+        };
+        actionsContainer.appendChild(moreBtn);
 
         // Botão Stop Process
         const killBtn = document.createElement('button');
@@ -796,5 +967,330 @@ applyTranslations();
 // Initial load
 loadPorts();
 
-// Auto refresh every 5s
+// Auto refresh every 5s (como fallback caso o watcher do sistema operacional não emita evento)
 setInterval(loadPorts, AUTO_REFRESH_INTERVAL);
+
+// ==========================================================================
+// Menu de Contexto Flutuante (Context Menu Logic)
+// ==========================================================================
+let activeContextPort = null;
+const contextMenu = document.getElementById('context-menu');
+
+function openContextMenu(port, x, y) {
+    if (!contextMenu) return;
+    activeContextPort = port;
+
+    const label = document.getElementById('ctx-port-label');
+    if (label) {
+        const title = port.ProjectName || port.ProcessName || window.i18n.t('unknown');
+        label.textContent = `:${port.LocalPort} (${title})`;
+    }
+
+    const rttBadge = document.getElementById('ctx-rtt-badge');
+    const cachedHealth = healthStatusCache.get(port.LocalPort);
+    if (rttBadge) {
+        if (cachedHealth && cachedHealth.status === 'online' && cachedHealth.rtt !== null) {
+            rttBadge.textContent = `${cachedHealth.statusText} (${cachedHealth.rtt}ms)`;
+            const speed = cachedHealth.rtt < 50 ? 'fast' : cachedHealth.rtt < 150 ? 'med' : 'slow';
+            rttBadge.className = `ctx-badge ${speed}`;
+        } else {
+            rttBadge.className = 'ctx-badge hidden';
+        }
+    }
+
+    // Exibe ou oculta opções dependentes de caminho em disco
+    const hasPath = Boolean(port.Cwd);
+    const vscodeBtn = document.getElementById('ctx-open-vscode');
+    const termBtn = document.getElementById('ctx-open-terminal');
+    const folderBtn = document.getElementById('ctx-open-folder');
+    if (vscodeBtn) vscodeBtn.style.display = hasPath ? 'flex' : 'none';
+    if (termBtn) termBtn.style.display = hasPath ? 'flex' : 'none';
+    if (folderBtn) folderBtn.style.display = hasPath ? 'flex' : 'none';
+
+    contextMenu.classList.remove('hidden');
+
+    // Bounds checking para garantir que o menu fique visível na janela
+    const rect = contextMenu.getBoundingClientRect();
+    const winWidth = window.innerWidth;
+    const winHeight = window.innerHeight;
+
+    let posX = x;
+    let posY = y;
+
+    if (posX + rect.width > winWidth - 8) {
+        posX = winWidth - rect.width - 8;
+    }
+    if (posY + rect.height > winHeight - 8) {
+        posY = winHeight - rect.height - 8;
+    }
+
+    contextMenu.style.left = `${Math.max(8, posX)}px`;
+    contextMenu.style.top = `${Math.max(8, posY)}px`;
+}
+
+function closeContextMenu() {
+    if (contextMenu) {
+        contextMenu.classList.add('hidden');
+    }
+    activeContextPort = null;
+}
+
+// Fechar menu de contexto e dropdown de exportação ao clicar fora ou rolar
+document.addEventListener('click', e => {
+    if (contextMenu && !contextMenu.contains(e.target)) {
+        closeContextMenu();
+    }
+    const exportDropdown = document.getElementById('export-dropdown');
+    const exportBtn = document.getElementById('btn-export');
+    if (
+        exportDropdown &&
+        exportBtn &&
+        !exportDropdown.contains(e.target) &&
+        !exportBtn.contains(e.target)
+    ) {
+        exportDropdown.classList.add('hidden');
+    }
+});
+
+window.addEventListener(
+    'scroll',
+    () => {
+        closeContextMenu();
+    },
+    true
+);
+
+window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        closeContextMenu();
+        const exportDropdown = document.getElementById('export-dropdown');
+        if (exportDropdown) exportDropdown.classList.add('hidden');
+    }
+});
+
+// Ações do menu de contexto
+const ctxCopyUrl = document.getElementById('ctx-copy-url');
+if (ctxCopyUrl) {
+    ctxCopyUrl.addEventListener('click', () => {
+        if (activeContextPort) {
+            navigator.clipboard
+                .writeText(`http://localhost:${activeContextPort.LocalPort}`)
+                .catch(() => {});
+        }
+        closeContextMenu();
+    });
+}
+
+const ctxCopyCurl = document.getElementById('ctx-copy-curl');
+if (ctxCopyCurl) {
+    ctxCopyCurl.addEventListener('click', () => {
+        if (activeContextPort) {
+            navigator.clipboard
+                .writeText(`curl -i http://localhost:${activeContextPort.LocalPort}`)
+                .catch(() => {});
+        }
+        closeContextMenu();
+    });
+}
+
+const ctxOpenVsCode = document.getElementById('ctx-open-vscode');
+if (ctxOpenVsCode) {
+    ctxOpenVsCode.addEventListener('click', () => {
+        if (activeContextPort && activeContextPort.Cwd) {
+            tauriInvoke('open_in_vscode', { path: activeContextPort.Cwd });
+        }
+        closeContextMenu();
+    });
+}
+
+const ctxOpenTerminal = document.getElementById('ctx-open-terminal');
+if (ctxOpenTerminal) {
+    ctxOpenTerminal.addEventListener('click', () => {
+        if (activeContextPort && activeContextPort.Cwd) {
+            tauriInvoke('open_in_terminal', { path: activeContextPort.Cwd });
+        }
+        closeContextMenu();
+    });
+}
+
+const ctxOpenFolder = document.getElementById('ctx-open-folder');
+if (ctxOpenFolder) {
+    ctxOpenFolder.addEventListener('click', () => {
+        if (activeContextPort && activeContextPort.Cwd) {
+            tauriInvoke('open_folder', { path: activeContextPort.Cwd });
+        }
+        closeContextMenu();
+    });
+}
+
+const ctxKillTree = document.getElementById('ctx-kill-tree');
+if (ctxKillTree) {
+    ctxKillTree.addEventListener('click', async () => {
+        if (!activeContextPort) return;
+        const pid = activeContextPort.PID;
+        const confirmed = window.confirm(window.i18n.t('killTreeConfirm', { pid }));
+        closeContextMenu();
+        if (confirmed) {
+            try {
+                const res = await tauriInvoke('kill_process_tree', { pid });
+                if (res && res.success) {
+                    loadPorts();
+                } else {
+                    alert(
+                        `${window.i18n.t('errorKillingProcess')}: ${res?.error || 'Erro desconhecido'}`
+                    );
+                }
+            } catch (err) {
+                alert(`${window.i18n.t('errorKillingProcess')}: ${err}`);
+            }
+        }
+    });
+}
+
+const ctxKillPid = document.getElementById('ctx-kill-pid');
+if (ctxKillPid) {
+    ctxKillPid.addEventListener('click', () => {
+        if (activeContextPort) {
+            const pid = activeContextPort.PID;
+            closeContextMenu();
+            killProcess(pid);
+        }
+    });
+}
+
+// ==========================================================================
+// Exportadores (Markdown & .env.local)
+// ==========================================================================
+const btnExport = document.getElementById('btn-export');
+const exportDropdown = document.getElementById('export-dropdown');
+if (btnExport && exportDropdown) {
+    btnExport.addEventListener('click', e => {
+        e.stopPropagation();
+        exportDropdown.classList.toggle('hidden');
+    });
+}
+
+const btnExportMd = document.getElementById('btn-export-markdown');
+if (btnExportMd) {
+    btnExportMd.addEventListener('click', () => {
+        if (exportDropdown) exportDropdown.classList.add('hidden');
+        if (!allPorts || allPorts.length === 0) return;
+
+        const header =
+            '| Porta | Processo | Tipo | PID | Memória | Pasta / Detalhes |\n|---|---|---|---|---|---|';
+        const rows = allPorts.map(p => {
+            const mem = p.MemoryMb && p.MemoryMb > 0 ? `${p.MemoryMb} MB` : '-';
+            const desc = p.Cwd || p.Details || '-';
+            return `| :${p.LocalPort} | ${p.ProcessName} | ${p.Category} | ${p.PID} | ${mem} | ${desc} |`;
+        });
+        const markdown = `# Taskvasne - Portas Ativas (${new Date().toLocaleTimeString()})\n\n${header}\n${rows.join('\n')}\n`;
+        navigator.clipboard
+            .writeText(markdown)
+            .then(() => {
+                alert(window.i18n.t('exportSuccess'));
+            })
+            .catch(() => {
+                alert('Falha ao copiar para a área de transferência');
+            });
+    });
+}
+
+const btnExportEnv = document.getElementById('btn-export-env');
+if (btnExportEnv) {
+    btnExportEnv.addEventListener('click', () => {
+        if (exportDropdown) exportDropdown.classList.add('hidden');
+        if (!allPorts || allPorts.length === 0) return;
+
+        const lines = [
+            `# Gerado por Taskvasne em ${new Date().toLocaleString()}`,
+            '# Sincronização de portas locais'
+        ];
+        allPorts.forEach(p => {
+            const name = (p.ProjectName || p.ProcessName)
+                .replace(/[^a-zA-Z0-9_]/g, '_')
+                .toUpperCase();
+            lines.push(`${name}_PORT=${p.LocalPort}`);
+            lines.push(`${name}_URL=http://localhost:${p.LocalPort}`);
+        });
+        navigator.clipboard
+            .writeText(lines.join('\n') + '\n')
+            .then(() => {
+                alert(window.i18n.t('exportSuccess'));
+            })
+            .catch(() => {
+                alert('Falha ao copiar para a área de transferência');
+            });
+    });
+}
+
+// ==========================================================================
+// Delta Watcher Event Listener (Reatividade Instantânea Tauri)
+// ==========================================================================
+if (window.__TAURI__ && window.__TAURI__.event && window.__TAURI__.event.listen) {
+    window.__TAURI__.event.listen('ports-changed', event => {
+        if (Array.isArray(event.payload)) {
+            syncPortsState(event.payload);
+        }
+    });
+}
+
+// ==========================================================================
+// Compartilhamento na Rede Local (Wi-Fi / QR Code)
+// ==========================================================================
+const ctxShareNetwork = document.getElementById('ctx-share-network');
+const shareModal = document.getElementById('share-modal');
+const closeShareBtn = document.getElementById('close-share');
+const shareUrlInput = document.getElementById('share-url-input');
+const btnCopyShareUrl = document.getElementById('btn-copy-share-url');
+const shareQrContainer = document.getElementById('share-qr-container');
+
+if (ctxShareNetwork) {
+    ctxShareNetwork.addEventListener('click', async () => {
+        if (!activeContextPort) return;
+        const portNum = activeContextPort.LocalPort;
+        closeContextMenu();
+
+        try {
+            const localIp = await tauriInvoke('get_local_ip');
+            const shareUrl = `http://${localIp}:${portNum}`;
+
+            if (shareUrlInput) shareUrlInput.value = shareUrl;
+            if (shareQrContainer && window.createQrSvg) {
+                shareQrContainer.innerHTML = window.createQrSvg(shareUrl, 160);
+            }
+
+            if (shareModal) shareModal.classList.remove('hidden');
+        } catch {
+            alert(window.i18n.t('networkIpError'));
+        }
+    });
+}
+
+if (closeShareBtn) {
+    closeShareBtn.addEventListener('click', () => {
+        if (shareModal) shareModal.classList.add('hidden');
+    });
+}
+
+if (shareModal) {
+    shareModal.addEventListener('click', e => {
+        if (e.target === shareModal) {
+            shareModal.classList.add('hidden');
+        }
+    });
+}
+
+if (btnCopyShareUrl && shareUrlInput) {
+    btnCopyShareUrl.addEventListener('click', () => {
+        navigator.clipboard
+            .writeText(shareUrlInput.value)
+            .then(() => {
+                const orig = btnCopyShareUrl.textContent;
+                btnCopyShareUrl.textContent = window.i18n.t('copied');
+                setTimeout(() => {
+                    btnCopyShareUrl.textContent = orig;
+                }, 1000);
+            })
+            .catch(() => {});
+    });
+}
