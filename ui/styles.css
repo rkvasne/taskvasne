@@ -124,25 +124,19 @@ body {
 
 .category-filters {
     display: flex;
-    gap: 3px;
-    padding: 5px 8px;
-    overflow-x: auto;
+    gap: 4px;
+    padding: 6px 8px;
     border-bottom: 1px solid var(--border-color);
-    background: rgba(0, 0, 0, 0.12);
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    background: rgba(0, 0, 0, 0.15);
     align-items: center;
-}
-
-.category-filters::-webkit-scrollbar {
-    display: none;
+    box-sizing: border-box;
 }
 
 .filter-pill {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.7);
-    padding: 3px 6px;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 3px 4px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 500;
@@ -150,16 +144,19 @@ body {
     white-space: nowrap;
     display: flex;
     align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
+    justify-content: center;
+    gap: 3px;
+    flex: 1;
+    min-width: 0;
     transition: all 0.15s ease;
     line-height: 1.2;
+    box-sizing: border-box;
 }
 
 .filter-pill:hover {
     background: rgba(255, 255, 255, 0.09);
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .filter-pill.active {
@@ -170,22 +167,25 @@ body {
 }
 
 .pill-count {
-    font-size: 11px;
-    opacity: 0.8;
-    background: rgba(0, 0, 0, 0.35);
+    font-size: 10px;
+    opacity: 0.85;
+    background: rgba(0, 0, 0, 0.4);
     padding: 0 4px;
     border-radius: 6px;
     line-height: 1.2;
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
 }
 
 .filter-pill.active .pill-count {
     opacity: 1;
     background: var(--accent-color);
     color: #000;
+    font-weight: 700;
 }
 
 .category-badge {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     padding: 1px 5px;
     border-radius: 4px;
@@ -196,7 +196,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -353,57 +352,12 @@ body {
 }
 
 /* ==========================================================================
-   Tabela de Portas & Alinhamento em Colunas
+   Cards de Portas (Estilo Fluent 2 - 2 Linhas Hierárquicas)
    ========================================================================== */
-.port-table-header {
-    display: grid;
-    grid-template-columns: 56px 1fr 56px 46px 66px;
-    gap: 6px;
-    padding: 4px 8px;
-    margin: 4px 8px 2px 8px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    user-select: none;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.col-head {
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.45);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.col-head.col-port {
-    text-align: center;
-}
-
-.col-head.col-process {
-    text-align: left;
-    padding-left: 2px;
-}
-
-.col-head.col-category {
-    text-align: center;
-}
-
-.col-head.col-pid {
-    text-align: right;
-    padding-right: 2px;
-}
-
-.col-head.col-actions {
-    text-align: right;
-    padding-right: 2px;
-}
-
 .port-item {
     display: flex;
     flex-direction: column;
-    padding: 5px 8px;
+    padding: 6px 10px;
     margin-bottom: 4px;
     background: var(--card-bg);
     border-radius: 6px;
@@ -420,49 +374,26 @@ body {
 
 .port-item:hover {
     background: var(--card-hover);
-    border-color: var(--border-color);
+    border-color: rgba(255, 255, 255, 0.14);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.port-main-row {
-    display: grid;
-    grid-template-columns: 56px 1fr 56px 46px 66px;
-    gap: 6px;
+.port-top-row {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     width: 100%;
     box-sizing: border-box;
 }
 
-.col-cell {
+.port-identity {
     display: flex;
     align-items: center;
+    gap: 6px;
+    flex: 1;
     min-width: 0;
-}
-
-.col-cell.col-port {
-    justify-content: center;
-}
-
-.col-cell.col-process {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
     overflow: hidden;
-    gap: 1px;
-}
-
-.col-cell.col-category {
-    justify-content: center;
-}
-
-.col-cell.col-pid {
-    justify-content: flex-end;
-}
-
-.col-cell.col-actions {
-    justify-content: flex-end;
-    gap: 4px;
 }
 
 .port-badge {
@@ -471,35 +402,45 @@ body {
     border: 1px solid rgba(96, 205, 255, 0.28);
     font-size: 11px;
     font-weight: 600;
-    padding: 2px 4px;
+    padding: 2px 6px;
     border-radius: 4px;
-    width: 100%;
-    text-align: center;
     cursor: pointer;
     transition: all 0.15s ease;
     user-select: none;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 4px;
+    flex-shrink: 0;
     box-sizing: border-box;
 }
 
 .port-badge:hover {
-    background: rgba(96, 205, 255, 0.24);
+    background: rgba(96, 205, 255, 0.22);
     border-color: #60cdff;
     color: #ffffff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
+.port-number {
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+}
+
+.process-info {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    min-width: 0;
+    overflow: hidden;
+}
+
 .process-name {
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-color);
-    width: 100%;
     line-height: 1.25;
 }
 
@@ -513,57 +454,18 @@ body {
     line-height: 1.2;
 }
 
-.pid-value {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.65);
-    font-family: 'Cascadia Code', Consolas, monospace;
-    white-space: nowrap;
-    text-align: right;
-    width: 100%;
-    padding-right: 2px;
-    box-sizing: border-box;
-}
-
-.port-sub-row {
-    margin-top: 3px;
-    padding-top: 3px;
-    border-top: 1px dashed rgba(255, 255, 255, 0.07);
+.port-actions {
     display: flex;
     align-items: center;
-    gap: 6px;
-    overflow: hidden;
-    font-size: 11px;
-}
-
-.cwd-path {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    flex: 1;
-    cursor: pointer;
-    transition: color 0.15s ease;
-}
-
-.cwd-path:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.details-snippet {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.45);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    gap: 4px;
+    flex-shrink: 0;
 }
 
 .kill-btn {
     background: rgba(239, 68, 68, 0.16);
     color: #fca5a5;
     border: 1px solid rgba(239, 68, 68, 0.35);
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 4px;
     cursor: pointer;
     font-size: 11px;
@@ -572,7 +474,7 @@ body {
     height: 22px;
     display: inline-flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     white-space: nowrap;
     box-sizing: border-box;
 }
@@ -582,6 +484,70 @@ body {
     border-color: #ef4444;
     color: #ffffff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.port-meta-row {
+    margin-top: 4px;
+    padding-top: 3px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 11px;
+    box-sizing: border-box;
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.meta-item.pid {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    color: rgba(255, 255, 255, 0.65);
+    flex-shrink: 0;
+}
+
+.meta-label {
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.55;
+    margin-right: 3px;
+}
+
+.meta-sep {
+    opacity: 0.25;
+    font-size: 8px;
+    flex-shrink: 0;
+}
+
+.meta-item.metrics {
+    color: rgba(255, 255, 255, 0.65);
+    flex-shrink: 0;
+}
+
+.meta-item.cwd-path {
+    color: rgba(255, 255, 255, 0.55);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.meta-item.cwd-path:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.meta-item.details-snippet {
+    color: rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Scrollbar */

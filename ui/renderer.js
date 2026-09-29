@@ -498,52 +498,49 @@ function renderPorts(ports) {
             .filter(Boolean)
             .join('\n');
 
-        const subRowItems = [];
-        if (port.Cwd) {
-            subRowItems.push(
-                `<span class="cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${port.Cwd}</span>`
+        const metaItems = [];
+        metaItems.push(
+            `<span class="meta-item pid" title="PID: ${port.PID}"><span class="meta-label">PID</span>${port.PID}</span>`
+        );
+        if (metricSummary) {
+            metaItems.push(
+                `<span class="meta-item metrics" title="Consumo: ${metricSummary}${ioTooltip ? `\n${ioTooltip}` : ''}">${metricSummary}</span>`
             );
         }
-        if (metricSummary) {
-            subRowItems.push(
-                `<span class="metric-badge" title="Consumo: ${metricSummary}${ioTooltip ? `\n${ioTooltip}` : ''}">${metricSummary}</span>`
+        if (port.Cwd) {
+            metaItems.push(
+                `<span class="meta-item cwd-path" title="Clique para abrir pasta:\n${port.Cwd}">📁 ${port.Cwd}</span>`
             );
         }
         if (detailsText) {
-            subRowItems.push(
-                `<span class="details-snippet" title="${detailsText}">${detailsText}</span>`
+            metaItems.push(
+                `<span class="meta-item details-snippet" title="${detailsText}">${detailsText}</span>`
             );
         }
-        const subRowHtml =
-            subRowItems.length > 0 ? `<div class="port-sub-row">${subRowItems.join('')}</div>` : '';
+        const metaRowHtml = `<div class="port-meta-row">${metaItems.join('<span class="meta-sep">•</span>')}</div>`;
 
         item.title = tooltipLines;
 
         item.innerHTML = `
-      <div class="port-main-row">
-        <div class="col-cell col-port">
+      <div class="port-top-row">
+        <div class="port-identity">
           <div class="port-badge" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
             <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
-            <span>:${port.LocalPort}</span>
+            <span class="port-number">:${port.LocalPort}</span>
             <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
             <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
           </div>
-        </div>
-        <div class="col-cell col-process" title="${mainTitle}">
-          <span class="process-name">${mainTitle}</span>
-          ${orphanTag}
-          ${subTag ? `<span class="process-tag" title="${subTag}">${subTag}</span>` : ''}
-        </div>
-        <div class="col-cell col-category">
+          <div class="process-info" title="${mainTitle}">
+            <span class="process-name">${mainTitle}</span>
+            ${subTag ? `<span class="process-tag" title="${subTag}">(${subTag})</span>` : ''}
+          </div>
           <span class="category-badge ${catInfo.class}" title="${catInfo.desc}">${catInfo.label}</span>
+          ${orphanTag}
         </div>
-        <div class="col-cell col-pid">
-          <span class="pid-value" title="PID: ${port.PID}">${port.PID}</span>
-        </div>
-        <div class="col-cell col-actions actions">
+        <div class="port-actions actions">
         </div>
       </div>
-      ${subRowHtml}
+      ${metaRowHtml}
     `;
 
         // Clique na pasta da sub-linha abre no Explorer
