@@ -7,7 +7,7 @@
 **O gerenciador de portas minimalista e elegante para Windows 11.**  
 _Controle rápido sobre seus ambientes locais (Node.js, Docker, etc.) com design moderno._
 
-[![Version](https://img.shields.io/badge/version-0.1.6-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg?style=for-the-badge)](https://github.com/rkvasne/taskvasne/releases)
 [![Rust](https://img.shields.io/badge/rust-1.77%2B-red.svg?style=for-the-badge)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/tauri-v2-yellow.svg?style=for-the-badge)](https://tauri.app/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
@@ -24,7 +24,11 @@ Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em 
 
 ## ✨ Funcionalidades
 
-- **Menu de Contexto Rápido (Novo)**: Botão direito para abrir projeto no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer, além de copiar URL e comando cURL.
+- **Ícones Oficiais dos Executáveis (Novo v0.2.0)**: Extração nativa de ícones 32-bit via Win32 Shell API em Base64 com cache de alta performance e exibição inline na tabela.
+- **Encerramento Elevado via UAC (Novo v0.2.0)**: Suporte para encerrar processos protegidos ou do sistema com elevação sob demanda de privilégios de Administrador.
+- **Suporte a Sockets UDP (Novo v0.2.0)**: Monitoramento completo de conexões em escuta tanto em `TCP` quanto em `UDP` com badges dedicados.
+- **Notificação Toast de Novas Portas Dev (Novo v0.2.0)**: Alerta nativo instantâneo no Windows quando um novo servidor de desenvolvimento abre uma porta.
+- **Menu de Contexto Rápido**: Botão direito para abrir projeto no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer, além de copiar URL e comando cURL.
 - **Health Probes com Latência e Sparklines (Novo)**: Sondagem HTTP com medição de RTT e mini gráfico vetorial inline mostrando histórico recente de resposta.
 - **Compartilhamento Wi-Fi / Rede Local com QR Code (Novo)**: Geração instantânea de URL com IP local e QR Code SVG autocontido para testar em smartphones ou outros dispositivos da LAN.
 - **Exportação de Portas (Novo)**: Exporte rapidamente a tabela de portas ativas em Markdown ou gere variáveis de ambiente `.env.local` com um clique.

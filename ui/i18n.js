@@ -93,6 +93,9 @@ const translations = {
         killTree: 'Encerrar Árvore de Processos',
         killTreeConfirm:
             'Deseja encerrar este processo e todos os seus subprocessos (PID {{pid}})?',
+        killAdmin: 'Encerrar como Administrador (UAC)',
+        killAdminConfirm:
+            'Deseja solicitar privilégios de Administrador (UAC) para forçar o encerramento do processo {{pid}}?',
         exportTitle: 'Exportar',
         exportMarkdown: 'Copiar Tabela (Markdown)',
         exportEnv: 'Copiar Variáveis (.env.local)',
@@ -191,6 +194,9 @@ const translations = {
         killTree: 'Kill Process Tree',
         killTreeConfirm:
             'Do you really want to terminate this process and all its subprocesses (PID {{pid}})?',
+        killAdmin: 'Stop as Administrator (UAC)',
+        killAdminConfirm:
+            'Do you want to request Administrator privileges (UAC) to force stop process {{pid}}?',
         exportTitle: 'Export',
         exportMarkdown: 'Copy Table (Markdown)',
         exportEnv: 'Copy Variables (.env.local)',

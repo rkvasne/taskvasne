@@ -1,61 +1,171 @@
 {
     "version": "0.12.0",
     "createdAt": "2026-09-07T16:15:15.726Z",
-    "lastUpdated": "2026-09-07T23:33:21.012Z",
+    "lastUpdated": "2026-10-07T18:10:41.019Z",
     "satellites": {},
     "modesUsed": {},
-    "skillsUsed": {},
+    "skillsUsed": {
+        "ops/env-setup": {
+            "count": 1,
+            "firstUsed": "2026-09-29T01:07:38.797Z",
+            "lastUsed": "2026-09-29T01:07:38.797Z"
+        },
+        "engineering/codebase-design": {
+            "count": 1,
+            "firstUsed": "2026-09-29T01:17:05.073Z",
+            "lastUsed": "2026-09-29T01:17:05.073Z"
+        },
+        "engineering/app-builder": {
+            "count": 1,
+            "firstUsed": "2026-09-29T01:17:05.079Z",
+            "lastUsed": "2026-09-29T01:17:05.079Z"
+        },
+        "engineering/testing-patterns": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:24:55.131Z",
+            "lastUsed": "2026-09-29T01:38:29.668Z"
+        },
+        "engineering/tdd-workflow": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:24:55.135Z",
+            "lastUsed": "2026-09-29T01:38:29.672Z"
+        },
+        "engineering/safe-code-cleanup": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:37:24.937Z",
+            "lastUsed": "2026-09-29T20:35:45.206Z"
+        },
+        "engineering/clean-code": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:37:24.940Z",
+            "lastUsed": "2026-09-29T20:35:45.212Z"
+        },
+        "management/documentation-hygiene": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:37:33.665Z",
+            "lastUsed": "2026-09-29T20:35:53.297Z"
+        },
+        "management/tech-authoring": {
+            "count": 3,
+            "firstUsed": "2026-09-29T01:37:33.668Z",
+            "lastUsed": "2026-09-29T20:35:53.302Z"
+        },
+        "management/documentation-templates": {
+            "count": 1,
+            "firstUsed": "2026-09-29T01:37:41.183Z",
+            "lastUsed": "2026-09-29T01:37:41.183Z"
+        },
+        "engineering/verification-before-completion": {
+            "count": 5,
+            "firstUsed": "2026-09-29T01:37:51.550Z",
+            "lastUsed": "2026-09-29T21:20:15.941Z"
+        },
+        "engineering/code-review-checklist": {
+            "count": 2,
+            "firstUsed": "2026-09-29T01:37:51.554Z",
+            "lastUsed": "2026-09-29T01:38:40.861Z"
+        },
+        "engineering/finishing-a-development-branch": {
+            "count": 3,
+            "firstUsed": "2026-09-29T02:05:20.985Z",
+            "lastUsed": "2026-09-29T21:20:15.951Z"
+        }
+    },
     "promptsUsed": {
         "11": {
+            "count": 3,
+            "executions": 2,
+            "firstUsed": "2026-09-07T23:18:36.110Z",
+            "lastUsed": "2026-09-29T01:38:29.660Z",
+            "lastExecutionKey": "default",
+            "lastExecutionAt": "2026-09-29T01:24:55.123Z",
+            "sources": {
+                "official-recorder": 3
+            }
+        },
+        "17": {
             "count": 1,
             "executions": 1,
-            "firstUsed": "2026-09-07T23:18:36.110Z",
-            "lastUsed": "2026-09-07T23:18:36.110Z",
-            "lastExecutionKey": "branch/main",
-            "lastExecutionAt": "2026-09-07T23:18:36.110Z",
+            "firstUsed": "2026-09-29T01:37:41.173Z",
+            "lastUsed": "2026-09-29T01:37:41.173Z",
+            "lastExecutionKey": "default",
+            "lastExecutionAt": "2026-09-29T01:37:41.173Z",
             "sources": {
                 "official-recorder": 1
             }
         },
         "19": {
-            "count": 1,
-            "executions": 1,
+            "count": 5,
+            "executions": 5,
             "firstUsed": "2026-09-07T20:55:39.935Z",
-            "lastUsed": "2026-09-07T20:55:39.935Z",
+            "lastUsed": "2026-09-29T21:20:15.923Z",
             "lastExecutionKey": "branch/main",
-            "lastExecutionAt": "2026-09-07T20:55:39.935Z",
+            "lastExecutionAt": "2026-09-29T21:20:15.923Z",
             "sources": {
-                "official-recorder": 1
+                "official-recorder": 5
+            }
+        },
+        "20": {
+            "count": 2,
+            "executions": 2,
+            "firstUsed": "2026-09-29T01:37:24.929Z",
+            "lastUsed": "2026-09-29T20:35:45.188Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-29T20:35:45.188Z",
+            "sources": {
+                "official-recorder": 2
             }
         },
         "23": {
-            "count": 1,
-            "executions": 1,
+            "count": 2,
+            "executions": 2,
             "firstUsed": "2026-09-07T23:15:35.869Z",
-            "lastUsed": "2026-09-07T23:15:35.869Z",
-            "lastExecutionKey": "branch/main",
-            "lastExecutionAt": "2026-09-07T23:15:35.869Z",
+            "lastUsed": "2026-09-29T01:07:38.788Z",
+            "lastExecutionKey": "default",
+            "lastExecutionAt": "2026-09-29T01:07:38.788Z",
             "sources": {
-                "official-recorder": 1
+                "official-recorder": 2
+            }
+        },
+        "25": {
+            "count": 2,
+            "executions": 2,
+            "firstUsed": "2026-09-29T01:37:33.658Z",
+            "lastUsed": "2026-09-29T20:35:53.286Z",
+            "lastExecutionKey": "branch/main",
+            "lastExecutionAt": "2026-09-29T20:35:53.286Z",
+            "sources": {
+                "official-recorder": 2
             }
         },
         "36": {
+            "count": 3,
+            "executions": 2,
+            "firstUsed": "2026-09-07T23:24:51.372Z",
+            "lastUsed": "2026-09-29T01:38:40.849Z",
+            "lastExecutionKey": "default",
+            "lastExecutionAt": "2026-09-29T01:37:51.543Z",
+            "sources": {
+                "official-recorder": 3
+            }
+        },
+        "05": {
             "count": 1,
             "executions": 1,
-            "firstUsed": "2026-09-07T23:24:51.372Z",
-            "lastUsed": "2026-09-07T23:24:51.372Z",
-            "lastExecutionKey": "branch/main",
-            "lastExecutionAt": "2026-09-07T23:24:51.372Z",
+            "firstUsed": "2026-09-29T01:17:05.059Z",
+            "lastUsed": "2026-09-29T01:17:05.059Z",
+            "lastExecutionKey": "default",
+            "lastExecutionAt": "2026-09-29T01:17:05.059Z",
             "sources": {
                 "official-recorder": 1
             }
         }
     },
-    "validationRuns": 21,
+    "validationRuns": 48,
     "buildRuns": 0,
-    "snapshotAt": "2026-09-07T23:36:51.246Z",
+    "snapshotAt": "2026-10-07T18:10:49.117Z",
     "partitions": {
-        "files": ["events-2026-09.jsonl"],
+        "files": ["events-2026-09.jsonl", "events-2026-10.jsonl"],
         "note": "Buraco na sequencia de meses e ESPERADO: mes sem atividade nao gera arquivo. Ausencia nao e arquivo faltando nem dado perdido."
     }
 }

@@ -611,5 +611,5 @@ _Configurado via Agents Hub (v0.12.5)_
 
 ---
 
-_Última atualização: 28/09/2026 • v0.1.6_
-_Editado via: Codex | Modelo: GPT-5 | OS: Windows 11_
+_Última atualização: 07/10/2026 • v0.2.0_
+_Editado via: Antigravity | Modelo: Gemini 3.8 Flash (Medium) | OS: Windows 11_

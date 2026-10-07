@@ -1,6 +1,6 @@
 # 📊 Status do Projeto - Taskvasne
 
-> **Última Atualização:** 29/09/2026  
+> **Última Atualização:** 07/10/2026  
 > **Fase Atual:** Estável / Produção
 
 ---
@@ -15,6 +15,15 @@
 ---
 
 ## 📝 Histórico de Sessões
+
+### 2026-10-07 — Release v0.2.0: Ícones Oficiais Win32, Elevação UAC e Suporte UDP
+
+- **Versão v0.2.0:** Bump minor com persistência e suíte completa de testes verdes (Jest 17/17, Cargo test 11/11, ESLint 0 erros, Prettier 100%, verify:full conforme).
+- **Extração Nativa de Ícones Win32 (`win_icon`):** Módulo FFI em Rust com Shell API (`SHGetFileInfoW`, `GetIconInfo`, `GetDIBits`) gerando imagens Base64 BMP 32-bit com transparência e normalização de canal alpha para executáveis legados, exibidas diretamente na tabela.
+- **Encerramento Elevado de Processos (UAC):** Comando `kill_process_elevated` com elevação sob demanda no Windows via PowerShell RunAs, oferecendo ação manual no menu de contexto e prompt de fallback para processos protegidos.
+- **Suporte a Sockets UDP:** Detecção e listagem de conexões em escuta tanto em `TCP` quanto em `UDP`, com badges de protocolo estilizados.
+- **Notificações Toast de Novas Portas Dev:** Alerta nativo do sistema operacional disparado em segundo plano quando novas portas de desenvolvimento são abertas.
+- **Aprendizado da Release:** Ícones extraídos via Win32 Shell API com canal alpha nulo requerem normalização (preenchimento com 0xFF) para evitar transparência total no WebView2.
 
 ### 2026-09-29 — Release v0.1.6: Tabela Contínua Windows 11 e Code/Docs Janitor
 

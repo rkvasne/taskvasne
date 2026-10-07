@@ -13,7 +13,32 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.2.0] - 2026-10-07
+
+### Added
+
+- **Extração de Ícones Reais dos Executáveis (`win_icon`):**
+    - Módulo nativo Win32 Shell API (`SHGetFileInfoW`, `GetIconInfo`, `GetDIBits`) extraindo os ícones oficiais dos executáveis em cache Base64 BMP 32-bit com transparência.
+    - Exibição de ícones oficiais na tabela contínua de portas para identificação visual instantânea dos processos.
+- **Encerramento Elevado com Privilégios de Administrador (UAC):**
+    - Novo comando `kill_process_elevated` com elevação UAC nativa sob demanda via PowerShell (`Start-Process taskkill -Verb RunAs`).
+    - Opção _"Encerrar como Administrador (UAC)"_ no menu de contexto e prompt automático de fallback quando a finalização comum falhar por restrição de permissões.
+- **Suporte a Sockets UDP (além de TCP):**
+    - Monitoramento abrangente de portas em escuta tanto em `TCP` quanto `UDP` com badges de protocolo estilizados.
+- **Notificação Automática de Nova Porta Dev Ativa:**
+    - Toast nativo do Windows disparado em segundo plano quando um novo servidor de desenvolvimento abre uma porta.
+
+### Fixed
+
+- **Normalização de Canal Alpha em Ícones Win32:**
+    - Correção para ícones legados do Windows sem canal alfa explícito para evitar renderização transparente ou preta no WebView2.
+- **Sanitização de Strings em Notificações Toast:**
+    - Sanitização contra caracteres especiais de XML e PowerShell em títulos de projetos e processos.
+
+### Aprendizado da Release
+
+- **Fato observado:** Ícones extraídos via Win32 Shell API (`SHGetFileInfoW`) de executáveis legados de 16/32-bit frequentemente possuem bitmaps DIB com bytes alpha zerados (0x00), fazendo com que navegadores e o WebView2 os tratem como totalmente transparentes. Adicionar uma etapa de normalização onde, se todos os bytes alpha forem 0, converte-se o canal para 255 (opaco), garante fidelidade visual de 100% dos executáveis.
+- **Diretriz consolidada:** Em ferramentas de sistema desktop com Tauri/WebView2, comandos de encerramento de processos em portas baixas ou pertencentes a outros usuários devem sempre oferecer degradação graciosa com solicitação pontual de elevação UAC sob demanda, em vez de exigir que a aplicação inteira seja iniciada com privilégios de Administrador.
 
 ## [0.1.6] - 2026-09-29
 

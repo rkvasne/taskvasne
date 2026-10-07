@@ -506,10 +506,12 @@ function renderPorts(ports) {
       <div class="col-port" title="Clique para copiar URL (http://localhost:${port.LocalPort})">
         <span class="health-dot unknown" id="health-${port.LocalPort}"></span>
         <span class="port-number">:${port.LocalPort}</span>
+        <span class="protocol-badge ${(port.Protocol || 'TCP').toLowerCase()}">${port.Protocol || 'TCP'}</span>
         <span class="latency-badge hidden" id="latency-${port.LocalPort}"></span>
         <span class="sparkline-container" id="sparkline-${port.LocalPort}"></span>
       </div>
       <div class="col-process" title="${mainTitle}">
+        ${port.IconBase64 ? `<img class="process-icon" src="${port.IconBase64}" alt="" onerror="this.style.display='none'" />` : ''}
         <span class="process-name">${mainTitle}</span>
         ${orphanTag}
       </div>
@@ -656,7 +658,25 @@ async function killProcess(pid, btnElement) {
         } else {
             if (row) row.classList.remove('removing');
             const errMsg = result && result.error ? result.error : 'Erro desconhecido';
-            alert(`${window.i18n.t('errorKillingProcess')}: ${errMsg}`);
+            const tryAdmin = window.confirm(
+                `${window.i18n.t('errorKillingProcess')}: ${errMsg}\n\n${window.i18n.t('killAdminConfirm', { pid })}`
+            );
+            if (tryAdmin) {
+                if (row) row.classList.add('removing');
+                const adminRes = await tauriInvoke('kill_process_elevated', {
+                    pid: parseInt(pid, 10)
+                });
+                if (adminRes && adminRes.success) {
+                    setTimeout(() => {
+                        loadPorts();
+                    }, ANIMATION_DURATION);
+                } else {
+                    if (row) row.classList.remove('removing');
+                    alert(
+                        `${window.i18n.t('errorKillingProcess')}: ${adminRes?.error || 'Falha na elevação'}`
+                    );
+                }
+            }
         }
     } catch (err) {
         if (row) row.classList.remove('removing');
@@ -1127,6 +1147,30 @@ if (ctxKillPid) {
             const pid = activeContextPort.PID;
             closeContextMenu();
             killProcess(pid);
+        }
+    });
+}
+
+const ctxKillAdmin = document.getElementById('ctx-kill-admin');
+if (ctxKillAdmin) {
+    ctxKillAdmin.addEventListener('click', async () => {
+        if (!activeContextPort) return;
+        const pid = activeContextPort.PID;
+        const confirmed = window.confirm(window.i18n.t('killAdminConfirm', { pid }));
+        closeContextMenu();
+        if (confirmed) {
+            try {
+                const res = await tauriInvoke('kill_process_elevated', { pid });
+                if (res && res.success) {
+                    loadPorts();
+                } else {
+                    alert(
+                        `${window.i18n.t('errorKillingProcess')}: ${res?.error || 'Falha na elevação'}`
+                    );
+                }
+            } catch (err) {
+                alert(`${window.i18n.t('errorKillingProcess')}: ${err}`);
+            }
         }
     });
 }

@@ -71,12 +71,16 @@ describe('i18n Module', () => {
         test('should interpolate parameters', () => {
             expect(i18n.t('pid', { pid: 1234 })).toBe('PID: 1234');
             expect(i18n.t('openPort', { port: 3000 })).toBe('Abrir http://localhost:3000');
+            expect(i18n.t('killAdmin')).toBe('Encerrar como Administrador (UAC)');
+            expect(i18n.t('killAdminConfirm', { pid: 1234 })).toContain('1234');
         });
 
         test('should interpolate parameters in EN', () => {
             i18n.setLanguage('en');
             expect(i18n.t('pid', { pid: 5678 })).toBe('PID: 5678');
             expect(i18n.t('openPort', { port: 8080 })).toBe('Open http://localhost:8080');
+            expect(i18n.t('killAdmin')).toBe('Stop as Administrator (UAC)');
+            expect(i18n.t('killAdminConfirm', { pid: 5678 })).toContain('5678');
         });
 
         test('should return key if translation not found', () => {
