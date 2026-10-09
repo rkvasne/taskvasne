@@ -362,7 +362,7 @@ body {
    ========================================================================== */
 .table-header {
     display: grid;
-    grid-template-columns: 58px 1fr 86px 56px 44px;
+    grid-template-columns: 82px 1fr 76px 54px 44px;
     gap: 6px;
     padding: 6px 8px;
     align-items: center;
@@ -400,7 +400,7 @@ body {
 
 .port-item {
     display: grid;
-    grid-template-columns: 58px 1fr 86px 56px 44px;
+    grid-template-columns: 82px 1fr 76px 54px 44px;
     gap: 6px;
     align-items: center;
     height: 31px;
@@ -427,8 +427,38 @@ body {
 .col-port {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.protocol-badge {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 0 3px;
+    height: 13px;
+    line-height: 13px;
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.protocol-badge.tcp {
+    background: rgba(96, 205, 255, 0.12);
+    color: #60cdff;
+    border: 1px solid rgba(96, 205, 255, 0.25);
+}
+
+.protocol-badge.udp {
+    background: rgba(234, 179, 8, 0.12);
+    color: #facc15;
+    border: 1px solid rgba(234, 179, 8, 0.25);
 }
 
 .port-number {
@@ -1535,7 +1565,7 @@ body {
 }
 
 /* ==========================================================================
-   Ícone Nativo do Executável & Badge de Protocolo (TCP/UDP)
+   Ícone Nativo do Executável
    ========================================================================== */
 .process-icon {
     width: 14px;
@@ -1545,24 +1575,62 @@ body {
     border-radius: 2px;
 }
 
-.protocol-badge {
-    font-size: 8.5px;
-    font-weight: 700;
-    padding: 1px 3px;
+/* ==========================================================================
+   Barra de Status do Rodapé (Footer Status Bar)
+   ========================================================================== */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.28);
+    border-top: 1px solid var(--border-color);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.55);
+    box-sizing: border-box;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.status-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.status-bar-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+}
+
+.status-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-bar-pill {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 5px;
     border-radius: 3px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    line-height: 1;
-    margin-left: 2px;
-    display: inline-block;
+    line-height: 1.2;
 }
 
-.protocol-badge.tcp {
-    background: rgba(96, 205, 255, 0.15);
+.status-bar-pill.tcp {
+    background: rgba(96, 205, 255, 0.12);
     color: #60cdff;
+    border: 1px solid rgba(96, 205, 255, 0.25);
 }
 
-.protocol-badge.udp {
-    background: rgba(234, 179, 8, 0.18);
+.status-bar-pill.udp {
+    background: rgba(234, 179, 8, 0.12);
     color: #facc15;
+    border: 1px solid rgba(234, 179, 8, 0.25);
 }

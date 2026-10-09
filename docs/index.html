@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskvasne v0.1.3 - Kvasne.com</title>
+    <title>Taskvasne v0.2.1 - Kvasne.com</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
@@ -53,7 +53,7 @@
                 <div class="hero-content">
                     <div class="hero-header">
                         <img src="icon.svg" alt="Taskvasne Logo" class="hero-logo">
-                        <div class="badge">v0.1.3</div>
+                        <div class="badge">v0.2.1</div>
                     </div>
                     <h1 data-i18n="hero.title">Controle suas portas.<br><span>Com Estilo.</span></h1>
                     <p data-i18n="hero.subtitle">O gerenciador de processos mais rápido e minimalista para
@@ -153,8 +153,7 @@
                     </svg>
                 </div>
                 <h3 data-i18n="features.fast.title">Ultra Rápido</h3>
-                <p data-i18n="features.fast.desc">Construído com Vanilla JS para performance máxima. Sem frameworks
-                    pesados, apenas velocidade.</p>
+                <p data-i18n="features.fast.desc">Construído em Rust e Tauri v2 para performance máxima. Ultra-leve com apenas ~20MB de RAM e binário de 8.6MB.</p>
             </div>
             <div class="feature-card">
                 <div class="icon">
@@ -237,12 +236,14 @@
 
         <section id="author" class="developer-section">
             <div class="container">
+                <div class="section-header">
+                    <div class="badge" data-i18n="dev.badge">Autor</div>
+                </div>
                 <div class="dev-container">
                     <div class="dev-image-wrapper">
                         <img src="landing/images/hero-nobg.webp" alt="Raphael Kvasne" class="dev-avatar-img">
                     </div>
                     <div class="dev-content">
-                        <span class="dev-label" data-i18n="dev.label">Desenvolvedor</span>
                         <h2 class="dev-name">Raphael Kvasne</h2>
                         <h3 class="dev-role" data-i18n="dev.role">Full Stack Developer</h3>
                         <p class="dev-bio" data-i18n="dev.bio">
@@ -349,7 +350,7 @@
                     <p data-i18n="footer.desc">O gerenciador de portas definitivo para Windows.</p>
                 </div>
                 <div class="footer-links">
-                    <h4 data-i18n="footer.links">Links Rápidos</h4>
+                    <h3 class="footer-heading" data-i18n="footer.links">Links Rápidos</h3>
                     <ul class="link-list">
                         <li><a href="#download" data-i18n="nav.download">Download</a></li>
                         <li><a href="#features" data-i18n="nav.features">Funcionalidades</a></li>
@@ -358,7 +359,7 @@
                 </div>
                 <div class="footer-social">
                     <div class="footer-social-wrapper">
-                        <h4 data-i18n="footer.social">Conecte-se</h4>
+                        <h3 class="footer-heading" data-i18n="footer.social">Conecte-se</h3>
                         <div class="social-icons">
                             <a href="https://github.com/rkvasne/taskvasne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -392,7 +393,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.copyright">&copy; <span id="current-year">2025</span> Taskvasne. Open Source sob licença MIT.</p>
+                <p data-i18n="footer.copyright">&copy; <span id="current-year">2026</span> Taskvasne. Open Source sob licença MIT.</p>
             </div>
         </div>
     </footer>
@@ -442,10 +443,11 @@
                 'donate.contact.cta': 'Enviar email',
                 'donate.note.title': 'Obrigado!',
                 'donate.note.desc': 'Seu apoio ajuda a manter o projeto gratuito e atualizado.',
+                'dev.badge': 'Autor',
                 'footer.desc': 'O gerenciador de portas definitivo para Windows.',
                 'footer.links': 'Links Rápidos',
                 'footer.social': 'Conecte-se',
-                'footer.copyright': '&copy; 2025 Taskvasne. Open Source sob licença MIT.'
+                'footer.copyright': '&copy; 2026 Taskvasne. Open Source sob licença MIT.'
             },
             'en': {
                 'nav.download': 'Download',
@@ -472,6 +474,7 @@
                 'security.telemetry.desc': 'We collect no data, track no usage, and send nothing to the cloud.',
                 'security.malware.title': 'Malware Free',
                 'security.malware.desc': 'Free from viruses, keyloggers, or any malicious software. Clean code guarantee.',
+                'dev.badge': 'Author',
                 'dev.label': 'Developer',
                 'dev.role': 'Full Stack Developer',
                 'dev.bio': 'Specialized in building tools that combine productivity and design. Creator of <strong>ProfitColors</strong>, <strong>Dahora App</strong>, and <strong>Taskvasne</strong>. Focused on simplicity and usability.',
@@ -492,7 +495,7 @@
                 'footer.desc': 'The ultimate port manager for Windows.',
                 'footer.links': 'Quick Links',
                 'footer.social': 'Connect',
-                'footer.copyright': '&copy; 2025 Taskvasne. Open Source under MIT license.'
+                'footer.copyright': '&copy; 2026 Taskvasne. Open Source under MIT license.'
             }
         };
 

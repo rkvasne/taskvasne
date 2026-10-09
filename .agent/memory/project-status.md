@@ -1,6 +1,6 @@
 # 📊 Status do Projeto - Taskvasne
 
-> **Última Atualização:** 07/10/2026  
+> **Última Atualização:** 09/10/2026  
 > **Fase Atual:** Estável / Produção
 
 ---
@@ -15,6 +15,15 @@
 ---
 
 ## 📝 Histórico de Sessões
+
+### 2026-10-09 — Release v0.2.1: Footer Status Bar, Refinamento Impeccable e Higiene Clippy
+
+- **Versão v0.2.1:** Bump patch com suíte de testes 100% verde (Jest 17/17, Cargo test 11/11, Clippy 0 warnings, ESLint 0 erros, Prettier 100%, verify:full conforme).
+- **Footer Status Bar no Desktop App:** Implementada barra de rodapé com dot de conexão em tempo real, resumo dinâmico (`Monitorando X portas` / `Monitoring X ports`) e pílulas dedicadas para contagem instantânea de sockets TCP e UDP. Ajustado grid para `82px 1fr 76px 54px 44px` evitando truncamento de badges de protocolo.
+- **Refinamento Impeccable na Landing Page (`docs/`):** 0 anti-patterns e 0 avisos consultivos no `impeccable detect`. Paleta roxa preservada com contraste WCAG AA (> 5.5:1), eliminação de halos/glows fluorescentes e side-tabs de IA, correção de hierarquia de headings (`h3`) e copyright 2026.
+- **Auditoria de Dívida Técnica e Alinhamento (Prompts 43+91):** Resolução integral de 8 warnings do `cargo clippy` no Rust, alinhamento rigoroso de versões nos manifestos e documentação.
+- **Auditoria de Distribuição / Executáveis:** Identificado que executáveis locais estão prontos (`Taskvasne_0.2.0_x64-setup.exe` de 2.0MB), necessitando publicação de GitHub Release oficial para atender os links de download.
+- **Auditoria Prompts 20+25 (Janitor):** Higiene de código sem dependências circulares, sem logs de debug, sem código morto e com documentação sincronizada.
 
 ### 2026-10-07 — Release v0.2.0: Ícones Oficiais Win32, Elevação UAC e Suporte UDP
 

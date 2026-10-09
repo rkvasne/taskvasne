@@ -113,7 +113,11 @@ const translations = {
         shareNetworkDesc:
             'Acesse pelo celular ou outros dispositivos conectados na mesma rede local:',
         qrScan: 'Escaneie o QR Code com a câmera do celular:',
-        networkIpError: 'Não foi possível detectar o IP da rede local'
+        networkIpError: 'Não foi possível detectar o IP da rede local',
+
+        // Status bar
+        monitoringPorts: 'Monitorando {{count}} portas',
+        monitoringPort: 'Monitorando 1 porta'
     },
 
     en: {
@@ -213,7 +217,11 @@ const translations = {
         shareNetworkDesc:
             'Access from your phone or other devices connected to the same local network:',
         qrScan: 'Scan the QR Code with your phone camera:',
-        networkIpError: 'Could not detect local network IP'
+        networkIpError: 'Could not detect local network IP',
+
+        // Status bar
+        monitoringPorts: 'Monitoring {{count}} ports',
+        monitoringPort: 'Monitoring 1 port'
     }
 };
 

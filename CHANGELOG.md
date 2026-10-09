@@ -13,6 +13,28 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-10-09
+
+### Added
+
+- **Barra de Status do Rodapé (Footer Status Bar):**
+    - Monitoramento em tempo real com contagem dinâmica de portas ativas (`Monitorando X portas` / `Monitoring X ports`), dot verde de conexão e pílulas dedicadas para contagem instantânea de sockets `TCP` e `UDP`.
+    - Ajuste no grid de dados (`82px 1fr 76px 54px 44px`) garantindo visualização completa e sem truncamento dos badges de protocolo.
+
+### Changed
+
+- **Refinamento Impeccable da Landing Page (`docs/`):**
+    - Eliminação completa de 28 anti-patterns acusados pelo Impeccable detect (0 erros, 0 avisos consultivos).
+    - Paleta roxa preservada com contraste WCAG AA (> 5.5:1), removendo glows fluorescentes artificiais e bordas assimétricas de IA (`[side-tab]`).
+    - Correção de hierarquia semântica com cabeçalhos `h3` no rodapé e remoção de kicker solto acima do título do desenvolvedor.
+- **Higiene de Compilação Rust (Clippy):**
+    - Resolução de todos os 8 avisos do Clippy em `src-tauri/src/lib.rs` (`collapsible_str_replace`, `div_ceil` e atributos FFI Win32).
+
+### Aprendizado da Release
+
+- **Fato observado:** Eliminar anti-patterns de IA (como halos e side-tabs) em interfaces web escuras não requer abandonar a identidade cromática do produto (como a cor roxa); elevar o contraste via tonalidades HSL balanceadas e usar elevação direcional neutra atinge nota máxima de design mantendo total personalidade.
+- **Diretriz consolidada:** Linhas de cabeçalho e dados em tabelas contínuas precisam reservar largura fixa suficiente para acomodar a maior combinação possível de etiquetas (número de porta + protocolo) sem depender de quebra de linha ou elipses no elemento ativo.
+
 ## [0.2.0] - 2026-10-07
 
 ### Added

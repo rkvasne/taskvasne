@@ -31,6 +31,9 @@ const unlockerActionBar = document.getElementById('unlocker-action-bar');
 const unlockerStatusMsg = document.getElementById('unlocker-status-msg');
 const btnReleaseAll = document.getElementById('btn-release-all');
 const lockedListElement = document.getElementById('locked-list');
+const statusBarSummary = document.getElementById('status-bar-summary');
+const statusTcpCount = document.getElementById('status-tcp-count');
+const statusUdpCount = document.getElementById('status-udp-count');
 
 let allPorts = [];
 let activeCategory = 'all';
@@ -396,6 +399,21 @@ function renderPorts(ports) {
 
     if (tabPortsCount) {
         tabPortsCount.textContent = allPorts.length;
+    }
+
+    // Atualiza Barra de Status do Rodapé
+    if (statusBarSummary) {
+        const total = allPorts.length;
+        const countKey = total === 1 ? 'monitoringPort' : 'monitoringPorts';
+        statusBarSummary.textContent = window.i18n.t(countKey, { count: total });
+    }
+    if (statusTcpCount) {
+        const tcpTotal = allPorts.filter(p => (p.Protocol || 'TCP').toUpperCase() === 'TCP').length;
+        statusTcpCount.textContent = `TCP: ${tcpTotal}`;
+    }
+    if (statusUdpCount) {
+        const udpTotal = allPorts.filter(p => (p.Protocol || '').toUpperCase() === 'UDP').length;
+        statusUdpCount.textContent = `UDP: ${udpTotal}`;
     }
 
     // Atualiza botão Kill All Dev

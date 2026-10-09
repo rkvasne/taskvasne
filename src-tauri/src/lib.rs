@@ -286,8 +286,7 @@ fn notify_new_dev_port(port: u16, title: &str) {
         .replace('<', "&lt;")
         .replace('>', "&gt;")
         .replace('"', " ")
-        .replace('$', "_")
-        .replace('`', "_");
+        .replace(['$', '`'], "_");
     let script = format!(
         r#"
         [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
@@ -791,6 +790,7 @@ mod win_privilege {
 
     #[repr(C)]
     #[derive(Clone, Copy)]
+    #[allow(clippy::upper_case_acronyms)]
     struct LUID {
         low_part: u32,
         high_part: i32,
@@ -798,6 +798,7 @@ mod win_privilege {
 
     #[repr(C)]
     #[derive(Clone, Copy)]
+    #[allow(clippy::upper_case_acronyms)]
     struct LUID_AND_ATTRIBUTES {
         luid: LUID,
         attributes: u32,
@@ -1012,6 +1013,7 @@ mod win_icon {
     static ICON_CACHE: Mutex<Option<HashMap<String, String>>> = Mutex::new(None);
 
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct SHFILEINFOW {
         h_icon: isize,
         i_icon: i32,
@@ -1021,6 +1023,7 @@ mod win_icon {
     }
 
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct ICONINFO {
         f_icon: i32,
         x_hotspot: u32,
@@ -1030,6 +1033,7 @@ mod win_icon {
     }
 
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct BITMAP {
         bm_type: i32,
         bm_width: i32,
@@ -1041,6 +1045,7 @@ mod win_icon {
     }
 
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct BITMAPINFOHEADER {
         bi_size: u32,
         bi_width: i32,
@@ -1056,6 +1061,7 @@ mod win_icon {
     }
 
     #[repr(C)]
+    #[allow(clippy::upper_case_acronyms)]
     struct BITMAPINFO {
         bmi_header: BITMAPINFOHEADER,
         bmi_colors: [u32; 1],
@@ -1102,7 +1108,7 @@ mod win_icon {
     const BASE64_ALPHABET: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
     fn to_base64(data: &[u8]) -> String {
-        let mut result = String::with_capacity((data.len() + 2) / 3 * 4);
+        let mut result = String::with_capacity(data.len().div_ceil(3) * 4);
         for chunk in data.chunks(3) {
             let b0 = chunk[0] as u32;
             let b1 = if chunk.len() > 1 { chunk[1] as u32 } else { 0 };

@@ -73,6 +73,8 @@ describe('i18n Module', () => {
             expect(i18n.t('openPort', { port: 3000 })).toBe('Abrir http://localhost:3000');
             expect(i18n.t('killAdmin')).toBe('Encerrar como Administrador (UAC)');
             expect(i18n.t('killAdminConfirm', { pid: 1234 })).toContain('1234');
+            expect(i18n.t('monitoringPorts', { count: 73 })).toBe('Monitorando 73 portas');
+            expect(i18n.t('monitoringPort')).toBe('Monitorando 1 porta');
         });
 
         test('should interpolate parameters in EN', () => {
@@ -81,6 +83,8 @@ describe('i18n Module', () => {
             expect(i18n.t('openPort', { port: 8080 })).toBe('Open http://localhost:8080');
             expect(i18n.t('killAdmin')).toBe('Stop as Administrator (UAC)');
             expect(i18n.t('killAdminConfirm', { pid: 5678 })).toContain('5678');
+            expect(i18n.t('monitoringPorts', { count: 73 })).toBe('Monitoring 73 ports');
+            expect(i18n.t('monitoringPort')).toBe('Monitoring 1 port');
         });
 
         test('should return key if translation not found', () => {
