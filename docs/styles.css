@@ -1104,7 +1104,7 @@ p {
 
 .footer-bottom p {
     font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.65);
 }
 
 @media (max-width: 768px) {

@@ -16,6 +16,13 @@
 
 ## 📝 Histórico de Sessões
 
+### 2026-10-09 — Release v0.2.2: Contraste Impeccable, Governança Hub v0.13.1 e Novos Executáveis
+
+- **Versão v0.2.2:** Bump patch com suíte de testes 100% verde (Jest 17/17, Cargo test 11/11, Clippy 0 warnings, ESLint 0 erros, Prettier 100%, verify:full conforme).
+- **Refinamento Impeccable de Contraste (`docs/`):** Contraste do rodapé legal (`.footer-bottom p`) ajustado para WCAG AA (> 5.5:1), mantendo 0 anti-patterns e 0 avisos consultivos no `impeccable detect`.
+- **Sincronização de Governança Hub v0.13.1:** `AGENTS.md` e `GEMINI.md` sincronizados com a versão mais recente do Agents Hub.
+- **Compilação e Disponibilização de Executáveis:** Gerados novos binários (`Taskvasne_0.2.2_x64-setup.exe`, `.msi` e binário autônomo) e publicados no GitHub Releases para download direto.
+
 ### 2026-10-09 — Release v0.2.1: Footer Status Bar, Refinamento Impeccable e Higiene Clippy
 
 - **Versão v0.2.1:** Bump patch com suíte de testes 100% verde (Jest 17/17, Cargo test 11/11, Clippy 0 warnings, ESLint 0 erros, Prettier 100%, verify:full conforme).

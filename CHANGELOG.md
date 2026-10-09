@@ -13,6 +13,23 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-10-09
+
+### Changed
+
+- **Refinamento Impeccable da Landing Page (`docs/`):**
+    - Ajuste de contraste no rodapé legal (`.footer-bottom p`) de `rgba(255, 255, 255, 0.4)` para `rgba(255, 255, 255, 0.65)`, garantindo conformidade estrita com WCAG AA (> 5.5:1).
+    - Verificação integral via ferramenta `impeccable detect docs` mantendo 0 erros e 0 avisos consultivos.
+- **Sincronização de Governança com Agents Hub v0.13.1:**
+    - Atualização dos arquivos mestres de governança (`AGENTS.md` e `GEMINI.md`) com as regras consolidadas do Hub v0.13.1 (papel de conselheiro sênior, boundary check e integridade de satélite).
+- **Publicação dos Instaladores e Executáveis:**
+    - Recompilação dos pacotes de distribuição para Windows x64 (instalador NSIS `.exe`, instalador `.msi` e binário autônomo `.exe`) disponibilizados para download direto via GitHub Releases.
+
+### Aprendizado da Release
+
+- **Fato observado:** Rodapés em temas escuros exigem atenção especial a elementos com opacidade reduzida; mesmo textos secundários ou de direitos autorais devem manter contraste mínimo de 4.5:1 (idealmente > 5.5:1) para legibilidade universal.
+- **Diretriz consolidada:** Toda versão de release com instaladores distribuídos deve garantir o alinhamento simultâneo entre a documentação da landing page e as tags e releases correspondentes no GitHub.
+
 ## [0.2.1] - 2026-10-09
 
 ### Added
