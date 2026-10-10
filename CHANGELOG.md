@@ -13,6 +13,32 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2026-10-10
+
+### Added
+
+- **Reformulação Profissional da Landing Page (`docs/`):**
+    - **Nova Seção Comparativa (Dor vs. Solução):** Contraste direto entre a complexidade do terminal manual (`netstat -ano` + `taskkill` + `Acesso Negado` ~45s) e o fluxo instantâneo na barra de tarefas do Taskvasne (< 1s com 1 clique).
+    - **6 Pilares Reais de Engenharia:** Documentação das funcionalidades-chave: Kill inteligente com botão `Parar Dev`, desbloqueador Win32 de pastas (Restart Manager API), Wi-Fi QR Code mobile, health probes com sparklines RTT, exportador `.env.local`/Markdown e elevação UAC sob demanda.
+    - **Painel de Especificações & Performance (Specs):** Métricas reais comparativas de consumo de memória (~20 MB RAM vs 300MB+ Electron), cold start (< 300 ms), instalador ultracompacto (~2.0 MB) e 0% telemetria / 100% offline.
+    - **Central de Downloads Estruturada (Download Hub):** Cards dedicados para instalador guiado `.exe`, pacote corporativo `.msi` e binário standalone portátil `.exe`, acompanhados dos requisitos de sistema.
+    - **FAQ Técnico para Desenvolvedores:** Seção com respostas objetivas sobre privilégios normais vs UAC, suporte a Docker/WSL2, Restart Manager e privacidade local.
+
+### Changed
+
+- **Refinamento do Card de Autor e Apoio:**
+    - Atualização da imagem oficial do desenvolvedor com foto em alta resolução (`raphael-workspace-monitores3-nobg.png`).
+    - Atualização do portfólio na bio para _Criador do Kvaslator, Printvasne e Taskvasne_.
+    - Reorganização do bloco de doações com espaçamento harmônico e botão toggle para visualização sob demanda dos QR Codes Pix e PayPal.
+- **Auditoria de Qualidade Impeccable & Acessibilidade:**
+    - 0 anti-patterns no `impeccable detect docs` (eliminação de halos fluorescentes, contraste WCAG AA > 5.5:1 e tipografia balanceada).
+    - Dicionário de tradução 100% bilíngue (`pt-BR` e `en`) cobrindo 128 tags sem chaves órfãs.
+
+### Aprendizado da Release
+
+- **Fato observado:** Utilitários para desenvolvedores ganham credibilidade imediata quando a comunicação substitui slogans genéricos por dores exatas do dia a dia (como o erro `EADDRINUSE`) e especificações técnicas transparentes (RAM real, arquitetura Rust e ausência de tracking).
+- **Diretriz consolidada:** O design de landing pages de produtos desktop deve refletir a mesma sobriedade e refinamento do próprio aplicativo, evitando ruídos de IA e priorizando documentação técnica e opções claras de instalação.
+
 ## [0.2.2] - 2026-10-09
 
 ### Changed

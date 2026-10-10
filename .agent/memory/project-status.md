@@ -1,6 +1,6 @@
 # 📊 Status do Projeto - Taskvasne
 
-> **Última Atualização:** 09/10/2026  
+> **Última Atualização:** 10/10/2026  
 > **Fase Atual:** Estável / Produção
 
 ---
@@ -15,6 +15,13 @@
 ---
 
 ## 📝 Histórico de Sessões
+
+### 2026-10-10 — Release v0.2.3: Reformulação Profissional da Landing Page, Comparativo, Specs e FAQ
+
+- **Versão v0.2.3:** Bump patch com suíte de testes 100% verde (Jest 17/17, Impeccable detect 0 anti-patterns, verify:full 100% conforme).
+- **Reformulação Profissional da Landing Page (`docs/`):** Implementada nova arquitetura de informação no padrão Raycast/DevToys. Seção Comparativa visual (terminal manual arcaico vs 1 clique na bandeja), 6 pilares de funcionalidades detalhados, painel de especificações de engenharia e performance (RAM ~20MB vs Electron, cold start <300ms, instalador ~2.0MB, zero telemetria), central estruturada de download hub (instalador, MSI corporativo e standalone) e FAQ técnico com 4 perguntas essenciais de desenvolvedor.
+- **Refinamento do Card de Autor e Apoio:** Atualização da imagem oficial do desenvolvedor com foto em alta resolução (`raphael-workspace-monitores3-nobg.png`), atualização da bio de portfólio para _Criador do Kvaslator, Printvasne e Taskvasne_ e ajuste de espaçamento harmônico com botão toggle para QR Codes Pix e PayPal.
+- **Auditoria de Qualidade Impeccable & Acessibilidade:** 0 anti-patterns no `impeccable detect docs` (eliminação de halos fluorescentes, contraste WCAG AA > 5.5:1 e tipografia balanceada). Dicionário de tradução 100% bilíngue (`pt-BR` e `en`) cobrindo 128 tags sem chaves órfãs.
 
 ### 2026-10-09 — Release v0.2.2: Contraste Impeccable, Governança Hub v0.13.1 e Novos Executáveis
 
