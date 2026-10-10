@@ -78,7 +78,7 @@
                 </div>
                 <div class="hero-image">
                     <div class="interactive-demo mock-interactive">
-                        <div class="app-popup mock-popup" id="demo-popup">
+                        <div class="app-popup mock-popup visible" id="demo-popup">
                             <!-- Header -->
                             <div class="demo-header">
                                 <div class="demo-title">
@@ -1234,7 +1234,7 @@
         const trigger = document.getElementById('demo-trigger');
         const popup = document.getElementById('demo-popup');
         const hint = document.querySelector('.click-hint');
-        let isOpen = false;
+        let isOpen = true;
 
         function setPopupOpen(open) {
             isOpen = open;
