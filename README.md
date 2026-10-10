@@ -29,7 +29,7 @@ Taskvasne é um gerenciador de portas para Windows 11 ultra-leve construído em 
 - **Suporte a Sockets UDP (Novo v0.2.0)**: Monitoramento completo de conexões em escuta tanto em `TCP` quanto em `UDP` com badges dedicados.
 - **Notificação Toast de Novas Portas Dev (Novo v0.2.0)**: Alerta nativo instantâneo no Windows quando um novo servidor de desenvolvimento abre uma porta.
 - **Menu de Contexto Rápido**: Botão direito para abrir projeto no VS Code, Terminal (Windows Terminal ou PowerShell) ou Explorer, além de copiar URL e comando cURL.
-- **Health Probes com Latência e Sparklines (Novo)**: Sondagem HTTP com medição de RTT e mini gráfico vetorial inline mostrando histórico recente de resposta.
+- **Monitoramento de Status e Latência (Novo)**: Sondagem de conexões HTTP com medição de tempo de resposta em tempo real e mini gráfico visual do histórico.
 - **Compartilhamento Wi-Fi / Rede Local com QR Code (Novo)**: Geração instantânea de URL com IP local e QR Code SVG autocontido para testar em smartphones ou outros dispositivos da LAN.
 - **Exportação de Portas (Novo)**: Exporte rapidamente a tabela de portas ativas em Markdown ou gere variáveis de ambiente `.env.local` com um clique.
 - **Delta Watcher de Sockets (Novo)**: Thread em background em Rust que detecta abertura/fechamento de portas instantaneamente sem depender exclusivamente de polling.
