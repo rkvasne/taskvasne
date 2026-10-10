@@ -1687,7 +1687,7 @@ p {
 }
 
 .comp-card-old {
-    border-color: rgba(239, 68, 68, 0.25);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 .comp-card-new {
@@ -1704,6 +1704,12 @@ p {
     font-size: var(--font-size-xs);
     font-weight: 600;
     margin-bottom: 16px;
+}
+
+.comp-card-badge.neutral {
+    background: rgba(148, 163, 184, 0.12);
+    color: #cbd5e1;
+    border: 1px solid rgba(148, 163, 184, 0.25);
 }
 
 .comp-card-badge.danger {
@@ -1860,6 +1866,10 @@ p {
     font-weight: 700;
     flex-shrink: 0;
     line-height: 1;
+}
+
+.comp-icon.bullet {
+    color: #94a3b8;
 }
 
 .comp-icon.bad {

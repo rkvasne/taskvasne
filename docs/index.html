@@ -239,20 +239,20 @@
             </div>
         </section>
 
-        <!-- Seção Comparativo (Pain vs Solution) -->
+        <!-- Seção Comparativo (Linha de Comando vs Interface Gráfica) -->
         <section class="comparison-section" id="comparison">
             <div class="container">
                 <div class="section-header">
                     <div class="badge" data-i18n="comp.badge">Comparativo</div>
-                    <h2 class="section-title" data-i18n="comp.title">O fluxo moderno que substitui comandos arcaicos</h2>
-                    <p class="section-subtitle" data-i18n="comp.subtitle">Liberte portas ocupadas instantaneamente, sem precisar abrir terminais ou consultar PIDs manuais.</p>
+                    <h2 class="section-title" data-i18n="comp.title">Uma alternativa visual para o terminal</h2>
+                    <p class="section-subtitle" data-i18n="comp.subtitle">Para quem prefere resolver portas ocupadas com rapidez e praticidade, direto pela barra de tarefas.</p>
                 </div>
 
                 <div class="comp-grid">
-                    <!-- Card Terminal Manual -->
+                    <!-- Card Terminal -->
                     <div class="comp-card comp-card-old">
-                        <div class="comp-card-badge danger" data-i18n="comp.old.badge">Fluxo Manual &bull; ~45s de atrito</div>
-                        <h3 class="comp-card-title" data-i18n="comp.old.title">Terminal Manual e netstat</h3>
+                        <div class="comp-card-badge neutral" data-i18n="comp.old.badge">Linha de Comando &bull; Terminal</div>
+                        <h3 class="comp-card-title" data-i18n="comp.old.title">Terminal e netstat</h3>
                         <div class="terminal-mockup">
                             <div class="terminal-bar">
                                 <span class="term-dot close"></span>
@@ -264,33 +264,32 @@
                                 <p class="term-cmd"><span class="term-prompt">&gt;</span> netstat -ano | findstr :3000</p>
                                 <p class="term-out">TCP &nbsp; 0.0.0.0:3000 &nbsp; LISTENING &nbsp; 14208</p>
                                 <p class="term-cmd"><span class="term-prompt">&gt;</span> taskkill /F /PID 14208</p>
-                                <p class="term-err">ERRO: O processo com PID 14208 n&atilde;o p&ocirc;de ser finalizado. Acesso negado.</p>
-                                <p class="term-muted">... Exige reabrir prompt como Administrador ...</p>
+                                <p class="term-out">&Ecirc;XITO: Processo 14208 finalizado.</p>
                             </div>
                         </div>
                         <ul class="comp-list">
-                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item1">Comandos longos e digita&ccedil;&atilde;o manual</span></li>
-                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item2">Sem identificar qual projeto ou app est&aacute; rodando</span></li>
-                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item3">Falhas de permiss&atilde;o exigem reabrir como Admin</span></li>
+                            <li><span class="comp-icon bullet">&bull;</span> <span data-i18n="comp.old.item1">Excelente para scripts e uso em linha de comando</span></li>
+                            <li><span class="comp-icon bullet">&bull;</span> <span data-i18n="comp.old.item2">Exige consultar PID e digitar comandos a cada porta</span></li>
+                            <li><span class="comp-icon bullet">&bull;</span> <span data-i18n="comp.old.item3">Processos protegidos exigem reabrir prompt com eleva&ccedil;&atilde;o</span></li>
                         </ul>
                     </div>
 
                     <!-- Card Taskvasne -->
                     <div class="comp-card comp-card-new">
-                        <div class="comp-card-badge success" data-i18n="comp.new.badge">Com Taskvasne &bull; 1 clique</div>
-                        <h3 class="comp-card-title" data-i18n="comp.new.title">Direto na Bandeja</h3>
+                        <div class="comp-card-badge success" data-i18n="comp.new.badge">Interface Gr&aacute;fica &bull; 1 clique</div>
+                        <h3 class="comp-card-title" data-i18n="comp.new.title">Direto na Barra de Tarefas</h3>
                         <div class="taskvasne-flow-mockup">
                             <div class="flow-step">
                                 <div class="flow-step-num">1</div>
                                 <div class="flow-step-content">
                                     <strong data-i18n="comp.new.step1.title">Bandeja do Windows</strong>
-                                    <p data-i18n="comp.new.step1.desc">Acesso direto pelo &iacute;cone na barra de tarefas.</p>
+                                    <p data-i18n="comp.new.step1.desc">Acesso r&aacute;pido pelo &iacute;cone ao lado do rel&oacute;gio.</p>
                                 </div>
                             </div>
                             <div class="flow-step">
                                 <div class="flow-step-num">2</div>
                                 <div class="flow-step-content">
-                                    <strong data-i18n="comp.new.step2.title">Identifica&ccedil;&atilde;o Direta</strong>
+                                    <strong data-i18n="comp.new.step2.title">Identifica&ccedil;&atilde;o Clara</strong>
                                     <p data-i18n="comp.new.step2.desc">Mostra Next, Vite, Docker e portas em tempo real.</p>
                                 </div>
                             </div>
@@ -298,13 +297,13 @@
                                 <div class="flow-step-num">3</div>
                                 <div class="flow-step-content">
                                     <strong data-i18n="comp.new.step3.title">1 Clique no Bot&atilde;o Parar</strong>
-                                    <p data-i18n="comp.new.step3.desc">Libera a porta e encerra o processo na hora.</p>
+                                    <p data-i18n="comp.new.step3.desc">Libera a porta e finaliza o processo na hora.</p>
                                 </div>
                             </div>
                         </div>
                         <ul class="comp-list">
-                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item1">Zero comandos para lembrar ou digitar</span></li>
-                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item2">Bot&atilde;o &quot;Parar Dev&quot; encerra servidores de teste juntos</span></li>
+                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item1">Mais comodidade para o fluxo di&aacute;rio de desenvolvimento</span></li>
+                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item2">Bot&atilde;o &quot;Parar Dev&quot; encerra m&uacute;ltiplos servidores juntos</span></li>
                             <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item3">Retorno imediato ao c&oacute;digo em menos de 1 segundo</span></li>
                         </ul>
                     </div>
@@ -731,23 +730,23 @@
                 'demo.monitoring': 'Monitorando',
                 'demo.ports': 'portas',
                 'comp.badge': 'Comparativo',
-                'comp.title': 'O fluxo moderno que substitui comandos arcaicos',
-                'comp.subtitle': 'Liberte portas ocupadas instantaneamente, sem precisar abrir terminais ou consultar PIDs manuais.',
-                'comp.old.badge': 'Fluxo Manual &bull; ~45s de atrito',
-                'comp.old.title': 'Terminal Manual e netstat',
-                'comp.old.item1': 'Comandos longos e digitação manual',
-                'comp.old.item2': 'Sem identificar qual projeto ou app está rodando',
-                'comp.old.item3': 'Falhas de permissão exigem reabrir como Admin',
-                'comp.new.badge': 'Com Taskvasne &bull; 1 clique',
-                'comp.new.title': 'Direto na Bandeja',
+                'comp.title': 'Uma alternativa visual para o terminal',
+                'comp.subtitle': 'Para quem prefere resolver portas ocupadas com rapidez e praticidade, direto pela barra de tarefas.',
+                'comp.old.badge': 'Linha de Comando &bull; Terminal',
+                'comp.old.title': 'Terminal e netstat',
+                'comp.old.item1': 'Excelente para scripts e uso em linha de comando',
+                'comp.old.item2': 'Exige consultar PID e digitar comandos a cada porta',
+                'comp.old.item3': 'Processos protegidos exigem reabrir prompt com elevação',
+                'comp.new.badge': 'Interface Gráfica &bull; 1 clique',
+                'comp.new.title': 'Direto na Barra de Tarefas',
                 'comp.new.step1.title': 'Bandeja do Windows',
-                'comp.new.step1.desc': 'Acesso direto pelo ícone na barra de tarefas.',
-                'comp.new.step2.title': 'Identificação Direta',
+                'comp.new.step1.desc': 'Acesso rápido pelo ícone ao lado do relógio.',
+                'comp.new.step2.title': 'Identificação Clara',
                 'comp.new.step2.desc': 'Mostra Next, Vite, Docker e portas em tempo real.',
                 'comp.new.step3.title': '1 Clique no Botão Parar',
-                'comp.new.step3.desc': 'Libera a porta e encerra o processo na hora.',
-                'comp.new.item1': 'Zero comandos para lembrar ou digitar',
-                'comp.new.item2': 'Botão "Parar Dev" encerra servidores de teste juntos',
+                'comp.new.step3.desc': 'Libera a porta e finaliza o processo na hora.',
+                'comp.new.item1': 'Mais comodidade para o fluxo diário de desenvolvimento',
+                'comp.new.item2': 'Botão "Parar Dev" encerra múltiplos servidores juntos',
                 'comp.new.item3': 'Retorno imediato ao código em menos de 1 segundo',
                 'features.badge': 'Funcionalidades',
                 'features.title': 'Engenharia focada no fluxo do desenvolvedor',
@@ -851,23 +850,23 @@
                 'demo.monitoring': 'Monitoring',
                 'demo.ports': 'ports',
                 'comp.badge': 'Comparison',
-                'comp.title': 'The modern workflow replacing archaic terminal commands',
-                'comp.subtitle': 'Free up occupied ports instantly, without opening terminals or checking manual PIDs.',
-                'comp.old.badge': 'Manual Flow &bull; ~45s friction',
-                'comp.old.title': 'Manual Terminal & netstat',
-                'comp.old.item1': 'Long commands and manual typing',
-                'comp.old.item2': 'Zero info on which project or app is running',
-                'comp.old.item3': 'Permission errors require reopening as Admin',
-                'comp.new.badge': 'With Taskvasne &bull; 1 click',
-                'comp.new.title': 'System Tray',
+                'comp.title': 'A visual alternative to the terminal',
+                'comp.subtitle': 'For developers who prefer freeing up ports with a single click right from the taskbar.',
+                'comp.old.badge': 'Command Line &bull; Terminal',
+                'comp.old.title': 'Terminal & netstat',
+                'comp.old.item1': 'Great for scripting and command-line workflows',
+                'comp.old.item2': 'Requires querying PIDs and typing commands per port',
+                'comp.old.item3': 'Protected processes require reopening with elevation',
+                'comp.new.badge': 'Graphical Interface &bull; 1 click',
+                'comp.new.title': 'Direct in Windows Tray',
                 'comp.new.step1.title': 'Windows System Tray',
-                'comp.new.step1.desc': 'Direct access via the taskbar tray icon.',
-                'comp.new.step2.title': 'Smart Detection',
-                'comp.new.step2.desc': 'Displays Next, Vite, Docker and ports in real time.',
+                'comp.new.step1.desc': 'Quick access via the taskbar tray icon.',
+                'comp.new.step2.title': 'Clear Overview',
+                'comp.new.step2.desc': 'Shows active servers (Next, Vite, Docker) and ports.',
                 'comp.new.step3.title': '1 Click to Stop',
-                'comp.new.step3.desc': 'Frees the port and terminates the process on the spot.',
-                'comp.new.item1': 'Zero commands to remember or type',
-                'comp.new.item2': '"Kill Dev" button terminates dev servers together',
+                'comp.new.step3.desc': 'Frees the port and terminates the process instantly.',
+                'comp.new.item1': 'Added convenience for your daily dev workflow',
+                'comp.new.item2': '"Kill Dev" button to stop multiple servers together',
                 'comp.new.item3': 'Instant return to code in less than 1 second',
                 'features.badge': 'Features',
                 'features.title': 'Engineering focused on developer workflow',
