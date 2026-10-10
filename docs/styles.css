@@ -1416,6 +1416,7 @@ p {
     background: rgba(168, 85, 247, 0.08);
     border: 1px solid rgba(168, 85, 247, 0.25);
     border-radius: 10px;
+    margin-top: 2rem;
 }
 
 .donate-note-text {
@@ -2176,7 +2177,7 @@ p {
 .donate-qr-toggle-wrapper {
     display: flex;
     justify-content: center;
-    margin: 32px 0 0;
+    margin: 32px 0;
 }
 
 .donate-qr-toggle-btn {
@@ -2200,7 +2201,7 @@ p {
 
 .donate-qr-box {
     display: none;
-    margin-top: 24px;
+    margin: 24px 0;
 }
 
 .donate-qr-box.active {
