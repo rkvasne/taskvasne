@@ -66,43 +66,132 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="interactive-demo">
-                        <div class="app-popup" id="demo-popup">
-                            <div class="mockup-header">
-                                <span class="title">Taskvasne</span>
-                                <div class="win-controls">
-                                    <span>&#8722;</span>
-                                    <span>&#10005;</span>
+                    <div class="interactive-demo mock-interactive">
+                        <div class="app-popup mock-popup" id="demo-popup">
+                            <!-- Header -->
+                            <div class="demo-header">
+                                <div class="demo-title">
+                                    <span>Taskvasne</span>
+                                    <span class="demo-count-badge" id="demo-total-count">78</span>
+                                </div>
+                                <div class="demo-header-actions">
+                                    <button class="demo-icon-btn" title="Exportar" aria-label="Exportar">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                    </button>
+                                    <button class="demo-icon-btn" id="demo-btn-refresh" title="Atualizar" aria-label="Atualizar">
+                                        <svg id="demo-refresh-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M23 4v6h-6"></path>
+                                            <path d="M1 20v-6h6"></path>
+                                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="demo-icon-btn" title="Sobre" aria-label="Sobre">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                        </svg>
+                                    </button>
+                                    <button class="demo-icon-btn danger" id="demo-btn-close" title="Fechar flyout" aria-label="Fechar flyout">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="mockup-body">
-                                <div class="mockup-row">
-                                    <div class="row-info">
-                                        <span class="port">:5040</span>
-                                        <span class="proc">svchost.exe</span>
-                                    </div>
-                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+
+                            <!-- Status Banner -->
+                            <div class="demo-status-banner" id="demo-status-banner">
+                                <span class="demo-status-dot"></span>
+                                <span data-i18n="demo.banner">Taskvasne ativo na bandeja do sistema</span>
+                                <button class="demo-status-close" id="demo-banner-close" title="Fechar aviso" aria-label="Fechar aviso">×</button>
+                            </div>
+
+                            <!-- Tabs Nav -->
+                            <div class="demo-tabs-nav">
+                                <button class="demo-tab-btn active" id="demo-tab-ports">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                    <span data-i18n="demo.tabPorts">Portas</span>
+                                    <span class="demo-tab-badge" id="demo-tab-ports-count">78</span>
+                                </button>
+                                <button class="demo-tab-btn" id="demo-tab-unlocker">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                                    </svg>
+                                    <span data-i18n="demo.tabUnlocker">Desbloquear Pasta</span>
+                                </button>
+                            </div>
+
+                            <!-- Category Filters -->
+                            <div class="demo-category-filters" id="demo-category-filters">
+                                <button class="demo-filter-pill active" data-cat="all">
+                                    <span data-i18n="demo.catAll">Todos</span> <span class="demo-pill-count" id="demo-count-all">78</span>
+                                </button>
+                                <button class="demo-filter-pill" data-cat="dev">
+                                    ⚡ <span data-i18n="demo.catDev">Dev</span> <span class="demo-pill-count" id="demo-count-dev">5</span>
+                                </button>
+                                <button class="demo-filter-pill" data-cat="database">
+                                    🗄️ <span data-i18n="demo.catDb">Bancos</span> <span class="demo-pill-count" id="demo-count-db">1</span>
+                                </button>
+                                <button class="demo-filter-pill" data-cat="app">
+                                    📦 <span data-i18n="demo.catApp">Apps</span> <span class="demo-pill-count" id="demo-count-app">43</span>
+                                </button>
+                                <button class="demo-filter-pill" data-cat="system">
+                                    🛡️ <span data-i18n="demo.catSys">Sistema</span> <span class="demo-pill-count" id="demo-count-sys">29</span>
+                                </button>
+                            </div>
+
+                            <!-- Search & Kill Dev Bar -->
+                            <div class="demo-search-bar">
+                                <div class="demo-search-wrapper">
+                                    <svg class="demo-search-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input type="text" id="demo-search-input" class="demo-search-input" placeholder="Buscar porta (:3000), processo... (Ctrl+F)" data-i18n-placeholder="demo.searchPlaceholder" autocomplete="off" spellcheck="false" />
                                 </div>
-                                <div class="mockup-row">
-                                    <div class="row-info">
-                                        <span class="port">:3000</span>
-                                        <span class="proc">node.exe (api)</span>
-                                    </div>
-                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                <button class="demo-btn-kill-dev" id="demo-btn-kill-dev" title="Parar todos os servidores Dev">
+                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                    </svg>
+                                    <span><span data-i18n="demo.killDev">Parar Dev</span> (<span id="demo-kill-dev-count">5</span>)</span>
+                                </button>
+                            </div>
+
+                            <!-- Table Header -->
+                            <div class="demo-table-header">
+                                <span class="demo-th demo-th-port" data-i18n="demo.thPort">PORTA</span>
+                                <span class="demo-th demo-th-proc" data-i18n="demo.thProcess">PROCESSO</span>
+                                <span class="demo-th demo-th-metrics" data-i18n="demo.thMetrics">CONSUMO / PID</span>
+                                <span class="demo-th demo-th-type" data-i18n="demo.thType">TIPO</span>
+                                <span class="demo-th demo-th-actions"></span>
+                            </div>
+
+                            <!-- Table Body -->
+                            <div class="demo-table-body" id="demo-table-body">
+                                <!-- Processos gerados dinamicamente via JS -->
+                            </div>
+
+                            <!-- Footer Status Bar -->
+                            <div class="demo-status-bar">
+                                <div class="demo-status-bar-left">
+                                    <span class="demo-status-bar-dot"></span>
+                                    <span id="demo-status-summary"><span data-i18n="demo.monitoring">Monitorando</span> <span id="demo-footer-count">78</span> <span data-i18n="demo.ports">portas</span></span>
                                 </div>
-                                <div class="mockup-row">
-                                    <div class="row-info">
-                                        <span class="port">:5173</span>
-                                        <span class="proc">vite.exe</span>
-                                    </div>
-                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
-                                </div>
-                                <div class="mockup-row">
-                                    <div class="row-info">
-                                        <span class="port">:8080</span>
-                                        <span class="proc">java.exe</span>
-                                    </div>
-                                    <span class="kill-btn" data-i18n="demo.kill">Parar</span>
+                                <div class="demo-status-bar-right">
+                                    <span class="demo-status-pill tcp" id="demo-tcp-pill">TCP: 58</span>
+                                    <span class="demo-status-pill udp" id="demo-udp-pill">UDP: 20</span>
                                 </div>
                             </div>
                         </div>
@@ -411,6 +500,22 @@
                 'hero.github': 'Ver no GitHub',
                 'demo.kill': 'Parar',
                 'demo.hint': 'Teste aqui',
+                'demo.banner': 'Taskvasne ativo na bandeja do sistema',
+                'demo.tabPorts': 'Portas',
+                'demo.tabUnlocker': 'Desbloquear Pasta',
+                'demo.catAll': 'Todos',
+                'demo.catDev': 'Dev',
+                'demo.catDb': 'Bancos',
+                'demo.catApp': 'Apps',
+                'demo.catSys': 'Sistema',
+                'demo.searchPlaceholder': 'Buscar porta (:3000), processo... (Ctrl+F)',
+                'demo.killDev': 'Parar Dev',
+                'demo.thPort': 'PORTA',
+                'demo.thProcess': 'PROCESSO',
+                'demo.thMetrics': 'CONSUMO / PID',
+                'demo.thType': 'TIPO',
+                'demo.monitoring': 'Monitorando',
+                'demo.ports': 'portas',
                 'features.title': 'Por que escolher o Taskvasne?',
                 'features.fast.title': 'Ultra Rápido',
                 'features.fast.desc': 'Construído em Rust e Tauri v2 para performance máxima. Ultra-leve com apenas ~20MB de RAM e binário de 8.6MB.',
@@ -459,6 +564,22 @@
                 'hero.github': 'View on GitHub',
                 'demo.kill': 'Kill',
                 'demo.hint': 'Try here',
+                'demo.banner': 'Taskvasne active in system tray',
+                'demo.tabPorts': 'Ports',
+                'demo.tabUnlocker': 'Unlock Folder',
+                'demo.catAll': 'All',
+                'demo.catDev': 'Dev',
+                'demo.catDb': 'Databases',
+                'demo.catApp': 'Apps',
+                'demo.catSys': 'System',
+                'demo.searchPlaceholder': 'Search port (:3000), process... (Ctrl+F)',
+                'demo.killDev': 'Kill Dev',
+                'demo.thPort': 'PORT',
+                'demo.thProcess': 'PROCESS',
+                'demo.thMetrics': 'MEMORY / PID',
+                'demo.thType': 'TYPE',
+                'demo.monitoring': 'Monitoring',
+                'demo.ports': 'ports',
                 'features.title': 'Why choose Taskvasne?',
                 'features.fast.title': 'Blazing Fast',
                 'features.fast.desc': 'Built with Rust & Tauri v2 for maximum native performance. Ultra-lightweight with ~20MB RAM and 8.6MB binary.',
@@ -515,10 +636,17 @@
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key];
                 }
             });
+
+            const searchInput = document.getElementById('demo-search-input');
+            if (searchInput && translations[lang]['demo.searchPlaceholder']) {
+                searchInput.setAttribute('placeholder', translations[lang]['demo.searchPlaceholder']);
+            }
+
+            renderDemoPorts();
         }
 
         if (langToggle) {
@@ -534,11 +662,260 @@
             });
         }
 
-        // Interactive Demo Script
+        // ==========================================
+        // Interactive Demo Script (Windows 11 Fluent 2)
+        // ==========================================
+        const initialDemoPorts = [
+            { port: 1420, proto: 'TCP', name: 'kvaslator-app', mem: '75 MB', cat: 'dev', isOnline: true },
+            { port: 1900, proto: 'UDP', name: 'svchost.exe', mem: '2 MB', cat: 'system', isOnline: false },
+            { port: 2177, proto: 'UDP', name: 'svchost.exe', mem: '1 MB', cat: 'system', isOnline: false },
+            { port: 2179, proto: 'TCP', name: 'vmms.exe', mem: '6 MB', cat: 'system', isOnline: true },
+            { port: 3000, proto: 'TCP', name: 'space-worms', mem: '1 MB', cat: 'dev', isOnline: true },
+            { port: 5040, proto: 'TCP', name: 'svchost.exe', mem: '8 MB', cat: 'system', isOnline: true },
+            { port: 5050, proto: 'UDP', name: 'svchost.exe', mem: '8 MB', cat: 'system', isOnline: false },
+            { port: 5173, proto: 'TCP', name: 'pdfael-app', mem: '96 MB', cat: 'dev', isOnline: true },
+            { port: 5353, proto: 'UDP', name: 'Application', mem: '267 MB', cat: 'app', isOnline: false },
+            { port: 5355, proto: 'UDP', name: 'svchost.exe', mem: '6 MB', cat: 'system', isOnline: false },
+            { port: 5432, proto: 'TCP', name: 'postgres.exe', mem: '48 MB', cat: 'database', isOnline: true },
+            { port: 8080, proto: 'TCP', name: 'java.exe', mem: '184 MB', cat: 'dev', isOnline: true }
+        ];
+
+        let demoPorts = JSON.parse(JSON.stringify(initialDemoPorts));
+        let activeDemoCat = 'all';
+        let demoSearchQuery = '';
+
+        const demoTableBody = document.getElementById('demo-table-body');
+        const demoTotalBadge = document.getElementById('demo-total-count');
+        const demoTabPortsCount = document.getElementById('demo-tab-ports-count');
+        const demoFooterCount = document.getElementById('demo-footer-count');
+        const demoKillDevBtn = document.getElementById('demo-btn-kill-dev');
+        const demoKillDevCount = document.getElementById('demo-kill-dev-count');
+        const demoRefreshBtn = document.getElementById('demo-btn-refresh');
+        const demoRefreshIcon = document.getElementById('demo-refresh-icon');
+        const demoSearchInput = document.getElementById('demo-search-input');
+        const demoBanner = document.getElementById('demo-status-banner');
+        const demoBannerClose = document.getElementById('demo-banner-close');
+        const demoBtnClose = document.getElementById('demo-btn-close');
+
+        function updateDemoCounts() {
+            const total = demoPorts.length;
+            const devCount = demoPorts.filter(p => p.cat === 'dev').length;
+            const dbCount = demoPorts.filter(p => p.cat === 'database').length;
+            const appCount = demoPorts.filter(p => p.cat === 'app').length;
+            const sysCount = demoPorts.filter(p => p.cat === 'system').length;
+            const tcpCount = demoPorts.filter(p => p.proto === 'TCP').length;
+            const udpCount = demoPorts.filter(p => p.proto === 'UDP').length;
+
+            if (demoTotalBadge) demoTotalBadge.textContent = total;
+            if (demoTabPortsCount) demoTabPortsCount.textContent = total;
+            if (demoFooterCount) demoFooterCount.textContent = total;
+
+            const elAll = document.getElementById('demo-count-all');
+            const elDev = document.getElementById('demo-count-dev');
+            const elDb = document.getElementById('demo-count-db');
+            const elApp = document.getElementById('demo-count-app');
+            const elSys = document.getElementById('demo-count-sys');
+
+            if (elAll) elAll.textContent = total;
+            if (elDev) elDev.textContent = devCount;
+            if (elDb) elDb.textContent = dbCount;
+            if (elApp) elApp.textContent = appCount;
+            if (elSys) elSys.textContent = sysCount;
+
+            const tcpPill = document.getElementById('demo-tcp-pill');
+            const udpPill = document.getElementById('demo-udp-pill');
+            if (tcpPill) tcpPill.textContent = `TCP: ${tcpCount}`;
+            if (udpPill) udpPill.textContent = `UDP: ${udpCount}`;
+
+            if (demoKillDevBtn && demoKillDevCount) {
+                demoKillDevCount.textContent = devCount;
+                if (devCount > 0) {
+                    demoKillDevBtn.classList.remove('hidden');
+                } else {
+                    demoKillDevBtn.classList.add('hidden');
+                }
+            }
+        }
+
+        function renderDemoPorts() {
+            if (!demoTableBody) return;
+
+            let filtered = demoPorts;
+            if (activeDemoCat !== 'all') {
+                filtered = filtered.filter(p => p.cat === activeDemoCat);
+            }
+            if (demoSearchQuery) {
+                const q = demoSearchQuery.toLowerCase().replace(/^:/, '');
+                filtered = filtered.filter(p => 
+                    String(p.port).includes(q) || 
+                    p.name.toLowerCase().includes(q)
+                );
+            }
+
+            updateDemoCounts();
+
+            if (filtered.length === 0) {
+                demoTableBody.innerHTML = `
+                    <div class="demo-empty-state">
+                        Nenhum processo correspondente.
+                    </div>
+                `;
+                return;
+            }
+
+            const catLabels = {
+                'dev': { label: 'Dev', cls: 'cat-dev' },
+                'system': { label: 'Sistema', cls: 'cat-system' },
+                'app': { label: 'App', cls: 'cat-app' },
+                'database': { label: 'Banco', cls: 'cat-database' }
+            };
+
+            demoTableBody.innerHTML = filtered.map(item => {
+                const catObj = catLabels[item.cat] || catLabels.app;
+                const dotCls = item.isOnline ? 'online' : '';
+                return `
+                    <div class="demo-port-item" data-port="${item.port}">
+                        <div class="demo-col-port">
+                            <span class="demo-health-dot ${dotCls}"></span>
+                            <span class="demo-port-number">:${item.port}</span>
+                            <span class="demo-protocol-badge ${item.proto.toLowerCase()}">${item.proto}</span>
+                        </div>
+                        <div class="demo-col-process" title="${item.name}">
+                            <span class="demo-proc-name">${item.name}</span>
+                        </div>
+                        <div class="demo-col-metrics">
+                            <span>${item.mem}</span>
+                        </div>
+                        <div class="demo-col-type">
+                            <span class="demo-category-pill ${catObj.cls}">${catObj.label}</span>
+                        </div>
+                        <div class="demo-col-actions">
+                            <button class="demo-kill-btn" data-kill-port="${item.port}" title="Parar processo" aria-label="Parar :${item.port}">
+                                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button class="demo-more-btn" title="Mais opções" aria-label="Mais opções">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <circle cx="12" cy="12" r="1.5"></circle>
+                                    <circle cx="12" cy="5" r="1.5"></circle>
+                                    <circle cx="12" cy="19" r="1.5"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Event listeners de encerramento
+            demoTableBody.querySelectorAll('[data-kill-port]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const portToKill = Number(btn.getAttribute('data-kill-port'));
+                    const row = btn.closest('.demo-port-item');
+                    if (row) {
+                        row.classList.add('removing');
+                        setTimeout(() => {
+                            demoPorts = demoPorts.filter(p => p.port !== portToKill);
+                            renderDemoPorts();
+                        }, 180);
+                    }
+                });
+            });
+        }
+
+        // Filtros de Categoria
+        document.querySelectorAll('.demo-filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.demo-filter-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                activeDemoCat = pill.getAttribute('data-cat') || 'all';
+                renderDemoPorts();
+            });
+        });
+
+        // Campo de busca
+        if (demoSearchInput) {
+            demoSearchInput.addEventListener('input', (e) => {
+                demoSearchQuery = e.target.value.trim();
+                renderDemoPorts();
+            });
+        }
+
+        // Botão Parar Dev em Lote
+        if (demoKillDevBtn) {
+            demoKillDevBtn.addEventListener('click', () => {
+                const devRows = demoTableBody.querySelectorAll('.demo-port-item');
+                devRows.forEach(row => {
+                    const port = Number(row.getAttribute('data-port'));
+                    const target = demoPorts.find(p => p.port === port);
+                    if (target && target.cat === 'dev') {
+                        row.classList.add('removing');
+                    }
+                });
+                setTimeout(() => {
+                    demoPorts = demoPorts.filter(p => p.cat !== 'dev');
+                    renderDemoPorts();
+                }, 200);
+            });
+        }
+
+        // Botão Atualizar (Refresh)
+        if (demoRefreshBtn) {
+            demoRefreshBtn.addEventListener('click', () => {
+                if (demoRefreshIcon) {
+                    demoRefreshIcon.classList.add('spinning');
+                    setTimeout(() => demoRefreshIcon.classList.remove('spinning'), 800);
+                }
+                demoPorts = JSON.parse(JSON.stringify(initialDemoPorts));
+                activeDemoCat = 'all';
+                demoSearchQuery = '';
+                if (demoSearchInput) demoSearchInput.value = '';
+                document.querySelectorAll('.demo-filter-pill').forEach(p => {
+                    p.classList.toggle('active', p.getAttribute('data-cat') === 'all');
+                });
+                renderDemoPorts();
+            });
+        }
+
+        // Fechar banner verde
+        if (demoBannerClose && demoBanner) {
+            demoBannerClose.addEventListener('click', () => {
+                demoBanner.classList.add('hidden');
+            });
+        }
+
+        // Trigger da bandeja e popup
         const trigger = document.getElementById('demo-trigger');
         const popup = document.getElementById('demo-popup');
         const hint = document.querySelector('.click-hint');
         let isOpen = false;
+
+        function setPopupOpen(open) {
+            isOpen = open;
+            if (popup) {
+                popup.classList.toggle('visible', open);
+            }
+            if (hint) {
+                hint.style.opacity = open ? '0' : '1';
+            }
+        }
+
+        if (trigger) {
+            trigger.addEventListener('click', () => setPopupOpen(!isOpen));
+        }
+
+        if (demoBtnClose) {
+            demoBtnClose.addEventListener('click', () => setPopupOpen(false));
+        }
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isOpen && trigger && popup && !trigger.contains(e.target) && !popup.contains(e.target)) {
+                setPopupOpen(false);
+            }
+        });
 
         // Mobile menu (drawer)
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -569,39 +946,27 @@
             });
         }
 
-        trigger.addEventListener('click', () => {
-            isOpen = !isOpen;
-            if (isOpen) {
-                popup.classList.add('visible');
-                hint.style.opacity = '0';
-            } else {
-                popup.classList.remove('visible');
-            }
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (isOpen && !trigger.contains(e.target) && !popup.contains(e.target)) {
-                isOpen = false;
-                popup.classList.remove('visible');
-            }
-        });
-
         // Clock Script
         function updateClock() {
             const now = new Date();
             const time = now.toLocaleTimeString(currentLang, { hour: '2-digit', minute: '2-digit' });
             const date = now.toLocaleDateString(currentLang);
 
-            document.getElementById('clock-time').textContent = time;
-            document.getElementById('clock-date').textContent = date;
+            const clockTime = document.getElementById('clock-time');
+            const clockDate = document.getElementById('clock-date');
+            if (clockTime) clockTime.textContent = time;
+            if (clockDate) clockDate.textContent = date;
         }
 
         setInterval(updateClock, 1000);
         updateClock();
 
         // Update copyright year automatically
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        const yearEl = document.getElementById('current-year');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // Renderização inicial
+        renderDemoPorts();
     </script>
 </body>
 
