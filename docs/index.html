@@ -255,16 +255,42 @@
                         <h3 class="comp-card-title" data-i18n="comp.old.title">Terminal e netstat</h3>
                         <div class="terminal-mockup">
                             <div class="terminal-bar">
-                                <span class="term-dot close"></span>
-                                <span class="term-dot min"></span>
-                                <span class="term-dot max"></span>
-                                <span class="term-title">cmd.exe &mdash; prompt</span>
+                                <div class="terminal-tabs">
+                                    <div class="term-tab active">
+                                        <svg class="term-tab-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="4 17 10 11 4 5"></polyline>
+                                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                                        </svg>
+                                        <span>PowerShell</span>
+                                        <span class="term-tab-close" aria-hidden="true">&times;</span>
+                                    </div>
+                                    <button class="term-tab-add" title="Nova aba" type="button" aria-label="Nova aba">+</button>
+                                </div>
+                                <div class="term-win-controls" aria-hidden="true">
+                                    <span class="win-btn min" title="Minimizar">&#8212;</span>
+                                    <span class="win-btn max" title="Maximizar">&#9633;</span>
+                                    <span class="win-btn close" title="Fechar">&times;</span>
+                                </div>
                             </div>
                             <div class="terminal-body">
-                                <p class="term-cmd"><span class="term-prompt">&gt;</span> netstat -ano | findstr :3000</p>
-                                <p class="term-out">TCP &nbsp; 0.0.0.0:3000 &nbsp; LISTENING &nbsp; 14208</p>
-                                <p class="term-cmd"><span class="term-prompt">&gt;</span> taskkill /F /PID 14208</p>
-                                <p class="term-out">&Ecirc;XITO: Processo 14208 finalizado.</p>
+                                <div class="term-line">
+                                    <span class="term-path">PS C:\dev\app&gt;</span>
+                                    <span class="term-cmd">netstat -ano | findstr :3000</span>
+                                </div>
+                                <div class="term-line term-out">
+                                    <span>&nbsp;&nbsp;TCP&nbsp;&nbsp;&nbsp;&nbsp;0.0.0.0:3000&nbsp;&nbsp;&nbsp;&nbsp;LISTENING&nbsp;&nbsp;&nbsp;&nbsp;14208</span>
+                                </div>
+                                <div class="term-line">
+                                    <span class="term-path">PS C:\dev\app&gt;</span>
+                                    <span class="term-cmd">taskkill /F /PID 14208</span>
+                                </div>
+                                <div class="term-line term-success">
+                                    <span>&Ecirc;XITO: Processo 14208 finalizado.</span>
+                                </div>
+                                <div class="term-line term-active-prompt">
+                                    <span class="term-path">PS C:\dev\app&gt;</span>
+                                    <span class="term-cursor" aria-hidden="true"></span>
+                                </div>
                             </div>
                         </div>
                         <ul class="comp-list">
@@ -407,7 +433,7 @@
             <div class="container">
                 <div class="section-header">
                     <div class="badge" data-i18n="specs.badge">Engenharia</div>
-                    <h2 class="section-title" data-i18n="specs.title">Constru&iacute;do para velocidade. Zero desperd&iacute;cio.</h2>
+                    <h2 class="section-title" data-i18n="specs.title">Constru&iacute;do para velocidade.<br>Zero desperd&iacute;cio.</h2>
                     <p class="section-subtitle" data-i18n="specs.subtitle">Desenhado em Rust nativo para consumir o m&iacute;nimo absoluto de mem&oacute;ria e CPU.</p>
                 </div>
 
@@ -764,7 +790,7 @@
                 'feat.p6.title': 'Elevação de Permissão sob Demanda',
                 'feat.p6.desc': 'Opera como usuário padrão e solicita privilégios de Administrador apenas para processos restritos do Windows.',
                 'specs.badge': 'Engenharia',
-                'specs.title': 'Construído para velocidade. Zero desperdício.',
+                'specs.title': 'Construído para velocidade.<br>Zero desperdício.',
                 'specs.subtitle': 'Desenhado em Rust nativo para consumir o mínimo absoluto de memória e CPU.',
                 'specs.m1.label': 'Memória RAM',
                 'specs.m1.sub': 'vs 300MB–600MB em Electron',
@@ -884,7 +910,7 @@
                 'feat.p6.title': 'On-Demand UAC Elevation',
                 'feat.p6.desc': 'Runs as a standard user, requesting Administrator privileges only for restricted Windows processes.',
                 'specs.badge': 'Engineering',
-                'specs.title': 'Built for speed. Zero waste.',
+                'specs.title': 'Built for speed.<br>Zero waste.',
                 'specs.subtitle': 'Engineered in native Rust to consume minimal memory and CPU.',
                 'specs.m1.label': 'RAM Memory',
                 'specs.m1.sub': 'vs 300MB–600MB in Electron',
