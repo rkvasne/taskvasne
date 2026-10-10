@@ -24,7 +24,10 @@
             <nav class="nav-desktop" aria-label="Primary navigation">
                 <ul class="nav-menu" id="nav-menu">
                     <li><a class="nav-link" href="#download" data-i18n="nav.download">Download</a></li>
+                    <li><a class="nav-link" href="#comparison" data-i18n="nav.comparison">Comparativo</a></li>
                     <li><a class="nav-link" href="#features" data-i18n="nav.features">Funcionalidades</a></li>
+                    <li><a class="nav-link" href="#specs" data-i18n="nav.specs">Engenharia</a></li>
+                    <li><a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a></li>
                     <li><a class="nav-link" href="#author" data-i18n="nav.author">Autor</a></li>
                 </ul>
             </nav>
@@ -41,7 +44,10 @@
 
         <div class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
             <a class="nav-link" href="#download" data-i18n="nav.download">Download</a>
+            <a class="nav-link" href="#comparison" data-i18n="nav.comparison">Comparativo</a>
             <a class="nav-link" href="#features" data-i18n="nav.features">Funcionalidades</a>
+            <a class="nav-link" href="#specs" data-i18n="nav.specs">Engenharia</a>
+            <a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a>
             <a class="nav-link" href="#author" data-i18n="nav.author">Autor</a>
             <button id="lang-toggle-mobile" class="lang-btn" type="button">EN</button>
         </div>
@@ -55,14 +61,19 @@
                         <img src="icon.svg" alt="Taskvasne Logo" class="hero-logo">
                         <div class="badge">v0.2.2</div>
                     </div>
-                    <h1 data-i18n="hero.title">Controle suas portas.<br><span>Com Estilo.</span></h1>
-                    <p data-i18n="hero.subtitle">O gerenciador de processos mais rápido e minimalista para
-                        desenvolvedores Windows.</p>
+                    <h1 data-i18n="hero.title">Porta 3000 em uso?<br><span>EADDRINUSE nunca mais.</span></h1>
+                    <p data-i18n="hero.subtitle">O gerenciador de processos e portas nativo em Rust que elimina conflitos de desenvolvimento no Windows com apenas um clique.</p>
                     <div class="cta-group">
-                        <a href="https://github.com/rkvasne/taskvasne/releases/latest" class="btn primary"
+                        <a href="#download-final" class="btn primary"
                             data-i18n="hero.download">Baixar para Windows</a>
                         <a href="https://github.com/rkvasne/taskvasne" class="btn secondary" target="_blank" rel="noopener noreferrer"
                             data-i18n="hero.github">Ver no GitHub</a>
+                    </div>
+                    <div class="hero-trust-badges">
+                        <span class="trust-badge"><span class="trust-dot"></span><span data-i18n="hero.trust.os">Windows 11 / 10 x64</span></span>
+                        <span class="trust-badge"><span class="trust-dot"></span><span data-i18n="hero.trust.size">~2.0 MB Instalador</span></span>
+                        <span class="trust-badge"><span class="trust-dot"></span><span data-i18n="hero.trust.stack">Rust &amp; Tauri v2</span></span>
+                        <span class="trust-badge"><span class="trust-dot"></span><span data-i18n="hero.trust.offline">100% Offline &amp; Open Source</span></span>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -228,101 +239,303 @@
             </div>
         </section>
 
-        <section class="features" id="features">
+        <!-- Seção Comparativo (Pain vs Solution) -->
+        <section class="comparison-section" id="comparison">
             <div class="container">
                 <div class="section-header">
-                    <div class="badge">Funcionalidades</div>
-                    <h2 class="section-title" data-i18n="features.title">Por que escolher o Taskvasne?</h2>
+                    <div class="badge" data-i18n="comp.badge">Comparativo</div>
+                    <h2 class="section-title" data-i18n="comp.title">O fluxo moderno que substitui comandos arcaicos</h2>
+                    <p class="section-subtitle" data-i18n="comp.subtitle">Chega de perder tempo caçando PIDs no terminal ou quebrando seu fluxo de trabalho.</p>
                 </div>
-                <div class="features-grid">
-            <div class="feature-card">
-                <div class="icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                    </svg>
-                </div>
-                <h3 data-i18n="features.fast.title">Ultra Rápido</h3>
-                <p data-i18n="features.fast.desc">Construído em Rust e Tauri v2 para performance máxima. Ultra-leve com apenas ~20MB de RAM e binário de 8.6MB.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                </div>
-                <h3 data-i18n="features.modern.title">Design Moderno</h3>
-                <p data-i18n="features.modern.desc">Estética inspirada no Windows 11 com vidro fosco, bordas
-                    arredondadas e modo escuro nativo.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                </div>
-                <h3 data-i18n="features.tray.title">System Tray</h3>
-                <p data-i18n="features.tray.desc">Vive silenciosamente na sua bandeja. Um clique para abrir, matar o
-                    processo e voltar ao código.</p>
-            </div>
+
+                <div class="comp-grid">
+                    <!-- Card Terminal Manual -->
+                    <div class="comp-card comp-card-old">
+                        <div class="comp-card-badge danger" data-i18n="comp.old.badge">Sem Taskvasne &bull; ~45s e frustração</div>
+                        <h3 class="comp-card-title" data-i18n="comp.old.title">Terminal Manual &amp; netstat</h3>
+                        <div class="terminal-mockup">
+                            <div class="terminal-bar">
+                                <span class="term-dot close"></span>
+                                <span class="term-dot min"></span>
+                                <span class="term-dot max"></span>
+                                <span class="term-title">cmd.exe &mdash; prompt</span>
+                            </div>
+                            <div class="terminal-body">
+                                <p class="term-cmd"><span class="term-prompt">&gt;</span> netstat -ano | findstr :3000</p>
+                                <p class="term-out">TCP &nbsp; 0.0.0.0:3000 &nbsp; LISTENING &nbsp; 14208</p>
+                                <p class="term-cmd"><span class="term-prompt">&gt;</span> taskkill /F /PID 14208</p>
+                                <p class="term-err">ERRO: O processo com PID 14208 n&atilde;o p&ocirc;de ser finalizado. Acesso negado.</p>
+                                <p class="term-muted">... Precisa reabrir PowerShell com Admin e ca&ccedil;ar de novo ...</p>
+                            </div>
+                        </div>
+                        <ul class="comp-list">
+                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item1">Digita&ccedil;&atilde;o repetitiva de comandos complexos</span></li>
+                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item2">Nenhum contexto de qual framework ou app est&aacute; rodando</span></li>
+                            <li><span class="comp-icon bad">&times;</span> <span data-i18n="comp.old.item3">Bloqueios de permiss&atilde;o UAC sem resolu&ccedil;&atilde;o autom&aacute;tica</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Card Taskvasne -->
+                    <div class="comp-card comp-card-new">
+                        <div class="comp-card-badge success" data-i18n="comp.new.badge">Com Taskvasne &bull; &lt; 1s com 1 clique</div>
+                        <h3 class="comp-card-title" data-i18n="comp.new.title">Fluxo Nativo na Barra de Tarefas</h3>
+                        <div class="taskvasne-flow-mockup">
+                            <div class="flow-step">
+                                <div class="flow-step-num">1</div>
+                                <div class="flow-step-content">
+                                    <strong data-i18n="comp.new.step1.title">Bandeja do Windows</strong>
+                                    <p data-i18n="comp.new.step1.desc">Clique no &iacute;cone discreto na bandeja sem trocar de janela de c&oacute;digo.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-step-num">2</div>
+                                <div class="flow-step-content">
+                                    <strong data-i18n="comp.new.step2.title">Detec&ccedil;&atilde;o Inteligente</strong>
+                                    <p data-i18n="comp.new.step2.desc">Reconhece Vite (:5173), Next (:3000), Postgres (:5432) com mem&oacute;ria e PID.</p>
+                                </div>
+                            </div>
+                            <div class="flow-step">
+                                <div class="flow-step-num">3</div>
+                                <div class="flow-step-content">
+                                    <strong data-i18n="comp.new.step3.title">1 Clique no Bot&atilde;o Parar</strong>
+                                    <p data-i18n="comp.new.step3.desc">Porta liberada instantaneamente com eleva&ccedil;&atilde;o pontual se necess&aacute;rio.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="comp-list">
+                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item1">Zero comandos de terminal para lembrar ou digitar</span></li>
+                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item2">Bot&atilde;o &quot;Parar Dev&quot; limpa todos os servidores de teste de uma vez</span></li>
+                            <li><span class="comp-icon good">&check;</span> <span data-i18n="comp.new.item3">Retorno imediato ao desenvolvimento sem quebra de fluxo</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="security" class="security-section">
+        <!-- Seção 6 Pilares de Funcionalidades -->
+        <section class="features-section" id="features">
             <div class="container">
-                <div class="security-content">
-                    <div class="section-header">
-                        <div class="badge">Segurança</div>
-                        <h2 class="section-title" data-i18n="security.title">Segurança e Transparência</h2>
-                    </div>
-                    <p data-i18n="security.subtitle">Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.</p>
+                <div class="section-header">
+                    <div class="badge" data-i18n="features.badge">Funcionalidades</div>
+                    <h2 class="section-title" data-i18n="features.title">Engenharia focada no fluxo do desenvolvedor</h2>
+                    <p class="section-subtitle" data-i18n="features.subtitle">Utilit&aacute;rios essenciais consolidados em uma experi&ecirc;ncia nativa ultraleve.</p>
+                </div>
 
-                    <div class="features-grid">
-                        <div class="feature-card">
-                            <div class="icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <polyline points="16 18 22 12 16 6"></polyline>
-                                    <polyline points="8 6 2 12 8 18"></polyline>
-                                </svg>
-                            </div>
-                            <h3 data-i18n="security.opensource.title">Código Aberto</h3>
-                            <p data-i18n="security.opensource.desc">Todo o código fonte está disponível no GitHub. Você pode
-                                auditar cada linha.</p>
+                <div class="features-pillars-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p1.title">Kill Inteligente &amp; Filtros Dev</h3>
                         </div>
-                        <div class="feature-card">
-                            <div class="icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path
-                                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
-                                    </path>
-                                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                                </svg>
-                            </div>
-                            <h3 data-i18n="security.telemetry.title">Zero Telemetria</h3>
-                            <p data-i18n="security.telemetry.desc">Não coletamos dados, não rastreamos seu uso e não enviamos
-                                nada para a nuvem.</p>
+                        <p class="pillar-desc" data-i18n="feat.p1.desc">Identifica&ccedil;&atilde;o autom&aacute;tica de stacks (Node, Vite, Next, Python, Go, Java, Docker, Bancos). Bot&atilde;o exclusivo &quot;Parar Dev&quot; para encerrar todas as inst&acirc;ncias de teste de uma s&oacute; vez.</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p2.title">Desbloqueador Win32 de Pastas</h3>
                         </div>
-                        <div class="feature-card">
-                            <div class="icon">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                    <path d="M9 12l2 2 4-4" />
-                                </svg>
-                            </div>
-                            <h3 data-i18n="security.malware.title">Sem Malware</h3>
-                            <p data-i18n="security.malware.desc">Livre de vírus, keyloggers ou qualquer software malicioso.
-                                Garantia de código limpo.</p>
+                        <p class="pillar-desc" data-i18n="feat.p2.desc">Integra&ccedil;&atilde;o nativa com a Windows Restart Manager API. Descubra quais processos est&atilde;o segurando pastas travadas (como node_modules ou build) e libere handles com seguran&ccedil;a.</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p3.title">Wi-Fi QR Code para Teste Mobile</h3>
                         </div>
+                        <p class="pillar-desc" data-i18n="feat.p3.desc">Gere instantaneamente um QR Code com seu IP na rede local (ex: http://192.168.1.50:3000). Aponte a c&acirc;mera do celular e teste layouts responsivos sem digitar URLs manualmente.</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p4.title">Health Probes com RTT &amp; Sparklines</h3>
+                        </div>
+                        <p class="pillar-desc" data-i18n="feat.p4.desc">Monitoramento cont&iacute;nuo de resposta HTTP e lat&ecirc;ncia (Round-Trip Time) com mini sparklines gr&aacute;ficos. Identifique APIs travadas em deadlock ou erros 500 em tempo real.</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p5.title">Exportador .env.local &amp; Markdown</h3>
+                        </div>
+                        <p class="pillar-desc" data-i18n="feat.p5.desc">Exporte a topologia completa de portas ativas em formato pronto para vari&aacute;veis de ambiente (.env) ou tabela Markdown para documentar a arquitetura local da sua equipe.</p>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            </span>
+                            <h3 class="pillar-title" data-i18n="feat.p6.title">Eleva&ccedil;&atilde;o UAC Sob Demanda</h3>
+                        </div>
+                        <p class="pillar-desc" data-i18n="feat.p6.desc">Princ&iacute;pio do menor privil&eacute;gio. O aplicativo roda como usu&aacute;rio comum no dia a dia, e solicita privil&eacute;gios administrativos apenas ao matar processos restritos do Windows.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Seção Engenharia & Specs -->
+        <section class="specs-section" id="specs">
+            <div class="container">
+                <div class="section-header">
+                    <div class="badge" data-i18n="specs.badge">Engenharia</div>
+                    <h2 class="section-title" data-i18n="specs.title">Constru&iacute;do para velocidade. Zero desperd&iacute;cio.</h2>
+                    <p class="section-subtitle" data-i18n="specs.subtitle">Diferente de utilit&aacute;rios pesados em Electron, o Taskvasne foi desenhado em Rust nativo para ser impercept&iacute;vel no uso de recursos.</p>
+                </div>
+
+                <div class="specs-metrics-grid">
+                    <div class="spec-metric-card">
+                        <div class="spec-metric-num">~20 MB</div>
+                        <div class="spec-metric-label" data-i18n="specs.m1.label">Mem&oacute;ria RAM</div>
+                        <div class="spec-metric-sub" data-i18n="specs.m1.sub">vs 300MB&ndash;600MB em Electron</div>
+                    </div>
+                    <div class="spec-metric-card">
+                        <div class="spec-metric-num">&lt; 300 ms</div>
+                        <div class="spec-metric-label" data-i18n="specs.m2.label">Cold Start</div>
+                        <div class="spec-metric-sub" data-i18n="specs.m2.sub">Abertura instant&acirc;nea ao clicar</div>
+                    </div>
+                    <div class="spec-metric-card">
+                        <div class="spec-metric-num">~2.0 MB</div>
+                        <div class="spec-metric-label" data-i18n="specs.m3.label">Tamanho do Instalador</div>
+                        <div class="spec-metric-sub" data-i18n="specs.m3.sub">Download r&aacute;pido em segundos</div>
+                    </div>
+                    <div class="spec-metric-card">
+                        <div class="spec-metric-num">0 bytes</div>
+                        <div class="spec-metric-label" data-i18n="specs.m4.label">Telemetria / Nuvem</div>
+                        <div class="spec-metric-sub" data-i18n="specs.m4.sub">100% offline &amp; dados locais</div>
+                    </div>
+                </div>
+
+                <div class="specs-architecture-box">
+                    <h3 class="specs-arch-title" data-i18n="specs.arch.title">Arquitetura de Alta Performance</h3>
+                    <div class="specs-tech-tags">
+                        <span class="tech-tag"><strong>Rust 2021</strong> Backend Seguro</span>
+                        <span class="tech-tag"><strong>Tauri v2</strong> Shell Nativo</span>
+                        <span class="tech-tag"><strong>Win32 API</strong> SysCalls Diretas</span>
+                        <span class="tech-tag"><strong>Fluent 2</strong> Design Windows 11</span>
+                        <span class="tech-tag"><strong>Licen&ccedil;a MIT</strong> C&oacute;digo Aberto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Central de Downloads Estruturada -->
+        <section class="download-section" id="download-final">
+            <div class="container">
+                <div class="section-header">
+                    <div class="badge" data-i18n="dl.badge">Download Hub</div>
+                    <h2 class="section-title" data-i18n="dl.title">Baixe a vers&atilde;o ideal para seu fluxo</h2>
+                    <p class="section-subtitle" data-i18n="dl.subtitle">Dispon&iacute;vel para Windows 11 e Windows 10 (64-bit). Livre de instaladores com adware ou trackers.</p>
+                </div>
+
+                <div class="download-cards-grid">
+                    <!-- Card 1: Instalador Setup -->
+                    <div class="download-card featured">
+                        <div class="download-card-badge" data-i18n="dl.c1.tag">Recomendado</div>
+                        <h3 class="download-card-title" data-i18n="dl.c1.title">Instalador Windows</h3>
+                        <p class="download-card-file">Taskvasne-Setup-0.2.2.exe</p>
+                        <p class="download-card-desc" data-i18n="dl.c1.desc">Instala&ccedil;&atilde;o completa com atalhos, integra&ccedil;&atilde;o &agrave; bandeja do sistema e op&ccedil;&atilde;o de iniciar com o Windows.</p>
+                        <a href="https://github.com/rkvasne/taskvasne/releases/latest" class="btn primary dl-btn" data-i18n="dl.c1.btn">Baixar Instalador (.exe)</a>
+                        <span class="download-meta">~2.0 MB &bull; Instalador Guiado</span>
+                    </div>
+
+                    <!-- Card 2: MSI Corporativo -->
+                    <div class="download-card">
+                        <div class="download-card-badge muted" data-i18n="dl.c2.tag">Empresas &amp; TI</div>
+                        <h3 class="download-card-title" data-i18n="dl.c2.title">Pacote MSI Corporativo</h3>
+                        <p class="download-card-file">Taskvasne_0.2.2_x64_en-US.msi</p>
+                        <p class="download-card-desc" data-i18n="dl.c2.desc">Pacote padronizado para implanta&ccedil;&atilde;o silenciosa em massa via GPO, Microsoft Intune ou winget.</p>
+                        <a href="https://github.com/rkvasne/taskvasne/releases/latest" class="btn secondary dl-btn" data-i18n="dl.c2.btn">Baixar Pacote (.msi)</a>
+                        <span class="download-meta">~2.2 MB &bull; Windows Installer</span>
+                    </div>
+
+                    <!-- Card 3: Standalone Portatil -->
+                    <div class="download-card">
+                        <div class="download-card-badge muted" data-i18n="dl.c3.tag">Port&aacute;til</div>
+                        <h3 class="download-card-title" data-i18n="dl.c3.title">Execut&aacute;vel Standalone</h3>
+                        <p class="download-card-file">Taskvasne.exe</p>
+                        <p class="download-card-desc" data-i18n="dl.c3.desc">Sem necessidade de instala&ccedil;&atilde;o. Basta baixar e executar diretamente de qualquer diret&oacute;rio ou pendrive.</p>
+                        <a href="https://github.com/rkvasne/taskvasne/releases/latest" class="btn secondary dl-btn" data-i18n="dl.c3.btn">Baixar Port&aacute;til (.exe)</a>
+                        <span class="download-meta">~8.6 MB &bull; Bin&aacute;rio Puro</span>
+                    </div>
+                </div>
+
+                <div class="download-requirements-box">
+                    <div class="req-item" data-i18n="dl.req.os">
+                        <strong>Requisitos:</strong> Windows 11 / Windows 10 (Build 17763+) x64
+                    </div>
+                    <div class="req-item" data-i18n="dl.req.deps">
+                        <strong>Depend&ecirc;ncias:</strong> Zero runtimes externos. WebView2 integrado ao Windows.
+                    </div>
+                    <div class="req-trust-links">
+                        <a href="https://github.com/rkvasne/taskvasne" target="_blank" rel="noopener noreferrer">C&oacute;digo no GitHub</a> &bull;
+                        <a href="https://github.com/rkvasne/taskvasne/releases" target="_blank" rel="noopener noreferrer">Hist&oacute;rico de Releases</a> &bull;
+                        <a href="https://github.com/rkvasne/taskvasne/blob/main/LICENSE.md" target="_blank" rel="noopener noreferrer">Licen&ccedil;a MIT</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção FAQ -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <div class="badge" data-i18n="faq.badge">FAQ</div>
+                    <h2 class="section-title" data-i18n="faq.title">Perguntas Frequentes</h2>
+                    <p class="section-subtitle" data-i18n="faq.subtitle">Respostas diretas sobre seguran&ccedil;a, privil&eacute;gios e funcionamento t&eacute;cnico.</p>
+                </div>
+
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3 class="faq-question" data-i18n="faq.q1">Preciso rodar o Taskvasne como Administrador?</h3>
+                        <p class="faq-answer" data-i18n="faq.a1">N&atilde;o. Por padr&atilde;o, o aplicativo roda com privil&eacute;gios normais de usu&aacute;rio. O Taskvasne consegue listar e finalizar processos do seu pr&oacute;prio usu&aacute;rio sem qualquer aviso. Apenas se voc&ecirc; solicitar o encerramento de um servi&ccedil;o do sistema, o Windows exibir&aacute; a caixa pontual do UAC.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question" data-i18n="faq.q2">Como o Taskvasne lida com Docker e WSL2?</h3>
+                        <p class="faq-answer" data-i18n="faq.a2">Portas roteadas pelo Docker Desktop e servidores no WSL2 que escutam em 0.0.0.0 ou 127.0.0.1 s&atilde;o mapeadas na pilha TCP do host Windows. O Taskvasne detecta a conex&atilde;o ativa e identifica os processos associados no sistema operacional.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question" data-i18n="faq.q3">Como funciona o Desbloqueador de Pastas?</h3>
+                        <p class="faq-answer" data-i18n="faq.a3">Ele utiliza a API oficial Win32 Restart Manager (a mesma arquitetura utilizada pelo instalador do Windows) para consultar com precis&atilde;o quais processos possuem handles abertos no arquivo ou diret&oacute;rio, permitindo fech&aacute;-los sem corromper arquivos.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-question" data-i18n="faq.q4">Existe telemetria ou envio de dados na nuvem?</h3>
+                        <p class="faq-answer" data-i18n="faq.a4">Absolutamente zero telemetria. O Taskvasne &eacute; 100% offline, n&atilde;o inclui Google Analytics, PostHog, Sentry ou rastreadores de qualquer tipo. O c&oacute;digo &eacute; p&uacute;blico e audit&aacute;vel no GitHub sob licen&ccedil;a MIT.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Autor -->
         <section id="author" class="developer-section">
             <div class="container">
                 <div class="section-header">
@@ -354,12 +567,13 @@
             </div>
         </section>
 
+        <!-- Seção Apoie o Projeto -->
         <section id="donate" class="donate-section">
             <div class="container">
                 <div class="donate-container">
                     <div class="donate-header">
                         <h2 class="donate-title" data-i18n="donate.title">☕ Apoie o Projeto</h2>
-                        <p class="donate-subtitle" data-i18n="donate.subtitle">"Desenvolvo e compartilho projetos que eu mesmo gostaria de usar no dia a dia."</p>
+                        <p class="donate-subtitle" data-i18n="donate.subtitle">&quot;Desenvolvo e compartilho ferramentas que eu mesmo uso todos os dias.&quot;</p>
                     </div>
 
                     <div class="donate-grid">
@@ -378,11 +592,17 @@
                         <div class="donate-card paypal">
                             <div class="donate-icon">🌐</div>
                             <h3 class="donate-card-title">PayPal</h3>
-                            <a href="https://www.paypal.com/donate/?hosted_button_id=JJFQZK647286S" target="_blank" rel="noopener noreferrer" class="donate-link paypal">Doação via PayPal</a>
+                            <a href="https://www.paypal.com/donate/?hosted_button_id=JJFQZK647286S" target="_blank" rel="noopener noreferrer" class="donate-link paypal">Doa&ccedil;&atilde;o via PayPal</a>
                         </div>
                     </div>
 
-                    <div class="donate-qr-box">
+                    <div class="donate-qr-toggle-wrapper">
+                        <button id="donate-qr-toggle-btn" class="donate-qr-toggle-btn" type="button" aria-expanded="false" aria-controls="donate-qr-box">
+                            <span data-i18n="donate.toggleQr">📱 Exibir QR Codes (Pix / PayPal)</span>
+                        </button>
+                    </div>
+
+                    <div class="donate-qr-box" id="donate-qr-box">
                         <h3 class="donate-qr-title" data-i18n="donate.qr">📱 QR Codes (Pix / PayPal)</h3>
                         <div class="donate-qr-flex">
                             <div class="donate-qr-item">
@@ -391,7 +611,7 @@
                                     <img src="landing/images/qr_pix.png" alt="QR code Pix" class="donate-qr-img" loading="lazy" decoding="async">
                                 </div>
                                 <div class="donate-pix-key">
-                                    <span class="donate-pix-label">Chave Aleatória:</span>
+                                    <span class="donate-pix-label">Chave Aleat&oacute;ria:</span>
                                     fa550c5d-fdaf-4484-b52b-760071fe524d
                                 </div>
                             </div>
@@ -405,23 +625,7 @@
                     </div>
 
                     <div class="donate-note-box">
-                        <p class="donate-note-text" data-i18n="donate.note">💚 O Taskvasne permanece 100% open-source e gratuito. Doações são opcionais e ajudam a manter o desenvolvimento.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="download-section" id="download-final">
-            <div class="container">
-                <div class="download-box">
-                    <h2 class="download-title" data-i18n="download.final.title">Baixe o Taskvasne agora</h2>
-                    <p class="download-subtitle" data-i18n="download.final.subtitle">Versão mais recente para Windows</p>
-                    <a href="https://github.com/rkvasne/taskvasne/releases/latest" class="btn primary download-cta"
-                        data-i18n="download.final.cta">Baixar para Windows</a>
-                    <div class="download-trust">
-                        <a href="https://github.com/rkvasne/taskvasne" target="_blank" rel="noopener noreferrer" data-i18n="download.final.github">Ver no GitHub</a>
-                        <a href="https://github.com/rkvasne/taskvasne/releases" target="_blank" rel="noopener noreferrer" data-i18n="download.final.releases">Releases</a>
-                        <a href="https://github.com/rkvasne/taskvasne/blob/main/LICENSE.md" target="_blank" rel="noopener noreferrer" data-i18n="download.final.license">Licença MIT</a>
+                        <p class="donate-note-text" data-i18n="donate.note">💚 O Taskvasne permanece 100% open-source e gratuito. Doa&ccedil;&otilde;es s&atilde;o opcionais e ajudam a manter o desenvolvimento.</p>
                     </div>
                 </div>
             </div>
@@ -442,7 +646,10 @@
                     <h3 class="footer-heading" data-i18n="footer.links">Links Rápidos</h3>
                     <ul class="link-list">
                         <li><a href="#download" data-i18n="nav.download">Download</a></li>
+                        <li><a href="#comparison" data-i18n="nav.comparison">Comparativo</a></li>
                         <li><a href="#features" data-i18n="nav.features">Funcionalidades</a></li>
+                        <li><a href="#specs" data-i18n="nav.specs">Engenharia</a></li>
+                        <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
                         <li><a href="#author" data-i18n="nav.author">Autor</a></li>
                     </ul>
                 </div>
@@ -492,12 +699,19 @@
         const translations = {
             'pt-BR': {
                 'nav.download': 'Download',
+                'nav.comparison': 'Comparativo',
                 'nav.features': 'Funcionalidades',
+                'nav.specs': 'Engenharia',
+                'nav.faq': 'FAQ',
                 'nav.author': 'Autor',
-                'hero.title': 'Controle suas portas.<br><span>Com Estilo.</span>',
-                'hero.subtitle': 'O gerenciador de processos mais rápido e minimalista para desenvolvedores Windows.',
+                'hero.title': 'Porta 3000 em uso?<br><span>EADDRINUSE nunca mais.</span>',
+                'hero.subtitle': 'O gerenciador de processos e portas nativo em Rust que elimina conflitos de desenvolvimento no Windows com apenas um clique.',
                 'hero.download': 'Baixar para Windows',
                 'hero.github': 'Ver no GitHub',
+                'hero.trust.os': 'Windows 11 / 10 x64',
+                'hero.trust.size': '~2.0 MB Instalador',
+                'hero.trust.stack': 'Rust & Tauri v2',
+                'hero.trust.offline': '100% Offline & Open Source',
                 'demo.kill': 'Parar',
                 'demo.hint': 'Teste aqui',
                 'demo.banner': 'Taskvasne ativo na bandeja do sistema',
@@ -516,39 +730,88 @@
                 'demo.thType': 'TIPO',
                 'demo.monitoring': 'Monitorando',
                 'demo.ports': 'portas',
-                'features.title': 'Por que escolher o Taskvasne?',
-                'features.fast.title': 'Ultra Rápido',
-                'features.fast.desc': 'Construído em Rust e Tauri v2 para performance máxima. Ultra-leve com apenas ~20MB de RAM e binário de 8.6MB.',
-                'features.modern.title': 'Design Moderno',
-                'features.modern.desc': 'Estética inspirada no Windows 11 com vidro fosco, bordas arredondadas e modo escuro nativo.',
-                'features.tray.title': 'System Tray',
-                'features.tray.desc': 'Vive silenciosamente na sua bandeja. Um clique para abrir, matar o processo e voltar ao código.',
-                'security.title': 'Segurança e Transparência',
-                'security.subtitle': 'Sua segurança é nossa prioridade. O Taskvasne é 100% transparente.',
-                'security.opensource.title': 'Código Aberto',
-                'security.opensource.desc': 'Todo o código fonte está disponível no GitHub. Você pode auditar cada linha.',
-                'security.telemetry.title': 'Zero Telemetria',
-                'security.telemetry.desc': 'Não coletamos dados, não rastreamos seu uso e não enviamos nada para a nuvem.',
-                'security.malware.title': 'Sem Malware',
-                'security.malware.desc': 'Livre de vírus, keyloggers ou qualquer software malicioso. Garantia de código limpo.',
-                'dev.label': 'Desenvolvedor',
+                'comp.badge': 'Comparativo',
+                'comp.title': 'O fluxo moderno que substitui comandos arcaicos',
+                'comp.subtitle': 'Chega de perder tempo caçando PIDs no terminal ou quebrando seu fluxo de trabalho.',
+                'comp.old.badge': 'Sem Taskvasne &bull; ~45s e frustração',
+                'comp.old.title': 'Terminal Manual & netstat',
+                'comp.old.item1': 'Digitação repetitiva de comandos complexos',
+                'comp.old.item2': 'Nenhum contexto de qual framework ou app está rodando',
+                'comp.old.item3': 'Bloqueios de permissão UAC sem resolução automática',
+                'comp.new.badge': 'Com Taskvasne &bull; < 1s com 1 clique',
+                'comp.new.title': 'Fluxo Nativo na Barra de Tarefas',
+                'comp.new.step1.title': 'Bandeja do Windows',
+                'comp.new.step1.desc': 'Clique no ícone discreto na bandeja sem trocar de janela de código.',
+                'comp.new.step2.title': 'Detecção Inteligente',
+                'comp.new.step2.desc': 'Reconhece Vite (:5173), Next (:3000), Postgres (:5432) com memória e PID.',
+                'comp.new.step3.title': '1 Clique no Botão Parar',
+                'comp.new.step3.desc': 'Porta liberada instantaneamente com elevação pontual se necessário.',
+                'comp.new.item1': 'Zero comandos de terminal para lembrar ou digitar',
+                'comp.new.item2': 'Botão "Parar Dev" limpa todos os servidores de teste de uma vez',
+                'comp.new.item3': 'Retorno imediato ao desenvolvimento sem quebra de fluxo',
+                'features.badge': 'Funcionalidades',
+                'features.title': 'Engenharia focada no fluxo do desenvolvedor',
+                'features.subtitle': 'Utilitários essenciais consolidados em uma experiência nativa ultraleve.',
+                'feat.p1.title': 'Kill Inteligente & Filtros Dev',
+                'feat.p1.desc': 'Identificação automática de stacks (Node, Vite, Next, Python, Go, Java, Docker, Bancos). Botão exclusivo "Parar Dev" para encerrar todas as instâncias de teste de uma só vez.',
+                'feat.p2.title': 'Desbloqueador Win32 de Pastas',
+                'feat.p2.desc': 'Integração nativa com a Windows Restart Manager API. Descubra quais processos estão segurando pastas travadas (como node_modules ou build) e libere handles com segurança.',
+                'feat.p3.title': 'Wi-Fi QR Code para Teste Mobile',
+                'feat.p3.desc': 'Gere instantaneamente um QR Code com seu IP na rede local (ex: http://192.168.1.50:3000). Aponte a câmera do celular e teste layouts responsivos sem digitar URLs manualmente.',
+                'feat.p4.title': 'Health Probes com RTT & Sparklines',
+                'feat.p4.desc': 'Monitoramento contínuo de resposta HTTP e latência (Round-Trip Time) com mini sparklines gráficos. Identifique APIs travadas em deadlock ou erros 500 em tempo real.',
+                'feat.p5.title': 'Exportador .env.local & Markdown',
+                'feat.p5.desc': 'Exporte a topologia completa de portas ativas em formato pronto para variáveis de ambiente (.env) ou tabela Markdown para documentar a arquitetura local da sua equipe.',
+                'feat.p6.title': 'Elevação UAC Sob Demanda',
+                'feat.p6.desc': 'Princípio do menor privilégio. O aplicativo roda como usuário comum no dia a dia, e solicita privilégios administrativos apenas ao matar processos restritos do Windows.',
+                'specs.badge': 'Engenharia',
+                'specs.title': 'Construído para velocidade. Zero desperdício.',
+                'specs.subtitle': 'Diferente de utilitários pesados em Electron, o Taskvasne foi desenhado em Rust nativo para ser imperceptível no uso de recursos.',
+                'specs.m1.label': 'Memória RAM',
+                'specs.m1.sub': 'vs 300MB–600MB em Electron',
+                'specs.m2.label': 'Cold Start',
+                'specs.m2.sub': 'Abertura instantânea ao clicar',
+                'specs.m3.label': 'Tamanho do Instalador',
+                'specs.m3.sub': 'Download rápido em segundos',
+                'specs.m4.label': 'Telemetria / Nuvem',
+                'specs.m4.sub': '100% offline & dados locais',
+                'specs.arch.title': 'Arquitetura de Alta Performance',
+                'dl.badge': 'Download Hub',
+                'dl.title': 'Baixe a versão ideal para seu fluxo',
+                'dl.subtitle': 'Disponível para Windows 11 e Windows 10 (64-bit). Livre de instaladores com adware ou trackers.',
+                'dl.c1.tag': 'Recomendado',
+                'dl.c1.title': 'Instalador Windows',
+                'dl.c1.desc': 'Instalação completa com atalhos, integração à bandeja do sistema e opção de iniciar com o Windows.',
+                'dl.c1.btn': 'Baixar Instalador (.exe)',
+                'dl.c2.tag': 'Empresas & TI',
+                'dl.c2.title': 'Pacote MSI Corporativo',
+                'dl.c2.desc': 'Pacote padronizado para implantação silenciosa em massa via GPO, Microsoft Intune ou winget.',
+                'dl.c2.btn': 'Baixar Pacote (.msi)',
+                'dl.c3.tag': 'Portátil',
+                'dl.c3.title': 'Executável Standalone',
+                'dl.c3.desc': 'Sem necessidade de instalação. Basta baixar e executar diretamente de qualquer diretório ou pendrive.',
+                'dl.c3.btn': 'Baixar Portátil (.exe)',
+                'dl.req.os': '<strong>Requisitos:</strong> Windows 11 / Windows 10 (Build 17763+) x64',
+                'dl.req.deps': '<strong>Dependências:</strong> Zero runtimes externos. WebView2 integrado ao Windows.',
+                'faq.badge': 'FAQ',
+                'faq.title': 'Perguntas Frequentes',
+                'faq.subtitle': 'Respostas diretas sobre segurança, privilégios e funcionamento técnico.',
+                'faq.q1': 'Preciso rodar o Taskvasne como Administrador?',
+                'faq.a1': 'Não. Por padrão, o aplicativo roda com privilégios normais de usuário. O Taskvasne consegue listar e finalizar processos do seu próprio usuário sem qualquer aviso. Apenas se você solicitar o encerramento de um serviço do sistema, o Windows exibirá a caixa pontual do UAC.',
+                'faq.q2': 'Como o Taskvasne lida com Docker e WSL2?',
+                'faq.a2': 'Portas roteadas pelo Docker Desktop e servidores no WSL2 que escutam em 0.0.0.0 ou 127.0.0.1 são mapeadas na pilha TCP do host Windows. O Taskvasne detecta a conexão ativa e identifica os processos associados no sistema operacional.',
+                'faq.q3': 'Como funciona o Desbloqueador de Pastas?',
+                'faq.a3': 'Ele utiliza a API oficial Win32 Restart Manager (a mesma arquitetura utilizada pelo instalador do Windows) para consultar com precisão quais processos possuem handles abertos no arquivo ou diretório, permitindo fechá-los sem corromper arquivos.',
+                'faq.q4': 'Existe telemetria ou envio de dados na nuvem?',
+                'faq.a4': 'Absolutamente zero telemetria. O Taskvasne é 100% offline, não inclui Google Analytics, PostHog, Sentry ou rastreadores de qualquer tipo. O código é público e auditável no GitHub sob licença MIT.',
+                'dev.badge': 'Autor',
                 'dev.role': 'Full Stack Developer',
                 'dev.bio': 'Especialista em criar ferramentas que unem produtividade e design. Criador do <strong>ProfitColors</strong>, <strong>Dahora App</strong> e <strong>Taskvasne</strong>. Focado em simplicidade e usabilidade.',
-                'download.final.title': 'Baixe o Taskvasne agora',
-                'download.final.subtitle': 'Versão mais recente para Windows',
-                'download.final.cta': 'Baixar para Windows',
-                'download.final.github': 'Ver no GitHub',
-                'download.final.releases': 'Releases',
-                'download.final.license': 'Licença MIT',
-                'donate.title': 'Apoie o Taskvasne',
-                'donate.subtitle': 'Se este projeto ajuda no seu dia a dia, apoie sua evolução.',
-                'donate.contact.title': 'Fale comigo',
-                'donate.contact.tag': 'Doações e parcerias',
-                'donate.contact.desc': 'Entre em contato para apoiar o Taskvasne.',
-                'donate.contact.cta': 'Enviar email',
-                'donate.note.title': 'Obrigado!',
-                'donate.note.desc': 'Seu apoio ajuda a manter o projeto gratuito e atualizado.',
-                'dev.badge': 'Autor',
+                'donate.title': '☕ Apoie o Projeto',
+                'donate.subtitle': '"Desenvolvo e compartilho ferramentas que eu mesmo uso todos os dias."',
+                'donate.toggleQr': '📱 Exibir QR Codes (Pix / PayPal)',
+                'donate.qr': '📱 QR Codes (Pix / PayPal)',
+                'donate.note': '💚 O Taskvasne permanece 100% open-source e gratuito. Doações são opcionais e ajudam a manter o desenvolvimento.',
                 'footer.desc': 'O gerenciador de portas definitivo para Windows.',
                 'footer.links': 'Links Rápidos',
                 'footer.social': 'Conecte-se',
@@ -556,12 +819,19 @@
             },
             'en': {
                 'nav.download': 'Download',
+                'nav.comparison': 'Comparison',
                 'nav.features': 'Features',
+                'nav.specs': 'Engineering',
+                'nav.faq': 'FAQ',
                 'nav.author': 'Author',
-                'hero.title': 'Control your ports.<br><span>With Style.</span>',
-                'hero.subtitle': 'The fastest and minimalist process manager for Windows developers.',
+                'hero.title': 'Port 3000 in use?<br><span>No more EADDRINUSE.</span>',
+                'hero.subtitle': 'The native Rust process and port manager that eliminates Windows dev conflicts in a single click.',
                 'hero.download': 'Download for Windows',
                 'hero.github': 'View on GitHub',
+                'hero.trust.os': 'Windows 11 / 10 x64',
+                'hero.trust.size': '~2.0 MB Installer',
+                'hero.trust.stack': 'Rust & Tauri v2',
+                'hero.trust.offline': '100% Offline & Open Source',
                 'demo.kill': 'Kill',
                 'demo.hint': 'Try here',
                 'demo.banner': 'Taskvasne active in system tray',
@@ -580,39 +850,88 @@
                 'demo.thType': 'TYPE',
                 'demo.monitoring': 'Monitoring',
                 'demo.ports': 'ports',
-                'features.title': 'Why choose Taskvasne?',
-                'features.fast.title': 'Blazing Fast',
-                'features.fast.desc': 'Built with Rust & Tauri v2 for maximum native performance. Ultra-lightweight with ~20MB RAM and 8.6MB binary.',
-                'features.modern.title': 'Modern Design',
-                'features.modern.desc': 'Windows 11 inspired aesthetic with frosted glass, rounded corners, and native dark mode.',
-                'features.tray.title': 'System Tray',
-                'features.tray.desc': 'Lives quietly in your tray. One click to open, kill the process, and get back to code.',
-                'security.title': 'Security and Transparency',
-                'security.subtitle': 'Your security is our priority. Taskvasne is 100% transparent.',
-                'security.opensource.title': 'Open Source',
-                'security.opensource.desc': 'All source code is available on GitHub. You can audit every line.',
-                'security.telemetry.title': 'Zero Telemetry',
-                'security.telemetry.desc': 'We collect no data, track no usage, and send nothing to the cloud.',
-                'security.malware.title': 'Malware Free',
-                'security.malware.desc': 'Free from viruses, keyloggers, or any malicious software. Clean code guarantee.',
+                'comp.badge': 'Comparison',
+                'comp.title': 'The modern workflow replacing archaic terminal commands',
+                'comp.subtitle': 'Stop wasting focus hunting PIDs in cmd or breaking your dev flow.',
+                'comp.old.badge': 'Without Taskvasne &bull; ~45s and frustration',
+                'comp.old.title': 'Manual Terminal & netstat',
+                'comp.old.item1': 'Repetitive typing of complex commands',
+                'comp.old.item2': 'Zero context on which framework or app is running',
+                'comp.old.item3': 'UAC permission blocks without automated resolution',
+                'comp.new.badge': 'With Taskvasne &bull; < 1s in 1 click',
+                'comp.new.title': 'Native Taskbar & Tray Flow',
+                'comp.new.step1.title': 'Windows System Tray',
+                'comp.new.step1.desc': 'Click the discreet tray icon without leaving your code editor.',
+                'comp.new.step2.title': 'Smart Detection',
+                'comp.new.step2.desc': 'Recognizes Vite (:5173), Next (:3000), Postgres (:5432) with memory and PID.',
+                'comp.new.step3.title': '1 Click to Stop',
+                'comp.new.step3.desc': 'Port released instantly with on-demand elevation when needed.',
+                'comp.new.item1': 'Zero terminal commands to remember or type',
+                'comp.new.item2': '"Kill Dev" button clears all dev servers at once',
+                'comp.new.item3': 'Instant return to development without context switching',
+                'features.badge': 'Features',
+                'features.title': 'Engineering focused on developer workflow',
+                'features.subtitle': 'Essential utilities consolidated in an ultra-lightweight native experience.',
+                'feat.p1.title': 'Smart Kill & Dev Filters',
+                'feat.p1.desc': 'Automatic identification of stacks (Node, Vite, Next, Python, Go, Java, Docker, DBs). Dedicated "Kill Dev" button to terminate all dev instances at once.',
+                'feat.p2.title': 'Win32 Folder Unlocker',
+                'feat.p2.desc': 'Native integration with Windows Restart Manager API. Discover which processes lock folders (like node_modules or build) and release handles safely.',
+                'feat.p3.title': 'Wi-Fi QR Code for Mobile Testing',
+                'feat.p3.desc': 'Instantly generate a QR Code with your local IP (e.g. http://192.168.1.50:3000). Scan with your phone camera and test responsive layouts effortlessly.',
+                'feat.p4.title': 'Health Probes with RTT & Sparklines',
+                'feat.p4.desc': 'Continuous monitoring of HTTP response and Round-Trip Time with mini graphical sparklines. Detect deadlocked APIs or 500 errors in real time.',
+                'feat.p5.title': 'Exporter for .env.local & Markdown',
+                'feat.p5.desc': 'Export the full topology of active ports into ready-to-use environment variables (.env) or Markdown tables for team documentation.',
+                'feat.p6.title': 'On-Demand UAC Elevation',
+                'feat.p6.desc': 'Principle of least privilege. The app runs as a standard user, requesting administrative privileges only when terminating restricted Windows processes.',
+                'specs.badge': 'Engineering',
+                'specs.title': 'Built for speed. Zero waste.',
+                'specs.subtitle': 'Unlike heavy Electron utilities, Taskvasne was engineered in native Rust to be imperceptible in resource usage.',
+                'specs.m1.label': 'RAM Memory',
+                'specs.m1.sub': 'vs 300MB–600MB in Electron',
+                'specs.m2.label': 'Cold Start',
+                'specs.m2.sub': 'Instant launch on click',
+                'specs.m3.label': 'Installer Size',
+                'specs.m3.sub': 'Fast download in seconds',
+                'specs.m4.label': 'Telemetry / Cloud',
+                'specs.m4.sub': '100% offline & local data',
+                'specs.arch.title': 'High-Performance Architecture',
+                'dl.badge': 'Download Hub',
+                'dl.title': 'Download the right version for your workflow',
+                'dl.subtitle': 'Available for Windows 11 and Windows 10 (64-bit). Free from adware or trackers.',
+                'dl.c1.tag': 'Recommended',
+                'dl.c1.title': 'Windows Setup',
+                'dl.c1.desc': 'Full installation with shortcuts, system tray integration, and optional auto-start with Windows.',
+                'dl.c1.btn': 'Download Installer (.exe)',
+                'dl.c2.tag': 'Enterprise & IT',
+                'dl.c2.title': 'Enterprise MSI Package',
+                'dl.c2.desc': 'Standardized package for silent mass deployment via GPO, Microsoft Intune, or winget.',
+                'dl.c2.btn': 'Download Package (.msi)',
+                'dl.c3.tag': 'Portable',
+                'dl.c3.title': 'Standalone Executable',
+                'dl.c3.desc': 'No installation required. Just download and run directly from any folder or USB drive.',
+                'dl.c3.btn': 'Download Portable (.exe)',
+                'dl.req.os': '<strong>Requirements:</strong> Windows 11 / Windows 10 (Build 17763+) x64',
+                'dl.req.deps': '<strong>Dependencies:</strong> Zero external runtimes. WebView2 built into Windows.',
+                'faq.badge': 'FAQ',
+                'faq.title': 'Frequently Asked Questions',
+                'faq.subtitle': 'Direct answers about security, privileges, and technical architecture.',
+                'faq.q1': 'Do I need to run Taskvasne as Administrator?',
+                'faq.a1': 'No. By default, the app runs with standard user privileges. Taskvasne can inspect and terminate your user processes without any prompt. Only when terminating a protected system service will Windows prompt for on-demand UAC.',
+                'faq.q2': 'How does Taskvasne handle Docker and WSL2?',
+                'faq.a2': 'Ports exposed by Docker Desktop and servers inside WSL2 listening on 0.0.0.0 or 127.0.0.1 are mapped onto the Windows host TCP stack. Taskvasne detects the active connection and identifies the associated processes.',
+                'faq.q3': 'How does the Folder Unlocker work?',
+                'faq.a3': 'It leverages the official Win32 Restart Manager API (the same mechanism used by Windows installers) to query exactly which processes hold open file handles, allowing safe unlocking without data corruption.',
+                'faq.q4': 'Is there any telemetry or cloud data collection?',
+                'faq.a4': 'Absolutely zero telemetry. Taskvasne is 100% offline, with no analytics, no trackers, and no external calls. Source code is fully open on GitHub under the MIT license.',
                 'dev.badge': 'Author',
-                'dev.label': 'Developer',
                 'dev.role': 'Full Stack Developer',
                 'dev.bio': 'Specialized in building tools that combine productivity and design. Creator of <strong>ProfitColors</strong>, <strong>Dahora App</strong>, and <strong>Taskvasne</strong>. Focused on simplicity and usability.',
-                'download.final.title': 'Download Taskvasne now',
-                'download.final.subtitle': 'Latest version for Windows',
-                'download.final.cta': 'Download for Windows',
-                'download.final.github': 'View on GitHub',
-                'download.final.releases': 'Releases',
-                'download.final.license': 'MIT License',
-                'donate.title': 'Support Taskvasne',
-                'donate.subtitle': 'If this project helps your day-to-day, consider supporting its growth.',
-                'donate.contact.title': 'Get in touch',
-                'donate.contact.tag': 'Donations and partnerships',
-                'donate.contact.desc': 'Reach out to support Taskvasne.',
-                'donate.contact.cta': 'Send email',
-                'donate.note.title': 'Thank you!',
-                'donate.note.desc': 'Your support helps keep the project free and updated.',
+                'donate.title': '☕ Support the Project',
+                'donate.subtitle': '"I build and share tools that I use every day."',
+                'donate.toggleQr': '📱 View QR Codes (Pix / PayPal)',
+                'donate.qr': '📱 QR Codes (Pix / PayPal)',
+                'donate.note': '💚 Taskvasne remains 100% open-source and free. Donations are optional and help maintain active development.',
                 'footer.desc': 'The ultimate port manager for Windows.',
                 'footer.links': 'Quick Links',
                 'footer.social': 'Connect',
@@ -964,6 +1283,20 @@
         // Update copyright year automatically
         const yearEl = document.getElementById('current-year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        // QR code toggle listener
+        const qrToggleBtn = document.getElementById('donate-qr-toggle-btn');
+        const qrBox = document.getElementById('donate-qr-box');
+        if (qrToggleBtn && qrBox) {
+            qrToggleBtn.addEventListener('click', () => {
+                const isExpanded = qrBox.classList.toggle('active');
+                qrToggleBtn.setAttribute('aria-expanded', String(isExpanded));
+                const textKey = isExpanded ? 'donate.qr' : 'donate.toggleQr';
+                if (translations[currentLang] && translations[currentLang][textKey]) {
+                    qrToggleBtn.querySelector('span').innerHTML = translations[currentLang][textKey];
+                }
+            });
+        }
 
         // Renderização inicial
         renderDemoPorts();
